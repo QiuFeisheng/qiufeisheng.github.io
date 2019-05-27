@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="###1、Standard：默认的启动模式，一个Activity可以创建无限个实例 ###2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Ma">
+<meta name="description" content="1、Standard：默认的启动模式，一个Activity可以创建无限个实例 2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Main2Act">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础Demo6-Activity的4S启动模式">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo6-Activity的4S启动模式/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="###1、Standard：默认的启动模式，一个Activity可以创建无限个实例 ###2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Ma">
+<meta property="og:description" content="1、Standard：默认的启动模式，一个Activity可以创建无限个实例 2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Main2Act">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T06:39:30.194Z">
+<meta property="og:updated_time" content="2019-05-27T06:43:38.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础Demo6-Activity的4S启动模式">
-<meta name="twitter:description" content="###1、Standard：默认的启动模式，一个Activity可以创建无限个实例 ###2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Ma">
+<meta name="twitter:description" content="1、Standard：默认的启动模式，一个Activity可以创建无限个实例 2、SingleTop：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。 &amp;lt;activity android:name=&amp;quot;.Main2Act">
 
 
 
@@ -299,18 +299,18 @@
       
 
       
-        <p>###1、Standard<br>：默认的启动模式，一个Activity可以创建无限个实例</p>
-<p>###2、SingleTop<br>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
+        <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
+<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
 <pre><code>&lt;activity
 android:name=&quot;.Main2Activity&quot;
 android:launchMode=&quot;singleTop&quot;&gt;
 &lt;/activity&gt;
-</code></pre><p>###3、SingleTask<br>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
+</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
 <pre><code>&lt;activity
 android:name=&quot;.Main2Activity&quot;
 android:launchMode=&quot;singleTask&quot;&gt;
 &lt;/activity&gt;
-</code></pre><p>###4、SingleInstance<br>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
+</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
 <pre><code>&lt;activity
 android:name=&quot;.Main2Activity&quot;
 android:launchMode=&quot;singleInstance&quot;&gt;
@@ -403,8 +403,17 @@ android:launchMode=&quot;singleInstance&quot;&gt;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -446,6 +455,22 @@ android:launchMode=&quot;singleInstance&quot;&gt;
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Standard"><span class="nav-number">1.</span> <span class="nav-text">1、Standard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、SingleTop"><span class="nav-number">2.</span> <span class="nav-text">2、SingleTop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、SingleTask"><span class="nav-number">3.</span> <span class="nav-text">3、SingleTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、SingleInstance"><span class="nav-number">4.</span> <span class="nav-text">4、SingleInstance</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

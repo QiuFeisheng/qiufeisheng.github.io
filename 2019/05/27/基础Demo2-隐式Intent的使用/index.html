@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###1、思路    ###2、Demo代码 (1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; andro">
+<meta name="description" content="1、思路  2、Demo代码(1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:layout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础Demo2-隐式Intent的使用">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo2-隐式Intent的使用/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="###1、思路    ###2、Demo代码 (1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; andro">
+<meta property="og:description" content="1、思路  2、Demo代码(1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:layout">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/gBw8NM9.jpg">
-<meta property="og:updated_time" content="2019-05-27T06:33:16.299Z">
+<meta property="og:updated_time" content="2019-05-27T06:42:51.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础Demo2-隐式Intent的使用">
-<meta name="twitter:description" content="###1、思路    ###2、Demo代码 (1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; andro">
+<meta name="twitter:description" content="1、思路  2、Demo代码(1)activity_main.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:layout">
 <meta name="twitter:image" content="https://i.imgur.com/gBw8NM9.jpg">
 
 
@@ -301,10 +301,8 @@
       
 
       
-        <p>###1、思路</p>
-<p>  <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
-<p>###2、Demo代码</p>
-<p>(1)activity_main.xml</p>
+        <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
+<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>(1)activity_main.xml</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout
 xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -382,8 +380,7 @@ public void onClick(View view) {
              break;
      }  }
 }
-</code></pre><p>###3、常用的action值</p>
-<pre><code>// 调用浏览器 
+</code></pre><h3 id="3、常用的action值"><a href="#3、常用的action值" class="headerlink" title="3、常用的action值"></a>3、常用的action值</h3><pre><code>// 调用浏览器 
 Uri webViewUri = Uri.parse(&quot;http://blog.csdn.net/zuolongsnail&quot;); 
 Intent intent = new Intent(Intent.ACTION_VIEW, webViewUri); 
 
@@ -537,8 +534,17 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -580,6 +586,22 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、思路"><span class="nav-number">1.</span> <span class="nav-text">1、思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Demo代码"><span class="nav-number">2.</span> <span class="nav-text">2、Demo代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、常用的action值"><span class="nav-number">3.</span> <span class="nav-text">3、常用的action值</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

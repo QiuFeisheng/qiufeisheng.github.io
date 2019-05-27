@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="###1、在我们的Project中导入我们的工具类： ActivityCollector.java 备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管">
+<meta name="description" content="1、在我们的Project中导入我们的工具类： ActivityCollector.java备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管理类 p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础Demo8-一键退出所有的Activity退出程序">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo8-一键退出所有的Activity退出程序/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="###1、在我们的Project中导入我们的工具类： ActivityCollector.java 备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管">
+<meta property="og:description" content="1、在我们的Project中导入我们的工具类： ActivityCollector.java备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管理类 p">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T06:39:12.544Z">
+<meta property="og:updated_time" content="2019-05-27T06:43:57.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础Demo8-一键退出所有的Activity退出程序">
-<meta name="twitter:description" content="###1、在我们的Project中导入我们的工具类： ActivityCollector.java 备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管">
+<meta name="twitter:description" content="1、在我们的Project中导入我们的工具类： ActivityCollector.java备注：总共三个方法，addActivity(), removeActivity(), finishAll() import java.util.ArrayList; import java.util.List; import android.app.Activity;  //Activity的集中管理类 p">
 
 
 
@@ -299,8 +299,7 @@
       
 
       
-        <p>###1、在我们的Project中导入我们的工具类： ActivityCollector.java</p>
-<p>备注：总共三个方法，addActivity(), removeActivity(), finishAll()</p>
+        <h3 id="1、在我们的Project中导入我们的工具类：-ActivityCollector-java"><a href="#1、在我们的Project中导入我们的工具类：-ActivityCollector-java" class="headerlink" title="1、在我们的Project中导入我们的工具类： ActivityCollector.java"></a>1、在我们的Project中导入我们的工具类： ActivityCollector.java</h3><p>备注：总共三个方法，addActivity(), removeActivity(), finishAll()</p>
 <pre><code>import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
@@ -337,8 +336,7 @@ public static void finishAll() {
     activities.clear();
   }
 }
-</code></pre><p>###2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy</p>
-<pre><code> import android.os.Bundle;
+</code></pre><h3 id="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"><a href="#2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy" class="headerlink" title="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"></a>2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy</h3><pre><code> import android.os.Bundle;
  import android.support.annotation.Nullable;
  import android.support.v7.app.AppCompatActivity;
 
@@ -363,8 +361,7 @@ protected void onDestroy() {
     ActivityCollector.removeActivity(this);
   }
 }
-</code></pre><p>###3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；</p>
-<pre><code>@Override
+</code></pre><h3 id="3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；"><a href="#3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；" class="headerlink" title="3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；"></a>3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；</h3><pre><code>@Override
 public void onClick(View view) {
 
 ActivityCollector.finishAll();
@@ -459,8 +456,17 @@ ActivityCollector.finishAll();
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -502,6 +508,22 @@ ActivityCollector.finishAll();
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、在我们的Project中导入我们的工具类：-ActivityCollector-java"><span class="nav-number">1.</span> <span class="nav-text">1、在我们的Project中导入我们的工具类： ActivityCollector.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"><span class="nav-number">2.</span> <span class="nav-text">2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；"><span class="nav-number">3.</span> <span class="nav-text">3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
