@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo10-常用控件的常用属性使用/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo10-常用控件的常用属性使用/" itemprop="url">基础Demo10-常用控件的常用属性使用</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,7 @@
       
         
           
-            <p>##基础Demo10-常用控件的常用属性使用</p>
-<pre><code>1、android:gravity= “center”   
+            <pre><code>1、android:gravity= “center”   
 </code></pre><p>//常用值：top,bottom,left,right,center_vertical，center_horizontal</p>
 <p>效果：指定文字在控件中的对齐方式，TextView和Button用得多</p>
 <pre><code>2、android:textAllCaps=“false”
@@ -409,7 +408,7 @@ android:layout_toLeftOf=”@id/btn_2”
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo9-启动活动的习惯性写法/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo9-启动活动的习惯性写法/" itemprop="url">基础Demo9-启动活动的习惯性写法</a></h1>
         
 
         <div class="post-meta">
@@ -461,8 +460,7 @@ android:layout_toLeftOf=”@id/btn_2”
       
         
           
-            <p>##基础Demo9-启动活动的习惯性写法</p>
-<p>###1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了</p>
+            <p>###1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了</p>
 <p>###2、Demo代码<br>（1）Main2Activity:</p>
 <pre><code>......
 
@@ -564,7 +562,7 @@ switch (view.getId()) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/" itemprop="url">基础Demo7-日志打印当前界面所属于的Activity</a></h1>
         
 
         <div class="post-meta">
@@ -616,8 +614,7 @@ switch (view.getId()) {
       
         
           
-            <p>##基础Demo7-日志打印当前界面所属于的Activity</p>
-<p>###应用场景：用于接收旧项目阅读源码和修改代码的时候，可以知道当前界面所属的Activity是哪一个Activity，有时候非常有用</p>
+            <p>###应用场景：用于接收旧项目阅读源码和修改代码的时候，可以知道当前界面所属的Activity是哪一个Activity，有时候非常有用</p>
 <p>（1）有共同父类的：就在父类的onCreate里面加：</p>
 <pre><code>@Override
 protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -760,8 +757,8 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
       
         
           
-            <p>##基础Demo5-Activity意外回收保存数据</p>
-<p>###1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</p>
+            <hr>
+<h2 id="title-基础Demo5-Activity意外回收保存数据"><a href="#title-基础Demo5-Activity意外回收保存数据" class="headerlink" title="title: 基础Demo5-Activity意外回收保存数据"></a>title: 基础Demo5-Activity意外回收保存数据</h2><p>###1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</p>
 <p>###2、Demo代码</p>
 <pre><code>public static final String SAVE_KEY=&quot;save_key&quot;;
 private String data;
@@ -857,7 +854,7 @@ initData();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo3-Intent传递数据/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo3-Intent传递数据/" itemprop="url">基础Demo3-Intent传递数据</a></h1>
         
 
         <div class="post-meta">
@@ -909,7 +906,7 @@ initData();
       
         
           
-            <h2 id="基础Demo3-Intent传递数据"><a href="#基础Demo3-Intent传递数据" class="headerlink" title="基础Demo3-Intent传递数据"></a>基础Demo3-Intent传递数据</h2><p>###1、思路</p>
+            <p>###1、思路</p>
 <p>  <img src="https://i.imgur.com/HtXWRlH.jpg" alt></p>
 <p>###2、Demo代码</p>
 <p>（1）MainActivity.java</p>
@@ -1077,8 +1074,8 @@ protected void onCreate(Bundle savedInstanceState) {
       
         
           
-            <p>##基础Demo8-一键退出所有的Activity退出程序</p>
-<p>###1、在我们的Project中导入我们的工具类： ActivityCollector.java</p>
+            <hr>
+<h2 id="title-基础Demo8-一键退出所有的Activity退出程序"><a href="#title-基础Demo8-一键退出所有的Activity退出程序" class="headerlink" title="title: 基础Demo8-一键退出所有的Activity退出程序"></a>title: 基础Demo8-一键退出所有的Activity退出程序</h2><p>###1、在我们的Project中导入我们的工具类： ActivityCollector.java</p>
 <p>备注：总共三个方法，addActivity(), removeActivity(), finishAll()</p>
 <pre><code>import java.util.ArrayList;
 import java.util.List;
@@ -1269,8 +1266,8 @@ ActivityCollector.finishAll();
       
         
           
-            <p>##基础Demo6-Activity的4S启动模式</p>
-<p>###1、Standard<br>：默认的启动模式，一个Activity可以创建无限个实例</p>
+            <hr>
+<h2 id="title-基础Demo6-Activity的4S启动模式"><a href="#title-基础Demo6-Activity的4S启动模式" class="headerlink" title="title: 基础Demo6-Activity的4S启动模式"></a>title: 基础Demo6-Activity的4S启动模式</h2><p>###1、Standard<br>：默认的启动模式，一个Activity可以创建无限个实例</p>
 <p>###2、SingleTop<br>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
 <pre><code>&lt;activity
 android:name=&quot;.Main2Activity&quot;
@@ -1353,7 +1350,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/" itemprop="url">基础Demo4-Intent返回数据给上一个Activity</a></h1>
         
 
         <div class="post-meta">
@@ -1405,7 +1402,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
       
         
           
-            <h2 id="基础Demo4-Intent返回数据给上一个Activity"><a href="#基础Demo4-Intent返回数据给上一个Activity" class="headerlink" title="基础Demo4-Intent返回数据给上一个Activity"></a>基础Demo4-Intent返回数据给上一个Activity</h2><p>###1、思路</p>
+            <p>###1、思路</p>
 <p> <img src="https://i.imgur.com/XfmouoW.jpg" alt></p>
 <p>###2、Demo代码</p>
 <p>（1）MainActivity.java</p>
@@ -1534,7 +1531,7 @@ finish();
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo1--菜单Menu/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo1--菜单Menu/" itemprop="url">基础Demo1-菜单Menu</a></h1>
         
 
         <div class="post-meta">
@@ -1586,7 +1583,7 @@ finish();
       
         
           
-            <h2 id="基础Demo1-菜单Menu"><a href="#基础Demo1-菜单Menu" class="headerlink" title="基础Demo1-菜单Menu"></a>基础Demo1-菜单Menu</h2><p>###1、创建item_menu.xml<br>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
+            <p>###1、创建item_menu.xml<br>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
 
@@ -1731,7 +1728,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">基础Demo2-隐式Intent的使用</a></h1>
         
 
         <div class="post-meta">
@@ -1783,8 +1780,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
       
         
           
-            <p>##基础Demo2-隐式Intent的使用</p>
-<p>###1、思路</p>
+            <p>###1、思路</p>
 <p>  <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
 <p>###2、Demo代码</p>
 <p>(1)activity_main.xml</p>
