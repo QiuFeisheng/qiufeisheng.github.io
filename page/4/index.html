@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo9-启动活动的习惯性写法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo9-启动活动的习惯性写法/" itemprop="url">基础Demo9-启动活动的习惯性写法</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/" itemprop="url">基础Demo18-Fragment与Activity通信+生命周期</a></h1>
         
 
         <div class="post-meta">
@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
                 2019-05-27
               </time>
             
@@ -303,41 +303,32 @@
       
         
           
-            <h3 id="1、直接在每个Activity中重构一个actionStart-方法，让其他Activity直接调用跳转到当前Activity，简单明了"><a href="#1、直接在每个Activity中重构一个actionStart-方法，让其他Activity直接调用跳转到当前Activity，简单明了" class="headerlink" title="1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了"></a>1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）Main2Activity:</p>
-<pre><code>......
-
-//无数据跳转
-public static void actionStart(Context context){
-
-   Intent intent=new Intent(context,Main2Activity.class);
-   context.startActivity(intent);
+            <h3 id="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><a href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment" class="headerlink" title="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"></a>1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</h3><pre><code>transaction.addToBackStack( null );
+</code></pre><h3 id="2、Fragment与Activity通信"><a href="#2、Fragment与Activity通信" class="headerlink" title="2、Fragment与Activity通信"></a>2、Fragment与Activity通信</h3><p>（1）在Activity中，就去拿到Fragment的实例</p>
+<pre><code>/**
+ * 得到左侧菜单碎片的实例
+ * @return
+ */
+public LeftFragment getLeftMenuFragment() {
+    //构造FragmentManager对象
+    FragmentManager fm=getSupportFragmentManager();
+    //构造LeftMenuFragment对象： 通过构造FragmentManager对象调用象方
+    LeftFragment leftMenuFragment= (LeftFragment) fm.findFragmentByTag(LEFT_FRAGMENT_TAG);
+    return leftMenuFragment;
 }
 
-//带数据跳转
-public static void actionStart(Context context,String data1,String data2){
 
-  Intent intent=new Intent(context,Main2Activity.class);
-  intent.putExtra(DATA1,data1);
-  intent.putExtra(DATA2,data2);
-  context.startActivity(intent);
+/**
+ * 得到右侧碎片的实例
+ * @return
+ */
+public  RightFragment getContentFragment() {
+    return (RightFragment) getSupportFragmentManager().findFragmentByTag(RIGHT_FRAGMENT_TAG);
 }
-</code></pre><p>（2）MainActivity跳转到Main2Activity</p>
-<pre><code>@Override
-public void onClick(View view) {
+</code></pre><p>（2）在Fragment中，拿到Activity的实例</p>
+<pre><code>MainActivity   activity=(MainActivity)getActivity();
+</code></pre><h3 id="3、生命周期"><a href="#3、生命周期" class="headerlink" title="3、生命周期"></a>3、生命周期</h3><p>  <img src="图片18.jpg" alt></p>
 
-switch (view.getId()) {
-    case R.id.btn_1:
-
-        //一般写成全局变量field比较好
-         data=&quot;I am iron man&quot;;
-
-      Main2Activity.actionStart(MainActivity.this,data,data);
-
-        break;
-        default:break;
-   }
-}
-</code></pre>
           
         
       
@@ -385,7 +376,7 @@ switch (view.getId()) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo20-动态注册广播的简单Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -404,7 +395,7 @@ switch (view.getId()) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/" itemprop="url">基础Demo7-日志打印当前界面所属于的Activity</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo20-动态注册广播的简单Demo/" itemprop="url">基础Demo20-动态注册广播的简单Demo</a></h1>
         
 
         <div class="post-meta">
@@ -416,7 +407,7 @@ switch (view.getId()) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
                 2019-05-27
               </time>
             
@@ -456,665 +447,66 @@ switch (view.getId()) {
       
         
           
-            <p>###应用场景：用于接收旧项目阅读源码和修改代码的时候，可以知道当前界面所属的Activity是哪一个Activity，有时候非常有用</p>
-<p>（1）有共同父类的：就在父类的onCreate里面加：</p>
-<pre><code>@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
+            <h3 id="1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"><a href="#1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法" class="headerlink" title="1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"></a>1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法</h3><h3 id="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）"><a href="#2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）" class="headerlink" title="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）"></a>2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）</h3><pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Toast;
 
-LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-}
-</code></pre><p>（2）没有父类的，就创建父类：BaseActivity</p>
-<pre><code> import android.os.Bundle;
- import android.support.annotation.Nullable;
- import android.support.v7.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
 
-public class BaseActivity extends AppCompatActivity {
 
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+private IntentFilter mIntentFilter;
+private NetWorkChangeReceiver mNetWorkChangeReceiver;
 
-    LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-  }
-}
-</code></pre><p>（3）Activity较复杂的，直接在每个Activity的onCreate()方法中加：</p>
-<pre><code>LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo5-Activity意外回收保存数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo5-Activity意外回收保存数据/" itemprop="url">基础Demo5-Activity意外回收保存数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。"><a href="#1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。" class="headerlink" title="1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。"></a>1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><pre><code>public static final String SAVE_KEY=&quot;save_key&quot;;
-private String data;
-......
-
-//1、重写onSaveInstanceState, data---&gt;key---&gt;outState： key是快递，outState是快递车
-
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-super.onSaveInstanceState(outState);
-
-outState.putString(SAVE_KEY,data);
-}
-
-
-//2、在onCreate()里面的savedInstanceState取值后再填充显示即可
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_main);
-
-if (savedInstanceState!=null){
-    String tempData=savedInstanceState.getString(SAVE_KEY);
-    Log.d(&quot;保存的数据&quot;,tempData);
- }
-initView();
-initData();
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo3-Intent传递数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo3-Intent传递数据/" itemprop="url">基础Demo3-Intent传递数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p>  <img src="https://i.imgur.com/HtXWRlH.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）MainActivity.java</p>
-<pre><code>......
-public static final String DATA_KEY=&quot;data_key&quot;;
-private String data;
-......
-
-@Override
-public void onClick(View view) {
-
-switch (view.getId()) {
-
-    case R.id.btn_1:
-
-        //一般写成全局变量field比较好
-         data=&quot;I am iron man&quot;;
-
-        //构造对象：Intent对象
-        Intent intent=new Intent(MainActivity.this,Main2Activity.class);
-        //将数据打包存储到key，再通过快递车intent一起发送到下一个Activity
-        intent.putExtra(DATA_KEY,data);
-        //开车
-        startActivity(intent);
-
-        break;
-        default:break;
-   }
-}
-</code></pre><p>(2)Main2Activity.java</p>
-<pre><code>public class Main2Activity extends AppCompatActivity {
-
-private TextView mTextView;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main2);
+    setContentView(R.layout.activity_main);
 
-    mTextView=(TextView)findViewById(R.id.tv_content);
+    //构造IntentFilter，指定广播接收器的响应值
+    mIntentFilter=new IntentFilter();
+    mIntentFilter.addAction(&quot;android.net.conn.CONNECTIVITY_CHANGE&quot;);
 
-    //构造Intent对象：去快递车
-    Intent intent=getIntent();
-    //从快递车的快递包裹DATA_KEY取值
-    String data=intent.getStringExtra(MainActivity.DATA_KEY);
-    //填充Data显示到view
-    mTextView.setText(data);
-   }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo8-一键退出所有的Activity退出程序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo8-一键退出所有的Activity退出程序/" itemprop="url">基础Demo8-一键退出所有的Activity退出程序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、在我们的Project中导入我们的工具类：-ActivityCollector-java"><a href="#1、在我们的Project中导入我们的工具类：-ActivityCollector-java" class="headerlink" title="1、在我们的Project中导入我们的工具类： ActivityCollector.java"></a>1、在我们的Project中导入我们的工具类： ActivityCollector.java</h3><p>备注：总共三个方法，addActivity(), removeActivity(), finishAll()</p>
-<pre><code>import java.util.ArrayList;
-import java.util.List;
-import android.app.Activity;
-
-//Activity的集中管理类
-public class ActivityCollector {
-
-//构造对象：Activity的集合
-public static List&lt;Activity&gt; activities = new ArrayList&lt;&gt;();
-
-//调用象方：写对外的API，添加当前Activity
-/** 添加活动 **/
-public static void addActivity(Activity activity) {
-
-        activities.add(activity);
-
-}
-
-//调用象方：写对外的API，移除当前Activity
-/** 移除活动 **/
-public static void removeActivity(Activity activity) {
-    activities.remove(activity);
-}
-
-
-//调用象方：写对外的API，for循环finish所有的Activity，并清空集合每个元素对Activity的引用
-/** 结束所有的活动 **/
-public static void finishAll() {
-    for (Activity activity : activities) {
-        if (!activity.isFinishing()) {
-            activity.finish();
-        }
-    }
-    activities.clear();
-  }
-}
-</code></pre><h3 id="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"><a href="#2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy" class="headerlink" title="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"></a>2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy</h3><pre><code> import android.os.Bundle;
- import android.support.annotation.Nullable;
- import android.support.v7.app.AppCompatActivity;
-
-public class BaseActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-
-    //每个Activity实例都添加到集合中
-    ActivityCollector.addActivity(this);
+    //构造广播接收器处理类对象，给系统回调
+    mNetWorkChangeReceiver=new NetWorkChangeReceiver();
+    registerReceiver(mNetWorkChangeReceiver,mIntentFilter);
 }
 
 
 @Override
 protected void onDestroy() {
     super.onDestroy();
+    //回收内存，防止内存泄漏
+    unregisterReceiver(mNetWorkChangeReceiver);
+}
 
-    //销毁时就remove掉
-    ActivityCollector.removeActivity(this);
+//广播接收器结果处理类，对象注册后就给系统自己回调此类的API：onReceive
+class NetWorkChangeReceiver extends BroadcastReceiver{
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        //构造网络监听对象NetworkInfo
+        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo!=null&amp;&amp;networkInfo.isAvailable()){
+
+            Toast.makeText(context,&quot;网络可用&quot;,Toast.LENGTH_SHORT).show();
+        }else {
+
+            Toast.makeText(context,&quot;网络不可用，请检查网络情况&quot;,Toast.LENGTH_SHORT).show();
+        }
+    }
   }
+
 }
-</code></pre><h3 id="3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；"><a href="#3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；" class="headerlink" title="3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；"></a>3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；</h3><pre><code>@Override
-public void onClick(View view) {
-
-ActivityCollector.finishAll();
- // android.os.Process.killProcess(android.os.Process.myPid());
-}
-</code></pre><p>备注：还可以彻底杀掉进程，彻底完全退出：<br>     android.os.Process.killProcess(android.os.Process.myPid());</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo6-Activity的4S启动模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo6-Activity的4S启动模式/" itemprop="url">基础Demo6-Activity的4S启动模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
-<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTop&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTask&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleInstance&quot;&gt;
-&lt;/activity&gt;
 </code></pre>
           
         
@@ -1163,7 +555,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo22-Intent发送广播/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1182,7 +574,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/" itemprop="url">基础Demo4-Intent返回数据给上一个Activity</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo22-Intent发送广播/" itemprop="url">基础Demo22-Intent发送广播</a></h1>
         
 
         <div class="post-meta">
@@ -1194,7 +586,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
                 2019-05-27
               </time>
             
@@ -1234,330 +626,69 @@ android:launchMode=&quot;singleInstance&quot;&gt;
       
         
           
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/XfmouoW.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）MainActivity.java</p>
-<pre><code>@Override
-public void onClick(View view) {
-
-switch (view.getId()) {
-
-    case R.id.btn_1:
-
-        //构造对象：Intent对象
-        Intent intent=new Intent(MainActivity.this,Main2Activity.class);
-        //调用+ForResult，1是请求码，下一个接收的Activity会标记，返回的时候会一起返回 
-       //因为跳转到N个Activity，我们可以根据请求码requestCode来区分是哪一个Activity
-
-       //返回的数据回来   
-       startActivityForResult(intent,1);
-
-        break;
-        default:break;
-    }
- }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-//请求码区分是哪一个Activity返回的数据，其实都是自己设置的
-switch (requestCode){
-
-    case 1:
- //根据结果码来判断是否返回成功，再开始取数据
-        if (resultCode==RESULT_OK){
-            //data.getXXXExtra(key)；
-            String data1=data.getStringExtra(Main2Activity.DATA_RETURN);
-            mTextView.setText(data1);
-
-        }
-    }
-}
-</code></pre><p>（2）Main2Activity</p>
-<pre><code>//finish前面携带在intent中即可，结果码一般都是RESULT_OK不用改
-@Override
-public void onClick(View view) {
-
-data=&quot;I am spider man&quot;;
-Intent intent=new Intent();
-intent.putExtra(DATA_RETURN,data);
-setResult(RESULT_OK,intent);
-finish();
-}
-
-//重写返回键back键
-@Override
-public void onBackPressed() {
-data=&quot;I am spider man&quot;;
-Intent intent=new Intent();
-intent.putExtra(DATA_RETURN,data);
-setResult(RESULT_OK,intent);
-finish();
-}
-</code></pre><p>//常量作为Key的好处是： 可以在多个类多处调用，而且取值的时候不会出现手写key错误的概率</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo2-隐式Intent的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">基础Demo2-隐式Intent的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>(1)activity_main.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:orientation=&quot;vertical&quot;&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_1&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统浏览器&quot;/&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_2&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统电话&quot;/&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>（2）MainActivity.java</p>
+            <h3 id="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"><a href="#1、使用构造方法构造Intent对象，并指定Intent携带的广播值" class="headerlink" title="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"></a>1、使用构造方法构造Intent对象，并指定Intent携带的广播值</h3><h3 id="2、调用API："><a href="#2、调用API：" class="headerlink" title="2、调用API："></a>2、调用API：</h3><pre><code>sendBroadcast(intent); //发送标准广播，异步，不同线路接收     
+sendOrderedBroadcast(intent,null);//发送有序广播，同步，同一线路接收
+</code></pre><p>所以发送有序广播时，各个广播接收器可以设置接收的优先级，优先级高的可以先接收， 而且可以阻断广播向后继续发送</p>
+<p>（1）自定义Intent发送广播</p>
 <pre><code>import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-private Button btn_1;
-private Button btn_2;
+private Button mButton;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    initView();
-    initData();
+    mButton=(Button) findViewById(R.id.btn);
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            //构造Intent对象，指定广播值
+            Intent intent=new Intent(&quot;com.example.broadcasttest.MY_BROADCAST&quot;);
+            //发送广播
+            sendBroadcast(intent);
+            //sendOrderedBroadcast(intent,null);
+        }
+    });
+   }
+
 }
+</code></pre><p>（2）静态注册广播接收器接收广播值</p>
+<pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
 
-private void initView() {
+public class MyReceiver extends BroadcastReceiver {
 
-   btn_1= (Button) findViewById(R.id.btn_1);
-   btn_2= (Button) findViewById(R.id.btn_2);
-}
-
-private void initData() {
-
-    btn_1.setOnClickListener(this);
-    btn_2.setOnClickListener(this);
-}
 @Override
-public void onClick(View view) {
+public void onReceive(Context context, Intent intent) {
+    // TODO: This method is called when the BroadcastReceiver is receiving
+    // an Intent broadcast.
+    Toast.makeText(context,&quot;收到广播啦&quot;,Toast.LENGTH_SHORT).show();
 
-     switch (view.getId()){
+//如果是有序广播，可以阻断,不能向后发送
+//  abortBroadcast();
+    }
+</code></pre><p>   }</p>
+<p>  AndroidManifest.xml</p>
+<pre><code>&lt;receiver
+android:name=&quot;.MyReceiver&quot;
+android:enabled=&quot;true&quot;
+android:exported=&quot;true&quot;&gt;
 
-         case R.id.btn_1:
-             //1、传入隐式Intent的action值，构造Intent对象
-             //action值一般是传入Android系统可以响应的action值
-             //当然也可以在某个Activity的action值配置Intent-filter就可以响应此Intent
-             Intent intent=new Intent(Intent.ACTION_VIEW);
+&lt;intent-filter  android:priority=”100”&gt;
 
-             //调用象方：initData()，传入Uri对象
-             intent.setData(Uri.parse(&quot;http://www.baidu.com&quot;));
+    &lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot; /&gt;
+&lt;/intent-filter&gt;
 
-             //开启可以响应此Intent的Activity(可能是系统应用的Activity)
-             startActivity(intent);
-             break;
-
-         case R.id.btn_2:
-             Intent intent2=new Intent(Intent.ACTION_DIAL);
-             intent2.setData(Uri.parse(&quot;tel:15622391415&quot;));
-             startActivity(intent2);
-             break;
-     }  }
-}
-</code></pre><h3 id="3、常用的action值"><a href="#3、常用的action值" class="headerlink" title="3、常用的action值"></a>3、常用的action值</h3><pre><code>// 调用浏览器 
-Uri webViewUri = Uri.parse(&quot;http://blog.csdn.net/zuolongsnail&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, webViewUri); 
-
-// 调用地图 
-Uri mapUri = Uri.parse(&quot;geo:100,100&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, mapUri); 
-
-// 播放mp3 
-Uri playUri = Uri.parse(&quot;file:///sdcard/test.mp3&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, playUri); 
-intent.setDataAndType(playUri, &quot;audio/mp3&quot;); 
-
-
-// 调用拨打电话 
-Uri dialUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_DIAL, dialUri); 
-
-// 直接拨打电话，需要加上权限
-&lt;uses-permission id=&quot;android.permission.CALL_PHONE&quot; /&gt; 
-Uri callUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_CALL, callUri); 
-
-// 调用发邮件（这里要事先配置好的系统Email，否则是调不出发邮件界面的） 
-Uri emailUri = Uri.parse(&quot;mailto:zuolongsnail@163.com&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri); 
-
-// 直接发邮件 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-String[] tos = { &quot;zuolongsnail@gmail.com&quot; }; 
-String[] ccs = { &quot;zuolongsnail@163.com&quot; }; 
-intent.putExtra(Intent.EXTRA_EMAIL, tos); 
-intent.putExtra(Intent.EXTRA_CC, ccs); 
-intent.putExtra(Intent.EXTRA_TEXT, &quot;the email text&quot;); 
-intent.putExtra(Intent.EXTRA_SUBJECT, &quot;subject&quot;); 
-intent.setType(&quot;text/plain&quot;); 
-Intent.createChooser(intent, &quot;Choose Email Client&quot;); 
-
-// 发短信 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.setType(&quot;vnd.android-dir/mms-sms&quot;); 
-
-// 直接发短信 
-Uri smsToUri = Uri.parse(&quot;smsto:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-
-// 发彩信 
-Uri mmsUri = Uri.parse(&quot;content://media/external/images/media/23&quot;); 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.putExtra(Intent.EXTRA_STREAM, mmsUri); 
-intent.setType(&quot;image/png&quot;); 
-
-// 卸载应用 
-Uri uninstallUri = Uri.fromParts(&quot;package&quot;, &quot;com.app.test&quot;, null); 
-Intent intent = new Intent(Intent.ACTION_DELETE, uninstallUri); 
-
-// 安装应用 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.setDataAndType(Uri.fromFile(new File(&quot;/sdcard/test.apk&quot;), &quot;application/vnd.android.package-archive&quot;); 
-
-// 在Android Market中查找应用 
-Uri uri = Uri.parse(&quot;market://search?q=愤怒的小鸟&quot;);          
-Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+&lt;/receiver&gt;
 </code></pre>
           
         
@@ -1606,7 +737,7 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo1--菜单Menu/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo17-最常用的使用FrameLayout加载Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1625,7 +756,1703 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo1--菜单Menu/" itemprop="url">基础Demo1-菜单Menu</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo17-最常用的使用FrameLayout加载Fragment/" itemprop="url">基础Demo17-最常用的使用FrameLayout加载Fragment</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:32:26+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、left-fragment-xml"><a href="#1、left-fragment-xml" class="headerlink" title="1、left_fragment.xml"></a>1、left_fragment.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_1&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Left&quot;
+    /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、right-fragment-xml"><a href="#2、right-fragment-xml" class="headerlink" title="2、right_fragment.xml"></a>2、right_fragment.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:background=&quot;#3e3e3e&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_2&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Right&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="3、BaseFragment-java"><a href="#3、BaseFragment-java" class="headerlink" title="3、BaseFragment.java"></a>3、BaseFragment.java</h3><pre><code>import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+ /**
+  * 面向对象的本质：构造对象，调用象方
+  * 因为有抽象方法强制子类一定要重写，所以变成抽象类
+ */
+public abstract class BaseFragment extends Fragment {
+
+//上下文声明，Fragment习惯性把所在Activity的实例单独写出来
+public Activity context;
+
+/**
+ * 重写生命周期方法：初始化context
+ * @param savedInstanceState
+ */
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    context=getActivity();
+}
+
+/**
+ * 创建视图时回调此方法，所以里面负责写创建视图的代码，创建实体对象，设置属性，但是不填充数据
+ * @param inflater
+ * @param container
+ * @param savedInstanceState
+ * @return
+ */
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return initView();
+}
+
+//抽样方法，强制给子类自己写内容创建视图，而且是在onCreateView中执行
+public abstract View initView();
+
+/**
+ * Activity创建时回调此方法，而且填充实体对象的数据
+ * @param savedInstanceState
+ */
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    initData();  //先有View,才能填充数据，所以不要把数据写到View里面去，可能会拖慢
+}
+
+public void initData() {
+
+    }
+}
+</code></pre><h3 id="4、LeftFragment-java"><a href="#4、LeftFragment-java" class="headerlink" title="4、LeftFragment.java"></a>4、LeftFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class LeftFragment extends BaseFragment {
+
+
+private Button mButton;
+@Override
+public View initView() {
+
+    View view=View.inflate(context, R.layout.left_fragment,null);
+    mButton=(Button)view.findViewById(R.id.btn_1);
+    return view;
+}
+
+
+@Override
+public void initData() {
+    super.initData();
+
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getContext(),&quot;Left&quot;,Toast.LENGTH_SHORT).show();
+        }
+    });
+
+  }
+
+}
+</code></pre><h3 id="5、RightFragment-java"><a href="#5、RightFragment-java" class="headerlink" title="5、RightFragment.java"></a>5、RightFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class RightFragment extends BaseFragment {
+
+
+private Button mButton;
+@Override
+public View initView() {
+
+    View view=View.inflate(context, R.layout.right_fragment,null);
+    mButton=(Button)view.findViewById(R.id.btn_2);
+    return view;
+}
+
+
+@Override
+public void initData() {
+    super.initData();
+
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getContext(),&quot;Right&quot;,Toast.LENGTH_SHORT).show();
+        }
+     });
+
+  }
+}
+</code></pre><h3 id="6、在MainActivity中使用FragmentManager开启事务来以Fragment对象实例填充activity-main-xml的FrameLayout，就完成了。"><a href="#6、在MainActivity中使用FragmentManager开启事务来以Fragment对象实例填充activity-main-xml的FrameLayout，就完成了。" class="headerlink" title="6、在MainActivity中使用FragmentManager开启事务来以Fragment对象实例填充activity_main.xml的FrameLayout，就完成了。"></a>6、在MainActivity中使用FragmentManager开启事务来以Fragment对象实例填充activity_main.xml的FrameLayout，就完成了。</h3><pre><code>import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+
+private static final String LEFT_FRAGMENT_TAG =&quot;left_fragment_tag&quot;;
+private static final String RIGHT_FRAGMENT_TAG =&quot;right_fragment_tag&quot; ;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    initFragment();
+}
+
+
+//初始化Fragment的view
+private void initFragment() {
+
+    //1.构造FragmentManager对象
+    FragmentManager fm=getSupportFragmentManager();
+    //2、得到FragmentTransaction对象开启事务
+    FragmentTransaction ft=fm.beginTransaction();
+    //3、事务对象调用象方来使ContentFragment的view来覆盖fl_main_content
+    //LeftMenuFragment的view来覆盖fl_left_menu，tag是后面在其他地方可以找到这两个Fragment
+    ft.replace(R.id.left_frame, new LeftFragment(), LEFT_FRAGMENT_TAG);
+    ft.replace(R.id.right_frame, new RightFragment(), RIGHT_FRAGMENT_TAG);
+    //4、事务对象调用象方来提交
+    ft.commit();
+}
+
+
+  /**
+    * 得到左侧碎片的实例
+    * @return
+   */
+public LeftFragment getLeftMenuFragment() {
+    //构造FragmentManager对象
+    FragmentManager fm=getSupportFragmentManager();
+    //构造LeftMenuFragment对象： 通过构造FragmentManager对象调用象方
+    LeftFragment leftFragment= (LeftFragment) fm.findFragmentByTag(LEFT_FRAGMENT_TAG);
+    return leftFragment;
+}
+
+
+  /**
+   * 得到右侧碎片的实例
+   * @return
+   */
+public  RightFragment getContentFragment() {
+    return (RightFragment) getSupportFragmentManager().findFragmentByTag(RIGHT_FRAGMENT_TAG);
+   }
+
+ }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo16-Fragment最常用的基类BaseFragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo16-Fragment最常用的基类BaseFragment/" itemprop="url">基础Demo16-Fragment最常用的基类BaseFragment</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:29:35+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+ /**
+    * 面向对象的本质：构造对象，调用象方
+    * 因为有抽象方法强制子类一定要重写，所以变成抽象类
+  */
+public abstract class BaseFragment extends Fragment {
+
+//上下文声明，Fragment习惯性把所在Activity的实例单独写出来
+public Activity context;
+
+/**
+ * 重写生命周期方法：初始化context
+ * @param savedInstanceState
+ */
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    context=getActivity();
+}
+
+/**
+ * 创建视图时回调此方法，所以里面负责写创建视图的代码，创建实体对象，设置属性，但是不填充数据
+ * @param inflater
+ * @param container
+ * @param savedInstanceState
+ * @return
+ */
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return initView();
+}
+
+//抽样方法，强制给子类自己写内容创建视图，而且是在onCreateView中执行
+public abstract View initView();
+
+/**
+ * Activity创建时回调此方法，而且填充实体对象的数据
+ * @param savedInstanceState
+ */
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    initData();  //先有View,才能填充数据，所以不要把数据写到View里面去，可能会拖慢
+}
+
+public void initData() {
+
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo15-静态加载Fragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo15-静态加载Fragment/" itemprop="url">基础Demo15-静态加载Fragment</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:26:01+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、left-fragment-xml-right-fragment-xml"><a href="#1、left-fragment-xml-right-fragment-xml" class="headerlink" title="1、left_fragment.xml     right_fragment.xml"></a>1、left_fragment.xml     right_fragment.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;Button
+    android:id=&quot;@+id/btn_1&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Left&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><hr>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:background=&quot;#3e3e3e&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;Button
+    android:id=&quot;@+id/btn_2&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Right&quot;
+    /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、LeftFragment-java"><a href="#2、LeftFragment-java" class="headerlink" title="2、LeftFragment.java"></a>2、LeftFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class LeftFragment extends Fragment {
+
+private Button mButton;
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view=inflater.inflate(R.layout.left_fragment,container,false);
+    mButton=(Button)view.findViewById(R.id.btn_1);
+    return view;
+    }
+}
+</code></pre><h3 id="3、RightFragment-java"><a href="#3、RightFragment-java" class="headerlink" title="3、RightFragment.java"></a>3、RightFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class RightFragment extends Fragment {
+
+
+private Button mButton;
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view=inflater.inflate(R.layout.right_fragment,container,false);
+    mButton=(Button)view.findViewById(R.id.btn_2);
+    return view;
+  }
+}
+</code></pre><h3 id="4、在activity-main-xml中类似自定义控件引入fragment"><a href="#4、在activity-main-xml中类似自定义控件引入fragment" class="headerlink" title="4、在activity_main.xml中类似自定义控件引入fragment"></a>4、在activity_main.xml中类似自定义控件引入fragment</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+tools:context=&quot;.MainActivity&quot;&gt;
+
+
+&lt;fragment
+    android:id=&quot;@+id/left_fragment&quot;
+    android:name=&quot;com.mo.fragmentdemo1.LeftFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot;/&gt;
+
+
+&lt;fragment
+    android:id=&quot;@+id/right_fragment&quot;
+    android:name=&quot;com.mo.fragmentdemo1.RightFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo14-RecyclerView实现聊天界面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo14-RecyclerView实现聊天界面/" itemprop="url">基础Demo14-RecyclerView实现聊天界面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:20:52+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、在app模块的build-gradle文件添加recyclerview的依赖"><a href="#1、在app模块的build-gradle文件添加recyclerview的依赖" class="headerlink" title="1、在app模块的build.gradle文件添加recyclerview的依赖"></a>1、在app模块的build.gradle文件添加recyclerview的依赖</h3><pre><code>implementation &apos;com.android.support:recyclerview-v7:28.0.0&apos;
+</code></pre><h3 id="2、activity-main-xml"><a href="#2、activity-main-xml" class="headerlink" title="2、activity_main.xml"></a>2、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:background=&quot;#d8e0e8&quot; &gt;
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/msg_recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot; /&gt;
+
+&lt;LinearLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; &gt;
+
+    &lt;EditText
+        android:id=&quot;@+id/input_text&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:hint=&quot;Type something here&quot;
+        android:maxLines=&quot;2&quot; /&gt;
+
+    &lt;Button
+        android:id=&quot;@+id/send&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Send&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="3、recyclerview的item布局：-msg-item-xml"><a href="#3、recyclerview的item布局：-msg-item-xml" class="headerlink" title="3、recyclerview的item布局：  msg_item.xml"></a>3、recyclerview的item布局：  msg_item.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;wrap_content&quot;
+android:padding=&quot;10dp&quot; &gt;
+
+&lt;LinearLayout
+    android:id=&quot;@+id/left_layout&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;left&quot;
+    android:background=&quot;@drawable/message_left&quot; &gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/left_msg&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:layout_margin=&quot;10dp&quot;
+        android:textColor=&quot;#fff&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;LinearLayout
+    android:id=&quot;@+id/right_layout&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;right&quot;
+    android:background=&quot;@drawable/message_right&quot; &gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/right_msg&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:layout_margin=&quot;10dp&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="4、bean-存储解析后的数据，是一个实体类"><a href="#4、bean-存储解析后的数据，是一个实体类" class="headerlink" title="4、bean:    存储解析后的数据，是一个实体类"></a>4、bean:    存储解析后的数据，是一个实体类</h3><pre><code>public class Msg {
+
+public static final int TYPE_RECEIVED = 0;
+
+public static final int TYPE_SENT = 1;
+
+private String content;
+
+private int type;
+
+public Msg(String content, int type) {
+    this.content = content;
+    this.type = type;
+}
+
+public String getContent() {
+    return content;
+}
+
+public int getType() {
+    return type;
+   }
+
+}
+</code></pre><h3 id="5、适配器：-数据整理类，将数据整理到API中，setAdapter将适配器对象传入系统，让系统自己根据监听结果来回调适配器的API"><a href="#5、适配器：-数据整理类，将数据整理到API中，setAdapter将适配器对象传入系统，让系统自己根据监听结果来回调适配器的API" class="headerlink" title="5、适配器：  数据整理类，将数据整理到API中，setAdapter将适配器对象传入系统，让系统自己根据监听结果来回调适配器的API"></a>5、适配器：  数据整理类，将数据整理到API中，setAdapter将适配器对象传入系统，让系统自己根据监听结果来回调适配器的API</h3><pre><code>import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import java.util.List;
+
+public class MsgAdapter extends RecyclerView.Adapter&lt;MsgAdapter.ViewHolder&gt; {
+
+private List&lt;Msg&gt; mMsgList;
+
+
+public MsgAdapter(List&lt;Msg&gt; msgList) {
+    mMsgList = msgList;
+}
+
+@Override
+public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.msg_item, parent, false);
+    return new ViewHolder(view);
+}
+
+@Override
+public void onBindViewHolder(ViewHolder holder, int position) {
+    Msg msg = mMsgList.get(position);
+    if (msg.getType() == Msg.TYPE_RECEIVED) {
+        // 如果是收到的消息，则显示左边的消息布局，将右边的消息布局隐藏
+        holder.leftLayout.setVisibility(View.VISIBLE);
+        holder.rightLayout.setVisibility(View.GONE);
+        holder.leftMsg.setText(msg.getContent());
+    } else if(msg.getType() == Msg.TYPE_SENT) {
+        // 如果是发出的消息，则显示右边的消息布局，将左边的消息布局隐藏
+        holder.rightLayout.setVisibility(View.VISIBLE);
+        holder.leftLayout.setVisibility(View.GONE);
+        holder.rightMsg.setText(msg.getContent());
+    }
+}
+
+@Override
+public int getItemCount() {
+    return mMsgList.size();
+}
+
+
+
+  //初始化RecyclerView的itemView
+ static class ViewHolder extends RecyclerView.ViewHolder {
+
+    LinearLayout leftLayout;
+
+    LinearLayout rightLayout;
+
+    TextView leftMsg;
+
+    TextView rightMsg;
+
+    public ViewHolder(View view) {
+        super(view);
+        leftLayout = (LinearLayout) view.findViewById(R.id.left_layout);
+        rightLayout = (LinearLayout) view.findViewById(R.id.right_layout);
+        leftMsg = (TextView) view.findViewById(R.id.left_msg);
+        rightMsg = (TextView) view.findViewById(R.id.right_msg);
+      }
+   }
+
+
+}
+</code></pre><h3 id="6、MainActivity"><a href="#6、MainActivity" class="headerlink" title="6、MainActivity"></a>6、MainActivity</h3><pre><code>import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+private List&lt;Msg&gt; msgList = new ArrayList&lt;Msg&gt;();
+
+private EditText inputText;
+
+private Button send;
+
+private RecyclerView msgRecyclerView;
+
+private MsgAdapter adapter;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    //initView
+    inputText = (EditText) findViewById(R.id.input_text);
+    send = (Button) findViewById(R.id.send);
+    msgRecyclerView = (RecyclerView) findViewById(R.id.msg_recycler_view);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+    msgRecyclerView.setLayoutManager(layoutManager);
+
+
+    //initData
+    initMsgs(); // 初始化消息数据
+    adapter = new MsgAdapter(msgList);
+    msgRecyclerView.setAdapter(adapter);
+    send.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String content = inputText.getText().toString();
+            if (!&quot;&quot;.equals(content)) {
+                Msg msg = new Msg(content, Msg.TYPE_SENT);
+                msgList.add(msg);
+                adapter.notifyItemInserted(msgList.size() - 1); // 当有新消息时，刷新ListView中的显示
+                msgRecyclerView.scrollToPosition(msgList.size() - 1); // 将ListView定位到最后一行
+                inputText.setText(&quot;&quot;); // 清空输入框中的内容
+            }
+        }
+    });
+}
+
+
+
+private void initMsgs() {
+    Msg msg1 = new Msg(&quot;Hello guy.&quot;, Msg.TYPE_RECEIVED);
+    msgList.add(msg1);
+    Msg msg2 = new Msg(&quot;Hello. Who is that?&quot;, Msg.TYPE_SENT);
+    msgList.add(msg2);
+    Msg msg3 = new Msg(&quot;This is Tom. Nice talking to you. &quot;, Msg.TYPE_RECEIVED);
+    msgList.add(msg3);
+   }
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo13-RecyclerView最基本的Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo13-RecyclerView最基本的Demo/" itemprop="url">基础Demo13-RecyclerView最基本的Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:15:46+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、在app模块的build-gradle文件添加recyclerview的依赖"><a href="#1、在app模块的build-gradle文件添加recyclerview的依赖" class="headerlink" title="1、在app模块的build.gradle文件添加recyclerview的依赖"></a>1、在app模块的build.gradle文件添加recyclerview的依赖</h3><pre><code>implementation &apos;com.android.support:recyclerview-v7:28.0.0&apos;
+</code></pre><h3 id="2、activity-main-xml"><a href="#2、activity-main-xml" class="headerlink" title="2、activity_main.xml"></a>2、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="3、fruit-item-xml"><a href="#3、fruit-item-xml" class="headerlink" title="3、fruit_item.xml"></a>3、fruit_item.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;wrap_content&quot;
+android:layout_margin=&quot;5dp&quot; &gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/fruit_image&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot; /&gt;
+
+&lt;TextView
+    android:id=&quot;@+id/fruit_name&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;left&quot;
+    android:layout_marginTop=&quot;10dp&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="4、bean-Fruit-java-解析后存放数据"><a href="#4、bean-Fruit-java-解析后存放数据" class="headerlink" title="4、bean:    Fruit.java     解析后存放数据"></a>4、bean:    Fruit.java     解析后存放数据</h3><pre><code>//属性+Getter+Setter
+
+
+public class Fruit {
+
+private String name;
+
+private int imageId;
+
+public Fruit(String name, int imageId) {
+    this.name = name;
+    this.imageId = imageId;
+}
+
+public String getName() {
+    return name;
+}
+
+public int getImageId() {
+    return imageId;
+  }
+
+}
+</code></pre><h3 id="5、适配器：-数据整理类，将数据整理到API，setAdapter传入适配器对象，给系统自己回调，我们只要负责构造就行"><a href="#5、适配器：-数据整理类，将数据整理到API，setAdapter传入适配器对象，给系统自己回调，我们只要负责构造就行" class="headerlink" title="5、适配器： 数据整理类，将数据整理到API，setAdapter传入适配器对象，给系统自己回调，我们只要负责构造就行"></a>5、适配器： 数据整理类，将数据整理到API，setAdapter传入适配器对象，给系统自己回调，我们只要负责构造就行</h3><pre><code>import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.util.List;
+
+public class FruitAdapter extends RecyclerView.Adapter&lt;FruitAdapter.ViewHolder&gt;{
+
+//适配器要整理的数据
+private List&lt;Fruit&gt; mFruitList;
+
+public FruitAdapter(List&lt;Fruit&gt; fruitList) {
+    mFruitList = fruitList;
+}
+
+@Override
+public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fruit_item, parent, false);
+    final ViewHolder holder = new ViewHolder(view);
+
+    //灵活设置RecyclerView每个view的点击事件，这是比ListView的优势
+    holder.fruitView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int position = holder.getAdapterPosition();
+            Fruit fruit = mFruitList.get(position);
+            Toast.makeText(v.getContext(), &quot;you clicked view &quot; + fruit.getName(), Toast.LENGTH_SHORT).show();
+        }
+    });
+
+
+
+    holder.fruitImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int position = holder.getAdapterPosition();
+            Fruit fruit = mFruitList.get(position);
+            Toast.makeText(v.getContext(), &quot;you clicked image &quot; + fruit.getName(), Toast.LENGTH_SHORT).show();
+        }
+    });
+    return holder;
+}
+
+
+@Override
+public void onBindViewHolder(ViewHolder holder, int position) {
+    Fruit fruit = mFruitList.get(position);
+    holder.fruitImage.setImageResource(fruit.getImageId());
+    holder.fruitName.setText(fruit.getName());
+}
+
+
+@Override
+public int getItemCount() {
+    return mFruitList.size();
+}
+
+
+
+//内部类ViewHolder的作用就是初始化itemView
+static class ViewHolder extends RecyclerView.ViewHolder {
+    View fruitView;
+    ImageView fruitImage;
+    TextView fruitName;
+
+    public ViewHolder(View view) {
+        super(view);
+        fruitView = view;
+        fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+        fruitName = (TextView) view.findViewById(R.id.fruit_name);
+      }
+  }
+
+
+}
+</code></pre><h3 id="6、MainActivity"><a href="#6、MainActivity" class="headerlink" title="6、MainActivity"></a>6、MainActivity</h3><pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+private List&lt;Fruit&gt; fruitList = new ArrayList&lt;Fruit&gt;();
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    //initView
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+   // StaggeredGridLayoutManager layoutManager = new
+        //    StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+  //  recyclerView.setLayoutManager(layoutManager);
+   recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
+
+    //initData
+    initFruits();
+    FruitAdapter adapter = new FruitAdapter(fruitList);
+    recyclerView.setAdapter(adapter);
+}
+
+private void initFruits() {
+    for (int i = 0; i &lt; 2; i++) {
+        Fruit apple = new Fruit(getRandomLengthName(&quot;Apple&quot;), R.drawable.apple_pic);
+        fruitList.add(apple);
+        Fruit banana = new Fruit(getRandomLengthName(&quot;Banana&quot;), R.drawable.banana_pic);
+        fruitList.add(banana);
+        Fruit orange = new Fruit(getRandomLengthName(&quot;Orange&quot;), R.drawable.orange_pic);
+        fruitList.add(orange);
+        Fruit watermelon = new Fruit(getRandomLengthName(&quot;Watermelon&quot;), R.drawable.watermelon_pic);
+        fruitList.add(watermelon);
+        Fruit pear = new Fruit(getRandomLengthName(&quot;Pear&quot;), R.drawable.pear_pic);
+        fruitList.add(pear);
+        Fruit grape = new Fruit(getRandomLengthName(&quot;Grape&quot;), R.drawable.grape_pic);
+        fruitList.add(grape);
+        Fruit pineapple = new Fruit(getRandomLengthName(&quot;Pineapple&quot;), R.drawable.pineapple_pic);
+        fruitList.add(pineapple);
+        Fruit strawberry = new Fruit(getRandomLengthName(&quot;Strawberry&quot;), R.drawable.strawberry_pic);
+        fruitList.add(strawberry);
+        Fruit cherry = new Fruit(getRandomLengthName(&quot;Cherry&quot;), R.drawable.cherry_pic);
+        fruitList.add(cherry);
+        Fruit mango = new Fruit(getRandomLengthName(&quot;Mango&quot;), R.drawable.mango_pic);
+        fruitList.add(mango);
+    }
+}
+
+private String getRandomLengthName(String name) {
+    Random random = new Random();
+    int length = random.nextInt(20) + 1;
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i &lt; length; i++) {
+        builder.append(name);
+    }
+    return builder.toString();
+  }
+
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo12-ListView最基本的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo12-ListView最基本的使用/" itemprop="url">基础Demo12-ListView最基本的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:11:44+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ListView
+    android:id=&quot;@+id/list_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot; &gt;
+&lt;/ListView&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、fruit-item-xml"><a href="#2、fruit-item-xml" class="headerlink" title="2、fruit_item.xml"></a>2、fruit_item.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;horizontal&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/fruit_image&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;TextView
+    android:id=&quot;@+id/fruit_name&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_vertical&quot;
+    android:layout_marginLeft=&quot;10dp&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="3、bean-Fruit-java"><a href="#3、bean-Fruit-java" class="headerlink" title="3、bean:   Fruit.java"></a>3、bean:   Fruit.java</h3><pre><code>//属性+Getter+Setter
+
+
+public class Fruit {
+
+private String name;
+
+private int imageId;
+
+public Fruit(String name, int imageId) {
+    this.name = name;
+    this.imageId = imageId;
+}
+
+public String getName() {
+    return name;
+}
+
+public int getImageId() {
+    return imageId;
+}
+
+}
+</code></pre><h3 id="4、适配器：数据整理类，整理到API里面，然后setAdapter传到系统，给系统回调"><a href="#4、适配器：数据整理类，整理到API里面，然后setAdapter传到系统，给系统回调" class="headerlink" title="4、适配器：数据整理类，整理到API里面，然后setAdapter传到系统，给系统回调"></a>4、适配器：数据整理类，整理到API里面，然后setAdapter传到系统，给系统回调</h3><pre><code>import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import java.util.List;
+
+public class FruitAdapter extends ArrayAdapter&lt;Fruit&gt; {
+
+private int resourceId;
+
+public FruitAdapter(Context context, int textViewResourceId,
+                    List&lt;Fruit&gt; objects) {
+    super(context, textViewResourceId, objects);
+    resourceId = textViewResourceId;
+}
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    Fruit fruit = getItem(position); // 获取当前项的Fruit实例
+    View view;
+    ViewHolder viewHolder;
+    if (convertView == null) {
+        view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
+        viewHolder = new ViewHolder();
+        viewHolder.fruitImage = (ImageView) view.findViewById (R.id.fruit_image);
+        viewHolder.fruitName = (TextView) view.findViewById (R.id.fruit_name);
+        view.setTag(viewHolder); // 将ViewHolder存储在View中
+    } else {
+        view = convertView;
+        viewHolder = (ViewHolder) view.getTag(); // 重新获取ViewHolder
+    }
+    viewHolder.fruitImage.setImageResource(fruit.getImageId());
+    viewHolder.fruitName.setText(fruit.getName());
+    return view;
+}
+
+class ViewHolder {
+
+    ImageView fruitImage;
+
+    TextView fruitName;
+
+   }
+
+}
+</code></pre><h3 id="5、MainActivity"><a href="#5、MainActivity" class="headerlink" title="5、MainActivity"></a>5、MainActivity</h3><pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+private List&lt;Fruit&gt; fruitList = new ArrayList&lt;Fruit&gt;();
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    //initView()
+    ListView listView = (ListView) findViewById(R.id.list_view);
+
+
+    //initData()
+    initFruits(); // 初始化水果数据
+    FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+    listView.setAdapter(adapter);
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView&lt;?&gt; parent, View view,
+                                int position, long id) {
+            Fruit fruit = fruitList.get(position);
+            Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+
+private void initFruits() {
+    for (int i = 0; i &lt; 2; i++) {
+        Fruit apple = new Fruit(&quot;Apple&quot;, R.drawable.apple_pic);
+        fruitList.add(apple);
+        Fruit banana = new Fruit(&quot;Banana&quot;, R.drawable.banana_pic);
+        fruitList.add(banana);
+        Fruit orange = new Fruit(&quot;Orange&quot;, R.drawable.orange_pic);
+        fruitList.add(orange);
+        Fruit watermelon = new Fruit(&quot;Watermelon&quot;, R.drawable.watermelon_pic);
+        fruitList.add(watermelon);
+        Fruit pear = new Fruit(&quot;Pear&quot;, R.drawable.pear_pic);
+        fruitList.add(pear);
+        Fruit grape = new Fruit(&quot;Grape&quot;, R.drawable.grape_pic);
+        fruitList.add(grape);
+        Fruit pineapple = new Fruit(&quot;Pineapple&quot;, R.drawable.pineapple_pic);
+        fruitList.add(pineapple);
+        Fruit strawberry = new Fruit(&quot;Strawberry&quot;, R.drawable.strawberry_pic);
+        fruitList.add(strawberry);
+        Fruit cherry = new Fruit(&quot;Cherry&quot;, R.drawable.cherry_pic);
+        fruitList.add(cherry);
+        Fruit mango = new Fruit(&quot;Mango&quot;, R.drawable.mango_pic);
+        fruitList.add(mango);
+    }
+ }
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo10-常用控件的常用属性使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo10-常用控件的常用属性使用/" itemprop="url">基础Demo10-常用控件的常用属性使用</a></h1>
         
 
         <div class="post-meta">
@@ -1677,243 +2504,45 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
       
         
           
-            <h3 id="1、创建item-menu-xml"><a href="#1、创建item-menu-xml" class="headerlink" title="1、创建item_menu.xml"></a>1、创建item_menu.xml</h3><p>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-
-&lt;item
-    android:id=&quot;@+id/scan_item&quot;
-    android:title=&quot;扫一扫&quot;/&gt;
-
-&lt;item
-    android:id=&quot;@+id/friend_item&quot;
-    android:title=&quot;添加朋友&quot;/&gt;
-
-&lt;item
-    android:id=&quot;@+id/pay_item&quot;
-    android:title=&quot;收付款&quot;/&gt;
-
-&lt;/menu&gt;
-</code></pre><h3 id="2、在Activity中重写两个Menu的回调方法"><a href="#2、在Activity中重写两个Menu的回调方法" class="headerlink" title="2、在Activity中重写两个Menu的回调方法"></a>2、在Activity中重写两个Menu的回调方法</h3><p>：（1）onCreateOptionsMenu()，初始化菜单item</p>
-<p>：（2）onOptionsItemSelected（），子项选中后的逻辑</p>
-<pre><code>import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-public class MainActivity extends AppCompatActivity {
+            <pre><code>1、android:gravity= “center”   
+</code></pre><p>//常用值：top,bottom,left,right,center_vertical，center_horizontal</p>
+<p>效果：指定文字在控件中的对齐方式，TextView和Button用得多</p>
+<pre><code>2、android:textAllCaps=“false”
+</code></pre><p>效果：Button的text默认字母都大写，可以取消掉这个属性</p>
+<pre><code>3、android：hint=”请输入账号......”
+</code></pre><p>效果：EditText中可以浅灰色的文字提示</p>
+<pre><code>4、android:maxLines=”2”
+</code></pre><p>效果：EditText的文字最多显示两行，多了之后就需要滚动才能看到，例如微信输入框的maxLines是4</p>
+<pre><code>5、imageView.setImageResource()
+</code></pre><p>效果：可以设置图片资源</p>
+<pre><code>6、style=”?android:attr/progressBarStyleHorizontal”
+</code></pre><p>效果：让进度条以横条显示</p>
+<pre><code>7、android:max=”100”
+</code></pre><p>效果：设置进度条的最大值，我们在动态代码那里可以设置进度条的实时进度值</p>
+<pre><code>AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+dialog.setTitle(“Warning”);
+dialog.set......
+dialog.setPositiveButton(......)
+ dialog.setNegativeButton(......)
+对话框
 
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+ProgressDialog progressDialog=new ProgressDialog(this);
+progressDialog.setTitle(......)
+progressDialog.setMessage......
+还有进度条的对话框
+</code></pre><p>   android:layout_gravity=”top”(bottom,center_vertical……)</p>
+<p>   9、多个结合，可以平分宽度或者高度 </p>
+<pre><code>android:layout_width=”0dp”,android:layout_weight=”1”
+</code></pre><p>   10、相对布局： </p>
+<pre><code>android:layout_alignParentLeft=”true”
+android:layout_alignParentTop=”true”
+android:layout_centerInParent=”true”
+android:layout_above=”@id/btn_1”
+android:layout_toLeftOf=”@id/btn_2”
+</code></pre><p>13、RelativeLayout的特点是可以有相对位置，也可以覆盖</p>
+<p>14、FrameLayout的特点是可以覆盖，以及跟fragment搭配使用</p>
 
-    //调用象方：初始化布局
-    setContentView(R.layout.activity_main);
-}
-
-
-
-//初始化菜单item为view对象
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-
-    //调用象方：构造item_view对象，初始化item布局，参数menu是加载该view的位置，直接使用形参的menu，不用改
-    getMenuInflater().inflate(R.menu.item_menu,menu);
-
-    //ture的处理结果是可以显示菜单
-    return true;
-}
-
-//触摸结果的处理方法，在Android系统的触摸监听里被回调
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-
-    //在触摸回调的时候系统会传入监听到的item对象，我们根据id值来鉴别每个item
-    //要时刻记住我们的职责是构造处理类方法，不需要我们调用，是系统调用
-    //所以我们关键是写对方法名和形参类型，实际数据是系统自己调用时，自己传进去使用，不需要给我们
-    switch (item.getItemId()){
-
-        case R.id.scan_item:
-
-            Toast.makeText(this,&quot;扫一扫&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-        case R.id.friend_item:
-            Toast.makeText(this,&quot;添加朋友&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-        case R.id.pay_item:
-            Toast.makeText(this,&quot;收付款&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-            default:break;
-    }
-    //true理解为可以执行
-    return true;
-  }
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo11-最简单的自定义控件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo11-最简单的自定义控件/" itemprop="url">基础Demo11-最简单的自定义控件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T13:08:07+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、引入布局：-可以分离和再组合，而且可以多次利用"><a href="#1、引入布局：-可以分离和再组合，而且可以多次利用" class="headerlink" title="1、引入布局： 可以分离和再组合，而且可以多次利用"></a>1、引入布局： 可以分离和再组合，而且可以多次利用</h3><pre><code>&lt;include layout=”@layout/title_bar”/&gt;
-</code></pre><h3 id="2、创建一个类，extends-某个View"><a href="#2、创建一个类，extends-某个View" class="headerlink" title="2、创建一个类，extends 某个View"></a>2、创建一个类，extends 某个View</h3><p>：总共有4个构造方法，这里我们选用两个参数的构造方法，有时候4个都要写<br>：其次，可以直接在这里设置监听事件，点击事件，或者提供对外的API给使用此自定义控件的Activity调用，即可以自封装，也可以对外提供接口，非常灵活！！！！</p>
-<pre><code>import android.app.Activity;
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-public class TitleLayout extends LinearLayout {
-
-//两参构造器的作用就是initView
-public TitleLayout(Context context,AttributeSet attrs) {
-    super(context, attrs);
-
-    LayoutInflater.from(context).inflate(R.layout.title,this);
-    Button btn_back=(Button)findViewById(R.id.title_back);
-    Button btn_edit=(Button)findViewById(R.id.title_edit);
-
-    btn_back.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            ((Activity)getContext()).finish();
-        }
-    });
-
-    btn_edit.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            Toast.makeText(getContext(),&quot;you get it&quot;,Toast.LENGTH_SHORT).show();
-        }
-    });
-
-
-    }
-}
-</code></pre>
           
         
       
@@ -1952,7 +2581,7 @@ public TitleLayout(Context context,AttributeSet attrs) {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1998,7 +2627,7 @@ public TitleLayout(Context context,AttributeSet attrs) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
