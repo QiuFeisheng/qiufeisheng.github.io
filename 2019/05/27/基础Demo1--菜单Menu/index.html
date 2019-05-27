@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="###1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/and">
+<meta name="description" content="1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/androi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础Demo1-菜单Menu">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo1--菜单Menu/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="###1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/and">
+<meta property="og:description" content="1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/androi">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T06:36:06.534Z">
+<meta property="og:updated_time" content="2019-05-27T06:48:15.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础Demo1-菜单Menu">
-<meta name="twitter:description" content="###1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/and">
+<meta name="twitter:description" content="1、创建item_menu.xml：res右键—&amp;gt;Directory—&amp;gt;menu—&amp;gt;item_menu.xml &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;menu xmlns:android=&amp;quot;http://schemas.android.com/apk/res/androi">
 
 
 
@@ -299,7 +299,7 @@
       
 
       
-        <p>###1、创建item_menu.xml<br>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
+        <h3 id="1、创建item-menu-xml"><a href="#1、创建item-menu-xml" class="headerlink" title="1、创建item_menu.xml"></a>1、创建item_menu.xml</h3><p>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
 
@@ -316,7 +316,7 @@
     android:title=&quot;收付款&quot;/&gt;
 
 &lt;/menu&gt;
-</code></pre><p>###2、在Activity中重写两个Menu的回调方法<br>：（1）onCreateOptionsMenu()，初始化菜单item</p>
+</code></pre><h3 id="2、在Activity中重写两个Menu的回调方法"><a href="#2、在Activity中重写两个Menu的回调方法" class="headerlink" title="2、在Activity中重写两个Menu的回调方法"></a>2、在Activity中重写两个Menu的回调方法</h3><p>：（1）onCreateOptionsMenu()，初始化菜单item</p>
 <p>：（2）onOptionsItemSelected（），子项选中后的逻辑</p>
 <pre><code>import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -401,8 +401,8 @@ public boolean onOptionsItemSelected(MenuItem item) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/23/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/05/27/基础Demo11-最简单的自定义控件/" rel="next" title="基础Demo11-最简单的自定义控件">
+                <i class="fa fa-chevron-left"></i> 基础Demo11-最简单的自定义控件
               </a>
             
           </div>
@@ -465,8 +465,17 @@ public boolean onOptionsItemSelected(MenuItem item) {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -481,7 +490,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -508,6 +517,22 @@ public boolean onOptionsItemSelected(MenuItem item) {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建item-menu-xml"><span class="nav-number">1.</span> <span class="nav-text">1、创建item_menu.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在Activity中重写两个Menu的回调方法"><span class="nav-number">2.</span> <span class="nav-text">2、在Activity中重写两个Menu的回调方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

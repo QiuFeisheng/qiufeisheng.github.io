@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、在app模块下的build.gradle文件中添加recycleview的依赖implementation &amp;apos;com.android.support:recyclerview-v7:28.0.0&amp;apos; 2、bean:  新闻数据的实体类，存放解析后的数据， News.java//属性+ Getter+ Setter public class News {  private St">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础Demo19-Fragment的新闻Demo">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo19-Fragment的新闻Demo/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1、在app模块下的build.gradle文件中添加recycleview的依赖implementation &amp;apos;com.android.support:recyclerview-v7:28.0.0&amp;apos; 2、bean:  新闻数据的实体类，存放解析后的数据， News.java//属性+ Getter+ Setter public class News {  private St">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-27T08:01:02.792Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础Demo19-Fragment的新闻Demo">
+<meta name="twitter:description" content="1、在app模块下的build.gradle文件中添加recycleview的依赖implementation &amp;apos;com.android.support:recyclerview-v7:28.0.0&amp;apos; 2、bean:  新闻数据的实体类，存放解析后的数据， News.java//属性+ Getter+ Setter public class News {  private St">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo19-Fragment的新闻Demo/">
+
+
+
+
+
+  <title>基础Demo19-Fragment的新闻Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo19-Fragment的新闻Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基础Demo19-Fragment的新闻Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、在app模块下的build-gradle文件中添加recycleview的依赖"><a href="#1、在app模块下的build-gradle文件中添加recycleview的依赖" class="headerlink" title="1、在app模块下的build.gradle文件中添加recycleview的依赖"></a>1、在app模块下的build.gradle文件中添加recycleview的依赖</h3><pre><code>implementation &apos;com.android.support:recyclerview-v7:28.0.0&apos;
+</code></pre><h3 id="2、bean-新闻数据的实体类，存放解析后的数据，-News-java"><a href="#2、bean-新闻数据的实体类，存放解析后的数据，-News-java" class="headerlink" title="2、bean:  新闻数据的实体类，存放解析后的数据， News.java"></a>2、bean:  新闻数据的实体类，存放解析后的数据， News.java</h3><pre><code>//属性+ Getter+ Setter
+public class News {
+
+private String title;
+
+private String content;
+
+public String getTitle() {
+    return title;
+}
+
+public void setTitle(String title) {
+    this.title = title;
+}
+
+public String getContent() {
+    return content;
+}
+
+public void setContent(String content) {
+    this.content = content;
+ }
+
+}
+</code></pre><h3 id="3、新闻内容碎片的布局：-news-content-frag-xml"><a href="#3、新闻内容碎片的布局：-news-content-frag-xml" class="headerlink" title="3、新闻内容碎片的布局： news_content_frag.xml"></a>3、新闻内容碎片的布局： news_content_frag.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;LinearLayout
+    android:id=&quot;@+id/visibility_layout&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    android:visibility=&quot;invisible&quot; &gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/news_title&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:gravity=&quot;center&quot;
+        android:padding=&quot;10dp&quot;
+        android:textSize=&quot;20sp&quot; /&gt;
+
+    &lt;View
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;1dp&quot;
+        android:background=&quot;#000&quot; /&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/news_content&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;0dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:padding=&quot;15dp&quot;
+        android:textSize=&quot;18sp&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;View
+    android:layout_width=&quot;1dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_alignParentLeft=&quot;true&quot;
+    android:background=&quot;#000&quot; /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><h3 id="4、新闻内容碎片类：-NewsContentFragment-java"><a href="#4、新闻内容碎片类：-NewsContentFragment-java" class="headerlink" title="4、新闻内容碎片类：  NewsContentFragment.java"></a>4、新闻内容碎片类：  NewsContentFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class NewsContentFragment extends Fragment {
+
+private View view;
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
+
+    //initView                        
+    view = inflater.inflate(R.layout.news_content_frag, container, false);
+    return view;
+}
+
+
+//initData
+public void refresh(String newsTitle, String newsContent) {
+    View visibilityLayout = view.findViewById(R.id.visibility_layout);
+    visibilityLayout.setVisibility(View.VISIBLE);
+    TextView newsTitleText = (TextView) view.findViewById (R.id.news_title);
+    TextView newsContentText = (TextView) view.findViewById(R.id.news_content);
+    newsTitleText.setText(newsTitle); // 刷新新闻的标题
+    newsContentText.setText(newsContent); // 刷新新闻的内容
+   }
+
+}
+</code></pre><h3 id="5、内容Activity引入内容碎片，-news-content-xml"><a href="#5、内容Activity引入内容碎片，-news-content-xml" class="headerlink" title="5、内容Activity引入内容碎片， news_content.xml"></a>5、内容Activity引入内容碎片， news_content.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;fragment
+    android:id=&quot;@+id/news_content_fragment&quot;
+    android:name=&quot;com.example.fragmentbestpractice.NewsContentFragment&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="6、内容Activity-NewsContentActivity"><a href="#6、内容Activity-NewsContentActivity" class="headerlink" title="6、内容Activity: NewsContentActivity"></a>6、内容Activity: NewsContentActivity</h3><pre><code>import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class NewsContentActivity extends AppCompatActivity {
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.news_content);
+    String newsTitle = getIntent().getStringExtra(&quot;news_title&quot;); // 获取传入的新闻标题
+    String newsContent = getIntent().getStringExtra(&quot;news_content&quot;); // 获取传入的新闻内容
+    NewsContentFragment newsContentFragment = (NewsContentFragment) getSupportFragmentManager().findFragmentById(R.id.news_content_fragment);
+    newsContentFragment.refresh(newsTitle, newsContent); // 刷新NewsContentFragment界面
+}
+
+
+
+public static void actionStart(Context context, String newsTitle, String newsContent) {
+    Intent intent = new Intent(context, NewsContentActivity.class);
+    intent.putExtra(&quot;news_title&quot;, newsTitle);
+    intent.putExtra(&quot;news_content&quot;, newsContent);
+    context.startActivity(intent);
+  }
+
+}
+</code></pre><h3 id="7、新闻列表碎片的布局：-news-title-frag-xml"><a href="#7、新闻列表碎片的布局：-news-title-frag-xml" class="headerlink" title="7、新闻列表碎片的布局：  news_title_frag.xml"></a>7、新闻列表碎片的布局：  news_title_frag.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/news_title_recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="8、recyclerview的子项布局-news-item-xml"><a href="#8、recyclerview的子项布局-news-item-xml" class="headerlink" title="8、recyclerview的子项布局:  news_item.xml"></a>8、recyclerview的子项布局:  news_item.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;TextView xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:id=&quot;@+id/news_title&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;wrap_content&quot;
+android:singleLine=&quot;true&quot;
+android:ellipsize=&quot;end&quot;
+android:textSize=&quot;18sp&quot;
+android:paddingLeft=&quot;10dp&quot;
+android:paddingRight=&quot;10dp&quot;
+android:paddingTop=&quot;15dp&quot;
+android:paddingBottom=&quot;15dp&quot;
+/&gt;
+</code></pre><h3 id="9、新闻碎片类：-NewsTitleFragment-java"><a href="#9、新闻碎片类：-NewsTitleFragment-java" class="headerlink" title="9、新闻碎片类： NewsTitleFragment.java"></a>9、新闻碎片类： NewsTitleFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class NewsTitleFragment extends Fragment {
+
+private boolean isTwoPane;
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.news_title_frag, container, false);
+    RecyclerView newsTitleRecyclerView = (RecyclerView) view.findViewById(R.id.news_title_recycler_view);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+    newsTitleRecyclerView.setLayoutManager(layoutManager);
+    NewsAdapter adapter = new NewsAdapter(getNews());
+    newsTitleRecyclerView.setAdapter(adapter);
+    return view;
+}
+
+@Override
+public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    if (getActivity().findViewById(R.id.news_content_layout) != null) {
+        isTwoPane = true; // 可以找到news_content_layout布局时，为双页模式
+    } else {
+        isTwoPane = false; // 找不到news_content_layout布局时，为单页模式
+    }
+}
+
+private List&lt;News&gt; getNews() {
+    List&lt;News&gt; newsList = new ArrayList&lt;&gt;();
+    for (int i = 1; i &lt;= 50; i++) {
+        News news = new News();
+        news.setTitle(&quot;This is news title &quot; + i);
+        news.setContent(getRandomLengthContent(&quot;This is news content &quot; + i + &quot;. &quot;));
+        newsList.add(news);
+    }
+    return newsList;
+}
+
+private String getRandomLengthContent(String content) {
+    Random random = new Random();
+    int length = random.nextInt(20) + 1;
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i &lt; length; i++) {
+        builder.append(content);
+    }
+    return builder.toString();
+}
+
+class NewsAdapter extends RecyclerView.Adapter&lt;NewsAdapter.ViewHolder&gt; {
+
+    private List&lt;News&gt; mNewsList;
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView newsTitleText;
+
+        public ViewHolder(View view) {
+            super(view);
+            newsTitleText = (TextView) view.findViewById(R.id.news_title);
+        }
+
+    }
+
+    public NewsAdapter(List&lt;News&gt; newsList) {
+        mNewsList = newsList;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
+        final ViewHolder holder = new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                News news = mNewsList.get(holder.getAdapterPosition());
+                if (isTwoPane) {
+                    NewsContentFragment newsContentFragment = (NewsContentFragment)
+                            getFragmentManager().findFragmentById(R.id.news_content_fragment);
+                    newsContentFragment.refresh(news.getTitle(), news.getContent());
+                } else {
+                    NewsContentActivity.actionStart(getActivity(), news.getTitle(), news.getContent());
+                }
+            }
+        });
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        News news = mNewsList.get(position);
+        holder.newsTitleText.setText(news.getTitle());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mNewsList.size();
+    }
+
+}
+</code></pre><p>}</p>
+<h3 id="10、activity-main-xml引入碎片"><a href="#10、activity-main-xml引入碎片" class="headerlink" title="10、activity_main.xml引入碎片"></a>10、activity_main.xml引入碎片</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:id=&quot;@+id/news_title_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;fragment
+    android:id=&quot;@+id/news_title_fragment&quot;
+    android:name=&quot;com.example.fragmentbestpractice.NewsTitleFragment&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    /&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre><h3 id="11、多一个适配的布局：-layout-sw600dp文件夹的-activity-main-xml"><a href="#11、多一个适配的布局：-layout-sw600dp文件夹的-activity-main-xml" class="headerlink" title="11、多一个适配的布局： layout-sw600dp文件夹的 activity_main.xml"></a>11、多一个适配的布局： layout-sw600dp文件夹的 activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;horizontal&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;fragment
+    android:id=&quot;@+id/news_title_fragment&quot;
+    android:name=&quot;com.example.fragmentbestpractice.NewsTitleFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot; /&gt;
+
+&lt;FrameLayout
+    android:id=&quot;@+id/news_content_layout&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;3&quot; &gt;
+
+    &lt;fragment
+        android:id=&quot;@+id/news_content_fragment&quot;
+        android:name=&quot;com.example.fragmentbestpractice.NewsContentFragment&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot; /&gt;
+&lt;/FrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/" rel="next" title="基础Demo18-Fragment与Activity通信+生命周期">
+                <i class="fa fa-chevron-left"></i> 基础Demo18-Fragment与Activity通信+生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/27/基础Demo21-静态注册广播的简单Demo/" rel="prev" title="基础Demo21-静态注册广播的简单Demo">
+                基础Demo21-静态注册广播的简单Demo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、在app模块下的build-gradle文件中添加recycleview的依赖"><span class="nav-number">1.</span> <span class="nav-text">1、在app模块下的build.gradle文件中添加recycleview的依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、bean-新闻数据的实体类，存放解析后的数据，-News-java"><span class="nav-number">2.</span> <span class="nav-text">2、bean:  新闻数据的实体类，存放解析后的数据， News.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、新闻内容碎片的布局：-news-content-frag-xml"><span class="nav-number">3.</span> <span class="nav-text">3、新闻内容碎片的布局： news_content_frag.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、新闻内容碎片类：-NewsContentFragment-java"><span class="nav-number">4.</span> <span class="nav-text">4、新闻内容碎片类：  NewsContentFragment.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、内容Activity引入内容碎片，-news-content-xml"><span class="nav-number">5.</span> <span class="nav-text">5、内容Activity引入内容碎片， news_content.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、内容Activity-NewsContentActivity"><span class="nav-number">6.</span> <span class="nav-text">6、内容Activity: NewsContentActivity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、新闻列表碎片的布局：-news-title-frag-xml"><span class="nav-number">7.</span> <span class="nav-text">7、新闻列表碎片的布局：  news_title_frag.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、recyclerview的子项布局-news-item-xml"><span class="nav-number">8.</span> <span class="nav-text">8、recyclerview的子项布局:  news_item.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、新闻碎片类：-NewsTitleFragment-java"><span class="nav-number">9.</span> <span class="nav-text">9、新闻碎片类： NewsTitleFragment.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、activity-main-xml引入碎片"><span class="nav-number">10.</span> <span class="nav-text">10、activity_main.xml引入碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11、多一个适配的布局：-layout-sw600dp文件夹的-activity-main-xml"><span class="nav-number">11.</span> <span class="nav-text">11、多一个适配的布局： layout-sw600dp文件夹的 activity_main.xml</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

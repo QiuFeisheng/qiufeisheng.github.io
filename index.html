@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo10-常用控件的常用属性使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo37-联网请求框架Rxjava2+Retrofit2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo10-常用控件的常用属性使用/" itemprop="url">基础Demo10-常用控件的常用属性使用</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo37-联网请求框架Rxjava2+Retrofit2/" itemprop="url">基础Demo37-联网请求框架Rxjava2+Retrofit2</a></h1>
         
 
         <div class="post-meta">
@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
                 2019-05-27
               </time>
             
@@ -303,45 +303,7 @@
       
         
           
-            <pre><code>1、android:gravity= “center”   
-</code></pre><p>//常用值：top,bottom,left,right,center_vertical，center_horizontal</p>
-<p>效果：指定文字在控件中的对齐方式，TextView和Button用得多</p>
-<pre><code>2、android:textAllCaps=“false”
-</code></pre><p>效果：Button的text默认字母都大写，可以取消掉这个属性</p>
-<pre><code>3、android：hint=”请输入账号......”
-</code></pre><p>效果：EditText中可以浅灰色的文字提示</p>
-<pre><code>4、android:maxLines=”2”
-</code></pre><p>效果：EditText的文字最多显示两行，多了之后就需要滚动才能看到，例如微信输入框的maxLines是4</p>
-<pre><code>5、imageView.setImageResource()
-</code></pre><p>效果：可以设置图片资源</p>
-<pre><code>6、style=”?android:attr/progressBarStyleHorizontal”
-</code></pre><p>效果：让进度条以横条显示</p>
-<pre><code>7、android:max=”100”
-</code></pre><p>效果：设置进度条的最大值，我们在动态代码那里可以设置进度条的实时进度值</p>
-<pre><code>AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-dialog.setTitle(“Warning”);
-dialog.set......
-dialog.setPositiveButton(......)
- dialog.setNegativeButton(......)
-对话框
-
-
-ProgressDialog progressDialog=new ProgressDialog(this);
-progressDialog.setTitle(......)
-progressDialog.setMessage......
-还有进度条的对话框
-</code></pre><p>   android:layout_gravity=”top”(bottom,center_vertical……)</p>
-<p>   9、多个结合，可以平分宽度或者高度 </p>
-<pre><code>android:layout_width=”0dp”,android:layout_weight=”1”
-</code></pre><p>   10、相对布局： </p>
-<pre><code>android:layout_alignParentLeft=”true”
-android:layout_alignParentTop=”true”
-android:layout_centerInParent=”true”
-android:layout_above=”@id/btn_1”
-android:layout_toLeftOf=”@id/btn_2”
-</code></pre><p>13、RelativeLayout的特点是可以有相对位置，也可以覆盖</p>
-<p>14、FrameLayout的特点是可以覆盖，以及跟fragment搭配使用</p>
-
+            
           
         
       
@@ -389,7 +351,7 @@ android:layout_toLeftOf=”@id/btn_2”
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo9-启动活动的习惯性写法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo39-工具类打印日志LogUtil/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -408,7 +370,7 @@ android:layout_toLeftOf=”@id/btn_2”
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo9-启动活动的习惯性写法/" itemprop="url">基础Demo9-启动活动的习惯性写法</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo39-工具类打印日志LogUtil/" itemprop="url">基础Demo39-工具类打印日志LogUtil</a></h1>
         
 
         <div class="post-meta">
@@ -420,7 +382,7 @@ android:layout_toLeftOf=”@id/btn_2”
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
                 2019-05-27
               </time>
             
@@ -460,39 +422,120 @@ android:layout_toLeftOf=”@id/btn_2”
       
         
           
-            <h3 id="1、直接在每个Activity中重构一个actionStart-方法，让其他Activity直接调用跳转到当前Activity，简单明了"><a href="#1、直接在每个Activity中重构一个actionStart-方法，让其他Activity直接调用跳转到当前Activity，简单明了" class="headerlink" title="1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了"></a>1、直接在每个Activity中重构一个actionStart()方法，让其他Activity直接调用跳转到当前Activity，简单明了</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）Main2Activity:</p>
-<pre><code>......
+            <pre><code>import android.text.TextUtils;
+import android.util.Log;
 
-//无数据跳转
-public static void actionStart(Context context){
+/**
+     * Created by Administrator on 2018/8/15.
+  */
 
-   Intent intent=new Intent(context,Main2Activity.class);
-   context.startActivity(intent);
+public class LogUtil {
+public static String tagPrefix = &quot;&quot;;
+public static boolean showV = true;
+public static boolean showD = true;
+public static boolean showI = true;
+public static boolean showW = true;
+public static boolean showE = true;
+public static boolean showWTF = true;
+
+/**
+ * 得到tag（所在类.方法（L:行））
+ * @return
+ */
+private static String generateTag() {
+    StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[4];
+    String callerClazzName = stackTraceElement.getClassName();
+    callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(&quot;.&quot;) + 1);
+    String tag = &quot;%s.%s(L:%d)&quot;;
+    tag = String.format(tag, new Object[]{callerClazzName, stackTraceElement.getMethodName(), Integer.valueOf(stackTraceElement.getLineNumber())});
+    //给tag设置前缀
+    tag = TextUtils.isEmpty(tagPrefix) ? tag : tagPrefix + &quot;:&quot; + tag;
+    return tag;
 }
 
-//带数据跳转
-public static void actionStart(Context context,String data1,String data2){
-
-  Intent intent=new Intent(context,Main2Activity.class);
-  intent.putExtra(DATA1,data1);
-  intent.putExtra(DATA2,data2);
-  context.startActivity(intent);
+public static void v(String msg) {
+    if (showV) {
+        String tag = generateTag();
+        Log.v(tag, msg);
+    }
 }
-</code></pre><p>（2）MainActivity跳转到Main2Activity</p>
-<pre><code>@Override
-public void onClick(View view) {
 
-switch (view.getId()) {
-    case R.id.btn_1:
+public static void v(String msg, Throwable tr) {
+    if (showV) {
+        String tag = generateTag();
+        Log.v(tag, msg, tr);
+    }
+}
 
-        //一般写成全局变量field比较好
-         data=&quot;I am iron man&quot;;
+public static void d(String msg) {
+    if (showD) {
+        String tag = generateTag();
+        Log.d(tag, msg);
+    }
+}
 
-      Main2Activity.actionStart(MainActivity.this,data,data);
+public static void d(String msg, Throwable tr) {
+    if (showD) {
+        String tag = generateTag();
+        Log.d(tag, msg, tr);
+    }
+}
 
-        break;
-        default:break;
-   }
+public static void i(String msg) {
+    if (showI) {
+        String tag = generateTag();
+        Log.i(tag, msg);
+    }
+}
+
+public static void i(String msg, Throwable tr) {
+    if (showI) {
+        String tag = generateTag();
+        Log.i(tag, msg, tr);
+    }
+}
+
+public static void w(String msg) {
+    if (showW) {
+        String tag = generateTag();
+        Log.w(tag, msg);
+    }
+}
+
+public static void w(String msg, Throwable tr) {
+    if (showW) {
+        String tag = generateTag();
+        Log.w(tag, msg, tr);
+    }
+}
+
+public static void e(String msg) {
+    if (showE) {
+        String tag = generateTag();
+        Log.e(tag, msg);
+    }
+}
+
+public static void e(String msg, Throwable tr) {
+    if (showE) {
+        String tag = generateTag();
+        Log.e(tag, msg, tr);
+    }
+}
+
+public static void wtf(String msg) {
+    if (showWTF) {
+        String tag = generateTag();
+        Log.wtf(tag, msg);
+    }
+}
+
+public static void wtf(String msg, Throwable tr) {
+    if (showWTF) {
+        String tag = generateTag();
+        Log.wtf(tag, msg, tr);
+      }
+    }
 }
 </code></pre>
           
@@ -542,7 +585,7 @@ switch (view.getId()) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo35-解析Json数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -561,7 +604,7 @@ switch (view.getId()) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo7-日志打印当前界面所属于的Activity/" itemprop="url">基础Demo7-日志打印当前界面所属于的Activity</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo35-解析Json数据/" itemprop="url">基础Demo35-解析Json数据</a></h1>
         
 
         <div class="post-meta">
@@ -573,7 +616,7 @@ switch (view.getId()) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
                 2019-05-27
               </time>
             
@@ -613,665 +656,301 @@ switch (view.getId()) {
       
         
           
-            <p>###应用场景：用于接收旧项目阅读源码和修改代码的时候，可以知道当前界面所属的Activity是哪一个Activity，有时候非常有用</p>
-<p>（1）有共同父类的：就在父类的onCreate里面加：</p>
-<pre><code>@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
+            <h3 id="1、学习原因："><a href="#1、学习原因：" class="headerlink" title="1、学习原因："></a>1、学习原因：</h3><p>因为有些时候公司的后台API返回的Json数据不符合GsonFormat自动生成实体类的标准，此时就只能手动写Json解析的实体类Bean，解析调用Gson.fromJson()即可，实体类首选GsonFormat, 不符合标准就手动写实体类</p>
+<h3 id="2、不能解析的情况："><a href="#2、不能解析的情况：" class="headerlink" title="2、不能解析的情况："></a>2、不能解析的情况：</h3><p>Key是数字，然后后面是字段……..，要学习一遍Json</p>
+<h3 id="3、访问本地主机的Tomcat的三种方式，不一定要查ip地址"><a href="#3、访问本地主机的Tomcat的三种方式，不一定要查ip地址" class="headerlink" title="3、访问本地主机的Tomcat的三种方式，不一定要查ip地址"></a>3、访问本地主机的Tomcat的三种方式，不一定要查ip地址</h3><p>（1）192.168.1.199:8080/web_home</p>
+<p>（2）localhost:8080/web_home(手机模拟器不可访问)</p>
+<p>（3）127.0.0.1:8080/web_home（手机模拟器不可访问，一般选择真机调试）</p>
+<h3 id="4、手动写Json解析实体类的流程"><a href="#4、手动写Json解析实体类的流程" class="headerlink" title="4、手动写Json解析实体类的流程"></a>4、手动写Json解析实体类的流程</h3><p>（1）打开HiJson</p>
+<p>（2）复制后台返回的全部Json数据，粘贴到HiJson</p>
+<p>（3）点击格式化Json字符串</p>
+<p>（4）黄色摄像头代表是一个对象</p>
+<p>（5）解析流程： 对象—》属性—》再看属性是否为对象（是）—》属性…..一层层解析即可</p>
+<p>属性1,2,3（一层层并列解析）</p>
+<p>所以对应：</p>
+<pre><code>public class Bean {
+private List data;   //注意，data,extend,retcode都是json数据的键名，不能打错
+private List extend; //打错一个键名，就得不到数据
+private int retcode; //最好的方式是：Hijson右键复制键名
 
-LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-}
-</code></pre><p>（2）没有父类的，就创建父类：BaseActivity</p>
-<pre><code> import android.os.Bundle;
- import android.support.annotation.Nullable;
- import android.support.v7.app.AppCompatActivity;
-
-public class BaseActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-  }
-}
-</code></pre><p>（3）Activity较复杂的，直接在每个Activity的onCreate()方法中加：</p>
-<pre><code>LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo5-Activity意外回收保存数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo5-Activity意外回收保存数据/" itemprop="url">基础Demo5-Activity意外回收保存数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。"><a href="#1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。" class="headerlink" title="1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。"></a>1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><pre><code>public static final String SAVE_KEY=&quot;save_key&quot;;
-private String data;
-......
-
-//1、重写onSaveInstanceState, data---&gt;key---&gt;outState： key是快递，outState是快递车
-
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-super.onSaveInstanceState(outState);
-
-outState.putString(SAVE_KEY,data);
-}
-
-
-//2、在onCreate()里面的savedInstanceState取值后再填充显示即可
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_main);
-
-if (savedInstanceState!=null){
-    String tempData=savedInstanceState.getString(SAVE_KEY);
-    Log.d(&quot;保存的数据&quot;,tempData);
  }
-initView();
-initData();
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo3-Intent传递数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo3-Intent传递数据/" itemprop="url">基础Demo3-Intent传递数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p>  <img src="https://i.imgur.com/HtXWRlH.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）MainActivity.java</p>
-<pre><code>......
-public static final String DATA_KEY=&quot;data_key&quot;;
-private String data;
-......
-
-@Override
-public void onClick(View view) {
-
-switch (view.getId()) {
-
-    case R.id.btn_1:
-
-        //一般写成全局变量field比较好
-         data=&quot;I am iron man&quot;;
-
-        //构造对象：Intent对象
-        Intent intent=new Intent(MainActivity.this,Main2Activity.class);
-        //将数据打包存储到key，再通过快递车intent一起发送到下一个Activity
-        intent.putExtra(DATA_KEY,data);
-        //开车
-        startActivity(intent);
-
-        break;
-        default:break;
-   }
-}
-</code></pre><p>(2)Main2Activity.java</p>
-<pre><code>public class Main2Activity extends AppCompatActivity {
-
-private TextView mTextView;
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main2);
-
-    mTextView=(TextView)findViewById(R.id.tv_content);
-
-    //构造Intent对象：去快递车
-    Intent intent=getIntent();
-    //从快递车的快递包裹DATA_KEY取值
-    String data=intent.getStringExtra(MainActivity.DATA_KEY);
-    //填充Data显示到view
-    mTextView.setText(data);
-   }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo8-一键退出所有的Activity退出程序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo8-一键退出所有的Activity退出程序/" itemprop="url">基础Demo8-一键退出所有的Activity退出程序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、在我们的Project中导入我们的工具类：-ActivityCollector-java"><a href="#1、在我们的Project中导入我们的工具类：-ActivityCollector-java" class="headerlink" title="1、在我们的Project中导入我们的工具类： ActivityCollector.java"></a>1、在我们的Project中导入我们的工具类： ActivityCollector.java</h3><p>备注：总共三个方法，addActivity(), removeActivity(), finishAll()</p>
-<pre><code>import java.util.ArrayList;
+</code></pre><p>*data属性里又有对象，需要下一层解析</p>
+<p>*data里面有对象，所以List里面要指定此对象的类泛型，所以要写这个泛型类<br>而且是写成内部静态类public static class A{}的形式（内部静态类的好处？补一下）</p>
+<p>*然后打开对象0,1,2,3,4的所有字段（对应类里面的属性，Json里面称为字段），补充写到classA里面作为A的属性</p>
+<p>*然后写完所有的属性和静态内部类（泛型类）之后，开始写Getter,Setter</p>
+<p>*之后开始写:toString()，方便打印和debug数据</p>
+<p>*从里到外的类写Getter,Setter,toString()，这样不会出错</p>
+<p>***完整代码如下</p>
+<pre><code>package com.example.myapplication;
 import java.util.List;
-import android.app.Activity;
+public class Bean {
 
-//Activity的集中管理类
-public class ActivityCollector {
+private List&lt;DetailPagerData&gt; data;
+private List extend;
+private int retcode;
 
-//构造对象：Activity的集合
-public static List&lt;Activity&gt; activities = new ArrayList&lt;&gt;();
-
-//调用象方：写对外的API，添加当前Activity
-/** 添加活动 **/
-public static void addActivity(Activity activity) {
-
-        activities.add(activity);
-
+//3写Getter,Setter,toString()
+public List&lt;DetailPagerData&gt; getData() {
+    return data;
 }
 
-//调用象方：写对外的API，移除当前Activity
-/** 移除活动 **/
-public static void removeActivity(Activity activity) {
-    activities.remove(activity);
+public List getExtend() {
+    return extend;
+}
+
+public int getRetcode() {
+    return retcode;
+}
+
+public void setData(List&lt;DetailPagerData&gt; data) {
+    this.data = data;
+}
+
+public void setExtend(List extend) {
+    this.extend = extend;
+}
+
+public void setRetcode(int retcode) {
+    this.retcode = retcode;
 }
 
 
-//调用象方：写对外的API，for循环finish所有的Activity，并清空集合每个元素对Activity的引用
-/** 结束所有的活动 **/
-public static void finishAll() {
-    for (Activity activity : activities) {
-        if (!activity.isFinishing()) {
-            activity.finish();
+@Override
+public String toString() {
+    return &quot;Bean{&quot; +
+            &quot;data=&quot; + data +
+            &quot;, extend=&quot; + extend +
+            &quot;, retcode=&quot; + retcode +
+            &apos;}&apos;;
+}
+
+public static class DetailPagerData{
+
+    private int id;
+    private String title;
+    private int type;
+    private String url;
+    private String url1;
+    private String dayurl;
+    private String excurl;
+    private String weekurl;
+    private List&lt;ChildrenData&gt; children;
+   //2写Getter,Setter,toString()
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUrl1() {
+        return url1;
+    }
+
+    public String getDayurl() {
+        return dayurl;
+    }
+
+    public String getExcurl() {
+        return excurl;
+    }
+
+    public String getWeekurl() {
+        return weekurl;
+    }
+
+    public List&lt;ChildrenData&gt; getChildren() {
+        return children;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setUrl1(String url1) {
+        this.url1 = url1;
+    }
+
+    public void setDayurl(String dayurl) {
+        this.dayurl = dayurl;
+    }
+
+    public void setExcurl(String excurl) {
+        this.excurl = excurl;
+    }
+
+    public void setWeekurl(String weekurl) {
+        this.weekurl = weekurl;
+    }
+
+    public void setChildren(List&lt;ChildrenData&gt; children) {
+        this.children = children;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;DetailPagerData{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, title=&apos;&quot; + title + &apos;\&apos;&apos; +
+                &quot;, type=&quot; + type +
+                &quot;, url=&apos;&quot; + url + &apos;\&apos;&apos; +
+                &quot;, url1=&apos;&quot; + url1 + &apos;\&apos;&apos; +
+                &quot;, dayurl=&apos;&quot; + dayurl + &apos;\&apos;&apos; +
+                &quot;, excurl=&apos;&quot; + excurl + &apos;\&apos;&apos; +
+                &quot;, weekurl=&apos;&quot; + weekurl + &apos;\&apos;&apos; +
+                &quot;, children=&quot; + children +
+                &apos;}&apos;;
+    }
+
+    //内部类再嵌套内部类: 1写Getter,Setter,toString()
+    public static class ChildrenData{
+
+        private int id;
+        private String title;
+        private int type;
+        private String url;
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+       //可以打印日志，跟踪返回数据的解析情况
+        @Override
+        public String toString() {
+            return &quot;ChildrenData{&quot; +
+                    &quot;id=&quot; + id +
+                    &quot;, title=&apos;&quot; + title + &apos;\&apos;&apos; +
+                    &quot;, type=&quot; + type +
+                    &quot;, url=&apos;&quot; + url + &apos;\&apos;&apos; +
+                    &apos;}&apos;;
         }
     }
-    activities.clear();
-  }
 }
-</code></pre><h3 id="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"><a href="#2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy" class="headerlink" title="2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy"></a>2、在我们的BaseActivity或者所有的Activity中重写onCreate和onDestroy</h3><pre><code> import android.os.Bundle;
- import android.support.annotation.Nullable;
- import android.support.v7.app.AppCompatActivity;
+</code></pre><p>}</p>
+<h3 id="5、写完实体类后，开始真正解析Json数据"><a href="#5、写完实体类后，开始真正解析Json数据" class="headerlink" title="5、写完实体类后，开始真正解析Json数据"></a>5、写完实体类后，开始真正解析Json数据</h3><p>（1）使用JSONObject, JSONArray + for循环</p>
+<pre><code>String responseData=response.body().string();
+parseJson(responseData);
 
-public class BaseActivity extends AppCompatActivity {
+private void parseJson(String jsonData){
 
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+JSONArray jsonArray=new JSONArray(jsonData);
+try {
+    for (int i = 0; i &lt; jsonArray.length(); i++) {
 
-    LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
+        JSONObject jsonObject = jsonArray.getJSONObject(i);
+        String id = jsonObject.getString(&quot;id&quot;);
+        String name = jsonObject.getString(&quot;id&quot;);
+        String version = jsonObject.getString(&quot;id&quot;);
 
-    //每个Activity实例都添加到集合中
-    ActivityCollector.addActivity(this);
+    }
+}catch (Exception e){
+    e.printStackTrace();
+      }
+ }
+</code></pre><p>（2）使用Gson解析</p>
+<p>*build.gradle: </p>
+<pre><code>compile ‘com.google.code.gson:gson:2.7’
+</code></pre><p>*简单Gson解析</p>
+<pre><code>// 2 解析JSON数据
+  Gson gson = new Gson();
+  ShopInfo shopInfo = gson.fromJson(json, ShopInfo.class);
+  // 3 展示数据
+  tv_gson_last.setText(shopInfo.toString())；
+</code></pre><p>*复杂Gson解析：解析Json数组</p>
+<pre><code>private void parseJson(String jsonData){
+
+Gson gson=new Gson();
+List&lt;App&gt; appList=gson.fromJson(jsonData,new TypeToken&lt;List&lt;App&gt;&gt;(){}.getType());
+for(App app: appList){
+ Log.d(“ManActivity”,”id is”+ app.getId());
+
+   }
+
 }
+</code></pre><p>1、添加依赖</p>
+<pre><code>implementation &apos;com.google.code.gson:gson:2.7&apos;
+</code></pre><p>2、Gson解析的示例</p>
+<pre><code>//初始化Data，填充Data到view显示出来：解析返回的json数据
+private void processData(String result) {
+
+//调用象方：解析json
+NewsCenterPagerBean bean=parsedJson(result);
+//日志打印检验是否成功
+String title=bean.getData().get(0).getChildren().get(1).getTitle();
+LogUtil.e(&quot;解析标题成功---------&quot;+title);
 
 
-@Override
-protected void onDestroy() {
-    super.onDestroy();
 
-    //销毁时就remove掉
-    ActivityCollector.removeActivity(this);
-  }
+//调用象方：初始化Data，得到左侧菜单的所有数据
+data=bean.getData();
+//构造对象：将context转回Activity
+MainActivity mainActivity= (MainActivity) context;
+//构造对象：得到左侧菜单的实例
+LeftMenuFragment leftMenuFragment=mainActivity.getLeftMenuFragment();
+
+
+//构造对象：初始化DataView，创建了4个view配合左侧菜单切换显示
+detailBasePagers=new ArrayList&lt;&gt;();
+detailBasePagers.add(new NewsMenuDetailPager(context,data.get(0)));
+detailBasePagers.add(new TopicMenuDetailPager(context,data.get(0)));
+detailBasePagers.add(new PhotoMenuDetailPager(context,data.get(2)));
+detailBasePagers.add(new InteracMenuDetailPager(context,data.get(2)));
+
+//调用象方：初始化Data，传递左侧菜单数据给左侧菜单，左侧菜单用setter接收
+leftMenuFragment.setData(data);
 }
-</code></pre><h3 id="3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；"><a href="#3、一键退出：调用finishAll-就会销毁所有的Activity，退出程序；" class="headerlink" title="3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；"></a>3、一键退出：调用finishAll()就会销毁所有的Activity，退出程序；</h3><pre><code>@Override
-public void onClick(View view) {
-
-ActivityCollector.finishAll();
- // android.os.Process.killProcess(android.os.Process.myPid());
+ //调用象方解析：Gson解析效率高
+private NewsCenterPagerBean parsedJson(String result) {
+return new Gson().fromJson(result,NewsCenterPagerBean.class);
 }
-</code></pre><p>备注：还可以彻底杀掉进程，彻底完全退出：<br>     android.os.Process.killProcess(android.os.Process.myPid());</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo6-Activity的4S启动模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo6-Activity的4S启动模式/" itemprop="url">基础Demo6-Activity的4S启动模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
-<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTop&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTask&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleInstance&quot;&gt;
-&lt;/activity&gt;
 </code></pre>
           
         
@@ -1320,7 +999,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo30-通知Notification/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1339,7 +1018,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/" itemprop="url">基础Demo4-Intent返回数据给上一个Activity</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo30-通知Notification/" itemprop="url">基础Demo30-通知Notification</a></h1>
         
 
         <div class="post-meta">
@@ -1351,7 +1030,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
                 2019-05-27
               </time>
             
@@ -1391,330 +1070,135 @@ android:launchMode=&quot;singleInstance&quot;&gt;
       
         
           
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/XfmouoW.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>（1）MainActivity.java</p>
-<pre><code>@Override
-public void onClick(View view) {
-
-switch (view.getId()) {
-
-    case R.id.btn_1:
-
-        //构造对象：Intent对象
-        Intent intent=new Intent(MainActivity.this,Main2Activity.class);
-        //调用+ForResult，1是请求码，下一个接收的Activity会标记，返回的时候会一起返回 
-       //因为跳转到N个Activity，我们可以根据请求码requestCode来区分是哪一个Activity
-
-       //返回的数据回来   
-       startActivityForResult(intent,1);
-
-        break;
-        default:break;
-    }
- }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-//请求码区分是哪一个Activity返回的数据，其实都是自己设置的
-switch (requestCode){
-
-    case 1:
- //根据结果码来判断是否返回成功，再开始取数据
-        if (resultCode==RESULT_OK){
-            //data.getXXXExtra(key)；
-            String data1=data.getStringExtra(Main2Activity.DATA_RETURN);
-            mTextView.setText(data1);
-
-        }
-    }
-}
-</code></pre><p>（2）Main2Activity</p>
-<pre><code>//finish前面携带在intent中即可，结果码一般都是RESULT_OK不用改
-@Override
-public void onClick(View view) {
-
-data=&quot;I am spider man&quot;;
-Intent intent=new Intent();
-intent.putExtra(DATA_RETURN,data);
-setResult(RESULT_OK,intent);
-finish();
-}
-
-//重写返回键back键
-@Override
-public void onBackPressed() {
-data=&quot;I am spider man&quot;;
-Intent intent=new Intent();
-intent.putExtra(DATA_RETURN,data);
-setResult(RESULT_OK,intent);
-finish();
-}
-</code></pre><p>//常量作为Key的好处是： 可以在多个类多处调用，而且取值的时候不会出现手写key错误的概率</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo2-隐式Intent的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">基础Demo2-隐式Intent的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>(1)activity_main.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
 android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:orientation=&quot;vertical&quot;&gt;
+android:layout_height=&quot;match_parent&quot;&gt;
 
 &lt;Button
-    android:id=&quot;@+id/btn_1&quot;
-    android:layout_width=&quot;match_parent&quot;
+    android:id=&quot;@+id/send_notice&quot;
+    android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统浏览器&quot;/&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_2&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统电话&quot;/&gt;
+    android:text=&quot;Send notice&quot; /&gt;
 
 &lt;/LinearLayout&gt;
-</code></pre><p>（2）MainActivity.java</p>
-<pre><code>import android.content.Intent;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+import java.io.File;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity  implements View.OnClickListener {
 
-private Button btn_1;
-private Button btn_2;
+private Notification notification;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    initView();
-    initData();
+    Button sendNotice = (Button) findViewById(R.id.send_notice);
+    sendNotice.setOnClickListener(this);
 }
 
-private void initView() {
-
-   btn_1= (Button) findViewById(R.id.btn_1);
-   btn_2= (Button) findViewById(R.id.btn_2);
-}
-
-private void initData() {
-
-    btn_1.setOnClickListener(this);
-    btn_2.setOnClickListener(this);
-}
 @Override
-public void onClick(View view) {
+public void onClick(View v) {
 
-     switch (view.getId()){
 
-         case R.id.btn_1:
-             //1、传入隐式Intent的action值，构造Intent对象
-             //action值一般是传入Android系统可以响应的action值
-             //当然也可以在某个Activity的action值配置Intent-filter就可以响应此Intent
-             Intent intent=new Intent(Intent.ACTION_VIEW);
+    String id = &quot;channel_001&quot;;
+    String name = &quot;name&quot;;
+    switch (v.getId()) {
+        case R.id.send_notice:
+            Intent intent = new Intent(this, NotificationActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-             //调用象方：initData()，传入Uri对象
-             intent.setData(Uri.parse(&quot;http://www.baidu.com&quot;));
+            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {//判断API
+                NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_LOW);
+                manager.createNotificationChannel(mChannel);
+                notification = new Notification.Builder(this)
+                        .setChannelId(id)
+                        .setContentTitle(&quot;活动&quot;)
+                        .setContentText(&quot;您有一项新活动&quot;)
+                        .setContentIntent(pi)
+                        //还可以自定义通知的样式style
+                        .setStyle(new Notification.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.big_image)))
+                        .setPriority(Notification.PRIORITY_MAX)
+                        .setSmallIcon(R.mipmap.ic_launcher_round).build();
+            }
+            else{
 
-             //开启可以响应此Intent的Activity(可能是系统应用的Activity)
-             startActivity(intent);
-             break;
+                    notification = new NotificationCompat.Builder(this)
+                    .setContentTitle(&quot;This is content title&quot;)
+                    .setContentText(&quot;This is content text&quot;)
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                    .setContentIntent(pi)
+                            //发送通知时可以设置声音，震动，LED灯闪亮
+                    //        .setSound(Uri.fromFile(new File(&quot;/system/media/audio/ringtones/Luna.ogg&quot;)))
+                    //        .setVibrate(new long[]{0, 1000, 1000, 1000})
+                    //        .setLights(Color.GREEN, 1000, 1000)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    //        .setStyle(new NotificationCompat.BigTextStyle().bigText(&quot;Learn how to build notifications, send and sync data, and use voice actions. Get the official Android IDE and developer tools to build apps for Android.&quot;))
+                    .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.big_image)))
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .build();
+        }
 
-         case R.id.btn_2:
-             Intent intent2=new Intent(Intent.ACTION_DIAL);
-             intent2.setData(Uri.parse(&quot;tel:15622391415&quot;));
-             startActivity(intent2);
-             break;
-     }  }
+
+
+
+            manager.notify(1, notification);
+
+            Toast.makeText(MainActivity.this,&quot;可以执行&quot;,Toast.LENGTH_SHORT).show();
+            break;
+        default:
+            break;
+    }
 }
-</code></pre><h3 id="3、常用的action值"><a href="#3、常用的action值" class="headerlink" title="3、常用的action值"></a>3、常用的action值</h3><pre><code>// 调用浏览器 
-Uri webViewUri = Uri.parse(&quot;http://blog.csdn.net/zuolongsnail&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, webViewUri); 
+</code></pre><p>}</p>
+<h3 id="3、activity-notification-xml"><a href="#3、activity-notification-xml" class="headerlink" title="3、activity_notification.xml"></a>3、activity_notification.xml</h3><pre><code> &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
 
-// 调用地图 
-Uri mapUri = Uri.parse(&quot;geo:100,100&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, mapUri); 
+&lt;TextView
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_centerInParent=&quot;true&quot;
+    android:textSize=&quot;24sp&quot;
+    android:text=&quot;This is notification layout&quot;
+    /&gt;
 
-// 播放mp3 
-Uri playUri = Uri.parse(&quot;file:///sdcard/test.mp3&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, playUri); 
-intent.setDataAndType(playUri, &quot;audio/mp3&quot;); 
+&lt;/RelativeLayout&gt;
+</code></pre><h3 id="4、NotificationActivity-java"><a href="#4、NotificationActivity-java" class="headerlink" title="4、NotificationActivity.java"></a>4、NotificationActivity.java</h3><pre><code>import android.app.NotificationManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
+ public class NotificationActivity extends AppCompatActivity {
 
-// 调用拨打电话 
-Uri dialUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_DIAL, dialUri); 
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.notification_layout);
+    NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    manager.cancel(1);
 
-// 直接拨打电话，需要加上权限
-&lt;uses-permission id=&quot;android.permission.CALL_PHONE&quot; /&gt; 
-Uri callUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_CALL, callUri); 
-
-// 调用发邮件（这里要事先配置好的系统Email，否则是调不出发邮件界面的） 
-Uri emailUri = Uri.parse(&quot;mailto:zuolongsnail@163.com&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri); 
-
-// 直接发邮件 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-String[] tos = { &quot;zuolongsnail@gmail.com&quot; }; 
-String[] ccs = { &quot;zuolongsnail@163.com&quot; }; 
-intent.putExtra(Intent.EXTRA_EMAIL, tos); 
-intent.putExtra(Intent.EXTRA_CC, ccs); 
-intent.putExtra(Intent.EXTRA_TEXT, &quot;the email text&quot;); 
-intent.putExtra(Intent.EXTRA_SUBJECT, &quot;subject&quot;); 
-intent.setType(&quot;text/plain&quot;); 
-Intent.createChooser(intent, &quot;Choose Email Client&quot;); 
-
-// 发短信 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.setType(&quot;vnd.android-dir/mms-sms&quot;); 
-
-// 直接发短信 
-Uri smsToUri = Uri.parse(&quot;smsto:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-
-// 发彩信 
-Uri mmsUri = Uri.parse(&quot;content://media/external/images/media/23&quot;); 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.putExtra(Intent.EXTRA_STREAM, mmsUri); 
-intent.setType(&quot;image/png&quot;); 
-
-// 卸载应用 
-Uri uninstallUri = Uri.fromParts(&quot;package&quot;, &quot;com.app.test&quot;, null); 
-Intent intent = new Intent(Intent.ACTION_DELETE, uninstallUri); 
-
-// 安装应用 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.setDataAndType(Uri.fromFile(new File(&quot;/sdcard/test.apk&quot;), &quot;application/vnd.android.package-archive&quot;); 
-
-// 在Android Market中查找应用 
-Uri uri = Uri.parse(&quot;market://search?q=愤怒的小鸟&quot;);          
-Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+    }
+}
 </code></pre>
           
         
@@ -1763,7 +1247,7 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo1--菜单Menu/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo33-VideoPlayer视频播放/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1782,7 +1266,7 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo1--菜单Menu/" itemprop="url">基础Demo1-菜单Menu</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo33-VideoPlayer视频播放/" itemprop="url">基础Demo33-VideoPlayer视频播放</a></h1>
         
 
         <div class="post-meta">
@@ -1794,7 +1278,7 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
                 2019-05-27
               </time>
             
@@ -1834,84 +1318,1406 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
       
         
           
-            <p>###1、创建item_menu.xml<br>：res右键—&gt;Directory—&gt;menu—&gt;item_menu.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+            <p>使用VideoView控件来实现</p>
+<h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
 
-&lt;item
-    android:id=&quot;@+id/scan_item&quot;
-    android:title=&quot;扫一扫&quot;/&gt;
+&lt;LinearLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; &gt;
 
-&lt;item
-    android:id=&quot;@+id/friend_item&quot;
-    android:title=&quot;添加朋友&quot;/&gt;
+    &lt;Button
+        android:id=&quot;@+id/play&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:text=&quot;Play&quot; /&gt;
 
-&lt;item
-    android:id=&quot;@+id/pay_item&quot;
-    android:title=&quot;收付款&quot;/&gt;
+    &lt;Button
+        android:id=&quot;@+id/pause&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:text=&quot;Pause&quot; /&gt;
 
-&lt;/menu&gt;
-</code></pre><p>###2、在Activity中重写两个Menu的回调方法<br>：（1）onCreateOptionsMenu()，初始化菜单item</p>
-<p>：（2）onOptionsItemSelected（），子项选中后的逻辑</p>
-<pre><code>import android.support.v7.app.AppCompatActivity;
+    &lt;Button
+        android:id=&quot;@+id/replay&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:text=&quot;Replay&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;VideoView
+    android:id=&quot;@+id/video_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+import android.widget.VideoView;
+import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+private VideoView videoView;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    //调用象方：初始化布局
     setContentView(R.layout.activity_main);
-}
-
-
-
-//初始化菜单item为view对象
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-
-    //调用象方：构造item_view对象，初始化item布局，参数menu是加载该view的位置，直接使用形参的menu，不用改
-    getMenuInflater().inflate(R.menu.item_menu,menu);
-
-    //ture的处理结果是可以显示菜单
-    return true;
-}
-
-//触摸结果的处理方法，在Android系统的触摸监听里被回调
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-
-    //在触摸回调的时候系统会传入监听到的item对象，我们根据id值来鉴别每个item
-    //要时刻记住我们的职责是构造处理类方法，不需要我们调用，是系统调用
-    //所以我们关键是写对方法名和形参类型，实际数据是系统自己调用时，自己传进去使用，不需要给我们
-    switch (item.getItemId()){
-
-        case R.id.scan_item:
-
-            Toast.makeText(this,&quot;扫一扫&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-        case R.id.friend_item:
-            Toast.makeText(this,&quot;添加朋友&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-        case R.id.pay_item:
-            Toast.makeText(this,&quot;收付款&quot;,Toast.LENGTH_SHORT).show();
-            break;
-
-            default:break;
+    videoView = (VideoView) findViewById(R.id.video_view);
+    Button play = (Button) findViewById(R.id.play);
+    Button pause = (Button) findViewById(R.id.pause);
+    Button replay = (Button) findViewById(R.id.replay);
+    play.setOnClickListener(this);
+    pause.setOnClickListener(this);
+    replay.setOnClickListener(this);
+    if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+    } else {
+        initVideoPath(); // 初始化MediaPlayer
     }
-    //true理解为可以执行
-    return true;
-  }
+}
+
+private void initVideoPath() {
+    File file = new File(Environment.getExternalStorageDirectory(), &quot;movie.mp4&quot;);
+    videoView.setVideoPath(file.getPath()); // 指定视频文件的路径
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    switch (requestCode) {
+        case 1:
+            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initVideoPath();
+            } else {
+                Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            break;
+        default:
+    }
+}
+
+@Override
+public void onClick(View v) {
+    switch (v.getId()) {
+        case R.id.play:
+            if (!videoView.isPlaying()) {
+                videoView.start(); // 开始播放
+            }
+            break;
+        case R.id.pause:
+            if (videoView.isPlaying()) {
+                videoView.pause(); // 暂停播放
+            }
+            break;
+        case R.id.replay:
+            if (videoView.isPlaying()) {
+                videoView.resume(); // 重新播放
+            }
+            break;
+    }
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (videoView != null) {
+        videoView.suspend();
+    }
+}
+</code></pre><p>}</p>
+<h3 id="3、AndroidManifest-xml添加权限"><a href="#3、AndroidManifest-xml添加权限" class="headerlink" title="3、AndroidManifest.xml添加权限"></a>3、AndroidManifest.xml添加权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo38-高级技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo38-高级技巧/" itemprop="url">基础Demo38-高级技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、一个工具类API获取同一个Context对象，任意地方使用"><a href="#1、一个工具类API获取同一个Context对象，任意地方使用" class="headerlink" title="1、一个工具类API获取同一个Context对象，任意地方使用"></a>1、一个工具类API获取同一个Context对象，任意地方使用</h3><pre><code>public class MyApplication extends Application{
+
+          private static Context context;
+
+    @Override
+public void onCreate(){
+
+      context=getApplicationContext();
+    }
+
+
+
+public static Context getContext(){
+
+     return context;
+}
 
 }
+</code></pre><p>（2）要在AndroidManifest.xml中配置Application类：</p>
+<pre><code>&lt; application android:name=”com......MyAplication”
+</code></pre><p>（3）调用</p>
+<p>MyApplition.getContext()可以随时随地用；</p>
+<p>（4）Application的配置有两种方式：</p>
+<p> *1：直接简单粗暴修改AndroidManifest.xml</p>
+<p> *2: 创建类MyApplition extends Application，然后在onCreate()方法中调用init方法初始化。而且一个应用程序只能配置一个Application。</p>
+<h3 id="2、使用Intent传递对象"><a href="#2、使用Intent传递对象" class="headerlink" title="2、使用Intent传递对象"></a>2、使用Intent传递对象</h3><p>备注：之前所遇到的Intent传递数据，都是传递基本数据类型，还可以传递对象哦，对象是属于引用数据类型。之前对应的都是intent.putExtra(KEY,”Tom”);<br>String name=getIntent().getStringExtra(KEY,””);来调用，现在是传递对象！</p>
+<p>Java规定，对象被传递需要满足2选1： 序列化或者分解后，才能被存储在磁盘中或者进行网络传输，反正对象不能直接传输，需要序列化或者分解才能传输，这是Java的规定。</p>
+<p>（1）序列化Serializable</p>
+<p>对象所属的类implements Serializable{}就可以使用Intent来传递对象了<br>eg:</p>
+<pre><code>import java.io.Serializable;
+
+public class Person implements Serializable {
+
+private String name;
+private int age;
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getAge() {
+    return age;
+}
+
+public void setAge(int age) {
+    this.age = age;
+}
+}
+</code></pre><p>传递：</p>
+<pre><code>Person person=new Person();
+person.setName(&quot;Tom&quot;);
+person.setAge(11);
+
+Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+intent.putExtra(KEY,person);
+startActivity(intent);
+</code></pre><p>获取：<br>    Person person=(Person)getIntent().getSerializableExtra(KEY);</p>
+<p>（2）implements Parcelable{ }分解对象传递<br>：重写describeContents（）和 writeToParcel（）</p>
+<pre><code>import android.os.Parcel;
+import android.os.Parcelable;
+import java.io.Serializable;
+
+public class Person implements Parcelable {
+
+private String name;
+private int age;
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getAge() {
+    return age;
+}
+
+public void setAge(int age) {
+    this.age = age;
+}
+
+
+@Override
+public int describeContents() {
+    return 0;
+}
+
+@Override
+public void writeToParcel(Parcel dest, int flags) {
+
+    dest.writeString(name);
+    dest.writeInt(age);
+}
+
+
+public static final Parcelable.Creator&lt;Person&gt;CREATOR= new Creator&lt;Person&gt;() {
+    @Override
+    public Person createFromParcel(Parcel source) {
+       Person person=new Person();
+       person.name=source.readString();
+       person.age=source.readInt();
+       return person;
+    }
+
+    @Override
+    public Person[] newArray(int size) {
+        return new Person[size];
+    }
+};
+}
+</code></pre><p>传递：</p>
+<pre><code>Person person=new Person();
+person.setName(&quot;Tom&quot;);
+person.setAge(11);
+
+Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+intent.putExtra(KEY,person);
+startActivity(intent);
+</code></pre><p>获取：</p>
+<pre><code>Person person=(Person)getIntent().getParcelableExtra(KEY);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/" itemprop="url">基础Demo36-封装HttpURLConnection和OkHttp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、封装HttpURLConnection"><a href="#1、封装HttpURLConnection" class="headerlink" title="1、封装HttpURLConnection"></a>1、封装HttpURLConnection</h3><pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+public static void sendHttpGET(final String address, final HttpCallbackListener listener) {
+
+
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(address);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod(&quot;GET&quot;);
+                connection.setConnectTimeout(8000);
+                connection.setReadTimeout(8000);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                InputStream in = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                if (listener != null) {
+                    // 回调onFinish()方法
+                    listener.onFinish(response.toString());
+                }
+            } catch (Exception e) {
+                if (listener != null) {
+                    // 回调onError()方法
+                    listener.onError(e);
+                }
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
+    }).start();
+  }
+}
+</code></pre><p>在子线程用回调来处理返回的数据或者错误，然后重写onFinish可以使用Handler或者runOnUiThread返回到主线程更新UI</p>
+<pre><code>public interface HttpCallbackListener {
+
+void onFinish(String response);
+
+void onError(Exception e);
+
+}
+</code></pre><h3 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h3><p>public void loginByPost(String userName, String userPass) {</p>
+<pre><code>    try {
+
+        // 请求的地址
+        String spec = &quot;http://172.16.237.200:8080/video/login.do&quot;;
+        // 根据地址创建URL对象
+        URL url = new URL(spec);
+        // 根据URL对象打开链接
+        HttpURLConnection urlConnection = (HttpURLConnection) url
+                .openConnection();
+        // 设置请求的方式
+        urlConnection.setRequestMethod(&quot;POST&quot;);
+        // 设置请求的超时时间
+        urlConnection.setReadTimeout(5000);
+        urlConnection.setConnectTimeout(5000);
+        // 传递的数据
+        String data = &quot;username=&quot; + URLEncoder.encode(userName, &quot;UTF-8&quot;)
+                + &quot;&amp;userpass=&quot; + URLEncoder.encode(userPass, &quot;UTF-8&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Connection&quot;, &quot;keep-alive&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Type&quot;,
+                &quot;application/x-www-form-urlencoded&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Length&quot;,
+                String.valueOf(data.getBytes().length));
+        // 设置请求的头
+        urlConnection
+                .setRequestProperty(&quot;User-Agent&quot;,
+                        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0&quot;);
+
+        urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
+        urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
+                                        //setDoInput的默认值就是true
+        //获取输出流
+        OutputStream os = urlConnection.getOutputStream();
+        os.write(data.getBytes());
+        os.flush();
+        if (urlConnection.getResponseCode() == 200) {
+            // 获取响应的输入流对象
+            InputStream is = urlConnection.getInputStream();
+            // 创建字节输出流对象
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            // 定义读取的长度
+            int len = 0;
+            // 定义缓冲区
+            byte buffer[] = new byte[1024];
+            // 按照缓冲区的大小，循环读取
+            while ((len = is.read(buffer)) != -1) {
+                // 根据读取的长度写入到os对象中
+                baos.write(buffer, 0, len);
+            }
+            // 释放资源
+            is.close();
+            baos.close();
+            // 返回字符串
+            final String result = new String(baos.toByteArray());
+
+            // 通过runOnUiThread方法进行修改主线程的控件内容
+            LoginActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // 在这里把返回的数据写在控件上 会出现什么情况尼
+                    tv_result.setText(result);
+                }
+            });
+
+        } else {
+            System.out.println(&quot;链接失败.........&quot;);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>}</p>
+<p>封装OkHttp</p>
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+    public static void sendOkHttpRequest(final String address, final okhttp3.Callback callback) {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+            .url(address)
+            .build();
+    client.newCall(request).enqueue(callback);
+}
+
+}
+</code></pre><p>调用示例：</p>
+<pre><code>HttpUtil.sendOkHttpRequest(“https//www.baidu.com”,new okhttp3.Callback() {
+
+@Override
+public void onResponse(Call call,Response response)throws IOException{
+
+        String responseData=response.body().string();
+}
+
+
+@Override
+public void onFailure(Call call,IOException e){
+
+}
+
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo34-WebView最简单的用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo34-WebView最简单的用法/" itemprop="url">基础Demo34-WebView最简单的用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;WebView
+    android:id=&quot;@+id/web_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+public class MainActivity extends AppCompatActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    WebView webView = (WebView) findViewById(R.id.web_view);
+    webView.getSettings().setJavaScriptEnabled(true);
+    webView.setWebViewClient(new WebViewClient());
+    webView.loadUrl(&quot;https://www.baidu.com&quot;);
+}
+
+@Override
+public boolean onKeyDown(int keyCode, KeyEvent event) {
+if (keyCode == KeyEvent.KEYCODE_BACK &amp;&amp; webView.canGoBack()) {
+    webView.goBack();//返回上个页面
+    return true;
+}
+return super.onKeyDown(keyCode, event);//退出H5界面
+ } }
+</code></pre><h3 id="3、AndroidManifest-xml增加权限"><a href="#3、AndroidManifest-xml增加权限" class="headerlink" title="3、AndroidManifest.xml增加权限"></a>3、AndroidManifest.xml增加权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo32-MediaPlayer音频播放/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo32-MediaPlayer音频播放/" itemprop="url">基础Demo32-MediaPlayer音频播放</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;Button
+    android:id=&quot;@+id/play&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Play&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/pause&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Pause&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/stop&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Stop&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import java.io.File;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+private MediaPlayer mediaPlayer = new MediaPlayer();
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button play = (Button) findViewById(R.id.play);
+    Button pause = (Button) findViewById(R.id.pause);
+    Button stop = (Button) findViewById(R.id.stop);
+    play.setOnClickListener(this);
+    pause.setOnClickListener(this);
+    stop.setOnClickListener(this);
+    if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+    } else {
+        initMediaPlayer(); // 初始化MediaPlayer
+    }
+}
+
+private void initMediaPlayer() {
+    try {
+       // File file = new File(Environment.getExternalStorageDirectory(), &quot;music.mp3&quot;);
+        mediaPlayer.setDataSource(Environment.getExternalStorageDirectory()+&quot;/waterdrop.mp3&quot;); // 指定音频文件的路径
+        mediaPlayer.prepare(); // 让MediaPlayer进入到准备状态
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    switch (requestCode) {
+        case 1:
+            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initMediaPlayer();
+            } else {
+                Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            break;
+        default:
+    }
+}
+
+@Override
+public void onClick(View v) {
+    switch (v.getId()) {
+        case R.id.play:
+            if (!mediaPlayer.isPlaying()) {
+                mediaPlayer.start(); // 开始播放
+            }
+            break;
+        case R.id.pause:
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.pause(); // 暂停播放
+            }
+            break;
+        case R.id.stop:
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.reset(); // 停止播放
+                initMediaPlayer();
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (mediaPlayer != null) {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+    }
+}
+</code></pre><p>}</p>
+<h3 id="3、AndroidManifest-xml加入权限"><a href="#3、AndroidManifest-xml加入权限" class="headerlink" title="3、AndroidManifest.xml加入权限"></a>3、AndroidManifest.xml加入权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo31-调用摄像头拍照+选取相册的照片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo31-调用摄像头拍照+选取相册的照片/" itemprop="url">基础Demo31-调用摄像头拍照+选取相册的照片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;Button
+    android:id=&quot;@+id/take_photo&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Take Photo&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/choose_from_album&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Choose From Album&quot; /&gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/picture&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity {
+public static final int TAKE_PHOTO = 1;
+
+public static final int CHOOSE_PHOTO = 2;
+
+private ImageView picture;
+
+private Uri imageUri;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button takePhoto = (Button) findViewById(R.id.take_photo);
+    Button chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
+    picture = (ImageView) findViewById(R.id.picture);
+    takePhoto.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // 创建File对象，用于存储拍照后的图片
+            File outputImage = new File(getExternalCacheDir(), &quot;output_image.jpg&quot;);
+            try {
+                if (outputImage.exists()) {
+                    outputImage.delete();
+                }
+                outputImage.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (Build.VERSION.SDK_INT &lt; 24) {
+                imageUri = Uri.fromFile(outputImage);
+            } else {
+                imageUri = FileProvider.getUriForFile(MainActivity.this, &quot;com.example.cameraalbumtest.fileprovider&quot;, outputImage);
+            }
+            // 启动相机程序
+            Intent intent = new Intent(&quot;android.media.action.IMAGE_CAPTURE&quot;);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            startActivityForResult(intent, TAKE_PHOTO);
+        }
+    });
+    chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+            } else {
+                openAlbum();
+            }
+        }
+    });
+}
+
+private void openAlbum() {
+    Intent intent = new Intent(&quot;android.intent.action.GET_CONTENT&quot;);
+    intent.setType(&quot;image/*&quot;);
+    startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    switch (requestCode) {
+        case 1:
+            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openAlbum();
+            } else {
+                Toast.makeText(this, &quot;You denied the permission&quot;, Toast.LENGTH_SHORT).show();
+            }
+            break;
+        default:
+    }
+}
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+        case TAKE_PHOTO:
+            if (resultCode == RESULT_OK) {
+                try {
+                    // 将拍摄的照片显示出来
+                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                    picture.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            break;
+        case CHOOSE_PHOTO:
+            if (resultCode == RESULT_OK) {
+                // 判断手机系统版本号
+                if (Build.VERSION.SDK_INT &gt;= 19) {
+                    // 4.4及以上系统使用这个方法处理图片
+                    handleImageOnKitKat(data);
+                } else {
+                    // 4.4以下系统使用这个方法处理图片
+                    handleImageBeforeKitKat(data);
+                }
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+@TargetApi(19)
+private void handleImageOnKitKat(Intent data) {
+    String imagePath = null;
+    Uri uri = data.getData();
+    Log.d(&quot;TAG&quot;, &quot;handleImageOnKitKat: uri is &quot; + uri);
+    if (DocumentsContract.isDocumentUri(this, uri)) {
+        // 如果是document类型的Uri，则通过document id处理
+        String docId = DocumentsContract.getDocumentId(uri);
+        if(&quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority())) {
+            String id = docId.split(&quot;:&quot;)[1]; // 解析出数字格式的id
+            String selection = MediaStore.Images.Media._ID + &quot;=&quot; + id;
+            imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+        } else if (&quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority())) {
+            Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;), Long.valueOf(docId));
+            imagePath = getImagePath(contentUri, null);
+        }
+    } else if (&quot;content&quot;.equalsIgnoreCase(uri.getScheme())) {
+        // 如果是content类型的Uri，则使用普通方式处理
+        imagePath = getImagePath(uri, null);
+    } else if (&quot;file&quot;.equalsIgnoreCase(uri.getScheme())) {
+        // 如果是file类型的Uri，直接获取图片路径即可
+        imagePath = uri.getPath();
+    }
+    displayImage(imagePath); // 根据图片路径显示图片
+}
+
+private void handleImageBeforeKitKat(Intent data) {
+    Uri uri = data.getData();
+    String imagePath = getImagePath(uri, null);
+    displayImage(imagePath);
+}
+
+private String getImagePath(Uri uri, String selection) {
+    String path = null;
+    // 通过Uri和selection来获取真实的图片路径
+    Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+    if (cursor != null) {
+        if (cursor.moveToFirst()) {
+            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        }
+        cursor.close();
+    }
+    return path;
+}
+
+private void displayImage(String imagePath) {
+    if (imagePath != null) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+        picture.setImageBitmap(bitmap);
+    } else {
+        Toast.makeText(this, &quot;failed to get image&quot;, Toast.LENGTH_SHORT).show();
+    }
+}
+</code></pre><p>}</p>
+<h3 id="3、在AndroidManifest-xml中注册内容提供器"><a href="#3、在AndroidManifest-xml中注册内容提供器" class="headerlink" title="3、在AndroidManifest.xml中注册内容提供器"></a>3、在AndroidManifest.xml中注册内容提供器</h3><pre><code>&lt;provider
+        android:name=&quot;android.support.v4.content.FileProvider&quot;
+        android:authorities=&quot;com.example.cameraalbumtest.fileprovider&quot;
+        android:exported=&quot;false&quot;
+        android:grantUriPermissions=&quot;true&quot;&gt;
+        &lt;meta-data
+            android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;
+            android:resource=&quot;@xml/file_paths&quot; /&gt;
+    &lt;/provider&gt;
+
+&lt;/application&gt;
+</code></pre><h3 id="4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml"><a href="#4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml" class="headerlink" title="4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml"></a>4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+&lt;external-path name=&quot;my_images&quot; path=&quot;&quot; /&gt;
+&lt;/paths&gt;
+</code></pre><h3 id="5、权限"><a href="#5、权限" class="headerlink" title="5、权限"></a>5、权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
 </code></pre>
           
         
@@ -1951,7 +2757,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1997,7 +2803,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
