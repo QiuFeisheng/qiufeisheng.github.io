@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、app模块下添加OkHttp的依赖implementation &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos; 2、创建回调接口 DownloadListener.javapublic interface DownloadListener {  void onProgress(int progress);  void onSuccess();  vo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础Demo54-Service实现后台下载任务">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo54-Service实现后台下载任务/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1、app模块下添加OkHttp的依赖implementation &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos; 2、创建回调接口 DownloadListener.javapublic interface DownloadListener {  void onProgress(int progress);  void onSuccess();  vo">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-27T11:55:25.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础Demo54-Service实现后台下载任务">
+<meta name="twitter:description" content="1、app模块下添加OkHttp的依赖implementation &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos; 2、创建回调接口 DownloadListener.javapublic interface DownloadListener {  void onProgress(int progress);  void onSuccess();  vo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo54-Service实现后台下载任务/">
+
+
+
+
+
+  <title>基础Demo54-Service实现后台下载任务 | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo54-Service实现后台下载任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基础Demo54-Service实现后台下载任务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:53:09+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、app模块下添加OkHttp的依赖"><a href="#1、app模块下添加OkHttp的依赖" class="headerlink" title="1、app模块下添加OkHttp的依赖"></a>1、app模块下添加OkHttp的依赖</h3><pre><code>implementation &apos;com.squareup.okhttp3:okhttp:3.4.1&apos;
+</code></pre><h3 id="2、创建回调接口-DownloadListener-java"><a href="#2、创建回调接口-DownloadListener-java" class="headerlink" title="2、创建回调接口 DownloadListener.java"></a>2、创建回调接口 DownloadListener.java</h3><pre><code>public interface DownloadListener {
+
+void onProgress(int progress);
+
+void onSuccess();
+
+void onFailed();
+
+void onPaused();
+
+void onCanceled();
+
+}
+</code></pre><h3 id="3、AsyncTask的实现类"><a href="#3、AsyncTask的实现类" class="headerlink" title="3、AsyncTask的实现类"></a>3、AsyncTask的实现类</h3><pre><code>import android.os.AsyncTask;
+import android.os.Environment;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class DownloadTask extends AsyncTask&lt;String, Integer, Integer&gt; {
+
+public static final int TYPE_SUCCESS = 0;
+public static final int TYPE_FAILED = 1;
+public static final int TYPE_PAUSED = 2;
+public static final int TYPE_CANCELED = 3;
+
+
+private DownloadListener listener;
+
+private boolean isCanceled = false;
+
+private boolean isPaused = false;
+
+private int lastProgress;
+
+public DownloadTask(DownloadListener listener) {
+    this.listener = listener;
+}
+
+@Override
+protected Integer doInBackground(String... params) {
+    InputStream is = null;
+    RandomAccessFile savedFile = null;
+    File file = null;
+    try {
+        long downloadedLength = 0; // 记录已下载的文件长度
+        String downloadUrl = params[0];
+        String fileName = downloadUrl.substring(downloadUrl.lastIndexOf(&quot;/&quot;));
+        String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+        file = new File(directory + fileName);
+        if (file.exists()) {
+            downloadedLength = file.length();
+        }
+        long contentLength = getContentLength(downloadUrl);
+        if (contentLength == 0) {
+            return TYPE_FAILED;
+        } else if (contentLength == downloadedLength) {
+            // 已下载字节和文件总字节相等，说明已经下载完成了
+            return TYPE_SUCCESS;
+        }
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                // 断点下载，指定从哪个字节开始下载
+                .addHeader(&quot;RANGE&quot;, &quot;bytes=&quot; + downloadedLength + &quot;-&quot;)
+                .url(downloadUrl)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response != null) {
+            is = response.body().byteStream();
+            savedFile = new RandomAccessFile(file, &quot;rw&quot;);
+            savedFile.seek(downloadedLength); // 跳过已下载的字节
+            byte[] b = new byte[1024];
+            int total = 0;
+            int len;
+            while ((len = is.read(b)) != -1) {
+                if (isCanceled) {
+                    return TYPE_CANCELED;
+                } else if(isPaused) {
+                    return TYPE_PAUSED;
+                } else {
+                    total += len;
+                    savedFile.write(b, 0, len);
+                    // 计算已下载的百分比
+                    int progress = (int) ((total + downloadedLength) * 100 / contentLength);
+                    publishProgress(progress);
+                }
+            }
+            response.body().close();
+            return TYPE_SUCCESS;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (is != null) {
+                is.close();
+            }
+            if (savedFile != null) {
+                savedFile.close();
+            }
+            if (isCanceled &amp;&amp; file != null) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    return TYPE_FAILED;
+}
+
+@Override
+protected void onProgressUpdate(Integer... values) {
+    int progress = values[0];
+    if (progress &gt; lastProgress) {
+        listener.onProgress(progress);
+        lastProgress = progress;
+    }
+}
+
+@Override
+protected void onPostExecute(Integer status) {
+    switch (status) {
+        case TYPE_SUCCESS:
+            listener.onSuccess();
+            break;
+        case TYPE_FAILED:
+            listener.onFailed();
+            break;
+        case TYPE_PAUSED:
+            listener.onPaused();
+            break;
+        case TYPE_CANCELED:
+            listener.onCanceled();
+        default:
+            break;
+    }
+}
+
+public void pauseDownload() {
+    isPaused = true;
+}
+
+
+public void cancelDownload() {
+    isCanceled = true;
+}
+
+private long getContentLength(String downloadUrl) throws IOException {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+            .url(downloadUrl)
+            .build();
+    Response response = client.newCall(request).execute();
+    if (response != null &amp;&amp; response.isSuccessful()) {
+        long contentLength = response.body().contentLength();
+        response.close();
+        return contentLength;
+    }
+    return 0;
+}
+
+}
+</code></pre><h3 id="4、DownloadService-java"><a href="#4、DownloadService-java" class="headerlink" title="4、DownloadService.java"></a>4、DownloadService.java</h3><pre><code>import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Binder;
+import android.os.Environment;
+import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
+import java.io.File;
+
+public class DownloadService extends Service {
+
+private DownloadTask downloadTask;
+
+private String downloadUrl;
+
+private DownloadListener listener = new DownloadListener() {
+    @Override
+    public void onProgress(int progress) {
+        getNotificationManager().notify(1, getNotification(&quot;Downloading...&quot;, progress));
+    }
+
+    @Override
+    public void onSuccess() {
+        downloadTask = null;
+        // 下载成功时将前台服务通知关闭，并创建一个下载成功的通知
+        stopForeground(true);
+        getNotificationManager().notify(1, getNotification(&quot;Download Success&quot;, -1));
+        Toast.makeText(DownloadService.this, &quot;Download Success&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailed() {
+        downloadTask = null;
+        // 下载失败时将前台服务通知关闭，并创建一个下载失败的通知
+        stopForeground(true);
+        getNotificationManager().notify(1, getNotification(&quot;Download Failed&quot;, -1));
+        Toast.makeText(DownloadService.this, &quot;Download Failed&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaused() {
+        downloadTask = null;
+        Toast.makeText(DownloadService.this, &quot;Paused&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCanceled() {
+        downloadTask = null;
+        stopForeground(true);
+        Toast.makeText(DownloadService.this, &quot;Canceled&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+};
+
+private DownloadBinder mBinder = new DownloadBinder();
+
+@Override
+public IBinder onBind(Intent intent) {
+    return mBinder;
+}
+
+class DownloadBinder extends Binder {
+
+    public void startDownload(String url) {
+        if (downloadTask == null) {
+            downloadUrl = url;
+            downloadTask = new DownloadTask(listener);
+            downloadTask.execute(downloadUrl);
+            startForeground(1, getNotification(&quot;Downloading...&quot;, 0));
+            Toast.makeText(DownloadService.this, &quot;Downloading...&quot;, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void pauseDownload() {
+        if (downloadTask != null) {
+            downloadTask.pauseDownload();
+        }
+    }
+
+    public void cancelDownload() {
+        if (downloadTask != null) {
+            downloadTask.cancelDownload();
+        } else {
+            if (downloadUrl != null) {
+                // 取消下载时需将文件删除，并将通知关闭
+                String fileName = downloadUrl.substring(downloadUrl.lastIndexOf(&quot;/&quot;));
+                String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+                File file = new File(directory + fileName);
+                if (file.exists()) {
+                    file.delete();
+                }
+                getNotificationManager().cancel(1);
+                stopForeground(true);
+                Toast.makeText(DownloadService.this, &quot;Canceled&quot;, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+}
+
+private NotificationManager getNotificationManager() {
+    return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+}
+
+private Notification getNotification(String title, int progress) {
+    Intent intent = new Intent(this, MainActivity.class);
+    PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+    builder.setSmallIcon(R.mipmap.ic_launcher);
+    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+    builder.setContentIntent(pi);
+    builder.setContentTitle(title);
+    if (progress &gt;= 0) {
+        // 当progress大于或等于0时才需显示下载进度
+        builder.setContentText(progress + &quot;%&quot;);
+        builder.setProgress(100, progress, false);
+    }
+    return builder.build();
+}
+</code></pre><p>}</p>
+<h3 id="5、activity-main-xml"><a href="#5、activity-main-xml" class="headerlink" title="5、activity_main.xml"></a>5、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/start_download&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Start Download&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/pause_download&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Pause Download&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/cancel_download&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Cancel Download&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="6、MainActivity-java"><a href="#6、MainActivity-java" class="headerlink" title="6、MainActivity.java"></a>6、MainActivity.java</h3><pre><code>import android.Manifest;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+private DownloadService.DownloadBinder downloadBinder;
+
+private ServiceConnection connection = new ServiceConnection() {
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        downloadBinder = (DownloadService.DownloadBinder) service;
+    }
+
+};
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button startDownload = (Button) findViewById(R.id.start_download);
+    Button pauseDownload = (Button) findViewById(R.id.pause_download);
+    Button cancelDownload = (Button) findViewById(R.id.cancel_download);
+    startDownload.setOnClickListener(this);
+    pauseDownload.setOnClickListener(this);
+    cancelDownload.setOnClickListener(this);
+    Intent intent = new Intent(this, DownloadService.class);
+    startService(intent); // 启动服务
+    bindService(intent, connection, BIND_AUTO_CREATE); // 绑定服务
+    if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+    }
+}
+
+@Override
+public void onClick(View v) {
+    if (downloadBinder == null) {
+        return;
+    }
+    switch (v.getId()) {
+        case R.id.start_download:
+            String url = &quot;https://raw.githubusercontent.com/guolindev/eclipse/master/eclipse-inst-win64.exe&quot;;
+            downloadBinder.startDownload(url);
+            break;
+        case R.id.pause_download:
+            downloadBinder.pauseDownload();
+            break;
+        case R.id.cancel_download:
+            downloadBinder.cancelDownload();
+            break;
+        default:
+            break;
+    }
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    switch (requestCode) {
+        case 1:
+            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            break;
+        default:
+    }
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    unbindService(connection);
+}
+
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/27/基础Demo53-IntentService的使用/" rel="next" title="基础Demo53-IntentService的使用">
+                <i class="fa fa-chevron-left"></i> 基础Demo53-IntentService的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、app模块下添加OkHttp的依赖"><span class="nav-number">1.</span> <span class="nav-text">1、app模块下添加OkHttp的依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、创建回调接口-DownloadListener-java"><span class="nav-number">2.</span> <span class="nav-text">2、创建回调接口 DownloadListener.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、AsyncTask的实现类"><span class="nav-number">3.</span> <span class="nav-text">3、AsyncTask的实现类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、DownloadService-java"><span class="nav-number">4.</span> <span class="nav-text">4、DownloadService.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、activity-main-xml"><span class="nav-number">5.</span> <span class="nav-text">5、activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、MainActivity-java"><span class="nav-number">6.</span> <span class="nav-text">6、MainActivity.java</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

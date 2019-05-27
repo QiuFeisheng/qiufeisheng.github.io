@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta name="description" content="1、IntentService的应用场景：因为Service和Activity是兄弟，也是运行在主线程中，所以在执行耗时任务的时候，需要开启子线程，避免阻塞主线程，出现ANR；为了方便开启子线程，Android直接封装了一个IntentService给我们使用，不需要再new Thread，直接重写onHandleIntent方法就可以了，在此方法执行具体的后台耗时任务。 2、而且执行完之后会自动">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/index.html">
+<meta property="og:title" content="基础Demo53-IntentService的使用">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo53-IntentService的使用/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta property="og:description" content="1、IntentService的应用场景：因为Service和Activity是兄弟，也是运行在主线程中，所以在执行耗时任务的时候，需要开启子线程，避免阻塞主线程，出现ANR；为了方便开启子线程，Android直接封装了一个IntentService给我们使用，不需要再new Thread，直接重写onHandleIntent方法就可以了，在此方法执行具体的后台耗时任务。 2、而且执行完之后会自动">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
-<meta property="og:updated_time" content="2019-05-27T07:55:55.188Z">
+<meta property="og:updated_time" content="2019-05-27T11:52:53.335Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta name="twitter:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
+<meta name="twitter:title" content="基础Demo53-IntentService的使用">
+<meta name="twitter:description" content="1、IntentService的应用场景：因为Service和Activity是兄弟，也是运行在主线程中，所以在执行耗时任务的时候，需要开启子线程，避免阻塞主线程，出现ANR；为了方便开启子线程，Android直接封装了一个IntentService给我们使用，不需要再new Thread，直接重写onHandleIntent方法就可以了，在此方法执行具体的后台耗时任务。 2、而且执行完之后会自动">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo53-IntentService的使用/">
 
 
 
 
 
-  <title>基础Demo18-Fragment与Activity通信+生命周期 | QiuFeisheng'Blog</title>
+  <title>基础Demo53-IntentService的使用 | QiuFeisheng'Blog</title>
   
 
 
@@ -234,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo53-IntentService的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基础Demo18-Fragment与Activity通信+生命周期</h1>
+          <h1 class="post-title" itemprop="name headline">基础Demo53-IntentService的使用</h1>
         
 
         <div class="post-meta">
@@ -263,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:51:01+08:00">
                 2019-05-27
               </time>
             
@@ -301,31 +299,75 @@
       
 
       
-        <h3 id="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><a href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment" class="headerlink" title="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"></a>1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</h3><pre><code>transaction.addToBackStack( null );
-</code></pre><h3 id="2、Fragment与Activity通信"><a href="#2、Fragment与Activity通信" class="headerlink" title="2、Fragment与Activity通信"></a>2、Fragment与Activity通信</h3><p>（1）在Activity中，就去拿到Fragment的实例</p>
-<pre><code>/**
- * 得到左侧菜单碎片的实例
- * @return
- */
-public LeftFragment getLeftMenuFragment() {
-    //构造FragmentManager对象
-    FragmentManager fm=getSupportFragmentManager();
-    //构造LeftMenuFragment对象： 通过构造FragmentManager对象调用象方
-    LeftFragment leftMenuFragment= (LeftFragment) fm.findFragmentByTag(LEFT_FRAGMENT_TAG);
-    return leftMenuFragment;
+        <h3 id="1、IntentService的应用场景"><a href="#1、IntentService的应用场景" class="headerlink" title="1、IntentService的应用场景"></a>1、IntentService的应用场景</h3><p>：因为Service和Activity是兄弟，也是运行在主线程中，所以在执行耗时任务的时候，需要开启子线程，避免阻塞主线程，出现ANR；为了方便开启子线程，Android直接封装了一个IntentService给我们使用，不需要再new Thread，直接重写onHandleIntent方法就可以了，在此方法执行具体的后台耗时任务。</p>
+<h3 id="2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy-来回收资源："><a href="#2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy-来回收资源：" class="headerlink" title="2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy()来回收资源："></a>2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy()来回收资源：</h3><p>包名—》New—&gt;Java class—&gt;MyIntentService—-&gt;extends IntentService—-&gt;一定要有一个无参构造方法—-》重写onHandleIntent和onDestroy就可以了</p>
+<pre><code>import android.app.IntentService;
+import android.content.Intent;
+import android.util.Log;
+
+public class MyIntentService extends IntentService {
+
+public MyIntentService( ) {
+    super(&quot;MyIntentService&quot;);
 }
 
+@Override
+protected void onHandleIntent( Intent intent) {
 
-/**
- * 得到右侧碎片的实例
- * @return
- */
-public  RightFragment getContentFragment() {
-    return (RightFragment) getSupportFragmentManager().findFragmentByTag(RIGHT_FRAGMENT_TAG);
+    Log.d(&quot;执行&quot;,&quot;IntentService开启了&quot;);
+
 }
-</code></pre><p>（2）在Fragment中，拿到Activity的实例</p>
-<pre><code>MainActivity   activity=(MainActivity)getActivity();
-</code></pre><h3 id="3、生命周期"><a href="#3、生命周期" class="headerlink" title="3、生命周期"></a>3、生命周期</h3><p>  <img src="图片18.jpg" alt></p>
+
+@Override
+public void onDestroy() {
+    super.onDestroy();
+
+    Log.d(&quot;执行&quot;,&quot;onDestroy()&quot;);
+}
+</code></pre><p>}<br>*在点击事件中构造Intent对象，然后startService( intent)；就可以了,执行完后会自动关闭服务。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;Button
+    android:id=&quot;@+id/btn&quot;
+    android:text=&quot;开启服务&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+
+&lt;/LinearLayout&gt;
+</code></pre><hr>
+<pre><code>import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+private Button mButton;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    mButton=(Button)findViewById(R.id.btn);
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent=new Intent(MainActivity.this,MyIntentService.class);
+            startService(intent);
+        }
+    });}}
+</code></pre><hr>
+<p>注册Service</p>
+<pre><code>&lt;service android:name=&quot;.MyIntentService&quot;/&gt;
+</code></pre><p>搞定啦！！！！！！</p>
 
       
     </div>
@@ -350,8 +392,8 @@ public  RightFragment getContentFragment() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/27/基础Demo20-动态注册广播的简单Demo/" rel="next" title="基础Demo20-动态注册广播的简单Demo">
-                <i class="fa fa-chevron-left"></i> 基础Demo20-动态注册广播的简单Demo
+              <a href="/2019/05/27/基础Demo52-前台服务和IntentService/" rel="next" title="基础Demo52-前台服务和IntentService">
+                <i class="fa fa-chevron-left"></i> 基础Demo52-前台服务和IntentService
               </a>
             
           </div>
@@ -360,8 +402,8 @@ public  RightFragment getContentFragment() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/27/基础Demo19-Fragment的新闻Demo/" rel="prev" title="基础Demo19-Fragment的新闻Demo">
-                基础Demo19-Fragment的新闻Demo <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/27/基础Demo54-Service实现后台下载任务/" rel="prev" title="基础Demo54-Service实现后台下载任务">
+                基础Demo54-Service实现后台下载任务 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -476,7 +518,7 @@ public  RightFragment getContentFragment() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><span class="nav-number">1.</span> <span class="nav-text">1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Fragment与Activity通信"><span class="nav-number">2.</span> <span class="nav-text">2、Fragment与Activity通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、生命周期"><span class="nav-number">3.</span> <span class="nav-text">3、生命周期</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、IntentService的应用场景"><span class="nav-number">1.</span> <span class="nav-text">1、IntentService的应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy-来回收资源："><span class="nav-number">2.</span> <span class="nav-text">2、而且执行完之后会自动关闭服务，不需要手动关闭，所以重写Service的onDestroy()来回收资源：</span></a></li></ol></div>
             
 
           </div>

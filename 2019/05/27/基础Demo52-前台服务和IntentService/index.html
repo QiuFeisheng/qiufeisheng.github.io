@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta name="description" content="1、使用前台服务的场景（1）Service默认是运行在后台的，不想因系统内存不足回收后台任务，可转为前台Service，因为垃圾回收是分优先级别的 （2）功能需求要求应用的服务一直在系统状态栏显示，例如天气APP，这是功能需求决定的 在Service的onCreate()里面： //构造Intent对象—》构造PendingIntent对象—》构造Notification对象—》startFore">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/index.html">
+<meta property="og:title" content="基础Demo52-前台服务和IntentService">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo52-前台服务和IntentService/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta property="og:description" content="1、使用前台服务的场景（1）Service默认是运行在后台的，不想因系统内存不足回收后台任务，可转为前台Service，因为垃圾回收是分优先级别的 （2）功能需求要求应用的服务一直在系统状态栏显示，例如天气APP，这是功能需求决定的 在Service的onCreate()里面： //构造Intent对象—》构造PendingIntent对象—》构造Notification对象—》startFore">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
-<meta property="og:updated_time" content="2019-05-27T07:55:55.188Z">
+<meta property="og:updated_time" content="2019-05-27T11:49:42.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta name="twitter:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
+<meta name="twitter:title" content="基础Demo52-前台服务和IntentService">
+<meta name="twitter:description" content="1、使用前台服务的场景（1）Service默认是运行在后台的，不想因系统内存不足回收后台任务，可转为前台Service，因为垃圾回收是分优先级别的 （2）功能需求要求应用的服务一直在系统状态栏显示，例如天气APP，这是功能需求决定的 在Service的onCreate()里面： //构造Intent对象—》构造PendingIntent对象—》构造Notification对象—》startFore">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo52-前台服务和IntentService/">
 
 
 
 
 
-  <title>基础Demo18-Fragment与Activity通信+生命周期 | QiuFeisheng'Blog</title>
+  <title>基础Demo52-前台服务和IntentService | QiuFeisheng'Blog</title>
   
 
 
@@ -234,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo52-前台服务和IntentService/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基础Demo18-Fragment与Activity通信+生命周期</h1>
+          <h1 class="post-title" itemprop="name headline">基础Demo52-前台服务和IntentService</h1>
         
 
         <div class="post-meta">
@@ -263,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:47:36+08:00">
                 2019-05-27
               </time>
             
@@ -301,31 +299,92 @@
       
 
       
-        <h3 id="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><a href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment" class="headerlink" title="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"></a>1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</h3><pre><code>transaction.addToBackStack( null );
-</code></pre><h3 id="2、Fragment与Activity通信"><a href="#2、Fragment与Activity通信" class="headerlink" title="2、Fragment与Activity通信"></a>2、Fragment与Activity通信</h3><p>（1）在Activity中，就去拿到Fragment的实例</p>
-<pre><code>/**
- * 得到左侧菜单碎片的实例
- * @return
- */
-public LeftFragment getLeftMenuFragment() {
-    //构造FragmentManager对象
-    FragmentManager fm=getSupportFragmentManager();
-    //构造LeftMenuFragment对象： 通过构造FragmentManager对象调用象方
-    LeftFragment leftMenuFragment= (LeftFragment) fm.findFragmentByTag(LEFT_FRAGMENT_TAG);
-    return leftMenuFragment;
+        <h3 id="1、使用前台服务的场景"><a href="#1、使用前台服务的场景" class="headerlink" title="1、使用前台服务的场景"></a>1、使用前台服务的场景</h3><p>（1）Service默认是运行在后台的，不想因系统内存不足回收后台任务，可转为前台Service，因为垃圾回收是分优先级别的</p>
+<p>（2）功能需求要求应用的服务一直在系统状态栏显示，例如天气APP，这是功能需求决定的</p>
+<p>在Service的onCreate()里面：</p>
+<p>//构造Intent对象—》构造PendingIntent对象—》构造Notification对象—》startForeground(id值,notification)</p>
+<p>1、MyService.java</p>
+<pre><code>import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.widget.Toast;
+
+public class MyService extends Service {
+
+public MyService() {
 }
 
+@Override
+public void onCreate() {
+    super.onCreate();
+    //解决权限兼容的问题,8.0开始就需要这样
+    String CHANNEL_ONE_ID = &quot;com.primedu.cn&quot;;
+    String CHANNEL_ONE_NAME = &quot;Channel One&quot;;
+    NotificationChannel notificationChannel = null;
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.O) {
+        notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.setShowBadge(true);
+        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(notificationChannel);
+    }
 
-/**
- * 得到右侧碎片的实例
- * @return
- */
-public  RightFragment getContentFragment() {
-    return (RightFragment) getSupportFragmentManager().findFragmentByTag(RIGHT_FRAGMENT_TAG);
+
+
+    Intent intent=new Intent(this,MainActivity.class);
+    PendingIntent pi=PendingIntent.getActivity(this,0,intent,0);
+    Notification notification=new NotificationCompat.Builder(this)
+            .setContentTitle(&quot;How are you?&quot;)
+            .setContentText(&quot;I am fine&quot;)
+            .setWhen(System.currentTimeMillis())
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+            .setContentIntent(pi)
+            .setChannelId(CHANNEL_ONE_ID)
+            .build();
+
+    startForeground(1,notification);
 }
-</code></pre><p>（2）在Fragment中，拿到Activity的实例</p>
-<pre><code>MainActivity   activity=(MainActivity)getActivity();
-</code></pre><h3 id="3、生命周期"><a href="#3、生命周期" class="headerlink" title="3、生命周期"></a>3、生命周期</h3><p>  <img src="图片18.jpg" alt></p>
+
+//1.
+class DownloadBinder extends Binder{
+
+    public void startDownload(){
+
+        Toast.makeText(MyService.this,&quot;开始下载&quot;,Toast.LENGTH_SHORT).show();
+        Log.d(&quot;执行&quot;,&quot;开始下载&quot;);
+    }
+
+    public void getProgress(){
+
+        Toast.makeText(MyService.this,&quot;获取进度&quot;,Toast.LENGTH_SHORT).show();
+        Log.d(&quot;执行&quot;,&quot;获取进度&quot;);
+    }
+}
+
+//2.
+private DownloadBinder mDownloadBinder=new DownloadBinder();
+//3.
+@Override
+public IBinder onBind(Intent intent) {
+    return mDownloadBinder;
+}
+</code></pre><p>}</p>
+<p>2、在AndroidManifest.xml增加权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.FOREGROUND_SERVICE&quot;/&gt;
+</code></pre><p>  <strong>.setChannelId(CHANNEL_ONE_ID)</strong><br>这一句不能漏，很重要，否则程序会奔溃</p>
 
       
     </div>
@@ -350,8 +409,8 @@ public  RightFragment getContentFragment() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/27/基础Demo20-动态注册广播的简单Demo/" rel="next" title="基础Demo20-动态注册广播的简单Demo">
-                <i class="fa fa-chevron-left"></i> 基础Demo20-动态注册广播的简单Demo
+              <a href="/2019/05/27/基础Demo51-Service与Activity绑定通信/" rel="next" title="基础Demo51-Service与Activity绑定通信">
+                <i class="fa fa-chevron-left"></i> 基础Demo51-Service与Activity绑定通信
               </a>
             
           </div>
@@ -360,8 +419,8 @@ public  RightFragment getContentFragment() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/27/基础Demo19-Fragment的新闻Demo/" rel="prev" title="基础Demo19-Fragment的新闻Demo">
-                基础Demo19-Fragment的新闻Demo <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/27/基础Demo53-IntentService的使用/" rel="prev" title="基础Demo53-IntentService的使用">
+                基础Demo53-IntentService的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -476,7 +535,7 @@ public  RightFragment getContentFragment() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><span class="nav-number">1.</span> <span class="nav-text">1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Fragment与Activity通信"><span class="nav-number">2.</span> <span class="nav-text">2、Fragment与Activity通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、生命周期"><span class="nav-number">3.</span> <span class="nav-text">3、生命周期</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、使用前台服务的场景"><span class="nav-number">1.</span> <span class="nav-text">1、使用前台服务的场景</span></a></li></ol></div>
             
 
           </div>

@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta name="description" content="备注：Activity若想与Servcie通信，进行数据交互，需要进行绑定开启 1、在MyService里面创建内部类MyBinder(继承Binder)； 2、在MyService里面构造MyBinder对象； 3、在onBind（）方法里面return这个MyBinder对象； 4、Activity构造MyService内部类对象； 5、Activity构造ServiceConnection匿">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/index.html">
+<meta property="og:title" content="基础Demo51-Service与Activity绑定通信">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/基础Demo51-Service与Activity绑定通信/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
+<meta property="og:description" content="备注：Activity若想与Servcie通信，进行数据交互，需要进行绑定开启 1、在MyService里面创建内部类MyBinder(继承Binder)； 2、在MyService里面构造MyBinder对象； 3、在onBind（）方法里面return这个MyBinder对象； 4、Activity构造MyService内部类对象； 5、Activity构造ServiceConnection匿">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
-<meta property="og:updated_time" content="2019-05-27T07:55:55.188Z">
+<meta property="og:updated_time" content="2019-05-27T11:47:30.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础Demo18-Fragment与Activity通信+生命周期">
-<meta name="twitter:description" content="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragmenttransaction.addToBackStack( null ); 2、Fragment与Activity通信（1）在Activity中，就去拿到Fragment的实例 /**  * 得到左侧菜单碎片的实例  * @retur">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/图片18.jpg">
+<meta name="twitter:title" content="基础Demo51-Service与Activity绑定通信">
+<meta name="twitter:description" content="备注：Activity若想与Servcie通信，进行数据交互，需要进行绑定开启 1、在MyService里面创建内部类MyBinder(继承Binder)； 2、在MyService里面构造MyBinder对象； 3、在onBind（）方法里面return这个MyBinder对象； 4、Activity构造MyService内部类对象； 5、Activity构造ServiceConnection匿">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/基础Demo51-Service与Activity绑定通信/">
 
 
 
 
 
-  <title>基础Demo18-Fragment与Activity通信+生命周期 | QiuFeisheng'Blog</title>
+  <title>基础Demo51-Service与Activity绑定通信 | QiuFeisheng'Blog</title>
   
 
 
@@ -234,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo51-Service与Activity绑定通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基础Demo18-Fragment与Activity通信+生命周期</h1>
+          <h1 class="post-title" itemprop="name headline">基础Demo51-Service与Activity绑定通信</h1>
         
 
         <div class="post-meta">
@@ -263,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:45:03+08:00">
                 2019-05-27
               </time>
             
@@ -301,32 +299,143 @@
       
 
       
-        <h3 id="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><a href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment" class="headerlink" title="1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"></a>1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</h3><pre><code>transaction.addToBackStack( null );
-</code></pre><h3 id="2、Fragment与Activity通信"><a href="#2、Fragment与Activity通信" class="headerlink" title="2、Fragment与Activity通信"></a>2、Fragment与Activity通信</h3><p>（1）在Activity中，就去拿到Fragment的实例</p>
-<pre><code>/**
- * 得到左侧菜单碎片的实例
- * @return
- */
-public LeftFragment getLeftMenuFragment() {
-    //构造FragmentManager对象
-    FragmentManager fm=getSupportFragmentManager();
-    //构造LeftMenuFragment对象： 通过构造FragmentManager对象调用象方
-    LeftFragment leftMenuFragment= (LeftFragment) fm.findFragmentByTag(LEFT_FRAGMENT_TAG);
-    return leftMenuFragment;
+        <p>备注：Activity若想与Servcie通信，进行数据交互，需要进行绑定开启</p>
+<p>1、在MyService里面创建内部类MyBinder(继承Binder)；</p>
+<p>2、在MyService里面构造MyBinder对象；</p>
+<p>3、在onBind（）方法里面return这个MyBinder对象；</p>
+<p>4、Activity构造MyService内部类对象；</p>
+<p>5、Activity构造ServiceConnection匿名类对象;</p>
+<p>6、重写onServiceConnected（）的时候，就可以构造MyBinder对象，然后调用它的象方；</p>
+<p>7、第6步实现了可以在Activity里面调用MyService的API，我们就称之为可以通信。</p>
+<p>8、Activity构造Intent对象，bindService()和unbindService即可绑定和解绑</p>
+<p>9、一个Service可以和多个Activity绑定，而且是通过同一个Binder对象调用Service里面的API。</p>
+<p>MyService.java</p>
+<pre><code>import android.app.Service;
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
+
+public class MyService extends Service {
+
+public MyService() {
 }
 
 
-/**
- * 得到右侧碎片的实例
- * @return
- */
-public  RightFragment getContentFragment() {
-    return (RightFragment) getSupportFragmentManager().findFragmentByTag(RIGHT_FRAGMENT_TAG);
-}
-</code></pre><p>（2）在Fragment中，拿到Activity的实例</p>
-<pre><code>MainActivity   activity=(MainActivity)getActivity();
-</code></pre><h3 id="3、生命周期"><a href="#3、生命周期" class="headerlink" title="3、生命周期"></a>3、生命周期</h3><p>  <img src="图片18.jpg" alt></p>
+//1.
+class DownloadBinder extends Binder{
 
+    public void startDownload(){
+
+        Toast.makeText(MyService.this,&quot;开始下载&quot;,Toast.LENGTH_SHORT).show();
+        Log.d(&quot;执行&quot;,&quot;开始下载&quot;);
+    }
+
+    public void getProgress(){
+
+        Toast.makeText(MyService.this,&quot;获取进度&quot;,Toast.LENGTH_SHORT).show();
+        Log.d(&quot;执行&quot;,&quot;获取进度&quot;);
+    }
+}
+
+//2.
+private DownloadBinder mDownloadBinder=new DownloadBinder();
+
+
+
+//3.
+@Override
+public IBinder onBind(Intent intent) {
+    return mDownloadBinder;
+    }
+}
+</code></pre><p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:orientation=&quot;vertical&quot;
+tools:context=&quot;.MainActivity&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_start&quot;
+    android:text=&quot;绑定服务&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_stop&quot;
+    android:text=&quot;解绑服务&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>MainActivity.java</p>
+<pre><code>import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+//1.构造mDownloadBinder对象
+private MyService.DownloadBinder mDownloadBinder;
+
+//2.构造ServiceConnection匿名类对象
+private ServiceConnection mServiceConnection=new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+
+        mDownloadBinder= (MyService.DownloadBinder) service;
+        mDownloadBinder.startDownload();
+        mDownloadBinder.getProgress();
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+};
+
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+
+    Button btn_bind= (Button) findViewById(R.id.btn_start);
+    Button btn_unbind= (Button) findViewById(R.id.btn_stop);
+
+    btn_bind.setOnClickListener(this);
+    btn_unbind.setOnClickListener(this);
+}
+@Override
+public void onClick(View v) {
+
+    switch (v.getId()){
+
+        case R.id.btn_start:
+            Intent bindIntent=new Intent(this,MyService.class);
+            bindService(bindIntent,mServiceConnection,BIND_AUTO_CREATE);
+            break;
+        case R.id.btn_stop:
+            unbindService(mServiceConnection);
+            break;
+            default:break;
+    }
+}
+}
+</code></pre>
       
     </div>
     
@@ -350,8 +459,8 @@ public  RightFragment getContentFragment() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/27/基础Demo20-动态注册广播的简单Demo/" rel="next" title="基础Demo20-动态注册广播的简单Demo">
-                <i class="fa fa-chevron-left"></i> 基础Demo20-动态注册广播的简单Demo
+              <a href="/2019/05/27/基础Demo50-Service的基本Demo/" rel="next" title="基础Demo50-Service的基本Demo">
+                <i class="fa fa-chevron-left"></i> 基础Demo50-Service的基本Demo
               </a>
             
           </div>
@@ -360,8 +469,8 @@ public  RightFragment getContentFragment() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/27/基础Demo19-Fragment的新闻Demo/" rel="prev" title="基础Demo19-Fragment的新闻Demo">
-                基础Demo19-Fragment的新闻Demo <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/27/基础Demo52-前台服务和IntentService/" rel="prev" title="基础Demo52-前台服务和IntentService">
+                基础Demo52-前台服务和IntentService <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -414,17 +523,8 @@ public  RightFragment getContentFragment() {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -466,22 +566,6 @@ public  RightFragment getContentFragment() {
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment"><span class="nav-number">1.</span> <span class="nav-text">1、一个FrameLayout多次replace不同的Fragment实例的时候，我们想back之后不直接退出Activity，可以使用返回栈，返回上一个Fragment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Fragment与Activity通信"><span class="nav-number">2.</span> <span class="nav-text">2、Fragment与Activity通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、生命周期"><span class="nav-number">3.</span> <span class="nav-text">3、生命周期</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

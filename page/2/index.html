@@ -232,6 +232,1525 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo44-CardView的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo44-CardView的使用/" itemprop="url">基础Demo44-CardView的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:05:27+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、app模块下添加依赖"><a href="#1、app模块下添加依赖" class="headerlink" title="1、app模块下添加依赖"></a>1、app模块下添加依赖</h3><pre><code>implementation &apos;com.android.support:recyclerview-v7:28.0.0&apos;
+implementation &apos;com.android.support:cardview-v7:28.0.0&apos;
+implementation &apos;com.github.bumptech.glide:glide:3.7.0&apos;
+</code></pre><h3 id="2、activity-main-xml"><a href="#2、activity-main-xml" class="headerlink" title="2、activity_main.xml"></a>2、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;android.support.design.widget.CoordinatorLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    /&gt;
+
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;/&gt;
+
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:id=&quot;@+id/fab&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;bottom|end&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_done&quot;
+    app:elevation=&quot;10dp&quot;
+    /&gt;
+
+&lt;/android.support.design.widget.CoordinatorLayout&gt;
+
+
+
+
+&lt;android.support.design.widget.NavigationView
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><h3 id="3、RecyclerView的bean：数据实体类"><a href="#3、RecyclerView的bean：数据实体类" class="headerlink" title="3、RecyclerView的bean：数据实体类"></a>3、RecyclerView的bean：数据实体类</h3><pre><code>public class Fruit {
+
+private String name;
+private int imageId;
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getImageId() {
+    return imageId;
+}
+
+public void setImageId(int imageId) {
+    this.imageId = imageId;
+}
+}
+</code></pre><h3 id="4、RecyclerView的子项布局item使用CardView"><a href="#4、RecyclerView的子项布局item使用CardView" class="headerlink" title="4、RecyclerView的子项布局item使用CardView:"></a>4、RecyclerView的子项布局item使用CardView:</h3><p>fruit_item.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.v7.widget.CardView
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;wrap_content&quot;
+android:layout_margin=&quot;5dp&quot;
+app:cardCornerRadius=&quot;4dp&quot;&gt;
+
+&lt;LinearLayout
+    android:orientation=&quot;vertical&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;&gt;
+
+    &lt;ImageView
+        android:id=&quot;@+id/fruit_image&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;100dp&quot;
+        android:scaleType=&quot;centerCrop&quot; /&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/fruit_name&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center_horizontal&quot;
+        android:layout_margin=&quot;5dp&quot;
+        android:textSize=&quot;16sp&quot; /&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/android.support.v7.widget.CardView&gt;
+</code></pre><h3 id="5、RecyclerView的适配器类"><a href="#5、RecyclerView的适配器类" class="headerlink" title="5、RecyclerView的适配器类"></a>5、RecyclerView的适配器类</h3><pre><code>import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import java.util.List;
+
+public class FruitAdapter extends RecyclerView.Adapter&lt;FruitAdapter.ViewHolder&gt;{
+
+private static final String TAG = &quot;FruitAdapter&quot;;
+
+private Context mContext;
+
+private List&lt;Fruit&gt; mFruitList;
+
+static class ViewHolder extends RecyclerView.ViewHolder {
+    CardView cardView;
+    ImageView fruitImage;
+    TextView fruitName;
+
+    public ViewHolder(View view) {
+        super(view);
+        cardView = (CardView) view;
+        fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+        fruitName = (TextView) view.findViewById(R.id.fruit_name);
+    }
+}
+
+public FruitAdapter(List&lt;Fruit&gt; fruitList) {
+    mFruitList = fruitList;
+}
+
+@Override
+public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    if (mContext == null) {
+        mContext = parent.getContext();
+    }
+    View view = LayoutInflater.from(mContext).inflate(R.layout.fruit_item, parent, false);
+    final ViewHolder holder = new ViewHolder(view);
+   /* holder.cardView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int position = holder.getAdapterPosition();
+            Fruit fruit = mFruitList.get(position);
+            Intent intent = new Intent(mContext, FruitActivity.class);
+            intent.putExtra(FruitActivity.FRUIT_NAME, fruit.getName());
+            intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, fruit.getImageId());
+            mContext.startActivity(intent);
+        }
+    });*/
+    return holder;
+}
+
+@Override
+public void onBindViewHolder(ViewHolder holder, int position) {
+    Fruit fruit = mFruitList.get(position);
+    holder.fruitName.setText(fruit.getName());
+    Glide.with(mContext).load(fruit.getImageId()).into(holder.fruitImage);
+}
+
+@Override
+public int getItemCount() {
+    return mFruitList.size();
+    }
+
+}
+</code></pre><h3 id="6、MainActivity-initView，initData"><a href="#6、MainActivity-initView，initData" class="headerlink" title="6、MainActivity:   initView，initData"></a>6、MainActivity:   initView，initData</h3><pre><code>import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+private NavigationView navigationView;
+private FloatingActionButton fab;
+
+//initData（）
+private Fruit[] fruits = {new Fruit(&quot;Apple&quot;, R.drawable.apple), new Fruit(&quot;Banana&quot;, R.drawable.banana),
+        new Fruit(&quot;Orange&quot;, R.drawable.orange), new Fruit(&quot;Watermelon&quot;, R.drawable.watermelon),
+        new Fruit(&quot;Pear&quot;, R.drawable.pear), new Fruit(&quot;Grape&quot;, R.drawable.grape),
+        new Fruit(&quot;Pineapple&quot;, R.drawable.pineapple), new Fruit(&quot;Strawberry&quot;, R.drawable.strawberry),
+        new Fruit(&quot;Cherry&quot;, R.drawable.cherry), new Fruit(&quot;Mango&quot;, R.drawable.mango)};
+private List&lt;Fruit&gt; fruitList = new ArrayList&lt;&gt;();
+private FruitAdapter adapter;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+    navigationView=(NavigationView)findViewById(R.id.nav_view);
+    navigationView.setCheckedItem(R.id.nav_call);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            mDrawerLayout.closeDrawers();
+            return true;
+        }
+    });
+
+    fab=(FloatingActionButton)findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view,&quot;确定删除数据？&quot;,Snackbar.LENGTH_SHORT)
+                    .setAction(&quot;Undo&quot;, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Toast.makeText(MainActivity.this,&quot;数据保存&quot;,Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+        }
+    });
+
+
+
+    //initView（）
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+    recyclerView.setLayoutManager(layoutManager);
+
+    //initData
+    initFruits();
+    adapter = new FruitAdapter(fruitList);
+    recyclerView.setAdapter(adapter);
+}
+
+
+private void initFruits() {
+    fruitList.clear();
+    for (int i = 0; i &lt; 50; i++) {
+        Random random = new Random();
+        int index = random.nextInt(fruits.length);
+        fruitList.add(fruits[index]);
+    }
+}
+
+
+
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+
+
+
+    }
+    return true;
+}
+}
+</code></pre><h3 id="7、用AppBarLayout解决RecyclerView遮挡ToolBar的问题"><a href="#7、用AppBarLayout解决RecyclerView遮挡ToolBar的问题" class="headerlink" title="7、用AppBarLayout解决RecyclerView遮挡ToolBar的问题"></a>7、用AppBarLayout解决RecyclerView遮挡ToolBar的问题</h3><p>activity_main.xml</p>
+<p>（1）用AppBarLayout封装ToolBar</p>
+<p>（2）指定RecyclerView的行为</p>
+<p>（3）指定ToolBar的行为：可以随着RecyclerView随意滑动和隐藏</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;android.support.design.widget.CoordinatorLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;android.support.design.widget.AppBarLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;&gt;
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+app:layout_scrollFlags=&quot;scroll|enterAlways|snap&quot;
+    /&gt;
+&lt;/android.support.design.widget.AppBarLayout&gt;
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+   app:layout_behavior=&quot;android.support.design.widget.AppBarLayout$ScrollingViewBehavior&quot;
+    /&gt;
+
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:id=&quot;@+id/fab&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;bottom|end&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_done&quot;
+    app:elevation=&quot;10dp&quot;
+    /&gt;
+
+&lt;/android.support.design.widget.CoordinatorLayout&gt;
+
+
+
+
+&lt;android.support.design.widget.NavigationView
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo43-悬浮按钮FAB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo43-悬浮按钮FAB/" itemprop="url">基础Demo43-悬浮按钮FAB</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:00:20+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;FrameLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    /&gt;
+
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot; 
+    android:layout_gravity=&quot;bottom|end&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_done&quot;
+    app:elevation=&quot;10dp&quot;
+    /&gt;
+
+&lt;/FrameLayout&gt;
+
+
+
+
+&lt;android.support.design.widget.NavigationView
+android:id=&quot;@+id/fab&quot;
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><h3 id="2、MainActivity-java-（用法和Button几乎没有差别）"><a href="#2、MainActivity-java-（用法和Button几乎没有差别）" class="headerlink" title="2、MainActivity.java  （用法和Button几乎没有差别）"></a>2、MainActivity.java  （用法和Button几乎没有差别）</h3><pre><code>import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+import java.io.BufferedReader;
+
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+private NavigationView navigationView;
+private FloatingActionButton fab;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+
+    navigationView=(NavigationView)findViewById(R.id.nav_view);
+    navigationView.setCheckedItem(R.id.nav_call);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            mDrawerLayout.closeDrawers();
+            return true;
+        }
+    });
+
+
+
+    fab=(FloatingActionButton)findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(MainActivity.this,&quot;fab is coming&quot;,Toast.LENGTH_SHORT).show();
+        }
+    });
+
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+
+
+
+    }
+    return true;
+    }
+}
+</code></pre><h3 id="3、搭配使用CoordinatorLayout和Snackbar取代Toast和实现布局控件自动移动，不会遮挡"><a href="#3、搭配使用CoordinatorLayout和Snackbar取代Toast和实现布局控件自动移动，不会遮挡" class="headerlink" title="3、搭配使用CoordinatorLayout和Snackbar取代Toast和实现布局控件自动移动，不会遮挡"></a>3、搭配使用CoordinatorLayout和Snackbar取代Toast和实现布局控件自动移动，不会遮挡</h3><p>activity_mian.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;android.support.design.widget.CoordinatorLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    /&gt;
+
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:id=&quot;@+id/fab&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;bottom|end&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_done&quot;
+    app:elevation=&quot;10dp&quot;
+    /&gt;
+
+&lt;/android.support.design.widget.CoordinatorLayout&gt;
+
+
+
+
+&lt;android.support.design.widget.NavigationView
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><h3 id="4、MainActivity-java"><a href="#4、MainActivity-java" class="headerlink" title="4、MainActivity.java"></a>4、MainActivity.java</h3><pre><code>import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+import java.io.BufferedReader;
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+private NavigationView navigationView;
+private FloatingActionButton fab;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+
+    navigationView=(NavigationView)findViewById(R.id.nav_view);
+    navigationView.setCheckedItem(R.id.nav_call);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            mDrawerLayout.closeDrawers();
+            return true;
+        }
+    });
+
+
+
+    fab=(FloatingActionButton)findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view,&quot;确定删除数据？&quot;,Snackbar.LENGTH_SHORT)
+                    .setAction(&quot;Undo&quot;, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Toast.makeText(MainActivity.this,&quot;数据保存&quot;,Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+        }
+    });
+
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+
+    }
+    return true;
+            }
+    }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo42-NavigationView实现个人菜单主页/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo42-NavigationView实现个人菜单主页/" itemprop="url">基础Demo42-NavigationView实现个人菜单主页</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T18:56:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、app模块下添加依赖"><a href="#1、app模块下添加依赖" class="headerlink" title="1、app模块下添加依赖"></a>1、app模块下添加依赖</h3><pre><code>implementation &apos;com.android.support:design:28.0.0&apos;
+implementation &apos;de.hdodenhof:circleimageview:2.1.0&apos;
+</code></pre><h3 id="2、设置Menu文件嵌套到NavigationView中"><a href="#2、设置Menu文件嵌套到NavigationView中" class="headerlink" title="2、设置Menu文件嵌套到NavigationView中"></a>2、设置Menu文件嵌套到NavigationView中</h3><p>nav_menu.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+&lt;group android:checkableBehavior=&quot;single&quot;&gt;
+
+    &lt;item
+        android:id=&quot;@+id/nav_call&quot;
+        android:icon=&quot;@drawable/nav_call&quot;
+        android:title=&quot;Call&quot;/&gt;
+
+
+    &lt;item
+        android:id=&quot;@+id/nav_friends&quot;
+        android:icon=&quot;@drawable/nav_friends&quot;
+        android:title=&quot;Friends&quot;/&gt;
+
+    &lt;item
+        android:id=&quot;@+id/nav_location&quot;
+        android:icon=&quot;@drawable/nav_location&quot;
+        android:title=&quot;Location&quot;/&gt;
+
+    &lt;item
+        android:id=&quot;@+id/nav_mail&quot;
+        android:icon=&quot;@drawable/nav_mail&quot;
+        android:title=&quot;Mail&quot;/&gt;
+
+    &lt;item
+        android:id=&quot;@+id/nav_task&quot;
+        android:icon=&quot;@drawable/nav_task&quot;
+        android:title=&quot;Task&quot;/&gt;
+
+
+&lt;/group&gt;
+&lt;/menu&gt;
+</code></pre><h3 id="3、创建NavigationView的header-layout：-nav-header-xml"><a href="#3、创建NavigationView的header-layout：-nav-header-xml" class="headerlink" title="3、创建NavigationView的header_layout：  nav_header.xml"></a>3、创建NavigationView的header_layout：  nav_header.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;180dp&quot;
+android:padding=&quot;10dp&quot;
+android:background=&quot;?attr/colorPrimary&quot;&gt;
+
+
+&lt;de.hdodenhof.circleimageview.CircleImageView
+    android:id=&quot;@+id/icon_image&quot;
+    android:layout_width=&quot;70dp&quot;
+    android:layout_height=&quot;70dp&quot;
+    android:src=&quot;@drawable/nav_icon&quot;
+    android:layout_centerInParent=&quot;true&quot; /&gt;
+
+
+&lt;TextView
+    android:id=&quot;@+id/mail&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_alignParentBottom=&quot;true&quot;
+    android:text=&quot;15622391415@163.com&quot;
+    android:textColor=&quot;#FFF&quot;
+    android:textSize=&quot;14sp&quot;
+    /&gt;
+
+&lt;TextView
+    android:id=&quot;@+id/username&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_above=&quot;@id/mail&quot;
+    android:text=&quot;Feisheng&quot;
+    android:textColor=&quot;#FFF&quot;
+    android:textSize=&quot;14sp&quot;
+    /&gt;
+
+
+&lt;/RelativeLayout&gt;
+</code></pre><h3 id="4、将NavigationView组装后嵌套到DrawerLayout里面去"><a href="#4、将NavigationView组装后嵌套到DrawerLayout里面去" class="headerlink" title="4、将NavigationView组装后嵌套到DrawerLayout里面去"></a>4、将NavigationView组装后嵌套到DrawerLayout里面去</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;FrameLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    /&gt;
+
+&lt;/FrameLayout&gt;
+
+&lt;android.support.design.widget.NavigationView
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><p>5、MainActivity.java</p>
+<pre><code>import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import java.io.BufferedReader;
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+private NavigationView navigationView;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+
+    navigationView=(NavigationView)findViewById(R.id.nav_view);
+    navigationView.setCheckedItem(R.id.nav_call);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            mDrawerLayout.closeDrawers();
+            return true;
+        }
+    });
+
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+    }
+    return true;
+  }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo41-MD的DrawerLayout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo41-MD的DrawerLayout/" itemprop="url">基础Demo41-MD的DrawerLayout</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T18:53:38+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>//属于兼容库support v4库，包裹在布局最外层，里面总共两个子控件，第一个是主屏幕的布局，第二个属于菜单的布局；导航按钮是HomeAsUp，id值是home</p>
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;FrameLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    /&gt;
+
+&lt;/FrameLayout&gt;
+
+
+
+
+&lt;TextView
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    android:text=&quot;Menu is here&quot;
+    android:textSize=&quot;30sp&quot;
+    android:background=&quot;@color/colorWhite&quot;
+    /&gt;
+
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><p>tool.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;
+
+
+&lt;item
+    android:id=&quot;@+id/backup&quot;
+    android:icon=&quot;@drawable/ic_backup&quot;
+    android:title=&quot;BackUp&quot;
+    app:showAsAction=&quot;always&quot;/&gt;
+
+&lt;item
+    android:id=&quot;@+id/delete&quot;
+    android:icon=&quot;@drawable/ic_delete&quot;
+    android:title=&quot;Delete&quot;
+    app:showAsAction=&quot;ifRoom&quot;/&gt;
+
+&lt;item
+    android:id=&quot;@+id/settings&quot;
+    android:icon=&quot;@drawable/ic_settings&quot;
+    android:title=&quot;Settings&quot;
+    app:showAsAction=&quot;never&quot;/&gt;
+
+&lt;/menu&gt;
+</code></pre><p>MainActivity.java</p>
+<pre><code>import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import java.io.BufferedReader;
+
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+
+    }
+    return true;
+}
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo39-工具类打印日志LogUtil/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1724,1035 +3243,6 @@ startActivity(intent);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/" itemprop="url">基础Demo36-封装HttpURLConnection和OkHttp</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、封装HttpURLConnection"><a href="#1、封装HttpURLConnection" class="headerlink" title="1、封装HttpURLConnection"></a>1、封装HttpURLConnection</h3><pre><code>import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public class HttpUtil {
-
-public static void sendHttpGET(final String address, final HttpCallbackListener listener) {
-
-
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            HttpURLConnection connection = null;
-            try {
-                URL url = new URL(address);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod(&quot;GET&quot;);
-                connection.setConnectTimeout(8000);
-                connection.setReadTimeout(8000);
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-                InputStream in = connection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                if (listener != null) {
-                    // 回调onFinish()方法
-                    listener.onFinish(response.toString());
-                }
-            } catch (Exception e) {
-                if (listener != null) {
-                    // 回调onError()方法
-                    listener.onError(e);
-                }
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            }
-        }
-    }).start();
-  }
-}
-</code></pre><p>在子线程用回调来处理返回的数据或者错误，然后重写onFinish可以使用Handler或者runOnUiThread返回到主线程更新UI</p>
-<pre><code>public interface HttpCallbackListener {
-
-void onFinish(String response);
-
-void onError(Exception e);
-
-}
-</code></pre><h3 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h3><p>public void loginByPost(String userName, String userPass) {</p>
-<pre><code>    try {
-
-        // 请求的地址
-        String spec = &quot;http://172.16.237.200:8080/video/login.do&quot;;
-        // 根据地址创建URL对象
-        URL url = new URL(spec);
-        // 根据URL对象打开链接
-        HttpURLConnection urlConnection = (HttpURLConnection) url
-                .openConnection();
-        // 设置请求的方式
-        urlConnection.setRequestMethod(&quot;POST&quot;);
-        // 设置请求的超时时间
-        urlConnection.setReadTimeout(5000);
-        urlConnection.setConnectTimeout(5000);
-        // 传递的数据
-        String data = &quot;username=&quot; + URLEncoder.encode(userName, &quot;UTF-8&quot;)
-                + &quot;&amp;userpass=&quot; + URLEncoder.encode(userPass, &quot;UTF-8&quot;);
-        // 设置请求的头
-        urlConnection.setRequestProperty(&quot;Connection&quot;, &quot;keep-alive&quot;);
-        // 设置请求的头
-        urlConnection.setRequestProperty(&quot;Content-Type&quot;,
-                &quot;application/x-www-form-urlencoded&quot;);
-        // 设置请求的头
-        urlConnection.setRequestProperty(&quot;Content-Length&quot;,
-                String.valueOf(data.getBytes().length));
-        // 设置请求的头
-        urlConnection
-                .setRequestProperty(&quot;User-Agent&quot;,
-                        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0&quot;);
-
-        urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
-        urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
-                                        //setDoInput的默认值就是true
-        //获取输出流
-        OutputStream os = urlConnection.getOutputStream();
-        os.write(data.getBytes());
-        os.flush();
-        if (urlConnection.getResponseCode() == 200) {
-            // 获取响应的输入流对象
-            InputStream is = urlConnection.getInputStream();
-            // 创建字节输出流对象
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            // 定义读取的长度
-            int len = 0;
-            // 定义缓冲区
-            byte buffer[] = new byte[1024];
-            // 按照缓冲区的大小，循环读取
-            while ((len = is.read(buffer)) != -1) {
-                // 根据读取的长度写入到os对象中
-                baos.write(buffer, 0, len);
-            }
-            // 释放资源
-            is.close();
-            baos.close();
-            // 返回字符串
-            final String result = new String(baos.toByteArray());
-
-            // 通过runOnUiThread方法进行修改主线程的控件内容
-            LoginActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    // 在这里把返回的数据写在控件上 会出现什么情况尼
-                    tv_result.setText(result);
-                }
-            });
-
-        } else {
-            System.out.println(&quot;链接失败.........&quot;);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}</p>
-<p>封装OkHttp</p>
-<pre><code>import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public class HttpUtil {
-
-    public static void sendOkHttpRequest(final String address, final okhttp3.Callback callback) {
-    OkHttpClient client = new OkHttpClient();
-    Request request = new Request.Builder()
-            .url(address)
-            .build();
-    client.newCall(request).enqueue(callback);
-}
-
-}
-</code></pre><p>调用示例：</p>
-<pre><code>HttpUtil.sendOkHttpRequest(“https//www.baidu.com”,new okhttp3.Callback() {
-
-@Override
-public void onResponse(Call call,Response response)throws IOException{
-
-        String responseData=response.body().string();
-}
-
-
-@Override
-public void onFailure(Call call,IOException e){
-
-}
-
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo34-WebView最简单的用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo34-WebView最简单的用法/" itemprop="url">基础Demo34-WebView最简单的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;WebView
-    android:id=&quot;@+id/web_view&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; /&gt;
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-public class MainActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    WebView webView = (WebView) findViewById(R.id.web_view);
-    webView.getSettings().setJavaScriptEnabled(true);
-    webView.setWebViewClient(new WebViewClient());
-    webView.loadUrl(&quot;https://www.baidu.com&quot;);
-}
-
-@Override
-public boolean onKeyDown(int keyCode, KeyEvent event) {
-if (keyCode == KeyEvent.KEYCODE_BACK &amp;&amp; webView.canGoBack()) {
-    webView.goBack();//返回上个页面
-    return true;
-}
-return super.onKeyDown(keyCode, event);//退出H5界面
- } }
-</code></pre><h3 id="3、AndroidManifest-xml增加权限"><a href="#3、AndroidManifest-xml增加权限" class="headerlink" title="3、AndroidManifest.xml增加权限"></a>3、AndroidManifest.xml增加权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo32-MediaPlayer音频播放/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo32-MediaPlayer音频播放/" itemprop="url">基础Demo32-MediaPlayer音频播放</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;Button
-    android:id=&quot;@+id/play&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Play&quot; /&gt;
-
-&lt;Button
-    android:id=&quot;@+id/pause&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Pause&quot; /&gt;
-
-&lt;Button
-    android:id=&quot;@+id/stop&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Stop&quot; /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
-import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-import java.io.File;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-private MediaPlayer mediaPlayer = new MediaPlayer();
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button play = (Button) findViewById(R.id.play);
-    Button pause = (Button) findViewById(R.id.pause);
-    Button stop = (Button) findViewById(R.id.stop);
-    play.setOnClickListener(this);
-    pause.setOnClickListener(this);
-    stop.setOnClickListener(this);
-    if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
-    } else {
-        initMediaPlayer(); // 初始化MediaPlayer
-    }
-}
-
-private void initMediaPlayer() {
-    try {
-       // File file = new File(Environment.getExternalStorageDirectory(), &quot;music.mp3&quot;);
-        mediaPlayer.setDataSource(Environment.getExternalStorageDirectory()+&quot;/waterdrop.mp3&quot;); // 指定音频文件的路径
-        mediaPlayer.prepare(); // 让MediaPlayer进入到准备状态
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
-@Override
-public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    switch (requestCode) {
-        case 1:
-            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initMediaPlayer();
-            } else {
-                Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();
-                finish();
-            }
-            break;
-        default:
-    }
-}
-
-@Override
-public void onClick(View v) {
-    switch (v.getId()) {
-        case R.id.play:
-            if (!mediaPlayer.isPlaying()) {
-                mediaPlayer.start(); // 开始播放
-            }
-            break;
-        case R.id.pause:
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.pause(); // 暂停播放
-            }
-            break;
-        case R.id.stop:
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.reset(); // 停止播放
-                initMediaPlayer();
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    if (mediaPlayer != null) {
-        mediaPlayer.stop();
-        mediaPlayer.release();
-    }
-}
-</code></pre><p>}</p>
-<h3 id="3、AndroidManifest-xml加入权限"><a href="#3、AndroidManifest-xml加入权限" class="headerlink" title="3、AndroidManifest.xml加入权限"></a>3、AndroidManifest.xml加入权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo31-调用摄像头拍照+选取相册的照片/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo31-调用摄像头拍照+选取相册的照片/" itemprop="url">基础Demo31-调用摄像头拍照+选取相册的照片</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;Button
-    android:id=&quot;@+id/take_photo&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Take Photo&quot; /&gt;
-
-&lt;Button
-    android:id=&quot;@+id/choose_from_album&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Choose From Album&quot; /&gt;
-
-&lt;ImageView
-    android:id=&quot;@+id/picture&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_gravity=&quot;center_horizontal&quot; /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.ContentUris;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-public class MainActivity extends AppCompatActivity {
-public static final int TAKE_PHOTO = 1;
-
-public static final int CHOOSE_PHOTO = 2;
-
-private ImageView picture;
-
-private Uri imageUri;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button takePhoto = (Button) findViewById(R.id.take_photo);
-    Button chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
-    picture = (ImageView) findViewById(R.id.picture);
-    takePhoto.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // 创建File对象，用于存储拍照后的图片
-            File outputImage = new File(getExternalCacheDir(), &quot;output_image.jpg&quot;);
-            try {
-                if (outputImage.exists()) {
-                    outputImage.delete();
-                }
-                outputImage.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (Build.VERSION.SDK_INT &lt; 24) {
-                imageUri = Uri.fromFile(outputImage);
-            } else {
-                imageUri = FileProvider.getUriForFile(MainActivity.this, &quot;com.example.cameraalbumtest.fileprovider&quot;, outputImage);
-            }
-            // 启动相机程序
-            Intent intent = new Intent(&quot;android.media.action.IMAGE_CAPTURE&quot;);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            startActivityForResult(intent, TAKE_PHOTO);
-        }
-    });
-    chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
-            } else {
-                openAlbum();
-            }
-        }
-    });
-}
-
-private void openAlbum() {
-    Intent intent = new Intent(&quot;android.intent.action.GET_CONTENT&quot;);
-    intent.setType(&quot;image/*&quot;);
-    startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
-}
-
-@Override
-public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    switch (requestCode) {
-        case 1:
-            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openAlbum();
-            } else {
-                Toast.makeText(this, &quot;You denied the permission&quot;, Toast.LENGTH_SHORT).show();
-            }
-            break;
-        default:
-    }
-}
-
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch (requestCode) {
-        case TAKE_PHOTO:
-            if (resultCode == RESULT_OK) {
-                try {
-                    // 将拍摄的照片显示出来
-                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                    picture.setImageBitmap(bitmap);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            break;
-        case CHOOSE_PHOTO:
-            if (resultCode == RESULT_OK) {
-                // 判断手机系统版本号
-                if (Build.VERSION.SDK_INT &gt;= 19) {
-                    // 4.4及以上系统使用这个方法处理图片
-                    handleImageOnKitKat(data);
-                } else {
-                    // 4.4以下系统使用这个方法处理图片
-                    handleImageBeforeKitKat(data);
-                }
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-@TargetApi(19)
-private void handleImageOnKitKat(Intent data) {
-    String imagePath = null;
-    Uri uri = data.getData();
-    Log.d(&quot;TAG&quot;, &quot;handleImageOnKitKat: uri is &quot; + uri);
-    if (DocumentsContract.isDocumentUri(this, uri)) {
-        // 如果是document类型的Uri，则通过document id处理
-        String docId = DocumentsContract.getDocumentId(uri);
-        if(&quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority())) {
-            String id = docId.split(&quot;:&quot;)[1]; // 解析出数字格式的id
-            String selection = MediaStore.Images.Media._ID + &quot;=&quot; + id;
-            imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-        } else if (&quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority())) {
-            Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;), Long.valueOf(docId));
-            imagePath = getImagePath(contentUri, null);
-        }
-    } else if (&quot;content&quot;.equalsIgnoreCase(uri.getScheme())) {
-        // 如果是content类型的Uri，则使用普通方式处理
-        imagePath = getImagePath(uri, null);
-    } else if (&quot;file&quot;.equalsIgnoreCase(uri.getScheme())) {
-        // 如果是file类型的Uri，直接获取图片路径即可
-        imagePath = uri.getPath();
-    }
-    displayImage(imagePath); // 根据图片路径显示图片
-}
-
-private void handleImageBeforeKitKat(Intent data) {
-    Uri uri = data.getData();
-    String imagePath = getImagePath(uri, null);
-    displayImage(imagePath);
-}
-
-private String getImagePath(Uri uri, String selection) {
-    String path = null;
-    // 通过Uri和selection来获取真实的图片路径
-    Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-    if (cursor != null) {
-        if (cursor.moveToFirst()) {
-            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        }
-        cursor.close();
-    }
-    return path;
-}
-
-private void displayImage(String imagePath) {
-    if (imagePath != null) {
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        picture.setImageBitmap(bitmap);
-    } else {
-        Toast.makeText(this, &quot;failed to get image&quot;, Toast.LENGTH_SHORT).show();
-    }
-}
-</code></pre><p>}</p>
-<h3 id="3、在AndroidManifest-xml中注册内容提供器"><a href="#3、在AndroidManifest-xml中注册内容提供器" class="headerlink" title="3、在AndroidManifest.xml中注册内容提供器"></a>3、在AndroidManifest.xml中注册内容提供器</h3><pre><code>&lt;provider
-        android:name=&quot;android.support.v4.content.FileProvider&quot;
-        android:authorities=&quot;com.example.cameraalbumtest.fileprovider&quot;
-        android:exported=&quot;false&quot;
-        android:grantUriPermissions=&quot;true&quot;&gt;
-        &lt;meta-data
-            android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;
-            android:resource=&quot;@xml/file_paths&quot; /&gt;
-    &lt;/provider&gt;
-
-&lt;/application&gt;
-</code></pre><h3 id="4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml"><a href="#4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml" class="headerlink" title="4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml"></a>4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-&lt;external-path name=&quot;my_images&quot; path=&quot;&quot; /&gt;
-&lt;/paths&gt;
-</code></pre><h3 id="5、权限"><a href="#5、权限" class="headerlink" title="5、权限"></a>5、权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2803,7 +3293,7 @@ private void displayImage(String imagePath) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
