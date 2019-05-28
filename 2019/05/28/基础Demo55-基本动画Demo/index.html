@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、activity_splash.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;RelativeLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:id=&amp;quot;@+id/rl_s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础Demo55-基本动画Demo">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/基础Demo55-基本动画Demo/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1、activity_splash.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;RelativeLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:id=&amp;quot;@+id/rl_s">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-28T01:23:41.129Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础Demo55-基本动画Demo">
+<meta name="twitter:description" content="1、activity_splash.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;RelativeLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:id=&amp;quot;@+id/rl_s">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/28/基础Demo55-基本动画Demo/">
+
+
+
+
+
+  <title>基础Demo55-基本动画Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo55-基本动画Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基础Demo55-基本动画Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:22:01+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、activity-splash-xml"><a href="#1、activity-splash-xml" class="headerlink" title="1、activity_splash.xml"></a>1、activity_splash.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:id=&quot;@+id/rl_splash_root&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+</code></pre><p>   android:background=”@drawable/splash_bg_newyear”&gt;</p>
+<pre><code>&lt;ImageView
+    android:id=&quot;@+id/img_sheep&quot;
+    android:layout_centerInParent=&quot;true&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:src=&quot;@drawable/splash_sheep_newyear&quot; /&gt;
+
+
+&lt;/RelativeLayout&gt;
+</code></pre><h3 id="2、SplashActivity-java"><a href="#2、SplashActivity-java" class="headerlink" title="2、SplashActivity.java"></a>2、SplashActivity.java</h3><pre><code>import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import com.example.newbeijing.activity.GuideActivity;
+import com.example.newbeijing.activity.MainActivity;
+import com.example.newbeijing.utils.CacheUtil;
+
+/**
+ * 面向对象的本质：构造对象，调用象方
+ */
+public class SplashActivity extends Activity {
+
+
+//静态常量做key，可以保持不变，刚好符合key的需求，且多处可用，所以使用静态
+public static final String START_MAIN = &quot;start_main&quot;;
+
+//view声明
+private RelativeLayout rl_splash_root;
+private ImageView img_sheep;
+
+//继承重写Activity的生命周期方法：onCreate()，且super先调用父类的onCreate做一些初始化操作吧（可查一下）
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    //初始化view
+    initView();
+
+    //初始化Data(准备Data + 把Data填充到view显示出来)
+    initData();
+
+
+
+
+
+}
+
+
+//初始化view
+private void initView() {
+
+    //将布局activity_splash.xml初始化成主view
+    setContentView(R.layout.activity_splash);
+
+    //初始化view
+    rl_splash_root = (RelativeLayout) findViewById(R.id.rl_splash_root);
+    img_sheep = (ImageView) findViewById(R.id.img_sheep);
+}
+
+
+
+//初始化Data（构造动画对象），填充数据显示出来
+private void initData() {
+
+
+    /**
+     * 构造AlphaAnimation渐变动画对象，目的是后期构造AnimationSet对象
+     * 类似Builder建造特殊对象的思想
+     * 渐变就是在可见与不可见之间慢慢切换
+     */
+    //构造器（起始透明度0不可见，末态透明度1完全可见）
+    AlphaAnimation aa=new AlphaAnimation(0,1);
+    //setter设置动画对象播放完后停在 播完的状态
+    aa.setFillAfter(true);
+
+
+    /**
+     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
+     * 类似Builder建造特殊对象的思想
+     * 缩放就是从大到小，或从小到大
+     */
+    //构造器：一般是fromX，Y一样，然后toX，Y一样，这样才不会变形，0.5,2,0.5，2，即从本身的0.5倍变成2倍，后面是旋转中心的位置，下面这个旋转中心值常用
+    ScaleAnimation sa=new ScaleAnimation(0,1,0,1, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+    //setter设置动画对象播放完后停在 播完的状态
+    sa.setFillAfter(true);
+
+
+    /**
+     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
+     * 类似Builder建造特殊对象的思想
+     * 缩放就是从大到小，或从小到大
+     */
+    //构造器：从0度开始旋转360度结束，旋转中心跟上面一样，X轴，左到右1，Y轴，上到1下
+    RotateAnimation ra=new RotateAnimation(0,360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+    //setter设置动画对象播放完后停在 播完的状态
+    ra.setFillAfter(true);
+
+    /**
+     * 构造AnimationSet对象，叠加动画效果
+     * setDuration只是设置了整个动画的播放时间，
+     * 但是整个过程的播放速率，例如先快后慢，先慢后快，匀速，
+     * 是需要插值器Interpolator来设置的，不设置的话，默认匀速
+     */
+    AnimationSet set=new AnimationSet(false);
+    //setter调用象方初始化内部属性对象值，两个都可理解为setter
+    set.addAnimation(aa);
+    set.addAnimation(sa);
+    set.addAnimation(ra);
+    set.setDuration(1000);
+    ra.setFillAfter(true);
+
+    /**
+     * 属于将Data填充到view显示出来，通过调用象方
+     */
+    //开启动画
+    rl_splash_root.startAnimation(set);
+    //动画状态监听触发方法是写在set类内部的，所以这里的监听器对象本质上并不是监听器
+    //而是一个监听结果处理类的对象，会被在set内部的触发方法里调用此对象的象方，所以叫回调
+    set.setAnimationListener(new MyAnimationListener());
+}
+
+
+
+/**
+ * 重写动画监听结果处理类，并不是监听触发类，是结果处理类来的，所以才叫回调
+ */
+class MyAnimationListener implements Animation.AnimationListener{
+
+    /**
+     * 监听动画的接口，动画开始时，动画结束时，动画重复播放时，学会看方法名，一看就知道
+     * @param animation
+     */
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+        boolean isStartMain= CacheUtil.getBoolean(SplashActivity.this, START_MAIN);
+        Intent intent;
+        if (isStartMain){
+
+            //进去过主页面，则直接进入主页面
+            // 跳转到MainActivity
+            intent=new Intent(SplashActivity.this, MainActivity.class);
+
+        }else {
+            //没进去过主页面，则先进入引导页面
+            intent=new Intent(SplashActivity.this, GuideActivity.class);
+
+        }
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
+  }
+
+
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/27/基础Demo54-Service实现后台下载任务/" rel="next" title="基础Demo54-Service实现后台下载任务">
+                <i class="fa fa-chevron-left"></i> 基础Demo54-Service实现后台下载任务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/28/基础Demo56-ViewPager的基本Demo/" rel="prev" title="基础Demo56-ViewPager的基本Demo">
+                基础Demo56-ViewPager的基本Demo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、activity-splash-xml"><span class="nav-number">1.</span> <span class="nav-text">1、activity_splash.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、SplashActivity-java"><span class="nav-number">2.</span> <span class="nav-text">2、SplashActivity.java</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
