@@ -740,6 +740,155 @@ protected void onCreate(Bundle savedInstanceState) {
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo21-静态注册广播的简单Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo21-静态注册广播的简单Demo/" itemprop="url">基础Demo21-静态注册广播的简单Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"><a href="#1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作" class="headerlink" title="1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"></a>1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作</h3><h3 id="2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）"><a href="#2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）" class="headerlink" title="2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）"></a>2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）</h3><pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class MyReceiver extends BroadcastReceiver {
+
+@Override
+public void onReceive(Context context, Intent intent) {
+    // TODO: This method is called when the BroadcastReceiver is receiving
+    // an Intent broadcast.
+    Toast.makeText(context,&quot;开机啦&quot;,Toast.LENGTH_SHORT).show();
+   }
+}
+</code></pre><h3 id="3、在AndroidManifest-xml中配置权限"><a href="#3、在AndroidManifest-xml中配置权限" class="headerlink" title="3、在AndroidManifest.xml中配置权限"></a>3、在AndroidManifest.xml中配置权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
+</code></pre><h3 id="4、在AndroidManifest-xml的中加入广播接收器的响应值："><a href="#4、在AndroidManifest-xml的中加入广播接收器的响应值：" class="headerlink" title="4、在AndroidManifest.xml的中加入广播接收器的响应值："></a>4、在AndroidManifest.xml的<intent-filter>中加入广播接收器的响应值：</intent-filter></h3><p>例如： </p>
+<pre><code>&lt;receiver
+android:name=&quot;.MyReceiver&quot;
+android:enabled=&quot;true&quot;
+android:exported=&quot;true&quot;&gt;
+
+&lt;intent-filter&gt;
+
+    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
+
+&lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><h3 id="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："><a href="#5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：" class="headerlink" title="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："></a>5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：</h3><p>（1）创建一条状态栏通知</p>
+<p>（2）开启一个服务Service</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo19-Fragment的新闻Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1132,155 +1281,6 @@ android:layout_height=&quot;match_parent&quot; &gt;
 
 &lt;/LinearLayout&gt;
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo21-静态注册广播的简单Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo21-静态注册广播的简单Demo/" itemprop="url">基础Demo21-静态注册广播的简单Demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"><a href="#1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作" class="headerlink" title="1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"></a>1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作</h3><h3 id="2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）"><a href="#2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）" class="headerlink" title="2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）"></a>2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）</h3><pre><code>import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-public class MyReceiver extends BroadcastReceiver {
-
-@Override
-public void onReceive(Context context, Intent intent) {
-    // TODO: This method is called when the BroadcastReceiver is receiving
-    // an Intent broadcast.
-    Toast.makeText(context,&quot;开机啦&quot;,Toast.LENGTH_SHORT).show();
-   }
-}
-</code></pre><h3 id="3、在AndroidManifest-xml中配置权限"><a href="#3、在AndroidManifest-xml中配置权限" class="headerlink" title="3、在AndroidManifest.xml中配置权限"></a>3、在AndroidManifest.xml中配置权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
-</code></pre><h3 id="4、在AndroidManifest-xml的中加入广播接收器的响应值："><a href="#4、在AndroidManifest-xml的中加入广播接收器的响应值：" class="headerlink" title="4、在AndroidManifest.xml的中加入广播接收器的响应值："></a>4、在AndroidManifest.xml的<intent-filter>中加入广播接收器的响应值：</intent-filter></h3><p>例如： </p>
-<pre><code>&lt;receiver
-android:name=&quot;.MyReceiver&quot;
-android:enabled=&quot;true&quot;
-android:exported=&quot;true&quot;&gt;
-
-&lt;intent-filter&gt;
-
-    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
-
-&lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><h3 id="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："><a href="#5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：" class="headerlink" title="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："></a>5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：</h3><p>（1）创建一条状态栏通知</p>
-<p>（2）开启一个服务Service</p>
-
           
         
       
