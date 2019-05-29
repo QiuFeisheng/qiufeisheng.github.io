@@ -107,9 +107,9 @@
 <meta property="og:image" content="https://i.imgur.com/QK0gu3T.png">
 <meta property="og:image" content="https://i.imgur.com/uKuILYF.png">
 <meta property="og:image" content="https://i.imgur.com/Qu08Zx5.png">
-<meta property="og:image" content="https://i.imgur.com/KKiwQd1.png">
+<meta property="og:image" content="http://yoursite.com/images/529.png">
 <meta property="og:image" content="http://yoursite.com/images/600.png">
-<meta property="og:updated_time" content="2019-05-29T11:26:19.086Z">
+<meta property="og:updated_time" content="2019-05-29T11:59:54.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Html&amp;CSS碎片知识点">
 <meta name="twitter:description" content="1、Web前端技术框架    2、html文件的结构    &amp;lt;!DOCTYPE HTML&amp;gt; &amp;lt;html&amp;gt;   &amp;lt;head&amp;gt;     &amp;lt;meta http-equiv=&amp;quot;Content-Type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quot;&amp;gt;     &amp;lt;title&amp;gt;认识htm">
@@ -1048,7 +1048,7 @@ span{
        color:blue;
 }
 &lt;/style&gt;
-</code></pre><p> <img src="https://i.imgur.com/KKiwQd1.png" alt></p>
+</code></pre><p> <img src="/images/529.png" alt></p>
 <pre><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1082,7 +1082,69 @@ p{
 &lt;p&gt;慕课网，超酷的互联网、IT技术免费学习平台，创新的网络一站式学习、实践体验；服务及时贴心，内容专业、有趣易学。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
+</code></pre><h4 id="4-CSS的注释-块注释-其它的都不行"><a href="#4-CSS的注释-块注释-其它的都不行" class="headerlink" title="4:CSS的注释==块注释==/ /  其它的都不行"></a>4:CSS的注释==块注释==/<em> </em>/  其它的都不行</h4><h4 id="5：内联式CSS样式"><a href="#5：内联式CSS样式" class="headerlink" title="5：内联式CSS样式"></a>5：内联式CSS样式</h4><p>：style的代码直接写在HTML标签中</p>
+<pre><code>&lt;span style=&quot;color:blue&quot;&gt;超酷的互联网&lt;/span&gt;
+</code></pre><p>完整代码：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:red;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;慕课网，&lt;span style=&quot;color:blue&quot;&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="6：嵌入式CSS样式"><a href="#6：嵌入式CSS样式" class="headerlink" title="6：嵌入式CSS样式"></a>6：嵌入式CSS样式</h4><p>：样式代码写在style标签之中，而且是在head标签的style标签中</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;嵌入式css样式&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:blue;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+    &lt;p&gt;慕课网，&lt;span&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="7-外部式CSS样式"><a href="#7-外部式CSS样式" class="headerlink" title="7:外部式CSS样式"></a>7:外部式CSS样式</h4><p>：（1）样式代码写在一个独立的.css文件中</p>
+<p>：（2）在head标签内使用link标签链接进来</p>
+<p>：（3）rel=”stylesheet” type=”text/css” 是固定写法不可修改</p>
+<p>style.css</p>
+<pre><code>span{
+   color:red;
+   font-size:20px;
+}
+</code></pre><p>index.html</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;嵌入式css样式&lt;/title&gt;
+&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;慕课网，&lt;span&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h4 id="8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则"><a href="#8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则" class="headerlink" title="8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则"></a>8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则</h4><p>：口诀：内联嵌外部</p>
+<h4 id="9："><a href="#9：" class="headerlink" title="9："></a>9：</h4>
       
     </div>
     
@@ -1228,7 +1290,7 @@ p{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、Web前端技术框架"><span class="nav-number">1.</span> <span class="nav-text">1、Web前端技术框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、html文件的结构"><span class="nav-number">2.</span> <span class="nav-text">2、html文件的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-标签title—设置网页在浏览器的标题栏"><span class="nav-number">3.</span> <span class="nav-text">3:标签title—设置网页在浏览器的标题栏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-注释"><span class="nav-number">4.</span> <span class="nav-text">4:注释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-标签body——存放网页显示内容"><span class="nav-number">5.</span> <span class="nav-text">5:标签body——存放网页显示内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6：h是——n级标题标签"><span class="nav-number">6.</span> <span class="nav-text">6：h是——n级标题标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7：span标签——设置文字颜色和字体等style"><span class="nav-number">7.</span> <span class="nav-text">7：span标签——设置文字颜色和字体等style</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"><span class="nav-number">8.</span> <span class="nav-text">8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9：blockquote标签——引用长文本，短文本用q"><span class="nav-number">9.</span> <span class="nav-text">9：blockquote标签——引用长文本，短文本用q</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10：br标签——文本间进行换行"><span class="nav-number">10.</span> <span class="nav-text">10：br标签——文本间进行换行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11：-amp-nbsp标签——为网页文本添加空格"><span class="nav-number">11.</span> <span class="nav-text">11：&amp;nbsp标签——为网页文本添加空格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12：hr标签——添加水平横线"><span class="nav-number">12.</span> <span class="nav-text">12：hr标签——添加水平横线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13：address标签——为网页加入地址信息"><span class="nav-number">13.</span> <span class="nav-text">13：address标签——为网页加入地址信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14：code标签——加在一行代码外面"><span class="nav-number">14.</span> <span class="nav-text">14：code标签——加在一行代码外面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15：pre标签——加入大段代码"><span class="nav-number">15.</span> <span class="nav-text">15：pre标签——加入大段代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16：ul标签——无序号的信息列表"><span class="nav-number">16.</span> <span class="nav-text">16：ul标签——无序号的信息列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-ol标签——有序号的信息列表"><span class="nav-number">17.</span> <span class="nav-text">17:ol标签——有序号的信息列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18：div划分独立逻辑"><span class="nav-number">18.</span> <span class="nav-text">18：div划分独立逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19：-lt-div-id-”版块名称”——div模块分配id值，进行标示"><span class="nav-number">19.</span> <span class="nav-text">19：&lt;div  id=”版块名称”——div模块分配id值，进行标示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20：table-tbody-tr-th标签——展示表格"><span class="nav-number">20.</span> <span class="nav-text">20：table,tbody,tr,th标签——展示表格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21：表格加入CSS样式——加入横线边框"><span class="nav-number">21.</span> <span class="nav-text">21：表格加入CSS样式——加入横线边框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#22：table-summary——摘要；caption——表格标题"><span class="nav-number">22.</span> <span class="nav-text">22：table summary——摘要；caption——表格标题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#23：a标签——为文本设置超链接"><span class="nav-number">23.</span> <span class="nav-text">23：a标签——为文本设置超链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#24：在新建的浏览器窗口打开链接"><span class="nav-number">24.</span> <span class="nav-text">24：在新建的浏览器窗口打开链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#25：mailto标签——发送邮件"><span class="nav-number">25.</span> <span class="nav-text">25：mailto标签——发送邮件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#26：img标签——为网页插入图片"><span class="nav-number">26.</span> <span class="nav-text">26：img标签——为网页插入图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#27-form表单——与用户进行交互"><span class="nav-number">27.</span> <span class="nav-text">27:form表单——与用户进行交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#28：文本输入框、密码输入框"><span class="nav-number">28.</span> <span class="nav-text">28：文本输入框、密码输入框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#29：文本域——支持多行文本输入"><span class="nav-number">29.</span> <span class="nav-text">29：文本域——支持多行文本输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#30：单选框，复选框"><span class="nav-number">30.</span> <span class="nav-text">30：单选框，复选框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#31：下拉列表框"><span class="nav-number">31.</span> <span class="nav-text">31：下拉列表框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32：下拉列表框进行多选"><span class="nav-number">32.</span> <span class="nav-text">32：下拉列表框进行多选</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#33：提交按钮"><span class="nav-number">33.</span> <span class="nav-text">33：提交按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#34：重置按钮"><span class="nav-number">34.</span> <span class="nav-text">34：重置按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#35：关联触发控件"><span class="nav-number">35.</span> <span class="nav-text">35：关联触发控件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS碎片知识点"><span class="nav-number"></span> <span class="nav-text">CSS碎片知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗"><span class="nav-number"></span> <span class="nav-text">1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2：span样式的使用"><span class="nav-number"></span> <span class="nav-text">2：span样式的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-CSS-选择符-属性-值"><span class="nav-number"></span> <span class="nav-text">3:CSS==选择符+属性+值</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、Web前端技术框架"><span class="nav-number">1.</span> <span class="nav-text">1、Web前端技术框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、html文件的结构"><span class="nav-number">2.</span> <span class="nav-text">2、html文件的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-标签title—设置网页在浏览器的标题栏"><span class="nav-number">3.</span> <span class="nav-text">3:标签title—设置网页在浏览器的标题栏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-注释"><span class="nav-number">4.</span> <span class="nav-text">4:注释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-标签body——存放网页显示内容"><span class="nav-number">5.</span> <span class="nav-text">5:标签body——存放网页显示内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6：h是——n级标题标签"><span class="nav-number">6.</span> <span class="nav-text">6：h是——n级标题标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7：span标签——设置文字颜色和字体等style"><span class="nav-number">7.</span> <span class="nav-text">7：span标签——设置文字颜色和字体等style</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"><span class="nav-number">8.</span> <span class="nav-text">8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9：blockquote标签——引用长文本，短文本用q"><span class="nav-number">9.</span> <span class="nav-text">9：blockquote标签——引用长文本，短文本用q</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10：br标签——文本间进行换行"><span class="nav-number">10.</span> <span class="nav-text">10：br标签——文本间进行换行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11：-amp-nbsp标签——为网页文本添加空格"><span class="nav-number">11.</span> <span class="nav-text">11：&amp;nbsp标签——为网页文本添加空格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12：hr标签——添加水平横线"><span class="nav-number">12.</span> <span class="nav-text">12：hr标签——添加水平横线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13：address标签——为网页加入地址信息"><span class="nav-number">13.</span> <span class="nav-text">13：address标签——为网页加入地址信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14：code标签——加在一行代码外面"><span class="nav-number">14.</span> <span class="nav-text">14：code标签——加在一行代码外面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15：pre标签——加入大段代码"><span class="nav-number">15.</span> <span class="nav-text">15：pre标签——加入大段代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16：ul标签——无序号的信息列表"><span class="nav-number">16.</span> <span class="nav-text">16：ul标签——无序号的信息列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-ol标签——有序号的信息列表"><span class="nav-number">17.</span> <span class="nav-text">17:ol标签——有序号的信息列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18：div划分独立逻辑"><span class="nav-number">18.</span> <span class="nav-text">18：div划分独立逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19：-lt-div-id-”版块名称”——div模块分配id值，进行标示"><span class="nav-number">19.</span> <span class="nav-text">19：&lt;div  id=”版块名称”——div模块分配id值，进行标示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20：table-tbody-tr-th标签——展示表格"><span class="nav-number">20.</span> <span class="nav-text">20：table,tbody,tr,th标签——展示表格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21：表格加入CSS样式——加入横线边框"><span class="nav-number">21.</span> <span class="nav-text">21：表格加入CSS样式——加入横线边框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#22：table-summary——摘要；caption——表格标题"><span class="nav-number">22.</span> <span class="nav-text">22：table summary——摘要；caption——表格标题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#23：a标签——为文本设置超链接"><span class="nav-number">23.</span> <span class="nav-text">23：a标签——为文本设置超链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#24：在新建的浏览器窗口打开链接"><span class="nav-number">24.</span> <span class="nav-text">24：在新建的浏览器窗口打开链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#25：mailto标签——发送邮件"><span class="nav-number">25.</span> <span class="nav-text">25：mailto标签——发送邮件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#26：img标签——为网页插入图片"><span class="nav-number">26.</span> <span class="nav-text">26：img标签——为网页插入图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#27-form表单——与用户进行交互"><span class="nav-number">27.</span> <span class="nav-text">27:form表单——与用户进行交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#28：文本输入框、密码输入框"><span class="nav-number">28.</span> <span class="nav-text">28：文本输入框、密码输入框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#29：文本域——支持多行文本输入"><span class="nav-number">29.</span> <span class="nav-text">29：文本域——支持多行文本输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#30：单选框，复选框"><span class="nav-number">30.</span> <span class="nav-text">30：单选框，复选框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#31：下拉列表框"><span class="nav-number">31.</span> <span class="nav-text">31：下拉列表框</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32：下拉列表框进行多选"><span class="nav-number">32.</span> <span class="nav-text">32：下拉列表框进行多选</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#33：提交按钮"><span class="nav-number">33.</span> <span class="nav-text">33：提交按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#34：重置按钮"><span class="nav-number">34.</span> <span class="nav-text">34：重置按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#35：关联触发控件"><span class="nav-number">35.</span> <span class="nav-text">35：关联触发控件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS碎片知识点"><span class="nav-number"></span> <span class="nav-text">CSS碎片知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗"><span class="nav-number"></span> <span class="nav-text">1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2：span样式的使用"><span class="nav-number"></span> <span class="nav-text">2：span样式的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-CSS-选择符-属性-值"><span class="nav-number"></span> <span class="nav-text">3:CSS==选择符+属性+值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-CSS的注释-块注释-其它的都不行"><span class="nav-number"></span> <span class="nav-text">4:CSS的注释==块注释==/ /  其它的都不行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5：内联式CSS样式"><span class="nav-number"></span> <span class="nav-text">5：内联式CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6：嵌入式CSS样式"><span class="nav-number"></span> <span class="nav-text">6：嵌入式CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-外部式CSS样式"><span class="nav-number"></span> <span class="nav-text">7:外部式CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则"><span class="nav-number"></span> <span class="nav-text">8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9："><span class="nav-number"></span> <span class="nav-text">9：</span></a></div>
             
 
           </div>
