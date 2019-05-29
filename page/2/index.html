@@ -232,302 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo55-基本动画Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/28/基础Demo55-基本动画Demo/" itemprop="url">基础Demo55-基本动画Demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:22:01+08:00">
-                2019-05-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-splash-xml"><a href="#1、activity-splash-xml" class="headerlink" title="1、activity_splash.xml"></a>1、activity_splash.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:id=&quot;@+id/rl_splash_root&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-</code></pre><p>   android:background=”@drawable/splash_bg_newyear”&gt;</p>
-<pre><code>&lt;ImageView
-    android:id=&quot;@+id/img_sheep&quot;
-    android:layout_centerInParent=&quot;true&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:src=&quot;@drawable/splash_sheep_newyear&quot; /&gt;
-
-
-&lt;/RelativeLayout&gt;
-</code></pre><h3 id="2、SplashActivity-java"><a href="#2、SplashActivity-java" class="headerlink" title="2、SplashActivity.java"></a>2、SplashActivity.java</h3><pre><code>import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import com.example.newbeijing.activity.GuideActivity;
-import com.example.newbeijing.activity.MainActivity;
-import com.example.newbeijing.utils.CacheUtil;
-
-/**
- * 面向对象的本质：构造对象，调用象方
- */
-public class SplashActivity extends Activity {
-
-
-//静态常量做key，可以保持不变，刚好符合key的需求，且多处可用，所以使用静态
-public static final String START_MAIN = &quot;start_main&quot;;
-
-//view声明
-private RelativeLayout rl_splash_root;
-private ImageView img_sheep;
-
-//继承重写Activity的生命周期方法：onCreate()，且super先调用父类的onCreate做一些初始化操作吧（可查一下）
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    //初始化view
-    initView();
-
-    //初始化Data(准备Data + 把Data填充到view显示出来)
-    initData();
-
-
-
-
-
-}
-
-
-//初始化view
-private void initView() {
-
-    //将布局activity_splash.xml初始化成主view
-    setContentView(R.layout.activity_splash);
-
-    //初始化view
-    rl_splash_root = (RelativeLayout) findViewById(R.id.rl_splash_root);
-    img_sheep = (ImageView) findViewById(R.id.img_sheep);
-}
-
-
-
-//初始化Data（构造动画对象），填充数据显示出来
-private void initData() {
-
-
-    /**
-     * 构造AlphaAnimation渐变动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 渐变就是在可见与不可见之间慢慢切换
-     */
-    //构造器（起始透明度0不可见，末态透明度1完全可见）
-    AlphaAnimation aa=new AlphaAnimation(0,1);
-    //setter设置动画对象播放完后停在 播完的状态
-    aa.setFillAfter(true);
-
-
-    /**
-     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 缩放就是从大到小，或从小到大
-     */
-    //构造器：一般是fromX，Y一样，然后toX，Y一样，这样才不会变形，0.5,2,0.5，2，即从本身的0.5倍变成2倍，后面是旋转中心的位置，下面这个旋转中心值常用
-    ScaleAnimation sa=new ScaleAnimation(0,1,0,1, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-    //setter设置动画对象播放完后停在 播完的状态
-    sa.setFillAfter(true);
-
-
-    /**
-     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 缩放就是从大到小，或从小到大
-     */
-    //构造器：从0度开始旋转360度结束，旋转中心跟上面一样，X轴，左到右1，Y轴，上到1下
-    RotateAnimation ra=new RotateAnimation(0,360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-    //setter设置动画对象播放完后停在 播完的状态
-    ra.setFillAfter(true);
-
-    /**
-     * 构造AnimationSet对象，叠加动画效果
-     * setDuration只是设置了整个动画的播放时间，
-     * 但是整个过程的播放速率，例如先快后慢，先慢后快，匀速，
-     * 是需要插值器Interpolator来设置的，不设置的话，默认匀速
-     */
-    AnimationSet set=new AnimationSet(false);
-    //setter调用象方初始化内部属性对象值，两个都可理解为setter
-    set.addAnimation(aa);
-    set.addAnimation(sa);
-    set.addAnimation(ra);
-    set.setDuration(1000);
-    ra.setFillAfter(true);
-
-    /**
-     * 属于将Data填充到view显示出来，通过调用象方
-     */
-    //开启动画
-    rl_splash_root.startAnimation(set);
-    //动画状态监听触发方法是写在set类内部的，所以这里的监听器对象本质上并不是监听器
-    //而是一个监听结果处理类的对象，会被在set内部的触发方法里调用此对象的象方，所以叫回调
-    set.setAnimationListener(new MyAnimationListener());
-}
-
-
-
-/**
- * 重写动画监听结果处理类，并不是监听触发类，是结果处理类来的，所以才叫回调
- */
-class MyAnimationListener implements Animation.AnimationListener{
-
-    /**
-     * 监听动画的接口，动画开始时，动画结束时，动画重复播放时，学会看方法名，一看就知道
-     * @param animation
-     */
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-
-        boolean isStartMain= CacheUtil.getBoolean(SplashActivity.this, START_MAIN);
-        Intent intent;
-        if (isStartMain){
-
-            //进去过主页面，则直接进入主页面
-            // 跳转到MainActivity
-            intent=new Intent(SplashActivity.this, MainActivity.class);
-
-        }else {
-            //没进去过主页面，则先进入引导页面
-            intent=new Intent(SplashActivity.this, GuideActivity.class);
-
-        }
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
-    }
-  }
-
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo54-Service实现后台下载任务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2800,6 +2504,386 @@ public int getItemCount() {
     return mFruitList.size();
 }
 
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo45-下拉刷新SwipeRefreshLayout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo45-下拉刷新SwipeRefreshLayout/" itemprop="url">基础Demo45-下拉刷新SwipeRefreshLayout</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T19:10:54+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、嵌套在RecyclerView的外面，然后记得把那个解决隐藏ToolBar的行为移到SwipeRefreshLayout，因为RecycleView已经被包裹了。"><a href="#1、嵌套在RecyclerView的外面，然后记得把那个解决隐藏ToolBar的行为移到SwipeRefreshLayout，因为RecycleView已经被包裹了。" class="headerlink" title="1、嵌套在RecyclerView的外面，然后记得把那个解决隐藏ToolBar的行为移到SwipeRefreshLayout，因为RecycleView已经被包裹了。"></a>1、嵌套在RecyclerView的外面，然后记得把那个解决隐藏ToolBar的行为移到SwipeRefreshLayout，因为RecycleView已经被包裹了。</h3><p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.v4.widget.DrawerLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:id=&quot;@+id/drawer_layout&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+
+
+&lt;android.support.design.widget.CoordinatorLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;android.support.design.widget.AppBarLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;&gt;
+&lt;android.support.v7.widget.Toolbar
+    android:id=&quot;@+id/toolbar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;?actionBarSize&quot;
+    android:background=&quot;?attr/colorPrimary&quot;
+    android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+    app:layout_scrollFlags=&quot;scroll|enterAlways|snap&quot;
+    /&gt;
+&lt;/android.support.design.widget.AppBarLayout&gt;
+
+
+&lt;android.support.v4.widget.SwipeRefreshLayout
+    android:id=&quot;@+id/swipe_refresh&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    app:layout_behavior=&quot;android.support.design.widget.AppBarLayout$ScrollingViewBehavior&quot;
+    &gt;
+
+&lt;android.support.v7.widget.RecyclerView
+    android:id=&quot;@+id/recycler_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    /&gt;
+&lt;/android.support.v4.widget.SwipeRefreshLayout&gt;
+
+
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:id=&quot;@+id/fab&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;bottom|end&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_done&quot;
+    app:elevation=&quot;10dp&quot;
+    /&gt;
+
+&lt;/android.support.design.widget.CoordinatorLayout&gt;
+
+
+
+
+&lt;android.support.design.widget.NavigationView
+    android:id=&quot;@+id/nav_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_gravity=&quot;start&quot;
+    app:menu=&quot;@menu/nav_menu&quot;
+    app:headerLayout=&quot;@layout/nav_header&quot;
+    /&gt;
+
+
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+
+public class MainActivity extends AppCompatActivity {
+
+private Toolbar toolbar;
+private DrawerLayout mDrawerLayout;
+private NavigationView navigationView;
+private FloatingActionButton fab;
+
+private SwipeRefreshLayout swipeRefresh;
+
+
+
+//initData（）
+private Fruit[] fruits = {new Fruit(&quot;Apple&quot;, R.drawable.apple), new Fruit(&quot;Banana&quot;, R.drawable.banana),
+        new Fruit(&quot;Orange&quot;, R.drawable.orange), new Fruit(&quot;Watermelon&quot;, R.drawable.watermelon),
+        new Fruit(&quot;Pear&quot;, R.drawable.pear), new Fruit(&quot;Grape&quot;, R.drawable.grape),
+        new Fruit(&quot;Pineapple&quot;, R.drawable.pineapple), new Fruit(&quot;Strawberry&quot;, R.drawable.strawberry),
+        new Fruit(&quot;Cherry&quot;, R.drawable.cherry), new Fruit(&quot;Mango&quot;, R.drawable.mango)};
+private List&lt;Fruit&gt; fruitList = new ArrayList&lt;&gt;();
+private FruitAdapter adapter;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         toolbar=(Toolbar)findViewById(R.id.toolbar);
+    }
+    setSupportActionBar(toolbar); //替代ActionBar
+
+    mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+    ActionBar actionBar=getSupportActionBar();
+    if (actionBar!=null){
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+
+    navigationView=(NavigationView)findViewById(R.id.nav_view);
+    navigationView.setCheckedItem(R.id.nav_call);
+    navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            mDrawerLayout.closeDrawers();
+            return true;
+        }
+    });
+
+
+
+    fab=(FloatingActionButton)findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Snackbar.make(view,&quot;确定删除数据？&quot;,Snackbar.LENGTH_SHORT)
+                    .setAction(&quot;Undo&quot;, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Toast.makeText(MainActivity.this,&quot;数据保存&quot;,Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+        }
+    });
+
+
+
+    //initView（）
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+    recyclerView.setLayoutManager(layoutManager);
+
+    //initData
+    initFruits();
+    adapter = new FruitAdapter(fruitList);
+    recyclerView.setAdapter(adapter);
+
+
+
+    swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+    swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+    swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            refreshFruits();
+        }
+    });
+}
+
+
+
+private void refreshFruits() {
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //在子线程里面可以直接切换回主线程
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    initFruits();
+                    adapter.notifyDataSetChanged();
+                    swipeRefresh.setRefreshing(false);
+                }
+            });
+        }
+    }).start();
+}
+
+private void initFruits() {
+    fruitList.clear();
+    for (int i = 0; i &lt; 50; i++) {
+        Random random = new Random();
+        int index = random.nextInt(fruits.length);
+        fruitList.add(fruits[index]);
+    }
+}
+
+
+
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar,menu);
+    return true;
+}
+
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+
+        case android.R.id.home:
+          mDrawerLayout.openDrawer(GravityCompat.START);
+            break;
+
+
+        case R.id.backup:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.delete:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+        case R.id.settings:
+            Toast.makeText(this,&quot;BackUp&quot;,Toast.LENGTH_SHORT).show();
+            break;
+
+            default:break;
+
+
+
+
+    }
+    return true;
+            }
 }
 </code></pre>
           
