@@ -232,6 +232,251 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo38-高级技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo38-高级技巧/" itemprop="url">基础Demo38-高级技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、一个工具类API获取同一个Context对象，任意地方使用"><a href="#1、一个工具类API获取同一个Context对象，任意地方使用" class="headerlink" title="1、一个工具类API获取同一个Context对象，任意地方使用"></a>1、一个工具类API获取同一个Context对象，任意地方使用</h3><pre><code>public class MyApplication extends Application{
+
+          private static Context context;
+
+    @Override
+public void onCreate(){
+
+      context=getApplicationContext();
+    }
+
+
+
+public static Context getContext(){
+
+     return context;
+}
+
+}
+</code></pre><p>（2）要在AndroidManifest.xml中配置Application类：</p>
+<pre><code>&lt; application android:name=”com......MyAplication”
+</code></pre><p>（3）调用</p>
+<p>MyApplition.getContext()可以随时随地用；</p>
+<p>（4）Application的配置有两种方式：</p>
+<p> *1：直接简单粗暴修改AndroidManifest.xml</p>
+<p> *2: 创建类MyApplition extends Application，然后在onCreate()方法中调用init方法初始化。而且一个应用程序只能配置一个Application。</p>
+<h3 id="2、使用Intent传递对象"><a href="#2、使用Intent传递对象" class="headerlink" title="2、使用Intent传递对象"></a>2、使用Intent传递对象</h3><p>备注：之前所遇到的Intent传递数据，都是传递基本数据类型，还可以传递对象哦，对象是属于引用数据类型。之前对应的都是intent.putExtra(KEY,”Tom”);<br>String name=getIntent().getStringExtra(KEY,””);来调用，现在是传递对象！</p>
+<p>Java规定，对象被传递需要满足2选1： 序列化或者分解后，才能被存储在磁盘中或者进行网络传输，反正对象不能直接传输，需要序列化或者分解才能传输，这是Java的规定。</p>
+<p>（1）序列化Serializable</p>
+<p>对象所属的类implements Serializable{}就可以使用Intent来传递对象了<br>eg:</p>
+<pre><code>import java.io.Serializable;
+
+public class Person implements Serializable {
+
+private String name;
+private int age;
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getAge() {
+    return age;
+}
+
+public void setAge(int age) {
+    this.age = age;
+}
+}
+</code></pre><p>传递：</p>
+<pre><code>Person person=new Person();
+person.setName(&quot;Tom&quot;);
+person.setAge(11);
+
+Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+intent.putExtra(KEY,person);
+startActivity(intent);
+</code></pre><p>获取：<br>    Person person=(Person)getIntent().getSerializableExtra(KEY);</p>
+<p>（2）implements Parcelable{ }分解对象传递<br>：重写describeContents（）和 writeToParcel（）</p>
+<pre><code>import android.os.Parcel;
+import android.os.Parcelable;
+import java.io.Serializable;
+
+public class Person implements Parcelable {
+
+private String name;
+private int age;
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getAge() {
+    return age;
+}
+
+public void setAge(int age) {
+    this.age = age;
+}
+
+
+@Override
+public int describeContents() {
+    return 0;
+}
+
+@Override
+public void writeToParcel(Parcel dest, int flags) {
+
+    dest.writeString(name);
+    dest.writeInt(age);
+}
+
+
+public static final Parcelable.Creator&lt;Person&gt;CREATOR= new Creator&lt;Person&gt;() {
+    @Override
+    public Person createFromParcel(Parcel source) {
+       Person person=new Person();
+       person.name=source.readString();
+       person.age=source.readInt();
+       return person;
+    }
+
+    @Override
+    public Person[] newArray(int size) {
+        return new Person[size];
+    }
+};
+}
+</code></pre><p>传递：</p>
+<pre><code>Person person=new Person();
+person.setName(&quot;Tom&quot;);
+person.setAge(11);
+
+Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+intent.putExtra(KEY,person);
+startActivity(intent);
+</code></pre><p>获取：</p>
+<pre><code>Person person=(Person)getIntent().getParcelableExtra(KEY);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2691,200 +2936,6 @@ openFileInput(&quot;data&quot;)---InputStreamReader---BufferedReader---readLine(
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo23-发送和接收本地广播/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo23-发送和接收本地广播/" itemprop="url">基础Demo23-发送和接收本地广播</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:49:04+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"><a href="#1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。" class="headerlink" title="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"></a>1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。</h3><h3 id="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"><a href="#2、A程序发送的本地广播，只能有A程序的广播接收器接收。" class="headerlink" title="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"></a>2、A程序发送的本地广播，只能有A程序的广播接收器接收。</h3><h3 id="3、流程"><a href="#3、流程" class="headerlink" title="3、流程"></a>3、流程</h3><p>（1）构造本地广播管理器对象，可以调用API发送广播，而且可以注册广播接收器</p>
-<p>（2）构造Intent对象，指定要发送的广播值</p>
-<p>（3）本地广播管理器对象调用API发送广播</p>
-<pre><code>import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-public class MainActivity extends AppCompatActivity {
-
-
-private Button mButton;
-private LocalBroadcastManager localBroadcastManager;
-private IntentFilter mIntentFilter;
-private LocalReceiver localReceiver;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    //构造本地广播管理器对象，可以调用API发送本地广播
-    localBroadcastManager=LocalBroadcastManager.getInstance(this);
-    mButton=(Button)findViewById(R.id.btn);
-    mButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            //构造Intent对象，指定要发送的广播值
-            Intent intent=new Intent(&quot;com.example.broadcasttest.LOACL&quot;);
-            //本地广播管理器发送本地广播
-            localBroadcastManager.sendBroadcast(intent);
-        }
-    });
-
-
-
-    //动态注册广播接收器
-    mIntentFilter=new IntentFilter();
-    mIntentFilter.addAction(&quot;com.example.broadcasttest.LOACL&quot;);
-    localReceiver=new LocalReceiver();
-    localBroadcastManager.registerReceiver(localReceiver,mIntentFilter);
-
-
-
-}
-
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-
-    localBroadcastManager.unregisterReceiver(localReceiver);
-}
-
-
-
-//广播接收器结果处理类
-class LocalReceiver extends BroadcastReceiver{
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-
-        Toast.makeText(context,&quot;我是本地广播&quot;,Toast.LENGTH_SHORT).show();
-    }
-  }
-
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2935,7 +2986,7 @@ class LocalReceiver extends BroadcastReceiver{
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

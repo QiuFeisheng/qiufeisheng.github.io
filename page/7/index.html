@@ -232,6 +232,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo6-Activity的4S启动模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo6-Activity的4S启动模式/" itemprop="url">基础Demo6-Activity的4S启动模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
+<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
+<pre><code>&lt;activity
+android:name=&quot;.Main2Activity&quot;
+android:launchMode=&quot;singleTop&quot;&gt;
+&lt;/activity&gt;
+</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
+<pre><code>&lt;activity
+android:name=&quot;.Main2Activity&quot;
+android:launchMode=&quot;singleTask&quot;&gt;
+&lt;/activity&gt;
+</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
+<pre><code>&lt;activity
+android:name=&quot;.Main2Activity&quot;
+android:launchMode=&quot;singleInstance&quot;&gt;
+&lt;/activity&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo4-Intent返回数据给上一个Activity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -364,6 +499,270 @@ finish();
 }
 </code></pre><p>//常量作为Key的好处是： 可以在多个类多处调用，而且取值的时候不会出现手写key错误的概率</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo2-隐式Intent的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">基础Demo2-隐式Intent的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="https://i.imgur.com/gBw8NM9.jpg" alt></p>
+<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>(1)activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:orientation=&quot;vertical&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_1&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;打开系统浏览器&quot;/&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_2&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;打开系统电话&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>（2）MainActivity.java</p>
+<pre><code>import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+private Button btn_1;
+private Button btn_2;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    initView();
+    initData();
+}
+
+private void initView() {
+
+   btn_1= (Button) findViewById(R.id.btn_1);
+   btn_2= (Button) findViewById(R.id.btn_2);
+}
+
+private void initData() {
+
+    btn_1.setOnClickListener(this);
+    btn_2.setOnClickListener(this);
+}
+@Override
+public void onClick(View view) {
+
+     switch (view.getId()){
+
+         case R.id.btn_1:
+             //1、传入隐式Intent的action值，构造Intent对象
+             //action值一般是传入Android系统可以响应的action值
+             //当然也可以在某个Activity的action值配置Intent-filter就可以响应此Intent
+             Intent intent=new Intent(Intent.ACTION_VIEW);
+
+             //调用象方：initData()，传入Uri对象
+             intent.setData(Uri.parse(&quot;http://www.baidu.com&quot;));
+
+             //开启可以响应此Intent的Activity(可能是系统应用的Activity)
+             startActivity(intent);
+             break;
+
+         case R.id.btn_2:
+             Intent intent2=new Intent(Intent.ACTION_DIAL);
+             intent2.setData(Uri.parse(&quot;tel:15622391415&quot;));
+             startActivity(intent2);
+             break;
+     }  }
+}
+</code></pre><h3 id="3、常用的action值"><a href="#3、常用的action值" class="headerlink" title="3、常用的action值"></a>3、常用的action值</h3><pre><code>// 调用浏览器 
+Uri webViewUri = Uri.parse(&quot;http://blog.csdn.net/zuolongsnail&quot;); 
+Intent intent = new Intent(Intent.ACTION_VIEW, webViewUri); 
+
+// 调用地图 
+Uri mapUri = Uri.parse(&quot;geo:100,100&quot;); 
+Intent intent = new Intent(Intent.ACTION_VIEW, mapUri); 
+
+// 播放mp3 
+Uri playUri = Uri.parse(&quot;file:///sdcard/test.mp3&quot;); 
+Intent intent = new Intent(Intent.ACTION_VIEW, playUri); 
+intent.setDataAndType(playUri, &quot;audio/mp3&quot;); 
+
+
+// 调用拨打电话 
+Uri dialUri = Uri.parse(&quot;tel:10086&quot;); 
+Intent intent = new Intent(Intent.ACTION_DIAL, dialUri); 
+
+// 直接拨打电话，需要加上权限
+&lt;uses-permission id=&quot;android.permission.CALL_PHONE&quot; /&gt; 
+Uri callUri = Uri.parse(&quot;tel:10086&quot;); 
+Intent intent = new Intent(Intent.ACTION_CALL, callUri); 
+
+// 调用发邮件（这里要事先配置好的系统Email，否则是调不出发邮件界面的） 
+Uri emailUri = Uri.parse(&quot;mailto:zuolongsnail@163.com&quot;); 
+Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri); 
+
+// 直接发邮件 
+Intent intent = new Intent(Intent.ACTION_SEND); 
+String[] tos = { &quot;zuolongsnail@gmail.com&quot; }; 
+String[] ccs = { &quot;zuolongsnail@163.com&quot; }; 
+intent.putExtra(Intent.EXTRA_EMAIL, tos); 
+intent.putExtra(Intent.EXTRA_CC, ccs); 
+intent.putExtra(Intent.EXTRA_TEXT, &quot;the email text&quot;); 
+intent.putExtra(Intent.EXTRA_SUBJECT, &quot;subject&quot;); 
+intent.setType(&quot;text/plain&quot;); 
+Intent.createChooser(intent, &quot;Choose Email Client&quot;); 
+
+// 发短信 
+Intent intent = new Intent(Intent.ACTION_VIEW); 
+intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
+intent.setType(&quot;vnd.android-dir/mms-sms&quot;); 
+
+// 直接发短信 
+Uri smsToUri = Uri.parse(&quot;smsto:10086&quot;); 
+Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri); 
+intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
+
+// 发彩信 
+Uri mmsUri = Uri.parse(&quot;content://media/external/images/media/23&quot;); 
+Intent intent = new Intent(Intent.ACTION_SEND); 
+intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
+intent.putExtra(Intent.EXTRA_STREAM, mmsUri); 
+intent.setType(&quot;image/png&quot;); 
+
+// 卸载应用 
+Uri uninstallUri = Uri.fromParts(&quot;package&quot;, &quot;com.app.test&quot;, null); 
+Intent intent = new Intent(Intent.ACTION_DELETE, uninstallUri); 
+
+// 安装应用 
+Intent intent = new Intent(Intent.ACTION_VIEW); 
+intent.setDataAndType(Uri.fromFile(new File(&quot;/sdcard/test.apk&quot;), &quot;application/vnd.android.package-archive&quot;); 
+
+// 在Android Market中查找应用 
+Uri uri = Uri.parse(&quot;market://search?q=愤怒的小鸟&quot;);          
+Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+</code></pre>
           
         
       
@@ -560,270 +959,6 @@ public boolean onOptionsItemSelected(MenuItem item) {
   }
 
 }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo2-隐式Intent的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo2-隐式Intent的使用/" itemprop="url">基础Demo2-隐式Intent的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T14:28:45+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h3><p> <img src="1.jpg" alt></p>
-<h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><p>(1)activity_main.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:orientation=&quot;vertical&quot;&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_1&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统浏览器&quot;/&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_2&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;打开系统电话&quot;/&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>（2）MainActivity.java</p>
-<pre><code>import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-private Button btn_1;
-private Button btn_2;
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    initView();
-    initData();
-}
-
-private void initView() {
-
-   btn_1= (Button) findViewById(R.id.btn_1);
-   btn_2= (Button) findViewById(R.id.btn_2);
-}
-
-private void initData() {
-
-    btn_1.setOnClickListener(this);
-    btn_2.setOnClickListener(this);
-}
-@Override
-public void onClick(View view) {
-
-     switch (view.getId()){
-
-         case R.id.btn_1:
-             //1、传入隐式Intent的action值，构造Intent对象
-             //action值一般是传入Android系统可以响应的action值
-             //当然也可以在某个Activity的action值配置Intent-filter就可以响应此Intent
-             Intent intent=new Intent(Intent.ACTION_VIEW);
-
-             //调用象方：initData()，传入Uri对象
-             intent.setData(Uri.parse(&quot;http://www.baidu.com&quot;));
-
-             //开启可以响应此Intent的Activity(可能是系统应用的Activity)
-             startActivity(intent);
-             break;
-
-         case R.id.btn_2:
-             Intent intent2=new Intent(Intent.ACTION_DIAL);
-             intent2.setData(Uri.parse(&quot;tel:15622391415&quot;));
-             startActivity(intent2);
-             break;
-     }  }
-}
-</code></pre><h3 id="3、常用的action值"><a href="#3、常用的action值" class="headerlink" title="3、常用的action值"></a>3、常用的action值</h3><pre><code>// 调用浏览器 
-Uri webViewUri = Uri.parse(&quot;http://blog.csdn.net/zuolongsnail&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, webViewUri); 
-
-// 调用地图 
-Uri mapUri = Uri.parse(&quot;geo:100,100&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, mapUri); 
-
-// 播放mp3 
-Uri playUri = Uri.parse(&quot;file:///sdcard/test.mp3&quot;); 
-Intent intent = new Intent(Intent.ACTION_VIEW, playUri); 
-intent.setDataAndType(playUri, &quot;audio/mp3&quot;); 
-
-
-// 调用拨打电话 
-Uri dialUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_DIAL, dialUri); 
-
-// 直接拨打电话，需要加上权限
-&lt;uses-permission id=&quot;android.permission.CALL_PHONE&quot; /&gt; 
-Uri callUri = Uri.parse(&quot;tel:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_CALL, callUri); 
-
-// 调用发邮件（这里要事先配置好的系统Email，否则是调不出发邮件界面的） 
-Uri emailUri = Uri.parse(&quot;mailto:zuolongsnail@163.com&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri); 
-
-// 直接发邮件 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-String[] tos = { &quot;zuolongsnail@gmail.com&quot; }; 
-String[] ccs = { &quot;zuolongsnail@163.com&quot; }; 
-intent.putExtra(Intent.EXTRA_EMAIL, tos); 
-intent.putExtra(Intent.EXTRA_CC, ccs); 
-intent.putExtra(Intent.EXTRA_TEXT, &quot;the email text&quot;); 
-intent.putExtra(Intent.EXTRA_SUBJECT, &quot;subject&quot;); 
-intent.setType(&quot;text/plain&quot;); 
-Intent.createChooser(intent, &quot;Choose Email Client&quot;); 
-
-// 发短信 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.setType(&quot;vnd.android-dir/mms-sms&quot;); 
-
-// 直接发短信 
-Uri smsToUri = Uri.parse(&quot;smsto:10086&quot;); 
-Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-
-// 发彩信 
-Uri mmsUri = Uri.parse(&quot;content://media/external/images/media/23&quot;); 
-Intent intent = new Intent(Intent.ACTION_SEND); 
-intent.putExtra(&quot;sms_body&quot;, &quot;the sms text&quot;); 
-intent.putExtra(Intent.EXTRA_STREAM, mmsUri); 
-intent.setType(&quot;image/png&quot;); 
-
-// 卸载应用 
-Uri uninstallUri = Uri.fromParts(&quot;package&quot;, &quot;com.app.test&quot;, null); 
-Intent intent = new Intent(Intent.ACTION_DELETE, uninstallUri); 
-
-// 安装应用 
-Intent intent = new Intent(Intent.ACTION_VIEW); 
-intent.setDataAndType(Uri.fromFile(new File(&quot;/sdcard/test.apk&quot;), &quot;application/vnd.android.package-archive&quot;); 
-
-// 在Android Market中查找应用 
-Uri uri = Uri.parse(&quot;market://search?q=愤怒的小鸟&quot;);          
-Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 </code></pre>
           
         
@@ -1195,7 +1330,7 @@ public TitleLayout(Context context,AttributeSet attrs) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

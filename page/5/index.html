@@ -232,6 +232,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo23-发送和接收本地广播/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo23-发送和接收本地广播/" itemprop="url">基础Demo23-发送和接收本地广播</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:49:04+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"><a href="#1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。" class="headerlink" title="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"></a>1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。</h3><h3 id="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"><a href="#2、A程序发送的本地广播，只能有A程序的广播接收器接收。" class="headerlink" title="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"></a>2、A程序发送的本地广播，只能有A程序的广播接收器接收。</h3><h3 id="3、流程"><a href="#3、流程" class="headerlink" title="3、流程"></a>3、流程</h3><p>（1）构造本地广播管理器对象，可以调用API发送广播，而且可以注册广播接收器</p>
+<p>（2）构造Intent对象，指定要发送的广播值</p>
+<p>（3）本地广播管理器对象调用API发送广播</p>
+<pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+
+private Button mButton;
+private LocalBroadcastManager localBroadcastManager;
+private IntentFilter mIntentFilter;
+private LocalReceiver localReceiver;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    //构造本地广播管理器对象，可以调用API发送本地广播
+    localBroadcastManager=LocalBroadcastManager.getInstance(this);
+    mButton=(Button)findViewById(R.id.btn);
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            //构造Intent对象，指定要发送的广播值
+            Intent intent=new Intent(&quot;com.example.broadcasttest.LOACL&quot;);
+            //本地广播管理器发送本地广播
+            localBroadcastManager.sendBroadcast(intent);
+        }
+    });
+
+
+
+    //动态注册广播接收器
+    mIntentFilter=new IntentFilter();
+    mIntentFilter.addAction(&quot;com.example.broadcasttest.LOACL&quot;);
+    localReceiver=new LocalReceiver();
+    localBroadcastManager.registerReceiver(localReceiver,mIntentFilter);
+
+
+
+}
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+
+    localBroadcastManager.unregisterReceiver(localReceiver);
+}
+
+
+
+//广播接收器结果处理类
+class LocalReceiver extends BroadcastReceiver{
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        Toast.makeText(context,&quot;我是本地广播&quot;,Toast.LENGTH_SHORT).show();
+    }
+  }
+
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo26-SharedPreferences存储/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2334,227 +2528,6 @@ public void initData() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo15-静态加载Fragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo15-静态加载Fragment/" itemprop="url">基础Demo15-静态加载Fragment</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:26:01+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、left-fragment-xml-right-fragment-xml"><a href="#1、left-fragment-xml-right-fragment-xml" class="headerlink" title="1、left_fragment.xml     right_fragment.xml"></a>1、left_fragment.xml     right_fragment.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;&gt;
-
-
-&lt;Button
-    android:id=&quot;@+id/btn_1&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_gravity=&quot;center_horizontal&quot;
-    android:text=&quot;Button_Left&quot;
-    /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><hr>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot;
-android:background=&quot;#3e3e3e&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;&gt;
-
-
-&lt;Button
-    android:id=&quot;@+id/btn_2&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_gravity=&quot;center_horizontal&quot;
-    android:text=&quot;Button_Right&quot;
-    /&gt;
-
-
-
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、LeftFragment-java"><a href="#2、LeftFragment-java" class="headerlink" title="2、LeftFragment.java"></a>2、LeftFragment.java</h3><pre><code>import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-public class LeftFragment extends Fragment {
-
-private Button mButton;
-@Nullable
-@Override
-public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view=inflater.inflate(R.layout.left_fragment,container,false);
-    mButton=(Button)view.findViewById(R.id.btn_1);
-    return view;
-    }
-}
-</code></pre><h3 id="3、RightFragment-java"><a href="#3、RightFragment-java" class="headerlink" title="3、RightFragment.java"></a>3、RightFragment.java</h3><pre><code>import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-public class RightFragment extends Fragment {
-
-
-private Button mButton;
-@Nullable
-@Override
-public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view=inflater.inflate(R.layout.right_fragment,container,false);
-    mButton=(Button)view.findViewById(R.id.btn_2);
-    return view;
-  }
-}
-</code></pre><h3 id="4、在activity-main-xml中类似自定义控件引入fragment"><a href="#4、在activity-main-xml中类似自定义控件引入fragment" class="headerlink" title="4、在activity_main.xml中类似自定义控件引入fragment"></a>4、在activity_main.xml中类似自定义控件引入fragment</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-tools:context=&quot;.MainActivity&quot;&gt;
-
-
-&lt;fragment
-    android:id=&quot;@+id/left_fragment&quot;
-    android:name=&quot;com.mo.fragmentdemo1.LeftFragment&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:layout_weight=&quot;1&quot;/&gt;
-
-
-&lt;fragment
-    android:id=&quot;@+id/right_fragment&quot;
-    android:name=&quot;com.mo.fragmentdemo1.RightFragment&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:layout_weight=&quot;1&quot;/&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2605,7 +2578,7 @@ tools:context=&quot;.MainActivity&quot;&gt;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
