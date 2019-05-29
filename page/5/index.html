@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo26-SharedPreferences存储/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/24/基础Demo24-广播实现强制下线功能/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo26-SharedPreferences存储/" itemprop="url">基础Demo26-SharedPreferences存储</a></h1>
+                <a class="post-title-link" href="/2019/04/24/基础Demo24-广播实现强制下线功能/" itemprop="url">基础Demo24-广播实现强制下线功能</a></h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:49:04+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T00:00:00+08:00">
+                2019-04-24
               </time>
             
 
@@ -303,72 +303,421 @@
       
         
           
-            <p>优点：以键值对Key-Value的形式存储值，比文本存储数据更加方便快捷。</p>
-<h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+            <h3 id="1、导入工具类：Activity集中管理类—ActivityCollector-java"><a href="#1、导入工具类：Activity集中管理类—ActivityCollector-java" class="headerlink" title="1、导入工具类：Activity集中管理类—ActivityCollector.java"></a>1、导入工具类：Activity集中管理类—ActivityCollector.java</h3><pre><code>import android.app.Activity;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ActivityCollector {
+
+public static List&lt;Activity&gt; activities = new ArrayList&lt;&gt;();
+
+public static void addActivity(Activity activity) {
+    activities.add(activity);
+}
+
+public static void removeActivity(Activity activity) {
+    activities.remove(activity);
+}
+
+public static void finishAll() {
+    for (Activity activity : activities) {
+        if (!activity.isFinishing()) {
+            activity.finish();
+         }
+      }
+   }
+
+}
+</code></pre><h3 id="2、Activity给一个父类，方便统一管理"><a href="#2、Activity给一个父类，方便统一管理" class="headerlink" title="2、Activity给一个父类，方便统一管理"></a>2、Activity给一个父类，方便统一管理</h3><p>（1）嵌套一个广播接收器的结果处理类（内部类）</p>
+<p>（2）动态注册广播接收器，在onResume那里注册才是对的，防止前面的多个Activity也跳转，没必要，只要当前运行的Activity跳转即可</p>
+<pre><code>import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+public class BaseActivity extends AppCompatActivity {
+
+private ForceOfflineReceiver receiver;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ActivityCollector.addActivity(this);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction(&quot;com.example.broadcastbestpractice.FORCE_OFFLINE&quot;);
+    receiver = new ForceOfflineReceiver();
+    registerReceiver(receiver, intentFilter);
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    if (receiver != null) {
+        unregisterReceiver(receiver);
+        receiver = null;
+    }
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    ActivityCollector.removeActivity(this);
+}
+
+class ForceOfflineReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(&quot;Warning&quot;);
+        builder.setMessage(&quot;You are forced to be offline. Please try to login again.&quot;);
+        builder.setCancelable(false);
+        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ActivityCollector.finishAll(); // 销毁所有活动
+                Intent intent = new Intent(context, LoginActivity.class);
+                context.startActivity(intent); // 重新启动LoginActivity
+            }
+        });
+        builder.show();
+      }
+
+    }
+
+}
+</code></pre><h3 id="3、写一个登录的LoginActivity-布局和逻辑都很简单"><a href="#3、写一个登录的LoginActivity-布局和逻辑都很简单" class="headerlink" title="3、写一个登录的LoginActivity, 布局和逻辑都很简单"></a>3、写一个登录的LoginActivity, 布局和逻辑都很简单</h3><p>activity_login.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
 android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:orientation=&quot;vertical&quot; &gt;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;LinearLayout
+    android:orientation=&quot;horizontal&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;60dp&quot;&gt;
+    &lt;TextView
+        android:layout_width=&quot;90dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center_vertical&quot;
+        android:textSize=&quot;18sp&quot;
+        android:text=&quot;Account:&quot; /&gt;
+
+    &lt;EditText
+        android:id=&quot;@+id/account&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_gravity=&quot;center_vertical&quot;/&gt;
+&lt;/LinearLayout&gt;
+
+&lt;LinearLayout
+    android:orientation=&quot;horizontal&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;60dp&quot;&gt;
+    &lt;TextView
+        android:layout_width=&quot;90dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center_vertical&quot;
+        android:textSize=&quot;18sp&quot;
+        android:text=&quot;Password:&quot; /&gt;
+
+    &lt;EditText
+        android:id=&quot;@+id/password&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_gravity=&quot;center_vertical&quot;
+        android:inputType=&quot;textPassword&quot; /&gt;
+&lt;/LinearLayout&gt;
 
 &lt;Button
-    android:id=&quot;@+id/save_data&quot;
+    android:id=&quot;@+id/login&quot;
     android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Save data&quot;
-    /&gt;
-
-&lt;Button
-    android:id=&quot;@+id/restore_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Restore data&quot;
-    /&gt;
+    android:layout_height=&quot;60dp&quot;
+    android:text=&quot;Login&quot; /&gt;
 
 &lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.content.SharedPreferences;
+</code></pre><p>LoginActivity.java</p>
+<pre><code>import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class LoginActivity extends BaseActivity {
+
+private EditText accountEdit;
+
+private EditText passwordEdit;
+
+private Button login;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_login);
+    accountEdit = (EditText) findViewById(R.id.account);
+    passwordEdit = (EditText) findViewById(R.id.password);
+    login = (Button) findViewById(R.id.login);
+    login.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String account = accountEdit.getText().toString();
+            String password = passwordEdit.getText().toString();
+            // 如果账号是admin且密码是123456，就认为登录成功
+            if (account.equals(&quot;admin&quot;) &amp;&amp; password.equals(&quot;123456&quot;)) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(LoginActivity.this, &quot;account or password is invalid&quot;,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
+   }  
+}
+</code></pre><h3 id="4、MainActivity发送广播，触发广播接收器的onReceive方法"><a href="#4、MainActivity发送广播，触发广播接收器的onReceive方法" class="headerlink" title="4、MainActivity发送广播，触发广播接收器的onReceive方法"></a>4、MainActivity发送广播，触发广播接收器的onReceive方法</h3><pre><code>import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends BaseActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button forceOffline = (Button) findViewById(R.id.force_offline);
+    forceOffline.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(&quot;com.example.broadcastbestpractice.FORCE_OFFLINE&quot;);
+            sendBroadcast(intent);
+        }
+    });
+  }
+
+}
+</code></pre><p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;Button
+    android:id=&quot;@+id/force_offline&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Send force offline broadcast&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础Demo23-发送和接收本地广播/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/23/基础Demo23-发送和接收本地广播/" itemprop="url">基础Demo23-发送和接收本地广播</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T00:00:00+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"><a href="#1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。" class="headerlink" title="1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。"></a>1、标准广播和有序广播属于系统全局广播，只要注册了对应了广播接收器，系统的任何程序都能接收到广播，不适合用于单个应用的私有广播发送和接收，所以需要本地广播。</h3><h3 id="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"><a href="#2、A程序发送的本地广播，只能有A程序的广播接收器接收。" class="headerlink" title="2、A程序发送的本地广播，只能有A程序的广播接收器接收。"></a>2、A程序发送的本地广播，只能有A程序的广播接收器接收。</h3><h3 id="3、流程"><a href="#3、流程" class="headerlink" title="3、流程"></a>3、流程</h3><p>（1）构造本地广播管理器对象，可以调用API发送广播，而且可以注册广播接收器</p>
+<p>（2）构造Intent对象，指定要发送的广播值</p>
+<p>（3）本地广播管理器对象调用API发送广播</p>
+<pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
+
+
+private Button mButton;
+private LocalBroadcastManager localBroadcastManager;
+private IntentFilter mIntentFilter;
+private LocalReceiver localReceiver;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Button saveData = (Button) findViewById(R.id.save_data);
-    saveData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences.Editor editor = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE).edit();
-            editor.putString(&quot;name&quot;, &quot;Tom&quot;);
-            editor.putInt(&quot;age&quot;, 28);
-            editor.putBoolean(&quot;married&quot;, true);
-            editor.apply();
-        }
-    });
-    Button restoreData = (Button) findViewById(R.id.restore_data);
-    restoreData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences pref = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE);
-            String name = pref.getString(&quot;name&quot;, &quot;&quot;);
-            int age = pref.getInt(&quot;age&quot;, 0);   //后面是默认值，取不到值的替代值
-            boolean married = pref.getBoolean(&quot;married&quot;, false);
 
-            Toast.makeText(MainActivity.this,&quot;name is &quot; + name,Toast.LENGTH_SHORT).show();
-          //  Toast.makeText(MainActivity.this,&quot;age is &quot; + age,Toast.LENGTH_SHORT).show();
-         //   Toast.makeText(MainActivity.this,&quot;married is &quot; + married,Toast.LENGTH_SHORT).show();
-            Log.d(&quot;MainActivity&quot;, &quot;name is &quot; + name);
-            Log.d(&quot;MainActivity&quot;, &quot;age is &quot; + age);
-            Log.d(&quot;MainActivity&quot;, &quot;married is &quot; + married);
+    //构造本地广播管理器对象，可以调用API发送本地广播
+    localBroadcastManager=LocalBroadcastManager.getInstance(this);
+    mButton=(Button)findViewById(R.id.btn);
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            //构造Intent对象，指定要发送的广播值
+            Intent intent=new Intent(&quot;com.example.broadcasttest.LOACL&quot;);
+            //本地广播管理器发送本地广播
+            localBroadcastManager.sendBroadcast(intent);
         }
     });
+
+
+
+    //动态注册广播接收器
+    mIntentFilter=new IntentFilter();
+    mIntentFilter.addAction(&quot;com.example.broadcasttest.LOACL&quot;);
+    localReceiver=new LocalReceiver();
+    localBroadcastManager.registerReceiver(localReceiver,mIntentFilter);
+
+
+
+}
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+
+    localBroadcastManager.unregisterReceiver(localReceiver);
+}
+
+
+
+//广播接收器结果处理类
+class LocalReceiver extends BroadcastReceiver{
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        Toast.makeText(context,&quot;我是本地广播&quot;,Toast.LENGTH_SHORT).show();
+    }
   }
+
 
 }
 </code></pre>
@@ -419,7 +768,7 @@ protected void onCreate(Bundle savedInstanceState) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo29-LitePal增删改查表的数据/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/基础Demo22-Intent发送广播/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -438,7 +787,7 @@ protected void onCreate(Bundle savedInstanceState) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo29-LitePal增删改查表的数据/" itemprop="url">基础Demo29-LitePal增删改查表的数据</a></h1>
+                <a class="post-title-link" href="/2019/04/22/基础Demo22-Intent发送广播/" itemprop="url">基础Demo22-Intent发送广播</a></h1>
         
 
         <div class="post-meta">
@@ -450,8 +799,8 @@ protected void onCreate(Bundle savedInstanceState) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:49:04+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T00:00:00+08:00">
+                2019-04-22
               </time>
             
 
@@ -490,205 +839,394 @@ protected void onCreate(Bundle savedInstanceState) {
       
         
           
-            <h3 id="1、表映射类-extends-DataSupport"><a href="#1、表映射类-extends-DataSupport" class="headerlink" title="1、表映射类+ extends DataSupport"></a>1、表映射类+ extends DataSupport</h3><pre><code>import org.litepal.crud.DataSupport;
+            <h3 id="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"><a href="#1、使用构造方法构造Intent对象，并指定Intent携带的广播值" class="headerlink" title="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"></a>1、使用构造方法构造Intent对象，并指定Intent携带的广播值</h3><h3 id="2、调用API："><a href="#2、调用API：" class="headerlink" title="2、调用API："></a>2、调用API：</h3><pre><code>sendBroadcast(intent); //发送标准广播，异步，不同线路接收     
+sendOrderedBroadcast(intent,null);//发送有序广播，同步，同一线路接收
+</code></pre><p>所以发送有序广播时，各个广播接收器可以设置接收的优先级，优先级高的可以先接收， 而且可以阻断广播向后继续发送</p>
+<p>（1）自定义Intent发送广播</p>
+<pre><code>import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class Book extends DataSupport {
+public class MainActivity extends AppCompatActivity {
 
-private int id;
+private Button mButton;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-private String author;
+    mButton=(Button) findViewById(R.id.btn);
+    mButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
 
-private double price;
-
-private int pages;
-
-private String name;
-
-private String press;
-
-public int getId() {
-    return id;
-}
-
-public void setId(int id) {
-    this.id = id;
-}
-
-public String getAuthor() {
-    return author;
-}
-
-public void setAuthor(String author) {
-    this.author = author;
-}
-
-public double getPrice() {
-    return price;
-}
-
-public void setPrice(double price) {
-    this.price = price;
-}
-
-public int getPages() {
-    return pages;
-}
-
-public void setPages(int pages) {
-    this.pages = pages;
-}
-
-public String getName() {
-    return name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public String getPress() {
-    return press;
-}
-
-public void setPress(String press) {
-    this.press = press;
+            //构造Intent对象，指定广播值
+            Intent intent=new Intent(&quot;com.example.broadcasttest.MY_BROADCAST&quot;);
+            //发送广播
+            sendBroadcast(intent);
+            //sendOrderedBroadcast(intent,null);
+        }
+    });
    }
 
 }
+</code></pre><p>（2）静态注册广播接收器接收广播值</p>
+<pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class MyReceiver extends BroadcastReceiver {
+
+@Override
+public void onReceive(Context context, Intent intent) {
+    // TODO: This method is called when the BroadcastReceiver is receiving
+    // an Intent broadcast.
+    Toast.makeText(context,&quot;收到广播啦&quot;,Toast.LENGTH_SHORT).show();
+
+//如果是有序广播，可以阻断,不能向后发送
+//  abortBroadcast();
+    }
+</code></pre><p>   }</p>
+<p>  AndroidManifest.xml</p>
+<pre><code>&lt;receiver
+android:name=&quot;.MyReceiver&quot;
+android:enabled=&quot;true&quot;
+android:exported=&quot;true&quot;&gt;
+
+&lt;intent-filter  android:priority=”100”&gt;
+
+    &lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot; /&gt;
+&lt;/intent-filter&gt;
+
+&lt;/receiver&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
+    
+      
 
+  
 
-public class Category {
+  
+  
+  
 
-private int id;
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/基础Demo21-静态注册广播的简单Demo/">
 
-private String categoryName;
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
 
-private int categoryCode;
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
 
-public void setId(int id) {
-    this.id = id;
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/基础Demo21-静态注册广播的简单Demo/" itemprop="url">基础Demo21-静态注册广播的简单Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-21T00:00:00+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"><a href="#1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作" class="headerlink" title="1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"></a>1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作</h3><h3 id="2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）"><a href="#2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）" class="headerlink" title="2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）"></a>2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）</h3><pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class MyReceiver extends BroadcastReceiver {
+
+@Override
+public void onReceive(Context context, Intent intent) {
+    // TODO: This method is called when the BroadcastReceiver is receiving
+    // an Intent broadcast.
+    Toast.makeText(context,&quot;开机啦&quot;,Toast.LENGTH_SHORT).show();
+   }
 }
+</code></pre><h3 id="3、在AndroidManifest-xml中配置权限"><a href="#3、在AndroidManifest-xml中配置权限" class="headerlink" title="3、在AndroidManifest.xml中配置权限"></a>3、在AndroidManifest.xml中配置权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
+</code></pre><h3 id="4、在AndroidManifest-xml的中加入广播接收器的响应值："><a href="#4、在AndroidManifest-xml的中加入广播接收器的响应值：" class="headerlink" title="4、在AndroidManifest.xml的中加入广播接收器的响应值："></a>4、在AndroidManifest.xml的<intent-filter>中加入广播接收器的响应值：</intent-filter></h3><p>例如： </p>
+<pre><code>&lt;receiver
+android:name=&quot;.MyReceiver&quot;
+android:enabled=&quot;true&quot;
+android:exported=&quot;true&quot;&gt;
 
-public void setCategoryName(String categoryName) {
-    this.categoryName = categoryName;
-}
+&lt;intent-filter&gt;
 
-public void setCategoryCode(int categoryCode) {
-    this.categoryCode = categoryCode;
-  }
+    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
 
-}
-</code></pre><h3 id="2、activity-main-xml"><a href="#2、activity-main-xml" class="headerlink" title="2、activity_main.xml"></a>2、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-&gt;
+&lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><h3 id="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："><a href="#5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：" class="headerlink" title="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："></a>5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：</h3><p>（1）创建一条状态栏通知</p>
+<p>（2）开启一个服务Service</p>
 
-&lt;Button
-    android:id=&quot;@+id/create_database&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Create database&quot;
-    /&gt;
+          
+        
+      
+    </div>
+    
+    
+    
 
-&lt;Button
-    android:id=&quot;@+id/add_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Add data&quot;
-    /&gt;
+    
 
-&lt;Button
-    android:id=&quot;@+id/update_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Update data&quot;
-    /&gt;
+    
 
-&lt;Button
-    android:id=&quot;@+id/delete_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Delete data&quot;
-    /&gt;
+    
 
-&lt;Button
-    android:id=&quot;@+id/query_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Query data&quot;
-    /&gt;
+    <footer class="post-footer">
+      
 
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="3、MainActivity-java"><a href="#3、MainActivity-java" class="headerlink" title="3、MainActivity.java"></a>3、MainActivity.java</h3><pre><code>import android.support.v7.app.AppCompatActivity;
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/基础Demo20-动态注册广播的简单Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/20/基础Demo20-动态注册广播的简单Demo/" itemprop="url">基础Demo20-动态注册广播的简单Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T00:00:00+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"><a href="#1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法" class="headerlink" title="1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"></a>1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法</h3><h3 id="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）"><a href="#2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）" class="headerlink" title="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）"></a>2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）</h3><pre><code>import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
-import java.util.List;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+
+private IntentFilter mIntentFilter;
+private NetWorkChangeReceiver mNetWorkChangeReceiver;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Button createDatabase = (Button) findViewById(R.id.create_database);
-    createDatabase.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Connector.getDatabase();
+
+    //构造IntentFilter，指定广播接收器的响应值
+    mIntentFilter=new IntentFilter();
+    mIntentFilter.addAction(&quot;android.net.conn.CONNECTIVITY_CHANGE&quot;);
+
+    //构造广播接收器处理类对象，给系统回调
+    mNetWorkChangeReceiver=new NetWorkChangeReceiver();
+    registerReceiver(mNetWorkChangeReceiver,mIntentFilter);
+}
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    //回收内存，防止内存泄漏
+    unregisterReceiver(mNetWorkChangeReceiver);
+}
+
+//广播接收器结果处理类，对象注册后就给系统自己回调此类的API：onReceive
+class NetWorkChangeReceiver extends BroadcastReceiver{
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        //构造网络监听对象NetworkInfo
+        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo!=null&amp;&amp;networkInfo.isAvailable()){
+
+            Toast.makeText(context,&quot;网络可用&quot;,Toast.LENGTH_SHORT).show();
+        }else {
+
+            Toast.makeText(context,&quot;网络不可用，请检查网络情况&quot;,Toast.LENGTH_SHORT).show();
         }
-    });
-    Button addData = (Button) findViewById(R.id.add_data);
-    addData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Book book = new Book();
-            book.setName(&quot;The Da Vinci Code&quot;);
-            book.setAuthor(&quot;Dan Brown&quot;);
-            book.setPages(454);
-            book.setPrice(16.96);
-            book.setPress(&quot;Unknow&quot;);
-            book.save();
-        }
-    });
-    Button updateData = (Button) findViewById(R.id.update_data);
-    updateData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Book book = new Book();
-            book.setPrice(14.95);
-            book.setPress(&quot;Anchor&quot;);
-            book.updateAll(&quot;name = ? and author = ?&quot;, &quot;The Lost Symbol&quot;, &quot;Dan Brown&quot;);
-        }
-    });
-    Button deleteButton = (Button) findViewById(R.id.delete_data);
-    deleteButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            DataSupport.deleteAll(Book.class, &quot;price &lt; ?&quot;, &quot;15&quot;);
-        }
-    });
-    Button queryButton = (Button) findViewById(R.id.query_data);
-    queryButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            List&lt;Book&gt; books = DataSupport.findAll(Book.class);
-            for (Book book: books) {
-                Log.d(&quot;MainActivity&quot;, &quot;book name is &quot; + book.getName());
-                Log.d(&quot;MainActivity&quot;, &quot;book author is &quot; + book.getAuthor());
-                Log.d(&quot;MainActivity&quot;, &quot;book pages is &quot; + book.getPages());
-                Log.d(&quot;MainActivity&quot;, &quot;book price is &quot; + book.getPrice());
-                Log.d(&quot;MainActivity&quot;, &quot;book press is &quot; + book.getPress());
-            }
-        }
-    });
+    }
   }
 
 }
@@ -740,7 +1278,7 @@ protected void onCreate(Bundle savedInstanceState) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo19-Fragment的新闻Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/基础Demo19-Fragment的新闻Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -759,7 +1297,7 @@ protected void onCreate(Bundle savedInstanceState) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo19-Fragment的新闻Demo/" itemprop="url">基础Demo19-Fragment的新闻Demo</a></h1>
+                <a class="post-title-link" href="/2019/04/19/基础Demo19-Fragment的新闻Demo/" itemprop="url">基础Demo19-Fragment的新闻Demo</a></h1>
         
 
         <div class="post-meta">
@@ -771,8 +1309,8 @@ protected void onCreate(Bundle savedInstanceState) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-19T00:00:00+08:00">
+                2019-04-19
               </time>
             
 
@@ -1179,7 +1717,7 @@ android:layout_height=&quot;match_parent&quot; &gt;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo21-静态注册广播的简单Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/基础Demo18-Fragment与Activity通信+生命周期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1198,7 +1736,7 @@ android:layout_height=&quot;match_parent&quot; &gt;
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo21-静态注册广播的简单Demo/" itemprop="url">基础Demo21-静态注册广播的简单Demo</a></h1>
+                <a class="post-title-link" href="/2019/04/18/基础Demo18-Fragment与Activity通信+生命周期/" itemprop="url">基础Demo18-Fragment与Activity通信+生命周期</a></h1>
         
 
         <div class="post-meta">
@@ -1210,157 +1748,8 @@ android:layout_height=&quot;match_parent&quot; &gt;
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"><a href="#1、优势：动态注册是在onCreate-方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作" class="headerlink" title="1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作"></a>1、优势：动态注册是在onCreate()方法中的，所以需要启动程序才能监听得到；而静态注册是在清单文件配置的，没有打开程序也能监听广播，然后执行响应的操作</h3><h3 id="2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）"><a href="#2、New—-gt-Other—-gt-Broadcast-Receiver—-gt-创建一个广播接收器结果处理类，重写onReceive方法（Exported-和-Enabled都打勾）" class="headerlink" title="2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）"></a>2、New—&gt;Other—&gt;Broadcast Receiver—&gt;创建一个广播接收器结果处理类，重写onReceive方法（Exported 和 Enabled都打勾）</h3><pre><code>import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-public class MyReceiver extends BroadcastReceiver {
-
-@Override
-public void onReceive(Context context, Intent intent) {
-    // TODO: This method is called when the BroadcastReceiver is receiving
-    // an Intent broadcast.
-    Toast.makeText(context,&quot;开机啦&quot;,Toast.LENGTH_SHORT).show();
-   }
-}
-</code></pre><h3 id="3、在AndroidManifest-xml中配置权限"><a href="#3、在AndroidManifest-xml中配置权限" class="headerlink" title="3、在AndroidManifest.xml中配置权限"></a>3、在AndroidManifest.xml中配置权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
-</code></pre><h3 id="4、在AndroidManifest-xml的中加入广播接收器的响应值："><a href="#4、在AndroidManifest-xml的中加入广播接收器的响应值：" class="headerlink" title="4、在AndroidManifest.xml的中加入广播接收器的响应值："></a>4、在AndroidManifest.xml的<intent-filter>中加入广播接收器的响应值：</intent-filter></h3><p>例如： </p>
-<pre><code>&lt;receiver
-android:name=&quot;.MyReceiver&quot;
-android:enabled=&quot;true&quot;
-android:exported=&quot;true&quot;&gt;
-
-&lt;intent-filter&gt;
-
-    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
-
-&lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><h3 id="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："><a href="#5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：" class="headerlink" title="5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个："></a>5、广播接收器的结果处理类的onReceive方法，因为不可以开启线程，所以不能在此执行耗时操作，主要作用有两个：</h3><p>（1）创建一条状态栏通知</p>
-<p>（2）开启一个服务Service</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo18-Fragment与Activity通信+生命周期/" itemprop="url">基础Demo18-Fragment与Activity通信+生命周期</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-18T00:00:00+08:00">
+                2019-04-18
               </time>
             
 
@@ -1472,7 +1861,7 @@ public  RightFragment getContentFragment() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo20-动态注册广播的简单Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/基础Demo17-最常用的使用FrameLayout加载Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -1491,7 +1880,7 @@ public  RightFragment getContentFragment() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo20-动态注册广播的简单Demo/" itemprop="url">基础Demo20-动态注册广播的简单Demo</a></h1>
+                <a class="post-title-link" href="/2019/04/17/基础Demo17-最常用的使用FrameLayout加载Fragment/" itemprop="url">基础Demo17-最常用的使用FrameLayout加载Fragment</a></h1>
         
 
         <div class="post-meta">
@@ -1503,369 +1892,8 @@ public  RightFragment getContentFragment() {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"><a href="#1、创建一个类（或者Activity里的内部类），extends-BroadcastReceiver-这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法" class="headerlink" title="1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法"></a>1、创建一个类（或者Activity里的内部类），extends BroadcastReceiver, 这是广播接收器结果处理类，之后需要new一个对象注册广播接收器，给系统自己监听回调处理类的API：onReceive（）方法</h3><h3 id="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）"><a href="#2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy-方法中取消注册（猜测里面是直接回收这个处理类对象）" class="headerlink" title="2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）"></a>2、为了回收对象，不造成内存泄漏内存（内存回收不了），需要在Activity的onDestroy()方法中取消注册（猜测里面是直接回收这个处理类对象）</h3><pre><code>import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
-
-public class MainActivity extends AppCompatActivity {
-
-
-private IntentFilter mIntentFilter;
-private NetWorkChangeReceiver mNetWorkChangeReceiver;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    //构造IntentFilter，指定广播接收器的响应值
-    mIntentFilter=new IntentFilter();
-    mIntentFilter.addAction(&quot;android.net.conn.CONNECTIVITY_CHANGE&quot;);
-
-    //构造广播接收器处理类对象，给系统回调
-    mNetWorkChangeReceiver=new NetWorkChangeReceiver();
-    registerReceiver(mNetWorkChangeReceiver,mIntentFilter);
-}
-
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    //回收内存，防止内存泄漏
-    unregisterReceiver(mNetWorkChangeReceiver);
-}
-
-//广播接收器结果处理类，对象注册后就给系统自己回调此类的API：onReceive
-class NetWorkChangeReceiver extends BroadcastReceiver{
-
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-
-        //构造网络监听对象NetworkInfo
-        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo!=null&amp;&amp;networkInfo.isAvailable()){
-
-            Toast.makeText(context,&quot;网络可用&quot;,Toast.LENGTH_SHORT).show();
-        }else {
-
-            Toast.makeText(context,&quot;网络不可用，请检查网络情况&quot;,Toast.LENGTH_SHORT).show();
-        }
-    }
-  }
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo22-Intent发送广播/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo22-Intent发送广播/" itemprop="url">基础Demo22-Intent发送广播</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T16:17:26+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"><a href="#1、使用构造方法构造Intent对象，并指定Intent携带的广播值" class="headerlink" title="1、使用构造方法构造Intent对象，并指定Intent携带的广播值"></a>1、使用构造方法构造Intent对象，并指定Intent携带的广播值</h3><h3 id="2、调用API："><a href="#2、调用API：" class="headerlink" title="2、调用API："></a>2、调用API：</h3><pre><code>sendBroadcast(intent); //发送标准广播，异步，不同线路接收     
-sendOrderedBroadcast(intent,null);//发送有序广播，同步，同一线路接收
-</code></pre><p>所以发送有序广播时，各个广播接收器可以设置接收的优先级，优先级高的可以先接收， 而且可以阻断广播向后继续发送</p>
-<p>（1）自定义Intent发送广播</p>
-<pre><code>import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-public class MainActivity extends AppCompatActivity {
-
-private Button mButton;
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    mButton=(Button) findViewById(R.id.btn);
-    mButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            //构造Intent对象，指定广播值
-            Intent intent=new Intent(&quot;com.example.broadcasttest.MY_BROADCAST&quot;);
-            //发送广播
-            sendBroadcast(intent);
-            //sendOrderedBroadcast(intent,null);
-        }
-    });
-   }
-
-}
-</code></pre><p>（2）静态注册广播接收器接收广播值</p>
-<pre><code>import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-public class MyReceiver extends BroadcastReceiver {
-
-@Override
-public void onReceive(Context context, Intent intent) {
-    // TODO: This method is called when the BroadcastReceiver is receiving
-    // an Intent broadcast.
-    Toast.makeText(context,&quot;收到广播啦&quot;,Toast.LENGTH_SHORT).show();
-
-//如果是有序广播，可以阻断,不能向后发送
-//  abortBroadcast();
-    }
-</code></pre><p>   }</p>
-<p>  AndroidManifest.xml</p>
-<pre><code>&lt;receiver
-android:name=&quot;.MyReceiver&quot;
-android:enabled=&quot;true&quot;
-android:exported=&quot;true&quot;&gt;
-
-&lt;intent-filter  android:priority=”100”&gt;
-
-    &lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot; /&gt;
-&lt;/intent-filter&gt;
-
-&lt;/receiver&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo17-最常用的使用FrameLayout加载Fragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo17-最常用的使用FrameLayout加载Fragment/" itemprop="url">基础Demo17-最常用的使用FrameLayout加载Fragment</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:32:26+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-17T00:00:00+08:00">
+                2019-04-17
               </time>
             
 
@@ -2170,7 +2198,7 @@ public  RightFragment getContentFragment() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo16-Fragment最常用的基类BaseFragment/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -2189,7 +2217,7 @@ public  RightFragment getContentFragment() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo16-Fragment最常用的基类BaseFragment/" itemprop="url">基础Demo16-Fragment最常用的基类BaseFragment</a></h1>
+                <a class="post-title-link" href="/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/" itemprop="url">基础Demo16-Fragment最常用的基类BaseFragment</a></h1>
         
 
         <div class="post-meta">
@@ -2201,8 +2229,8 @@ public  RightFragment getContentFragment() {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:29:35+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-16T00:00:00+08:00">
+                2019-04-16
               </time>
             
 
@@ -2347,7 +2375,7 @@ public void initData() {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo15-静态加载Fragment/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/基础Demo15-静态加载Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -2366,7 +2394,7 @@ public void initData() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/27/基础Demo15-静态加载Fragment/" itemprop="url">基础Demo15-静态加载Fragment</a></h1>
+                <a class="post-title-link" href="/2019/04/15/基础Demo15-静态加载Fragment/" itemprop="url">基础Demo15-静态加载Fragment</a></h1>
         
 
         <div class="post-meta">
@@ -2378,8 +2406,8 @@ public void initData() {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:26:01+08:00">
-                2019-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-15T00:00:00+08:00">
+                2019-04-15
               </time>
             
 
@@ -2605,7 +2633,7 @@ tools:context=&quot;.MainActivity&quot;&gt;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

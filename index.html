@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/"/>
 
 
 
@@ -153,7 +153,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">QiuFeisheng'Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -183,7 +183,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
           </a>
@@ -193,7 +193,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -232,11 +232,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo66-小米的Toast/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/Html&CSS碎片知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo66-小米的Toast/" itemprop="url">基础Demo66-修改小米的Toast，去掉应用名称</a></h1>
+                <a class="post-title-link" href="/2019/06/06/Html&CSS碎片知识点/" itemprop="url">Html&CSS碎片知识点</a></h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:45:45+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-06T00:00:00+08:00">
+                2019-06-06
               </time>
             
 
@@ -303,18 +303,708 @@
       
         
           
-            <pre><code>import android.content.Context;
-import android.widget.Toast;
+            <h5 id="1、Web前端技术框架"><a href="#1、Web前端技术框架" class="headerlink" title="1、Web前端技术框架"></a>1、Web前端技术框架</h5><p>   <img src="https://i.imgur.com/MN9vVD4.png" alt></p>
+<h5 id="2、html文件的结构"><a href="#2、html文件的结构" class="headerlink" title="2、html文件的结构"></a>2、html文件的结构</h5><p>   <img src="https://i.imgur.com/qK6yBXF.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
 
-public class MiToast {
 
-public static void showShort(Context context, CharSequence message) {
-    Toast mToast = Toast.makeText(context, null, Toast.LENGTH_SHORT);
-    mToast.setText(message);
-    mToast.show();
-        }
-    }
-</code></pre>
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;认识html文件基本结构&lt;/title&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+    &lt;h1&gt;在本小节中，你将学会认识html文件基本结构&lt;/h1&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h5 id="3-标签title—设置网页在浏览器的标题栏"><a href="#3-标签title—设置网页在浏览器的标题栏" class="headerlink" title="3:标签title—设置网页在浏览器的标题栏"></a>3:标签title—设置网页在浏览器的标题栏</h5><p>   <img src="https://i.imgur.com/bRIqCZT.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;hello world&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;欢迎来到慕课网&lt;/h1&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="4-注释"><a href="#4-注释" class="headerlink" title="4:注释"></a>4:注释</h5><p>：html和xml的注释快捷键都是： Ctrl + Shift + /  </p>
+<p>&lt;!-XXX–&gt;</p>
+<h5 id="5-标签body——存放网页显示内容"><a href="#5-标签body——存放网页显示内容" class="headerlink" title="5:标签body——存放网页显示内容"></a>5:标签body——存放网页显示内容</h5><p> <img src="https://i.imgur.com/Zoj49H4.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;了不起的盖茨比&lt;/h1&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫&lt;em&gt;尼克•卡拉威&lt;/em&gt;（托比•马奎尔Tobey Maguire 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的&lt;span&gt;美国梦&lt;/span&gt;，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&lt;strong&gt;&quot;爵士乐时代&quot;&lt;/strong&gt;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>h1:是一级标题标签</p>
+<p>p:段落标签</p>
+<p>strong：是黑体加粗标签</p>
+<h5 id="6：h是——n级标题标签"><a href="#6：h是——n级标题标签" class="headerlink" title="6：h是——n级标题标签"></a>6：h是——n级标题标签</h5><p>  <img src="https://i.imgur.com/CdKd77w.png" alt></p>
+<h5 id="7：span标签——设置文字颜色和字体等style"><a href="#7：span标签——设置文字颜色和字体等style" class="headerlink" title="7：span标签——设置文字颜色和字体等style"></a>7：span标签——设置文字颜色和字体等style</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+
+&lt;style&gt;
+span{
+color:blue;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（托比•马奎尔Tobey Maguire 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的&lt;span&gt;美国梦&lt;/span&gt;，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"><a href="#8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）" class="headerlink" title="8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"></a>8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）</h5><p>  <img src="https://i.imgur.com/n08eyoY.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;q标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;周瑜，不可否认，他是历史上一个了不起的英雄人物！确实也配的上那句&lt;q&gt;聪明秀出为之英，胆略过人为之雄。&lt;/q&gt;  &lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="9：blockquote标签——引用长文本，短文本用q"><a href="#9：blockquote标签——引用长文本，短文本用q" class="headerlink" title="9：blockquote标签——引用长文本，短文本用q"></a>9：blockquote标签——引用长文本，短文本用q</h5><p>  <img src="https://i.imgur.com/obtOKce.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;blockquote标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;心似桂花开&lt;/h2&gt;
+
+&lt;p&gt;大家都在忙于自认为最重要的事情，却没能享受到人生的乐趣，反而要吞下苦果？&lt;/p&gt;
+&lt;blockquote&gt;暗淡轻黄体性柔，情疏迹远只香留。何须浅碧深红色，自是花中第一流。&lt;/blockquote&gt;
+&lt;p&gt;这是李清照《咏桂》中的词句，在李清照看来，桂花暗淡青黄，性情温柔，淡泊自适，远比那些大红大紫争奇斗艳花值得称道。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="10：br标签——文本间进行换行"><a href="#10：br标签——文本间进行换行" class="headerlink" title="10：br标签——文本间进行换行"></a>10：br标签——文本间进行换行</h5><p> <img src="https://i.imgur.com/QD20YLt.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;br标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;《咏桂》&lt;/h2&gt;
+&lt;p&gt;暗淡轻黄体性柔，&lt;br /&gt;情疏迹远只香留。&lt;br /&gt;何须浅碧深红色，&lt;br /&gt;自是花中第一流。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="11：-amp-nbsp标签——为网页文本添加空格"><a href="#11：-amp-nbsp标签——为网页文本添加空格" class="headerlink" title="11：&amp;nbsp标签——为网页文本添加空格"></a>11：&amp;nbsp标签——为网页文本添加空格</h5><p> <img src="https://i.imgur.com/Nxf79ud.png" alt="10"></p>
+<p>  <img src="https://i.imgur.com/3T7tJjh.png" alt="11"></p>
+<h5 id="12：hr标签——添加水平横线"><a href="#12：hr标签——添加水平横线" class="headerlink" title="12：hr标签——添加水平横线"></a>12：hr标签——添加水平横线</h5><p>  <img src="https://i.imgur.com/WPFqX7j.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;hr标签使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;火车飞驰过暗夜里的村庄，月光，总是太容易让思念寂寞，太容易让人觉得孤独。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;每一枚被风吹起的蒲公英，都载满了一双眼睛的深情告别与一个目光的依依不舍。那天，我拿着行李，带上一个背影的祝福与惆怅，挥手告别了这片土地。我不知道，我何时会回来。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="13：address标签——为网页加入地址信息"><a href="#13：address标签——为网页加入地址信息" class="headerlink" title="13：address标签——为网页加入地址信息"></a>13：address标签——为网页加入地址信息</h5><p>：默认是斜体，也可以通过CSS来改变样式</p>
+<p> <img src="https://i.imgur.com/PEV5pxl.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;address标签介绍&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;慕课网&lt;/h2&gt;
+&lt;p&gt;超酷的互联网、IT技术免费学习平台，创新的网络一站式学习、实践体验；服务及时贴心，内容专业、有趣易学。专注服务互联网工程师快速成为技术高手!公司地址:&lt;address&gt;北京市西城区德外大街10号&lt;/address&gt; &lt;/p&gt; 
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="14：code标签——加在一行代码外面"><a href="#14：code标签——加在一行代码外面" class="headerlink" title="14：code标签——加在一行代码外面"></a>14：code标签——加在一行代码外面</h5><p><code>代码语言</code></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;code标签介绍&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;我们可能知道水平渐变的实现，类似这样：&lt;code&gt;{background-image:linear-gradient(left, red 100px, yellow 200px);}&lt;/code&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="15：pre标签——加入大段代码"><a href="#15：pre标签——加入大段代码" class="headerlink" title="15：pre标签——加入大段代码"></a>15：pre标签——加入大段代码</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;pre标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;pre&gt;
+var message=&quot;欢迎&quot;;
+for(var i=1;i&lt;=10;i++)&lt;br&gt;
+{&lt;br&gt;
+alert(message); &lt;br&gt;
+}&lt;br&gt;
+&lt;/pre&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="16：ul标签——无序号的信息列表"><a href="#16：ul标签——无序号的信息列表" class="headerlink" title="16：ul标签——无序号的信息列表"></a>16：ul标签——无序号的信息列表</h5><p>  <img src="https://i.imgur.com/Ueyf3Im.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt; p标签&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;
+&lt;li&gt;
+     我的第一个列表信息&lt;/li&gt;
+     &lt;li&gt;
+     我的第二个列表信息&lt;/li&gt;
+     &lt;li&gt;
+     我的第三个列表信息&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="17-ol标签——有序号的信息列表"><a href="#17-ol标签——有序号的信息列表" class="headerlink" title="17:ol标签——有序号的信息列表"></a>17:ol标签——有序号的信息列表</h5><p><img src="https://i.imgur.com/Zzrdc0E.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt; p标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;ol&gt;
+   &lt;li&gt;我的第一个列表信息。&lt;/li&gt;
+   &lt;li&gt;我的第一个列表信息。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="18：div划分独立逻辑"><a href="#18：div划分独立逻辑" class="headerlink" title="18：div划分独立逻辑"></a>18：div划分独立逻辑</h5><p><img src="https://i.imgur.com/JPEhTh5.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;div标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;&lt;h2&gt;热门课程排行榜&lt;/h2&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;ol&gt;
+    &lt;li&gt;前端开发面试心法 &lt;/li&gt;
+    &lt;li&gt;零基础学习html&lt;/li&gt;
+    &lt;li&gt;javascript全攻略&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;h2&gt;最新课程排行&lt;/h2&gt;&lt;/div&gt;
+
+
+&lt;div&gt;
+&lt;ol&gt;
+    &lt;li&gt;版本管理工具介绍—Git篇 &lt;/li&gt;
+    &lt;li&gt;Canvas绘图详解&lt;/li&gt;
+    &lt;li&gt;QQ5.0侧滑菜单&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h5 id="19：-lt-div-id-”版块名称”——div模块分配id值，进行标示"><a href="#19：-lt-div-id-”版块名称”——div模块分配id值，进行标示" class="headerlink" title="19：&lt;div  id=”版块名称”——div模块分配id值，进行标示"></a>19：&lt;div  id=”版块名称”——div模块分配id值，进行标示</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;div标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div id=&quot;hotList&quot;&gt;
+   &lt;h2&gt;热门课程排行榜&lt;/h2&gt;
+&lt;ol&gt;
+   &lt;li&gt;前端开发面试心法 &lt;/li&gt;
+  &lt;li&gt;零基础学习html&lt;/li&gt;
+   &lt;li&gt;javascript全攻略&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+
+&lt;div id=&quot;learningInstructed&quot;&gt;
+&lt;h2&gt;web前端开发导学课程&lt;/h2&gt;
+&lt;ul&gt;
+   &lt;li&gt;网页专业名词大扫盲 &lt;/li&gt;
+   &lt;li&gt;网站职位定位指南&lt;/li&gt;
+   &lt;li&gt;为您解密Yahoo网站制作流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="20：table-tbody-tr-th标签——展示表格"><a href="#20：table-tbody-tr-th标签——展示表格" class="headerlink" title="20：table,tbody,tr,th标签——展示表格"></a>20：table,tbody,tr,th标签——展示表格</h5><p>   <img src="https://i.imgur.com/JzPCyor.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;认识table表标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;班级&lt;/th&gt;
+  &lt;th&gt;学生数&lt;/th&gt;
+  &lt;th&gt;平均成绩&lt;/th&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;一班&lt;/td&gt;
+  &lt;td&gt;30&lt;/td&gt;
+  &lt;td&gt;89&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;二班&lt;/td&gt;
+  &lt;td&gt;35&lt;/td&gt;
+  &lt;td&gt;85&lt;/td&gt;
+&lt;/tr&gt;
+
+ &lt;tr&gt;
+  &lt;td&gt;三班&lt;/td&gt;
+  &lt;td&gt;32&lt;/td&gt;
+  &lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="21：表格加入CSS样式——加入横线边框"><a href="#21：表格加入CSS样式——加入横线边框" class="headerlink" title="21：表格加入CSS样式——加入横线边框"></a>21：表格加入CSS样式——加入横线边框</h5><p>：在head里面加入style样式设置table的样式</p>
+<p><img src="https://i.imgur.com/cqRvupo.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;为表格添加边框&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+table tr td,th{border:1px solid #000;}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+&lt;table summary=&quot;&quot;&gt;
+  &lt;tr&gt;
+&lt;th&gt;班级&lt;/th&gt;
+&lt;th&gt;学生数&lt;/th&gt;
+&lt;th&gt;平均成绩&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;一班&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;89&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;二班&lt;/td&gt;
+&lt;td&gt;35&lt;/td&gt;
+&lt;td&gt;85&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;三班&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="22：table-summary——摘要；caption——表格标题"><a href="#22：table-summary——摘要；caption——表格标题" class="headerlink" title="22：table summary——摘要；caption——表格标题"></a>22：table summary——摘要；caption——表格标题</h5><p>：摘要在浏览器是不显示出来的，但是对搜索引擎可以更好读懂表格</p>
+<p> <img src="https://i.imgur.com/ITDIqjf.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;认识table表标签&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+table tr td,th{
+border:1px solid #000;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+
+&lt;table summary=&quot;本表格记录2012年到2013年库存记录，记录包括U盘和耳机库存量&quot;&gt;
+
+  &lt;caption&gt;2012年到2013年库存记录&lt;/caption&gt;
+
+
+  &lt;tr&gt;
+&lt;th&gt;产品名称 &lt;/th&gt;
+&lt;th&gt;品牌 &lt;/th&gt;
+&lt;th&gt;库存量（个） &lt;/th&gt;
+&lt;th&gt;入库时间 &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;耳机 &lt;/td&gt;
+&lt;td&gt;联想 &lt;/td&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;td&gt;2013-1-2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;U盘 &lt;/td&gt;
+&lt;td&gt;金士顿 &lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;2013-8-10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;U盘 &lt;/td&gt;
+&lt;td&gt;爱国者 &lt;/td&gt;
+&lt;td&gt;133&lt;/td&gt;
+&lt;td&gt;2013-3-25&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="23：a标签——为文本设置超链接"><a href="#23：a标签——为文本设置超链接" class="headerlink" title="23：a标签——为文本设置超链接"></a>23：a标签——为文本设置超链接</h5><pre><code>&lt;a  href=&quot;目标网址&quot;  title=&quot;鼠标滑过显示的文本&quot;&gt;链接显示的文本&lt;/a&gt;
+</code></pre><p>title类似Android的Toast功能，不过要鼠标划过去才能显示内容</p>
+<p>效果</p>
+<p> <img src="https://i.imgur.com/QK0gu3T.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;ul&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;前端开发面试心法&quot;&gt;前端开发面试心法&lt;/a&gt; &lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;零基础学习html&quot;&gt;零基础学习html&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;JavaScript全攻略&quot;&gt;JavaScript全攻略&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot; title=&quot;点击查看托比•马奎尔Tobey Maguire的个人简介&quot;&gt;托比•马奎尔Tobey Maguire&lt;/a&gt; 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="24：在新建的浏览器窗口打开链接"><a href="#24：在新建的浏览器窗口打开链接" class="headerlink" title="24：在新建的浏览器窗口打开链接"></a>24：在新建的浏览器窗口打开链接</h5><pre><code>&lt;a href=&quot;目标网址&quot; target=&quot;_blank&quot;&gt;click here!&lt;/a&gt;
+</code></pre><p>主要是：target=”_blank”来实现的</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot; target=&quot;_blank&quot;&gt;托比•马奎尔Tobey Maguire &lt;/a&gt;饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="25：mailto标签——发送邮件"><a href="#25：mailto标签——发送邮件" class="headerlink" title="25：mailto标签——发送邮件"></a>25：mailto标签——发送邮件</h5><p><img src="https://i.imgur.com/uKuILYF.png" alt></p>
+<p><img src="https://i.imgur.com/Qu08Zx5.png" alt></p>
+<h5 id="26：img标签——为网页插入图片"><a href="#26：img标签——为网页插入图片" class="headerlink" title="26：img标签——为网页插入图片"></a>26：img标签——为网页插入图片</h5><pre><code>&lt;img src=&quot;图片地址&quot; alt=&quot;下载失败时的替换文本&quot; title = &quot;提示文本&quot;&gt;
+
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot;&gt;托比•马奎尔Tobey Maguire &lt;/a&gt;饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+  &lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+  &lt;img src=&quot;http://img.mukewang.com/52da54ed0001ecfa04120172.jpg&quot; title=&quot;电影介绍&quot;&gt; 
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="27-form表单——与用户进行交互"><a href="#27-form表单——与用户进行交互" class="headerlink" title="27:form表单——与用户进行交互"></a>27:form表单——与用户进行交互</h5><pre><code>&lt;form   method=&quot;传送方式&quot;   action=&quot;保存前端发送数据的服务器文件&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>表单标签</title><br></head><br><body><br><form method="post" action="save.php"><br>      <label for="username">用户名:</label><br>      <input type="text" name="username" id="username" value><br>      <label for="pass">密码:</label><br>      <input type="password" name="pass" id="pass" value><br>      <input type="submit" value="确定" name="submit"><br>      <input type="reset" value="重置" name="reset"><br></form><br></body><br></html>
+
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;表单标签&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+  &lt;label for=&quot;username&quot;&gt;用户名:&lt;/label&gt;
+  &lt;input type=&quot;text&quot;  name=&quot;username&quot; id=&quot;username&quot; value=&quot;&quot; /&gt;
+  &lt;label for=&quot;pass&quot;&gt;密码:&lt;/label&gt;
+  &lt;input type=&quot;password&quot;  name=&quot;pass&quot; id=&quot;pass&quot; value=&quot;&quot; /&gt;    
+  &lt;input type=&quot;submit&quot; value=&quot;确定&quot;  name=&quot;submit&quot; /&gt;
+  &lt;input type=&quot;reset&quot; value=&quot;重置&quot; name=&quot;reset&quot; /&gt;
+&lt;/form&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="28：文本输入框、密码输入框"><a href="#28：文本输入框、密码输入框" class="headerlink" title="28：文本输入框、密码输入框"></a>28：文本输入框、密码输入框</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>文本输入框、密码输入框</title><br></head><br><body><br><form method="post" action="save.php"><br>    账户:<br>    <input type="text" name="myName"><br>    <br><br>    密码:<br><input type="password" name="pass"><br></form><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;文本输入框、密码输入框&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form  method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+账户: 
+&lt;input  type=&quot;text&quot;  name=&quot;myName&quot; /&gt;
+&lt;br&gt;
+密码: 
+&lt;input  type=&quot;password&quot;  name=&quot;pass&quot; /&gt;
+&lt;/form&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="29：文本域——支持多行文本输入"><a href="#29：文本域——支持多行文本输入" class="headerlink" title="29：文本域——支持多行文本输入"></a>29：文本域——支持多行文本输入</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>文本域</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>个人简介：</label><br>    <textarea cols="50" rows="10">在这里输入内容…</textarea><br>    <input type="submit" value="确定" name="submit"><br>    <input type="reset" value="重置" name="reset"><br></form><br></body><br></html>
+
+
+
+<pre><code>&lt;textarea  rows=&quot;行数&quot; cols=&quot;列数&quot;&gt;文本&lt;/textarea&gt;
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;文本域&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;个人简介：&lt;/label&gt;
+&lt;textarea cols=&quot;50&quot; rows=&quot;10&quot;&gt;在这里输入内容...&lt;/textarea&gt;
+&lt;input type=&quot;submit&quot; value=&quot;确定&quot;  name=&quot;submit&quot; /&gt;
+&lt;input type=&quot;reset&quot; value=&quot;重置&quot;  name=&quot;reset&quot; /&gt;
+&lt;/form&gt; 
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="30：单选框，复选框"><a href="#30：单选框，复选框" class="headerlink" title="30：单选框，复选框"></a>30：单选框，复选框</h5><pre><code>&lt;input   type=&quot;radio/checkbox&quot;   value=&quot;值&quot;    name=&quot;名称&quot;   checked=&quot;checked&quot;/&gt;
+</code></pre><p>1、type:</p>
+<p>   当 type=”radio” 时，控件为单选框</p>
+<p>   当 type=”checkbox” 时，控件为复选框</p>
+<p>2、value：提交数据到服务器的值（后台程序PHP使用）</p>
+<p>3、name：为控件命名，以备后台程序 ASP、PHP 使用</p>
+<p>4、checked：当设置 checked=”checked” 时，该选项被默认选中</p>
+<p>效果：</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>单选框、复选框</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>性别:</label><br>    <label>男</label><br>    <input type="radio" value="1" name="gender"><br>    <label>女</label><br>    <input type="radio" value="2" name="gender"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;单选框、复选框&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;性别:&lt;/label&gt;
+&lt;label&gt;男&lt;/label&gt;
+&lt;input type=&quot;radio&quot; value=&quot;1&quot;  name=&quot;gender&quot; /&gt;
+&lt;label&gt;女&lt;/label&gt;
+&lt;input type=&quot;radio&quot; value=&quot;2&quot;  name=&quot;gender&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="31：下拉列表框"><a href="#31：下拉列表框" class="headerlink" title="31：下拉列表框"></a>31：下拉列表框</h5><p>效果：</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>下拉列表框</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select><br>      <option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br></form><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;下拉列表框&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot; selected=&quot;selected&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="32：下拉列表框进行多选"><a href="#32：下拉列表框进行多选" class="headerlink" title="32：下拉列表框进行多选"></a>32：下拉列表框进行多选</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>使用下拉列表框进行多选</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select multiple="multiple"><br>      <option value="看书">看书</option><br>      <option value="旅游">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;使用下拉列表框进行多选&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select multiple=&quot;multiple&quot;&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+</code></pre><h5 id="33：提交按钮"><a href="#33：提交按钮" class="headerlink" title="33：提交按钮"></a>33：提交按钮</h5><p>type：只有当type值设置为submit时，按钮才有提交作用</p>
+<p>value：按钮上显示的文字</p>
+<pre><code>&lt;input   type=&quot;submit&quot;   value=&quot;提交&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>提交按钮</title><br></head><br><body><br><form method="post" action="save.php"><br>    <label for="myName">姓名：</label><br>    <input type="text" value=" " name="myName "><br>    <input type="submit" value="提交" name="submitBtn"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;提交按钮&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form  method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+&lt;label for=&quot;myName&quot;&gt;姓名：&lt;/label&gt;
+&lt;input type=&quot;text&quot; value=&quot; &quot; name=&quot;myName &quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;submitBtn&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="34：重置按钮"><a href="#34：重置按钮" class="headerlink" title="34：重置按钮"></a>34：重置按钮</h5><p>type：只有当type值设置为reset时，按钮才有重置作用</p>
+<p>value：按钮上显示的文字</p>
+<pre><code>&lt;input type=&quot;reset&quot; value=&quot;重置&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>重置按钮</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select><br>      <option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br>    <input type="submit" value="确定"><br>    <input type="reset" value="重置"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;重置按钮&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot; selected=&quot;selected&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;input type=&quot;submit&quot; value=&quot;确定&quot;  /&gt;
+&lt;input type=&quot;reset&quot; value=&quot;重置&quot;  /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="35：关联触发控件"><a href="#35：关联触发控件" class="headerlink" title="35：关联触发控件"></a>35：关联触发控件</h5><p>标签的 for 属性中的值应当与相关控件的 id 属性值一定要相同。</p>
+<pre><code>&lt;label for=&quot;控件id名称&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>form中的lable标签</title><br></head><br><br><body><br><form><br>   <label for="male">男</label><br>  <input type="radio" name="gender" id="male"><br>  <br><br>  <label for="female">女</label><br>  <input type="radio" name="gender" id="female"><br>  <br><br>  <label for="email">输入你的邮箱地址</label><br>  <input type="email" id="email" placeholder="Enter email"><br><br></form><br><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;form中的lable标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form&gt;
+   &lt;label for=&quot;male&quot;&gt;男&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;male&quot; /&gt;
+  &lt;br /&gt;
+  &lt;label for=&quot;female&quot;&gt;女&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;female&quot; /&gt;
+  &lt;br /&gt;
+  &lt;label for=&quot;email&quot;&gt;输入你的邮箱地址&lt;/label&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;Enter email&quot;&gt;
+
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+
           
         
       
@@ -362,11 +1052,11 @@ public static void showShort(Context context, CharSequence message) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo65-像素dp转化工具类/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/02/基础Demo65-像素dp转化工具类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -381,7 +1071,7 @@ public static void showShort(Context context, CharSequence message) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo65-像素dp转化工具类/" itemprop="url">基础Demo65-像素dp转化工具类</a></h1>
+                <a class="post-title-link" href="/2019/06/02/基础Demo65-像素dp转化工具类/" itemprop="url">基础Demo65-像素dp转化工具类</a></h1>
         
 
         <div class="post-meta">
@@ -393,8 +1083,8 @@ public static void showShort(Context context, CharSequence message) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:44:47+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-02T00:00:00+08:00">
+                2019-06-02
               </time>
             
 
@@ -505,11 +1195,11 @@ public static int px2dip(Context context, float pxValue) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo64-缓存工具类Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/基础Demo64-缓存工具类Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -524,7 +1214,7 @@ public static int px2dip(Context context, float pxValue) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo64-缓存工具类Demo/" itemprop="url">基础Demo64-缓存工具类Demo</a></h1>
+                <a class="post-title-link" href="/2019/06/01/基础Demo64-缓存工具类Demo/" itemprop="url">基础Demo64-缓存工具类Demo</a></h1>
         
 
         <div class="post-meta">
@@ -536,8 +1226,8 @@ public static int px2dip(Context context, float pxValue) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:43:34+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-01T00:00:00+08:00">
+                2019-06-01
               </time>
             
 
@@ -694,11 +1384,11 @@ public static String getString(Context context, String key) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo63-联网请求地址的Constants Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/31/基础Demo63-联网请求地址的Constants Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -713,7 +1403,7 @@ public static String getString(Context context, String key) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo63-联网请求地址的Constants Demo/" itemprop="url">基础Demo63-联网请求地址的Constants Demo</a></h1>
+                <a class="post-title-link" href="/2019/05/31/基础Demo63-联网请求地址的Constants Demo/" itemprop="url">基础Demo63-联网请求地址的Constants Demo</a></h1>
         
 
         <div class="post-meta">
@@ -725,8 +1415,8 @@ public static String getString(Context context, String key) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:41:18+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T00:00:00+08:00">
+                2019-05-31
               </time>
             
 
@@ -831,11 +1521,11 @@ public static final String NEWSCENTER_PAGER_URL=BASE_URL+&quot;/static/api/news/
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo61-常用父类（2）-BasePager/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/基础Demo61-常用父类（2）-BasePager/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -850,7 +1540,7 @@ public static final String NEWSCENTER_PAGER_URL=BASE_URL+&quot;/static/api/news/
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo61-常用父类（2）-BasePager/" itemprop="url">基础Demo61-常用父类（2）-BasePager</a></h1>
+                <a class="post-title-link" href="/2019/05/30/基础Demo61-常用父类（2）-BasePager/" itemprop="url">基础Demo61-常用父类（2）-BasePager</a></h1>
         
 
         <div class="post-meta">
@@ -862,8 +1552,8 @@ public static final String NEWSCENTER_PAGER_URL=BASE_URL+&quot;/static/api/news/
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:40:06+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-30T00:00:00+08:00">
+                2019-05-30
               </time>
             
 
@@ -1017,11 +1707,11 @@ public void initData(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo59-drawable.xml：一般是作为xxx的background/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/基础Demo59-drawable.xml：一般是作为xxx的background/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1036,7 +1726,7 @@ public void initData(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo59-drawable.xml：一般是作为xxx的background/" itemprop="url">基础Demo59-drawable.xml：一般是作为xxx的background</a></h1>
+                <a class="post-title-link" href="/2019/05/29/基础Demo59-drawable.xml：一般是作为xxx的background/" itemprop="url">基础Demo59-drawable.xml：一般是作为xxx的background</a></h1>
         
 
         <div class="post-meta">
@@ -1048,8 +1738,8 @@ public void initData(){
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:30:34+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-29T00:00:00+08:00">
+                2019-05-29
               </time>
             
 
@@ -1186,7 +1876,7 @@ public void initData(){
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1213,7 +1903,7 @@ public void initData(){
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:28:05+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">
                 2019-05-28
               </time>
             
@@ -1738,11 +2428,11 @@ public class RefreshListView extends ListView {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo57-简单的自定义View（1）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo57-简单的自定义View（1）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1757,7 +2447,7 @@ public class RefreshListView extends ListView {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo57-简单的自定义View（1）/" itemprop="url">基础Demo57-简单的自定义View（1）</a></h1>
+                <a class="post-title-link" href="/2019/05/27/基础Demo57-简单的自定义View（1）/" itemprop="url">基础Demo57-简单的自定义View（1）</a></h1>
         
 
         <div class="post-meta">
@@ -1769,8 +2459,8 @@ public class RefreshListView extends ListView {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:25:54+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T00:00:00+08:00">
+                2019-05-27
               </time>
             
 
@@ -1981,11 +2671,11 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo56-ViewPager的基本Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/基础Demo56-ViewPager的基本Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -2000,7 +2690,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo56-ViewPager的基本Demo/" itemprop="url">基础Demo56-ViewPager的基本Demo</a></h1>
+                <a class="post-title-link" href="/2019/05/26/基础Demo56-ViewPager的基本Demo/" itemprop="url">基础Demo56-ViewPager的基本Demo</a></h1>
         
 
         <div class="post-meta">
@@ -2012,8 +2702,8 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:23:47+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T00:00:00+08:00">
+                2019-05-26
               </time>
             
 
@@ -2419,11 +3109,11 @@ class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/基础Demo55-基本动画Demo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/基础Demo55-基本动画Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -2438,7 +3128,7 @@ class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/基础Demo55-基本动画Demo/" itemprop="url">基础Demo55-基本动画Demo</a></h1>
+                <a class="post-title-link" href="/2019/05/25/基础Demo55-基本动画Demo/" itemprop="url">基础Demo55-基本动画Demo</a></h1>
         
 
         <div class="post-meta">
@@ -2450,8 +3140,8 @@ class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T09:22:01+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-25T00:00:00+08:00">
+                2019-05-25
               </time>
             
 
@@ -2752,7 +3442,7 @@ class MyAnimationListener implements Animation.AnimationListener{
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

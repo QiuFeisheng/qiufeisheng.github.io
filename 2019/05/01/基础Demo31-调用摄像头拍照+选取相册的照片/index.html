@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、activity_main.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:orientation=&amp;quot;vert">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础Demo31-调用摄像头拍照+选取相册的照片">
+<meta property="og:url" content="http://yoursite.com/2019/05/01/基础Demo31-调用摄像头拍照+选取相册的照片/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1、activity_main.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:orientation=&amp;quot;vert">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-29T09:03:51.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础Demo31-调用摄像头拍照+选取相册的照片">
+<meta name="twitter:description" content="1、activity_main.xml&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; android:orientation=&amp;quot;vert">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/01/基础Demo31-调用摄像头拍照+选取相册的照片/">
+
+
+
+
+
+  <title>基础Demo31-调用摄像头拍照+选取相册的照片 | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/基础Demo31-调用摄像头拍照+选取相册的照片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基础Demo31-调用摄像头拍照+选取相册的照片</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-01T00:00:00+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;Button
+    android:id=&quot;@+id/take_photo&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Take Photo&quot; /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/choose_from_album&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Choose From Album&quot; /&gt;
+
+&lt;ImageView
+    android:id=&quot;@+id/picture&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity {
+public static final int TAKE_PHOTO = 1;
+
+public static final int CHOOSE_PHOTO = 2;
+
+private ImageView picture;
+
+private Uri imageUri;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button takePhoto = (Button) findViewById(R.id.take_photo);
+    Button chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
+    picture = (ImageView) findViewById(R.id.picture);
+    takePhoto.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // 创建File对象，用于存储拍照后的图片
+            File outputImage = new File(getExternalCacheDir(), &quot;output_image.jpg&quot;);
+            try {
+                if (outputImage.exists()) {
+                    outputImage.delete();
+                }
+                outputImage.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (Build.VERSION.SDK_INT &lt; 24) {
+                imageUri = Uri.fromFile(outputImage);
+            } else {
+                imageUri = FileProvider.getUriForFile(MainActivity.this, &quot;com.example.cameraalbumtest.fileprovider&quot;, outputImage);
+            }
+            // 启动相机程序
+            Intent intent = new Intent(&quot;android.media.action.IMAGE_CAPTURE&quot;);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            startActivityForResult(intent, TAKE_PHOTO);
+        }
+    });
+    chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+            } else {
+                openAlbum();
+            }
+        }
+    });
+}
+
+private void openAlbum() {
+    Intent intent = new Intent(&quot;android.intent.action.GET_CONTENT&quot;);
+    intent.setType(&quot;image/*&quot;);
+    startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
+}
+
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    switch (requestCode) {
+        case 1:
+            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openAlbum();
+            } else {
+                Toast.makeText(this, &quot;You denied the permission&quot;, Toast.LENGTH_SHORT).show();
+            }
+            break;
+        default:
+    }
+}
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+        case TAKE_PHOTO:
+            if (resultCode == RESULT_OK) {
+                try {
+                    // 将拍摄的照片显示出来
+                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                    picture.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            break;
+        case CHOOSE_PHOTO:
+            if (resultCode == RESULT_OK) {
+                // 判断手机系统版本号
+                if (Build.VERSION.SDK_INT &gt;= 19) {
+                    // 4.4及以上系统使用这个方法处理图片
+                    handleImageOnKitKat(data);
+                } else {
+                    // 4.4以下系统使用这个方法处理图片
+                    handleImageBeforeKitKat(data);
+                }
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+@TargetApi(19)
+private void handleImageOnKitKat(Intent data) {
+    String imagePath = null;
+    Uri uri = data.getData();
+    Log.d(&quot;TAG&quot;, &quot;handleImageOnKitKat: uri is &quot; + uri);
+    if (DocumentsContract.isDocumentUri(this, uri)) {
+        // 如果是document类型的Uri，则通过document id处理
+        String docId = DocumentsContract.getDocumentId(uri);
+        if(&quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority())) {
+            String id = docId.split(&quot;:&quot;)[1]; // 解析出数字格式的id
+            String selection = MediaStore.Images.Media._ID + &quot;=&quot; + id;
+            imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+        } else if (&quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority())) {
+            Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;), Long.valueOf(docId));
+            imagePath = getImagePath(contentUri, null);
+        }
+    } else if (&quot;content&quot;.equalsIgnoreCase(uri.getScheme())) {
+        // 如果是content类型的Uri，则使用普通方式处理
+        imagePath = getImagePath(uri, null);
+    } else if (&quot;file&quot;.equalsIgnoreCase(uri.getScheme())) {
+        // 如果是file类型的Uri，直接获取图片路径即可
+        imagePath = uri.getPath();
+    }
+    displayImage(imagePath); // 根据图片路径显示图片
+}
+
+private void handleImageBeforeKitKat(Intent data) {
+    Uri uri = data.getData();
+    String imagePath = getImagePath(uri, null);
+    displayImage(imagePath);
+}
+
+private String getImagePath(Uri uri, String selection) {
+    String path = null;
+    // 通过Uri和selection来获取真实的图片路径
+    Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+    if (cursor != null) {
+        if (cursor.moveToFirst()) {
+            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        }
+        cursor.close();
+    }
+    return path;
+}
+
+private void displayImage(String imagePath) {
+    if (imagePath != null) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+        picture.setImageBitmap(bitmap);
+    } else {
+        Toast.makeText(this, &quot;failed to get image&quot;, Toast.LENGTH_SHORT).show();
+    }
+}
+</code></pre><p>}</p>
+<h3 id="3、在AndroidManifest-xml中注册内容提供器"><a href="#3、在AndroidManifest-xml中注册内容提供器" class="headerlink" title="3、在AndroidManifest.xml中注册内容提供器"></a>3、在AndroidManifest.xml中注册内容提供器</h3><pre><code>&lt;provider
+        android:name=&quot;android.support.v4.content.FileProvider&quot;
+        android:authorities=&quot;com.example.cameraalbumtest.fileprovider&quot;
+        android:exported=&quot;false&quot;
+        android:grantUriPermissions=&quot;true&quot;&gt;
+        &lt;meta-data
+            android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;
+            android:resource=&quot;@xml/file_paths&quot; /&gt;
+    &lt;/provider&gt;
+
+&lt;/application&gt;
+</code></pre><h3 id="4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml"><a href="#4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml" class="headerlink" title="4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml"></a>4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+&lt;external-path name=&quot;my_images&quot; path=&quot;&quot; /&gt;
+&lt;/paths&gt;
+</code></pre><h3 id="5、权限"><a href="#5、权限" class="headerlink" title="5、权限"></a>5、权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/30/基础Demo30-通知Notification/" rel="next" title="基础Demo30-通知Notification">
+                <i class="fa fa-chevron-left"></i> 基础Demo30-通知Notification
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/02/基础Demo32-MediaPlayer音频播放/" rel="prev" title="基础Demo32-MediaPlayer音频播放">
+                基础Demo32-MediaPlayer音频播放 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、activity-main-xml"><span class="nav-number">1.</span> <span class="nav-text">1、activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、MainActivity-java"><span class="nav-number">2.</span> <span class="nav-text">2、MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、在AndroidManifest-xml中注册内容提供器"><span class="nav-number">3.</span> <span class="nav-text">3、在AndroidManifest.xml中注册内容提供器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、res—-gt-New—-gt-Directory—-gt-xml—-gt-New—-gt-File—-gt-file-paths-xml"><span class="nav-number">4.</span> <span class="nav-text">4、res—&gt;New—&gt;Directory—&gt;xml—-&gt;New—&gt;File—&gt;file_paths.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、权限"><span class="nav-number">5.</span> <span class="nav-text">5、权限</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
