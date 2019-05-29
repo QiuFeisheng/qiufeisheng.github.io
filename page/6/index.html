@@ -232,6 +232,227 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/基础Demo15-静态加载Fragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/15/基础Demo15-静态加载Fragment/" itemprop="url">基础Demo15-静态加载Fragment</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-15T00:00:00+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、left-fragment-xml-right-fragment-xml"><a href="#1、left-fragment-xml-right-fragment-xml" class="headerlink" title="1、left_fragment.xml     right_fragment.xml"></a>1、left_fragment.xml     right_fragment.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;Button
+    android:id=&quot;@+id/btn_1&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Left&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><hr>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+android:background=&quot;#3e3e3e&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+
+&lt;Button
+    android:id=&quot;@+id/btn_2&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center_horizontal&quot;
+    android:text=&quot;Button_Right&quot;
+    /&gt;
+
+
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、LeftFragment-java"><a href="#2、LeftFragment-java" class="headerlink" title="2、LeftFragment.java"></a>2、LeftFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class LeftFragment extends Fragment {
+
+private Button mButton;
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view=inflater.inflate(R.layout.left_fragment,container,false);
+    mButton=(Button)view.findViewById(R.id.btn_1);
+    return view;
+    }
+}
+</code></pre><h3 id="3、RightFragment-java"><a href="#3、RightFragment-java" class="headerlink" title="3、RightFragment.java"></a>3、RightFragment.java</h3><pre><code>import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class RightFragment extends Fragment {
+
+
+private Button mButton;
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view=inflater.inflate(R.layout.right_fragment,container,false);
+    mButton=(Button)view.findViewById(R.id.btn_2);
+    return view;
+  }
+}
+</code></pre><h3 id="4、在activity-main-xml中类似自定义控件引入fragment"><a href="#4、在activity-main-xml中类似自定义控件引入fragment" class="headerlink" title="4、在activity_main.xml中类似自定义控件引入fragment"></a>4、在activity_main.xml中类似自定义控件引入fragment</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+tools:context=&quot;.MainActivity&quot;&gt;
+
+
+&lt;fragment
+    android:id=&quot;@+id/left_fragment&quot;
+    android:name=&quot;com.mo.fragmentdemo1.LeftFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot;/&gt;
+
+
+&lt;fragment
+    android:id=&quot;@+id/right_fragment&quot;
+    android:name=&quot;com.mo.fragmentdemo1.RightFragment&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout_weight=&quot;1&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/基础Demo14-RecyclerView实现聊天界面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2114,152 +2335,6 @@ android:launchMode=&quot;singleInstance&quot;&gt;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/基础Demo5-Activity意外回收保存数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/05/基础Demo5-Activity意外回收保存数据/" itemprop="url">基础Demo5-Activity意外回收保存数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-05T00:00:00+08:00">
-                2019-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。"><a href="#1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。" class="headerlink" title="1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。"></a>1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><pre><code>public static final String SAVE_KEY=&quot;save_key&quot;;
-private String data;
-......
-
-//1、重写onSaveInstanceState, data---&gt;key---&gt;outState： key是快递，outState是快递车
-
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-super.onSaveInstanceState(outState);
-
-outState.putString(SAVE_KEY,data);
-}
-
-
-//2、在onCreate()里面的savedInstanceState取值后再填充显示即可
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_main);
-
-if (savedInstanceState!=null){
-    String tempData=savedInstanceState.getString(SAVE_KEY);
-    Log.d(&quot;保存的数据&quot;,tempData);
- }
-initView();
-initData();
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2310,7 +2385,7 @@ initData();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
