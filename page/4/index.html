@@ -232,161 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo34-WebView最简单的用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo34-WebView最简单的用法/" itemprop="url">基础Demo34-WebView最简单的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;WebView
-    android:id=&quot;@+id/web_view&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; /&gt;
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-public class MainActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    WebView webView = (WebView) findViewById(R.id.web_view);
-    webView.getSettings().setJavaScriptEnabled(true);
-    webView.setWebViewClient(new WebViewClient());
-    webView.loadUrl(&quot;https://www.baidu.com&quot;);
-}
-
-@Override
-public boolean onKeyDown(int keyCode, KeyEvent event) {
-if (keyCode == KeyEvent.KEYCODE_BACK &amp;&amp; webView.canGoBack()) {
-    webView.goBack();//返回上个页面
-    return true;
-}
-return super.onKeyDown(keyCode, event);//退出H5界面
- } }
-</code></pre><h3 id="3、AndroidManifest-xml增加权限"><a href="#3、AndroidManifest-xml增加权限" class="headerlink" title="3、AndroidManifest.xml增加权限"></a>3、AndroidManifest.xml增加权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo36-封装HttpURLConnection和OkHttp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -631,6 +476,161 @@ public void onFailure(Call call,IOException e){
 }
 
 });
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo34-WebView最简单的用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/27/基础Demo34-WebView最简单的用法/" itemprop="url">基础Demo34-WebView最简单的用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T17:50:37+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+
+&lt;WebView
+    android:id=&quot;@+id/web_view&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+public class MainActivity extends AppCompatActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    WebView webView = (WebView) findViewById(R.id.web_view);
+    webView.getSettings().setJavaScriptEnabled(true);
+    webView.setWebViewClient(new WebViewClient());
+    webView.loadUrl(&quot;https://www.baidu.com&quot;);
+}
+
+@Override
+public boolean onKeyDown(int keyCode, KeyEvent event) {
+if (keyCode == KeyEvent.KEYCODE_BACK &amp;&amp; webView.canGoBack()) {
+    webView.goBack();//返回上个页面
+    return true;
+}
+return super.onKeyDown(keyCode, event);//退出H5界面
+ } }
+</code></pre><h3 id="3、AndroidManifest-xml增加权限"><a href="#3、AndroidManifest-xml增加权限" class="headerlink" title="3、AndroidManifest.xml增加权限"></a>3、AndroidManifest.xml增加权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
 </code></pre>
           
         
