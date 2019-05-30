@@ -232,249 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础Demo57-简单的自定义View（1）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/基础Demo57-简单的自定义View（1）/" itemprop="url">基础Demo57-简单的自定义View（1）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T00:00:00+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>易：extends xxxView，重写某个系统监听回调API</p>
-<p>NoScrollViewPager.java</p>
-<pre><code>import android.content.Context;
-import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-
-/**
- * Created by Administrator on 2018/8/12.
- * 自定义不可滑动的ViewPager
- */
-
-public class NoScrollViewPager extends ViewPager {
-/**
- * 在代码中实例化的时候调用改方法
- * @param context
- */
-public NoScrollViewPager(Context context) {
-    super(context);
-}
-
-/**
- * 在布局文件中使用该类的时候，要实例化该类（因为不是static），用该构造方法
- * 该构造方法不能少，少的话就会奔溃*********************************
- * 这是系统的规定！！！！非常重要！！！
- * @param context
- * @param attrs
- */
-public NoScrollViewPager(Context context, AttributeSet attrs) {
-    super(context, attrs);
-}
-
-
-
-
-/**
- * 重写触摸事件，消费掉
- * 这是核心代码！！！
- * ViewPager的父类是ViewGroup,自己在onTouchEvent retrun true，就会消费掉触摸事件
- * 消费后，就不能传递到view,我们在view层就不可以滑动了
- * @param ev
- * @return
- */
-@Override
-public boolean onTouchEvent(MotionEvent ev) {
-    return true;
-}
-
-
-@Override
-public boolean onInterceptTouchEvent(MotionEvent ev) {
-    return false;
-}
-
-
-}
-</code></pre><p>HorizonTalScrollViewPager .java</p>
-<pre><code>import android.content.Context;
-import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-
-/**
- * Created by Administrator on 2018/8/18.
- */
-
-public class HorizonTalScrollViewPager extends ViewPager {
-public HorizonTalScrollViewPager(Context context) {
-    super(context);
-}
-
-public HorizonTalScrollViewPager(Context context, AttributeSet attrs) {
-    super(context, attrs);
-}
-
-
-//起始坐标
-private float startX;
-private float startY;
-
-
-
-@Override
-public boolean dispatchTouchEvent(MotionEvent ev) {
-    //请求父层视图不用拦截当前控件的事件,即滑动权给当前控件
-    //getParent().requestDisallowInterceptTouchEvent(true);
-    switch (ev.getAction()){
-
-        case MotionEvent.ACTION_DOWN:
-            startX=ev.getX();
-            startY=ev.getY();
-            break;
-        case MotionEvent.ACTION_MOVE:
-            //新的坐标
-            float endX=ev.getX();
-            float endY=ev.getY();
-
-            //计算偏移量
-            float distanceX=endX-startX;
-            float distanceY=endY-startY;
-
-            //判断滑动方向 ,水平滑动,true的滑动权就给子控件，false就给父类滑动
-            if (Math.abs(distanceX)&gt;Math.abs(distanceY)){
-                //第一个页面
-                if (getCurrentItem()==0&amp;&amp;distanceX&gt;0){
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                }
-                   else if (getCurrentItem()==getAdapter().getCount()-1&amp;&amp;distanceX&lt;0){
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                } else { getParent().requestDisallowInterceptTouchEvent(true);}
-            }
-            //上下滑动
-            else {
-                getParent().requestDisallowInterceptTouchEvent(false);
-            }
-            break;
-        case MotionEvent.ACTION_UP:
-            break;
-             default:break;
-
-    }
-    return super.dispatchTouchEvent(ev);
-            }
-    }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/基础Demo56-ViewPager的基本Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2977,6 +2734,223 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/17/基础Demo47-完全融合屏幕/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/17/基础Demo47-完全融合屏幕/" itemprop="url">基础Demo47-完全融合屏幕</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-17T00:00:00+08:00">
+                2019-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、在某子控件的所有父布局加入属性："><a href="#1、在某子控件的所有父布局加入属性：" class="headerlink" title="1、在某子控件的所有父布局加入属性："></a>1、在某子控件的所有父布局加入属性：</h3><pre><code>android:fitsSystemWindows=”true”
+</code></pre><p>activity_fruit.xml  （这里的目标控件是ImageView）</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.design.widget.CoordinatorLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:fitsSystemWindows=&quot;true&quot;&gt;
+
+&lt;android.support.design.widget.AppBarLayout
+    android:id=&quot;@+id/appBar&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;250dp&quot;
+    android:fitsSystemWindows=&quot;true&quot;&gt;
+
+    &lt;android.support.design.widget.CollapsingToolbarLayout
+        android:id=&quot;@+id/collapsing_toolbar&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+        android:fitsSystemWindows=&quot;true&quot;
+        app:contentScrim=&quot;?attr/colorPrimary&quot;
+        app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed&quot;&gt;
+
+        &lt;ImageView
+            android:id=&quot;@+id/fruit_image_view&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:scaleType=&quot;centerCrop&quot;
+            android:fitsSystemWindows=&quot;true&quot;
+            app:layout_collapseMode=&quot;parallax&quot; /&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            app:layout_collapseMode=&quot;pin&quot; /&gt;
+    &lt;/android.support.design.widget.CollapsingToolbarLayout&gt;
+&lt;/android.support.design.widget.AppBarLayout&gt;
+
+&lt;android.support.v4.widget.NestedScrollView
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
+
+    &lt;LinearLayout
+        android:orientation=&quot;vertical&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;android.support.v7.widget.CardView
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_marginBottom=&quot;15dp&quot;
+            android:layout_marginLeft=&quot;15dp&quot;
+            android:layout_marginRight=&quot;15dp&quot;
+            android:layout_marginTop=&quot;35dp&quot;
+            app:cardCornerRadius=&quot;4dp&quot;&gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/fruit_content_text&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_margin=&quot;10dp&quot; /&gt;
+        &lt;/android.support.v7.widget.CardView&gt;
+    &lt;/LinearLayout&gt;
+&lt;/android.support.v4.widget.NestedScrollView&gt;
+
+&lt;android.support.design.widget.FloatingActionButton
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_margin=&quot;16dp&quot;
+    android:src=&quot;@drawable/ic_comment&quot;
+    app:layout_anchor=&quot;@id/appBar&quot;
+    app:layout_anchorGravity=&quot;bottom|end&quot; /&gt;
+
+&lt;/android.support.design.widget.CoordinatorLayout&gt;
+</code></pre><h3 id="2、写一个融合的stytle"><a href="#2、写一个融合的stytle" class="headerlink" title="2、写一个融合的stytle"></a>2、写一个融合的stytle</h3><p>（1）res—&gt;New—&gt;Directory—&gt;values-v21—New—&gt;Values resource file—&gt;styles.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+
+&lt;style name=&quot;FruitActivityTheme&quot; parent=&quot;AppTheme&quot;&gt;
+
+
+    &lt;item name=&quot;android:statusBarColor&quot;&gt;@android:color/transparent&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;/resources&gt;
+</code></pre><p>（2）修改values—&gt;styles.xml:  API21以下用这个，25用上面那个</p>
+<resources><br><br>    <!-- Base application theme. --><br>    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"><br>        <!-- Customize your theme here. --><br>        <item name="colorPrimary">@color/colorPrimary</item><br>        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><br>        <item name="colorAccent">@color/colorAccent</item><br>        <item name="android:textColorPrimary">@color/colorWhite</item><br>    </style><br><br>    <style name="FruitActivityTheme." parent="AppTheme"></style><br>    </resources>
+
+
+<p>（3）Activity的theme引用</p>
+<pre><code>&lt;activity android:name=&quot;.FruitActivity&quot;
+android:theme=&quot;@style/FruitActivityTheme&quot;&gt;
+
+&lt;/activity&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -3027,7 +3001,7 @@ protected void onCreate(Bundle savedInstanceState) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

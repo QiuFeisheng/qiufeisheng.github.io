@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS碎片知识点">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/JS碎片知识点/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-28T11:38:53.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS碎片知识点">
+<meta name="twitter:description" content="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/JS碎片知识点/">
+
+
+
+
+
+  <title>JS碎片知识点 | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/JS碎片知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS碎片知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-30T14:09:12+08:00">
+                2019-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；"><a href="#1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；" class="headerlink" title="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；"></a>1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；</h5><h5 id="2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；"><a href="#2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；" class="headerlink" title="2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；"></a>2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；</h5><h5 id="3：Node-js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node-js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；"><a href="#3：Node-js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node-js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；" class="headerlink" title="3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node.js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；"></a>3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node.js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；</h5><h5 id="4：JavaScript由网景公司的Brenden-Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1-2-3-4-5-6就是JS的版本；"><a href="#4：JavaScript由网景公司的Brenden-Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1-2-3-4-5-6就是JS的版本；" class="headerlink" title="4：JavaScript由网景公司的Brenden Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1,2,3,4,5,6就是JS的版本；"></a>4：JavaScript由网景公司的Brenden Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1,2,3,4,5,6就是JS的版本；</h5><h5 id="5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；"><a href="#5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；" class="headerlink" title="5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；"></a>5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；</h5><h5 id="6：JavaScript不区分整数和浮点数，统一用Number类型表示；"><a href="#6：JavaScript不区分整数和浮点数，统一用Number类型表示；" class="headerlink" title="6：JavaScript不区分整数和浮点数，统一用Number类型表示；"></a>6：JavaScript不区分整数和浮点数，统一用Number类型表示；</h5><h5 id="7：JS里的字符串可以是单引号，也可以是双引号，都可以；"><a href="#7：JS里的字符串可以是单引号，也可以是双引号，都可以；" class="headerlink" title="7：JS里的字符串可以是单引号，也可以是双引号，都可以；"></a>7：JS里的字符串可以是单引号，也可以是双引号，都可以；</h5><h5 id="8：JS里面坚持使用-来做比较，作用与Java的-一样，但是JS的-很诡异，坚决忽略掉，不要使用就对了；"><a href="#8：JS里面坚持使用-来做比较，作用与Java的-一样，但是JS的-很诡异，坚决忽略掉，不要使用就对了；" class="headerlink" title="8：JS里面坚持使用===来做比较，作用与Java的==一样，但是JS的==很诡异，坚决忽略掉，不要使用就对了；"></a>8：JS里面坚持使用===来做比较，作用与Java的==一样，但是JS的==很诡异，坚决忽略掉，不要使用就对了；</h5><h5 id="9：JavaScript的一个数组可以包括任意数据类型"><a href="#9：JavaScript的一个数组可以包括任意数据类型" class="headerlink" title="9：JavaScript的一个数组可以包括任意数据类型"></a>9：JavaScript的一个数组可以包括任意数据类型</h5><pre><code>例如：[1, 2, 3.14, &apos;Hello&apos;, null, true];
+</code></pre><h5 id="10：-new-Array-1-2-3-也是创建一个数组，不过建议还是-创建数组好一点；"><a href="#10：-new-Array-1-2-3-也是创建一个数组，不过建议还是-创建数组好一点；" class="headerlink" title="10： new Array(1,2,3)也是创建一个数组，不过建议还是[]创建数组好一点；"></a>10： new Array(1,2,3)也是创建一个数组，不过建议还是[]创建数组好一点；</h5><pre><code>new Array(1,2,3)===[1,2,3]
+</code></pre><h5 id="11：JS的对象-key-value集合，原理还是一样的，构造对象也就是在构造属性；"><a href="#11：JS的对象-key-value集合，原理还是一样的，构造对象也就是在构造属性；" class="headerlink" title="11：JS的对象==key-value集合，原理还是一样的，构造对象也就是在构造属性；"></a>11：JS的对象==key-value集合，原理还是一样的，构造对象也就是在构造属性；</h5><pre><code>var person = {
+name: &apos;Bob&apos;,
+age: 20,
+tags: [&apos;js&apos;, &apos;web&apos;, &apos;mobile&apos;],
+city: &apos;Beijing&apos;,
+hasCar: true,
+zipcode: null
+};
+</code></pre><p>备注：key都是字符串类型，value可以是任意数据类型</p>
+<h5 id="12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一"><a href="#12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一" class="headerlink" title="12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一;"></a>12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一;</h5><pre><code>var a = 123; // a的值是整数123
+a = &apos;ABC&apos;; // a变为字符串
+
+int a = 123; // a是整数类型变量，类型用int申明，这是Java
+a = &quot;ABC&quot;; // 错误：不能把字符串赋给整型变量
+</code></pre><h5 id="13：JS的日志打印是：-console-log-……"><a href="#13：JS的日志打印是：-console-log-……" class="headerlink" title="13：JS的日志打印是： console.log(……);"></a>13：JS的日志打印是： console.log(……);</h5><pre><code>var x = 100;
+console.log(x);
+</code></pre><h5 id="14-’use-strict’-模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；"><a href="#14-’use-strict’-模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；" class="headerlink" title="14:’use strict’;模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；"></a>14:’use strict’;模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；</h5><h5 id="15：多行字符串：可以使用-n也行，不过-更加方便"><a href="#15：多行字符串：可以使用-n也行，不过-更加方便" class="headerlink" title="15：多行字符串：可以使用\n也行，不过...更加方便"></a>15：多行字符串：可以使用\n也行，不过<code>...</code>更加方便</h5><pre><code>`这是一个
+多行
+字符串`;
+</code></pre><h5 id="16：模板字符串"><a href="#16：模板字符串" class="headerlink" title="16：模板字符串"></a>16：模板字符串</h5><p>：也可以使用+号来连接，不过更加高效</p>
+<pre><code>&apos;use strict&apos;;
+
+// 如果浏览器支持模板字符串，将会替换字符串内部的变量:
+var name = &apos;小明&apos;;
+var age = 20;
+console.log(`你好, ${name}, 你今年${age}岁了!`);
+</code></pre><h5 id="17：直接给Array的length赋一个新的值会导致Array大小的变化："><a href="#17：直接给Array的length赋一个新的值会导致Array大小的变化：" class="headerlink" title="17：直接给Array的length赋一个新的值会导致Array大小的变化："></a>17：直接给Array的length赋一个新的值会导致Array大小的变化：</h5><pre><code>var arr = [1, 2, 3];
+arr.length; // 3
+arr.length = 6;
+arr; // arr变为[1, 2, 3, undefined, undefined, undefined]
+arr.length = 2;
+arr; // arr变为[1, 2]
+</code></pre><h5 id="18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化："><a href="#18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：" class="headerlink" title="18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化："></a>18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：</h5><pre><code>var arr = [1, 2, 3];
+arr[5] = &apos;x&apos;;
+arr; // arr变为[1, 2, 3, undefined, undefined, &apos;x&apos;]
+</code></pre><p>大多数其他编程语言不允许直接改变数组的大小，越界访问索引会报错。然而，JavaScript的Array却不会有任何错误。<strong>在编写代码时，不建议直接修改Array的大小</strong></p>
+<h5 id="19：-indexOf是返回索引值"><a href="#19：-indexOf是返回索引值" class="headerlink" title="19： indexOf是返回索引值"></a>19： indexOf是返回索引值</h5><pre><code>var arr = [10, 20, &apos;30&apos;, &apos;xyz&apos;];
+arr.indexOf(10); // 元素10的索引为0
+arr.indexOf(20); // 元素20的索引为1
+arr.indexOf(30); // 元素30没有找到，返回-1
+arr.indexOf(&apos;30&apos;); // 元素&apos;30&apos;的索引为2
+</code></pre><h5 id="20：Slice（）类似String的substring"><a href="#20：Slice（）类似String的substring" class="headerlink" title="20：Slice（）类似String的substring"></a>20：Slice（）类似String的substring</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;];
+arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+arr.slice(3); // 从索引3开始到结束: [&apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;]
+
+var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;];
+var aCopy = arr.slice();
+aCopy; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;]
+aCopy === arr; // false    
+</code></pre><h5 id="21：unshift和shift"><a href="#21：unshift和shift" class="headerlink" title="21：unshift和shift"></a>21：unshift和shift</h5><p>如果要往Array的头部添加若干元素，使用unshift()方法，shift()方法则把Array的第一个元素删掉：</p>
+<pre><code>var arr = [1, 2];
+arr.unshift(&apos;A&apos;, &apos;B&apos;); // 返回Array新的长度: 4
+arr; // [&apos;A&apos;, &apos;B&apos;, 1, 2]
+arr.shift(); // &apos;A&apos;
+arr; // [&apos;B&apos;, 1, 2]
+arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次
+arr; // []
+arr.shift(); // 空数组继续shift不会报错，而是返回undefined
+arr; // []
+</code></pre><h5 id="22：sort"><a href="#22：sort" class="headerlink" title="22：sort()"></a>22：sort()</h5><pre><code>var arr = [&apos;B&apos;, &apos;C&apos;, &apos;A&apos;];
+arr.sort();
+arr; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+</code></pre><h5 id="23-reverse"><a href="#23-reverse" class="headerlink" title="23:reverse()"></a>23:reverse()</h5><pre><code>var arr = [&apos;one&apos;, &apos;two&apos;, &apos;three&apos;];
+arr.reverse(); 
+arr; // [&apos;three&apos;, &apos;two&apos;, &apos;one&apos;]
+</code></pre><h5 id="24-splice"><a href="#24-splice" class="headerlink" title="24:splice()"></a>24:splice()</h5><pre><code>var arr = [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Yahoo&apos;, &apos;AOL&apos;, &apos;Excite&apos;, &apos;Oracle&apos;];
+// 从索引2开始删除3个元素,然后再添加两个元素:
+arr.splice(2, 3, &apos;Google&apos;, &apos;Facebook&apos;); // 返回删除的元素 [&apos;Yahoo&apos;, &apos;AOL&apos;, &apos;Excite&apos;]
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Google&apos;, &apos;Facebook&apos;, &apos;Oracle&apos;]
+// 只删除,不添加:
+arr.splice(2, 2); // [&apos;Google&apos;, &apos;Facebook&apos;]
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Oracle&apos;]
+// 只添加,不删除:
+arr.splice(2, 0, &apos;Google&apos;, &apos;Facebook&apos;); // 返回[],因为没有删除任何元素
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Google&apos;, &apos;Facebook&apos;, &apos;Oracle&apos;]
+</code></pre><h5 id="25-concat"><a href="#25-concat" class="headerlink" title="25:concat()"></a>25:concat()</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+var added = arr.concat([1, 2, 3]);
+added; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3]
+arr; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+
+//可以自动拆数组然后再添加元素
+var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+arr.concat(1, 2, [3, 4]); // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3, 4]
+</code></pre><h5 id="26：join"><a href="#26：join" class="headerlink" title="26：join()"></a>26：join()</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3];
+arr.join(&apos;-&apos;); // &apos;A-B-C-1-2-3&apos;
+</code></pre><h5 id="27-JS的对象是key-value集合"><a href="#27-JS的对象是key-value集合" class="headerlink" title="27:JS的对象是key-value集合"></a>27:JS的对象是key-value集合</h5><pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+school: &apos;No.1 Middle School&apos;,
+height: 1.70,
+weight: 65,
+score: null
+};
+</code></pre><hr>
+<pre><code>//含特殊字符的key属性名要用&apos;&apos;
+var xiaohong = {
+name: &apos;小红&apos;,
+&apos;middle-school&apos;: &apos;No.1 Middle School&apos;
+};
+
+//访问方式如下
+xiaohong[&apos;middle-school&apos;]; // &apos;No.1 Middle School&apos;
+xiaohong[&apos;name&apos;]; // &apos;小红&apos;
+xiaohong.name; // &apos;小红&apos;
+</code></pre><p>（2）检验某个对象是否含有某个属性，in是包含父类继承二类的属性，hasOwnProperty()是自身增加的属性</p>
+<pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+school: &apos;No.1 Middle School&apos;,
+height: 1.70,
+weight: 65,
+score: null
+};
+&apos;name&apos; in xiaoming; // true
+&apos;grade&apos; in xiaoming; // false
+
+
+
+var xiaoming = {
+name: &apos;小明&apos;
+};
+xiaoming.hasOwnProperty(&apos;name&apos;); // true
+xiaoming.hasOwnProperty(&apos;toString&apos;); // false
+</code></pre><h5 id="28：for循环"><a href="#28：for循环" class="headerlink" title="28：for循环"></a>28：for循环</h5><pre><code>var arr = [&apos;Apple&apos;, &apos;Google&apos;, &apos;Microsoft&apos;];
+var i, x;
+for (i=0; i&lt;arr.length; i++) {
+x = arr[i];
+console.log(x);
+}
+</code></pre><hr>
+<pre><code>var x = 0;
+for (;;) { // 将无限循环下去
+if (x &gt; 100) {
+    break; // 通过if判断来退出循环
+}
+ console.log(x);
+x ++;
+}
+</code></pre><hr>
+<p>for…in类似Java的增强for循环</p>
+<pre><code>var o = {
+name: &apos;Jack&apos;,
+age: 20,
+city: &apos;Beijing&apos;
+};
+for (var key in o) {
+console.log(key); // &apos;name&apos;, &apos;age&apos;, &apos;city&apos;
+}
+
+
+var o = {
+name: &apos;Jack&apos;,
+age: 20,
+city: &apos;Beijing&apos;
+};
+for (var key in o) {
+if (o.hasOwnProperty(key)) {
+    console.log(key); // &apos;name&apos;, &apos;age&apos;, &apos;city&apos;
+}
+}
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+for (var i in a) {
+console.log(i); // &apos;0&apos;, &apos;1&apos;, &apos;2&apos;
+console.log(a[i]); // &apos;A&apos;, &apos;B&apos;, &apos;C&apos;
+}
+</code></pre><h5 id="29：while"><a href="#29：while" class="headerlink" title="29：while"></a>29：while</h5><pre><code>var x = 0;
+var n = 99;
+while (n &gt; 0) {
+x = x + n;
+n = n - 2;
+}
+x; // 2500
+
+
+var n = 0;
+do {
+n = n + 1;
+} while (n &lt; 100);
+n; // 
+</code></pre><h5 id="30-Map-类似Java的HashMap，也是key-value存值"><a href="#30-Map-类似Java的HashMap，也是key-value存值" class="headerlink" title="30:Map(类似Java的HashMap，也是key-value存值)"></a>30:Map(类似Java的HashMap，也是key-value存值)</h5><pre><code>var m = new Map([[&apos;Michael&apos;, 95], [&apos;Bob&apos;, 75], [&apos;Tracy&apos;, 85]]);
+m.get(&apos;Michael&apos;); // 95
+
+
+var m = new Map(); // 空Map
+m.set(&apos;Adam&apos;, 67); // 添加新的key-value
+m.set(&apos;Bob&apos;, 59);
+m.has(&apos;Adam&apos;); // 是否存在key &apos;Adam&apos;: true
+m.get(&apos;Adam&apos;); // 67
+m.delete(&apos;Adam&apos;); // 删除key &apos;Adam&apos;
+m.get(&apos;Adam&apos;); // undefined
+
+
+var m = new Map();
+m.set(&apos;Adam&apos;, 67);
+m.set(&apos;Adam&apos;, 88);
+m.get(&apos;Adam&apos;); // 88
+</code></pre><h5 id="31：Set-类似Java的HashSet-key不能重复"><a href="#31：Set-类似Java的HashSet-key不能重复" class="headerlink" title="31：Set(类似Java的HashSet,key不能重复)"></a>31：Set(类似Java的HashSet,key不能重复)</h5><p>Set和Map类似，也是一组key的集合，但不存储value</p>
+<pre><code>var s1 = new Set(); // 空Set
+var s2 = new Set([1, 2, 3]); // 含1, 2, 3
+
+var s = new Set([1, 2, 3, 3, &apos;3&apos;]);
+s; // Set {1, 2, 3, &quot;3&quot;}
+
+
+s.add(4);
+s; // Set {1, 2, 3, 4}
+s.add(4);
+s; // 仍然是 Set {1, 2, 3, 4}
+
+var s = new Set([1, 2, 3]);
+s; // Set {1, 2, 3}
+s.delete(3);
+s; // Set {1, 2}
+</code></pre><h5 id="32：iterator类型包含三种：Array-Map-Set"><a href="#32：iterator类型包含三种：Array-Map-Set" class="headerlink" title="32：iterator类型包含三种：Array,Map,Set"></a>32：iterator类型包含三种：Array,Map,Set</h5><p>主要用来循环遍历这三种数据类型</p>
+<pre><code>var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);
+var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);
+for (var x of a) { // 遍历Array
+console.log(x);
+}
+for (var x of s) { // 遍历Set
+console.log(x);
+}
+for (var x of m) { // 遍历Map
+console.log(x[0] + &apos;=&apos; + x[1]);
+}
+</code></pre><p>（1）for…in遍历得到的是Array的索引值，for…of是Array的元素值</p>
+<pre><code>var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.name = &apos;Hello&apos;;
+for (var x in a) {
+console.log(x); // &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;name&apos;
+}
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.name = &apos;Hello&apos;;
+for (var x of a) {
+console.log(x); // &apos;A&apos;, &apos;B&apos;, &apos;C&apos;
+}
+</code></pre><p>更好的方式是直接使用iterable内置的forEach方法</p>
+<pre><code>&apos;use strict&apos;;
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.forEach(function (element, index, array) {
+// element: 指向当前元素的值
+// index: 指向当前索引
+// array: 指向Array对象本身
+console.log(element + &apos;, index = &apos; + index);
+});
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.forEach(function (element) {
+console.log(element);
+});
+
+
+var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);
+m.forEach(function (value, key, map) {
+console.log(value);
+});
+
+
+var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);
+s.forEach(function (element, sameElement, set) {
+console.log(element);
+});
+</code></pre><h5 id="33：定义函数"><a href="#33：定义函数" class="headerlink" title="33：定义函数"></a>33：定义函数</h5><p>总共有两种方式：</p>
+<pre><code>function abs(x) {
+if (x &gt;= 0) {
+    return x;
+} else {
+    return -x;
+    }
+}
+
+
+var abs = function (x) {
+if (x &gt;= 0) {
+    return x;
+} else {
+    return -x;
+    }
+};
+
+
+abs(10); // 返回10
+abs(-9); // 返回9
+abs(10, &apos;blablabla&apos;); // 返回10
+abs(-9, &apos;haha&apos;, &apos;hehe&apos;, null); // 返回9
+abs(); // 返回NaN
+</code></pre><h5 id="34：arguments"><a href="#34：arguments" class="headerlink" title="34：arguments"></a>34：arguments</h5><p>永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array</p>
+<pre><code>function foo(x) {
+console.log(&apos;x = &apos; + x); // 10
+for (var i=0; i&lt;arguments.length; i++) {
+    console.log(&apos;arg &apos; + i + &apos; = &apos; + arguments[i]); // 10, 20, 30
+}
+}
+foo(10, 20, 30);
+
+
+x = 10
+arg 0 = 10
+arg 1 = 20
+arg 2 = 30
+
+
+
+
+function abs() {
+if (arguments.length === 0) {
+    return 0;
+}
+var x = arguments[0];
+return x &gt;= 0 ? x : -x;
+}
+abs(); // 0
+abs(10); // 10
+abs(-9); // 9
+
+
+
+// foo(a[, b], c)
+// 接收2~3个参数，b是可选参数，如果只传2个参数，b默认为null：
+function foo(a, b, c) {
+if (arguments.length === 2) {
+    // 实际拿到的参数是a和b，c为undefined
+    c = b; // 把b赋给c
+    b = null; // b变为默认值
+}
+// ...
+}
+</code></pre><h5 id="35-rest参数"><a href="#35-rest参数" class="headerlink" title="35:rest参数"></a>35:rest参数</h5><pre><code>function foo(a, b, ...rest) {
+console.log(&apos;a = &apos; + a);
+console.log(&apos;b = &apos; + b);
+console.log(rest);
+}
+
+foo(1, 2, 3, 4, 5);
+// 结果:
+// a = 1
+// b = 2
+// Array [ 3, 4, 5 ]
+
+foo(1);
+// 结果:
+// a = 1
+// b = undefined
+// Array []
+</code></pre><h5 id="36：注意return的多行写法"><a href="#36：注意return的多行写法" class="headerlink" title="36：注意return的多行写法"></a>36：注意return的多行写法</h5><p>防止自动补充;带来歧义</p>
+<pre><code>//效果错误
+function foo() {
+return
+    { name: &apos;foo&apos; };
+}
+
+foo(); // undefined
+
+
+function foo() {
+return { // 这里不会自动加分号，因为{表示语句尚未结束
+    name: &apos;foo&apos;
+};
+}
+</code></pre><h5 id="37：作用域"><a href="#37：作用域" class="headerlink" title="37：作用域"></a>37：作用域</h5><p>内部变量可以访问外部变量，同名变量，内部变量会屏蔽外部变量，各写各的</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var x = 1;
+function bar() {
+    var y = x + 1; // bar可以访问foo的变量x!
+}
+var z = y + 1; // ReferenceError! foo不可以访问bar的变量y!
+}
+
+
+
+function foo() {
+var x = 1;
+function bar() {
+    var x = &apos;A&apos;;
+    console.log(&apos;x in bar() = &apos; + x); // &apos;A&apos;
+}
+console.log(&apos;x in foo() = &apos; + x); // 1
+bar();
+}
+
+foo();
+</code></pre><p>输出值</p>
+<pre><code>x in foo() = 1
+
+x in bar() = A
+</code></pre><p>这说明JavaScript的函数在查找变量时从自身函数定义开始，从“内”向“外”查找</p>
+<h5 id="38：变量提升"><a href="#38：变量提升" class="headerlink" title="38：变量提升"></a>38：变量提升</h5><p>未提前声明的变量会被自动声明，但是不会自动赋值</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var x = &apos;Hello, &apos; + y;
+console.log(x);
+var y = &apos;Bob&apos;;
+}
+
+foo();    
+
+
+function foo() {
+var y; // 提升变量y的申明，此时y为undefined
+var x = &apos;Hello, &apos; + y;
+console.log(x);
+y = &apos;Bob&apos;;
+}
+
+
+
+function foo() {
+var
+    x = 1, // x初始化为1
+    y = x + 1, // y初始化为2
+    z, i; // z和i为undefined
+// 其他语句:
+for (i=0; i&lt;100; i++) {
+    ...
+        }
+}
+</code></pre><h5 id="39：全局作用域"><a href="#39：全局作用域" class="headerlink" title="39：全局作用域"></a>39：全局作用域</h5><p>：全局变量是绑定到全局对象window的其中一个属性</p>
+<pre><code>&apos;use strict&apos;;
+
+var course = &apos;Learn JavaScript&apos;;
+alert(course); // &apos;Learn JavaScript&apos;
+alert(window.course); // &apos;Learn JavaScript&apos;
+</code></pre><p>函数也算变量，而且是全局变量，感觉JS是万物皆变量</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+alert(&apos;foo&apos;);
+}
+
+foo(); // 直接调用foo()
+window.foo(); // 通过window.foo()调用
+</code></pre><h5 id="40：名字空间"><a href="#40：名字空间" class="headerlink" title="40：名字空间"></a>40：名字空间</h5><p>减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中。例如：</p>
+<pre><code>// 唯一的全局变量MYAPP:
+var MYAPP = {};
+
+// 其他变量:
+MYAPP.name = &apos;myapp&apos;;
+MYAPP.version = 1.0;
+
+// 其他函数:
+MYAPP.foo = function () {
+return &apos;foo&apos;;
+};    
+</code></pre><h5 id="41：局部作用域-let"><a href="#41：局部作用域-let" class="headerlink" title="41：局部作用域-let"></a>41：局部作用域-let</h5><p>为了解决块级作用域，ES6引入了新的关键字let，用let替代var可以申明一个块级作用域的变量：</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var sum = 0;
+for (let i=0; i&lt;100; i++) {
+    sum += i;
+}
+// SyntaxError:
+i += 1;
+}
+</code></pre><h5 id="42：常量"><a href="#42：常量" class="headerlink" title="42：常量"></a>42：常量</h5><p>ES6标准引入了新的关键字const来定义常量，const与let都具有块级作用域：</p>
+<pre><code>&apos;use strict&apos;;
+
+const PI = 3.14;
+PI = 3; // 某些浏览器不报错，但是无效果！
+PI; // 3.14
+</code></pre><h5 id="43：解构赋值"><a href="#43：解构赋值" class="headerlink" title="43：解构赋值"></a>43：解构赋值</h5><pre><code>var array = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;];
+var x = array[0];
+var y = array[1];
+var z = array[2];
+
+
+
+&apos;use strict&apos;;
+
+// 如果浏览器支持解构赋值就不会报错:
+var [x, y, z] = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;];
+</code></pre><hr>
+<pre><code>let [x, [y, z]] = [&apos;hello&apos;, [&apos;JavaScript&apos;, &apos;ES6&apos;]];
+x; // &apos;hello&apos;
+y; // &apos;JavaScript&apos;
+z; // &apos;ES6&apos;
+</code></pre><hr>
+<pre><code>let [, , z] = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;]; // 忽略前两个元素，只对z赋值第三个元素
+z; // &apos;ES6&apos;
+</code></pre><hr>
+<pre><code>&apos;use strict&apos;;
+
+var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;,
+school: &apos;No.4 middle school&apos;
+};
+var {name, age, passport} = person;
+</code></pre><p>对一个对象进行解构赋值时，同样可以直接对嵌套的对象属性进行赋值，只要保证对应的层次是一致的：</p>
+<pre><code>var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;,
+school: &apos;No.4 middle school&apos;,
+address: {
+    city: &apos;Beijing&apos;,
+    street: &apos;No.1 Road&apos;,
+    zipcode: &apos;100001&apos;
+}
+};
+var {name, address: {city, zip}} = person;
+name; // &apos;小明&apos;
+city; // &apos;Beijing&apos;
+zip; // undefined, 因为属性名是zipcode而不是zip
+// 注意: address不是变量，而是为了让city和zip获得嵌套的address对象的属性:
+address; // Uncaught ReferenceError: address is not defined
+</code></pre><p>解构赋值还可以使用默认值，这样就避免了不存在的属性返回undefined的问题：</p>
+<pre><code>var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;
+};
+
+// 如果person对象没有single属性，默认赋值为true:
+var {name, single=true} = person;
+name; // &apos;小明&apos;
+single; // true
+</code></pre><p>使用场景</p>
+<p>（1）解构赋值在很多时候可以大大简化代码</p>
+<pre><code>var x=1, y=2;
+[x, y] = [y, x]
+</code></pre><p>（2）快速获取当前页面的域名和路径：</p>
+<pre><code>var {hostname:domain, pathname:path} = location;
+</code></pre><p>（3）下面的函数可以快速创建一个Date对象：</p>
+<pre><code>function buildDate({year, month, day, hour=0, minute=0, second=0}) {
+return new Date(year + &apos;-&apos; + month + &apos;-&apos; + day + &apos; &apos; + hour + &apos;:&apos; + minute + &apos;:&apos; + second);
+}
+</code></pre><p>它的方便之处在于传入的对象只需要year、month和day这三个属性：</p>
+<pre><code>buildDate({ year: 2017, month: 1, day: 1 });
+// Sun Jan 01 2017 00:00:00 GMT+0800 (CST)
+</code></pre><h5 id="44：方法-对象绑定的函数"><a href="#44：方法-对象绑定的函数" class="headerlink" title="44：方法==对象绑定的函数"></a>44：方法==对象绑定的函数</h5><pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+age: function () {
+    var y = new Date().getFullYear();
+    return y - this.birth;
+}
+};
+
+xiaoming.age; // function xiaoming.age()
+xiaoming.age(); // 今年调用是25,明年调用就变成26了
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/基础Demo61-常用父类（2）-BasePager/" rel="next" title="基础Demo61-常用父类（2）-BasePager">
+                <i class="fa fa-chevron-left"></i> 基础Demo61-常用父类（2）-BasePager
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/基础Demo63-联网请求地址的Constants Demo/" rel="prev" title="基础Demo63-联网请求地址的Constants Demo">
+                基础Demo63-联网请求地址的Constants Demo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；"><span class="nav-number">1.</span> <span class="nav-text">1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；"><span class="nav-number">2.</span> <span class="nav-text">2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3：Node-js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node-js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；"><span class="nav-number">3.</span> <span class="nav-text">3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node.js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4：JavaScript由网景公司的Brenden-Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1-2-3-4-5-6就是JS的版本；"><span class="nav-number">4.</span> <span class="nav-text">4：JavaScript由网景公司的Brenden Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1,2,3,4,5,6就是JS的版本；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；"><span class="nav-number">5.</span> <span class="nav-text">5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6：JavaScript不区分整数和浮点数，统一用Number类型表示；"><span class="nav-number">6.</span> <span class="nav-text">6：JavaScript不区分整数和浮点数，统一用Number类型表示；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7：JS里的字符串可以是单引号，也可以是双引号，都可以；"><span class="nav-number">7.</span> <span class="nav-text">7：JS里的字符串可以是单引号，也可以是双引号，都可以；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8：JS里面坚持使用-来做比较，作用与Java的-一样，但是JS的-很诡异，坚决忽略掉，不要使用就对了；"><span class="nav-number">8.</span> <span class="nav-text">8：JS里面坚持使用===来做比较，作用与Java的==一样，但是JS的==很诡异，坚决忽略掉，不要使用就对了；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9：JavaScript的一个数组可以包括任意数据类型"><span class="nav-number">9.</span> <span class="nav-text">9：JavaScript的一个数组可以包括任意数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10：-new-Array-1-2-3-也是创建一个数组，不过建议还是-创建数组好一点；"><span class="nav-number">10.</span> <span class="nav-text">10： new Array(1,2,3)也是创建一个数组，不过建议还是[]创建数组好一点；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11：JS的对象-key-value集合，原理还是一样的，构造对象也就是在构造属性；"><span class="nav-number">11.</span> <span class="nav-text">11：JS的对象==key-value集合，原理还是一样的，构造对象也就是在构造属性；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一"><span class="nav-number">12.</span> <span class="nav-text">12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13：JS的日志打印是：-console-log-……"><span class="nav-number">13.</span> <span class="nav-text">13：JS的日志打印是： console.log(……);</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-’use-strict’-模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；"><span class="nav-number">14.</span> <span class="nav-text">14:’use strict’;模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15：多行字符串：可以使用-n也行，不过-更加方便"><span class="nav-number">15.</span> <span class="nav-text">15：多行字符串：可以使用\n也行，不过...更加方便</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16：模板字符串"><span class="nav-number">16.</span> <span class="nav-text">16：模板字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17：直接给Array的length赋一个新的值会导致Array大小的变化："><span class="nav-number">17.</span> <span class="nav-text">17：直接给Array的length赋一个新的值会导致Array大小的变化：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化："><span class="nav-number">18.</span> <span class="nav-text">18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19：-indexOf是返回索引值"><span class="nav-number">19.</span> <span class="nav-text">19： indexOf是返回索引值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20：Slice（）类似String的substring"><span class="nav-number">20.</span> <span class="nav-text">20：Slice（）类似String的substring</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21：unshift和shift"><span class="nav-number">21.</span> <span class="nav-text">21：unshift和shift</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#22：sort"><span class="nav-number">22.</span> <span class="nav-text">22：sort()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#23-reverse"><span class="nav-number">23.</span> <span class="nav-text">23:reverse()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#24-splice"><span class="nav-number">24.</span> <span class="nav-text">24:splice()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#25-concat"><span class="nav-number">25.</span> <span class="nav-text">25:concat()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#26：join"><span class="nav-number">26.</span> <span class="nav-text">26：join()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#27-JS的对象是key-value集合"><span class="nav-number">27.</span> <span class="nav-text">27:JS的对象是key-value集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#28：for循环"><span class="nav-number">28.</span> <span class="nav-text">28：for循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#29：while"><span class="nav-number">29.</span> <span class="nav-text">29：while</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#30-Map-类似Java的HashMap，也是key-value存值"><span class="nav-number">30.</span> <span class="nav-text">30:Map(类似Java的HashMap，也是key-value存值)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#31：Set-类似Java的HashSet-key不能重复"><span class="nav-number">31.</span> <span class="nav-text">31：Set(类似Java的HashSet,key不能重复)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32：iterator类型包含三种：Array-Map-Set"><span class="nav-number">32.</span> <span class="nav-text">32：iterator类型包含三种：Array,Map,Set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#33：定义函数"><span class="nav-number">33.</span> <span class="nav-text">33：定义函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#34：arguments"><span class="nav-number">34.</span> <span class="nav-text">34：arguments</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#35-rest参数"><span class="nav-number">35.</span> <span class="nav-text">35:rest参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#36：注意return的多行写法"><span class="nav-number">36.</span> <span class="nav-text">36：注意return的多行写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#37：作用域"><span class="nav-number">37.</span> <span class="nav-text">37：作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#38：变量提升"><span class="nav-number">38.</span> <span class="nav-text">38：变量提升</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#39：全局作用域"><span class="nav-number">39.</span> <span class="nav-text">39：全局作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#40：名字空间"><span class="nav-number">40.</span> <span class="nav-text">40：名字空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#41：局部作用域-let"><span class="nav-number">41.</span> <span class="nav-text">41：局部作用域-let</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#42：常量"><span class="nav-number">42.</span> <span class="nav-text">42：常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#43：解构赋值"><span class="nav-number">43.</span> <span class="nav-text">43：解构赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#44：方法-对象绑定的函数"><span class="nav-number">44.</span> <span class="nav-text">44：方法==对象绑定的函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
