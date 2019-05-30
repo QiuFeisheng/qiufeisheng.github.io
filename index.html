@@ -1123,8 +1123,121 @@ span{
 &lt;/body&gt;
 
 &lt;/html&gt;
-</code></pre><h4 id="8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则"><a href="#8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则" class="headerlink" title="8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则"></a>8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则</h4><p>：口诀：内联嵌外部</p>
-<h4 id="9："><a href="#9：" class="headerlink" title="9："></a>9：</h4>
+</code></pre><h5 id="8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则"><a href="#8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则" class="headerlink" title="8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则"></a>8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则</h5><p>：口诀：内联嵌外部</p>
+<h5 id="9：选择器"><a href="#9：选择器" class="headerlink" title="9：选择器"></a>9：选择器</h5><pre><code>&lt;style type=&quot;text/css&quot;&gt;
+body{
+font-size:12px;
+color:red;    
+}
+&lt;/style&gt;
+</code></pre><p>（1）style是嵌入式CSS样式默认写法，可以忽略；<br>（2）CSS核心是：body就是选择器+ {CSS样式代码}</p>
+<h5 id="10：标签选择器：html-body-h1-p-img"><a href="#10：标签选择器：html-body-h1-p-img" class="headerlink" title="10：标签选择器：html,body,h1,p,img"></a>10：标签选择器：html,body,h1,p,img</h5><p>：意思就是选择器名称是html标签，例如html,body……这些都是<br>：设置好样式后，此标签的文本样式就被定好了</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>认识html标签</title><br><style type="text/css"><br>h1{<br>    font-weight:normal;<br>    color:red;<br>}<br><br><br><br></style><br></head><br><body><br>    <h1>勇气</h1><br>    <p>三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br>    <p>到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br>    <img src="http://img.mukewang.com/52b4113500018cf102000200.jpg"><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+h1{
+font-weight:normal;
+color:red;
+}
+
+
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+&lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>可见此时的标签选择器是h1，被h1标签包括的文本内容就变为了红色</p>
+<h5 id="11：类选择器的使用"><a href="#11：类选择器的使用" class="headerlink" title="11：类选择器的使用"></a>11：类选择器的使用</h5><p>（1）.小写类名aaa{CSS样式代码}<br>（2）&lt;span class=”aaa”]胆小如鼠&lt;/span]，这样就可以搞定了</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.stress{
+color:red;
+}
+
+
+.setGreen{
+color:green;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个&lt;span class=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个&lt;span class=&quot;stress&quot;&gt;勇气&lt;/span&gt;来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了三年级下学期时，我们班上了一节&lt;span class=&quot;setGreen&quot;&gt;公开课&lt;/span&gt;，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+&lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="12：ID选择器"><a href="#12：ID选择器" class="headerlink" title="12：ID选择器"></a>12：ID选择器</h5><p>（1）#ID选择器名{ CSS样式代码}<br>（2）&lt;span id=”stress”]胆小如鼠&lt;/span]</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+#stress{
+    color:red;
+}
+
+#setGreen{
+    color:green;
+}
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p&gt;三年级时，我还是一个&lt;span id=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p&gt;到了三年级下学期时，我们班上了一节&lt;span id=&quot;setGreen&quot;&gt;公开课&lt;/span&gt;，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="13-类选择器和ID选择器的区别"><a href="#13-类选择器和ID选择器的区别" class="headerlink" title="13:类选择器和ID选择器的区别"></a>13:类选择器和ID选择器的区别</h5><p>（1）一个类选择器可以使用多次，而一个ID选择器只能使用一次；<br>（2）一个文本元素可以同时设置多个类选择器，而只能设置一个ID选择器，看Demo就明白什么意思了</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>类和ID选择器的区别</title><br><style type="text/css"><br>.stress{<br>    color:red;<br>}<br>.bigsize{<br>    font-size:25px;<br>}<br>#stressid{<br>    color:red;<br>}<br>#bigsizeid{<br>    font-size:25px;<br>}<br></style><br></head><br><body><br>    <h1>勇气</h1><br>    <p>三年级时，我还是一个<span class="stress">胆小如鼠</span>的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个<span class="stress">勇气</span>来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br>    <p>到了<span class="stress bigsize">三年级</span>下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br>     <p>到了<span id="stressid bigsizeid">三年级</span>下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;类和ID选择器的区别&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.stress{
+color:red;
+}
+.bigsize{
+font-size:25px;
+}    
+#stressid{
+    color:red;
+}
+#bigsizeid{
+    font-size:25px;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个&lt;span class=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个&lt;span class=&quot;stress&quot;&gt;勇气&lt;/span&gt;来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了&lt;span class=&quot;stress bigsize&quot;&gt;三年级&lt;/span&gt;下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+ &lt;p&gt;到了&lt;span id=&quot;stressid bigsizeid&quot;&gt;三年级&lt;/span&gt;下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
           
         
       
