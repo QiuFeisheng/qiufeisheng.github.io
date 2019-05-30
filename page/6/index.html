@@ -232,6 +232,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/" itemprop="url">基础Demo16-Fragment最常用的基类BaseFragment</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-16T00:00:00+08:00">
+                2019-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+ /**
+    * 面向对象的本质：构造对象，调用象方
+    * 因为有抽象方法强制子类一定要重写，所以变成抽象类
+  */
+public abstract class BaseFragment extends Fragment {
+
+//上下文声明，Fragment习惯性把所在Activity的实例单独写出来
+public Activity context;
+
+/**
+ * 重写生命周期方法：初始化context
+ * @param savedInstanceState
+ */
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    context=getActivity();
+}
+
+/**
+ * 创建视图时回调此方法，所以里面负责写创建视图的代码，创建实体对象，设置属性，但是不填充数据
+ * @param inflater
+ * @param container
+ * @param savedInstanceState
+ * @return
+ */
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return initView();
+}
+
+//抽样方法，强制给子类自己写内容创建视图，而且是在onCreateView中执行
+public abstract View initView();
+
+/**
+ * Activity创建时回调此方法，而且填充实体对象的数据
+ * @param savedInstanceState
+ */
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    initData();  //先有View,才能填充数据，所以不要把数据写到View里面去，可能会拖慢
+}
+
+public void initData() {
+
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/基础Demo15-静态加载Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2200,141 +2377,6 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/基础Demo6-Activity的4S启动模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/06/基础Demo6-Activity的4S启动模式/" itemprop="url">基础Demo6-Activity的4S启动模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-06T00:00:00+08:00">
-                2019-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
-<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTop&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTask&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleInstance&quot;&gt;
-&lt;/activity&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2385,7 +2427,7 @@ android:launchMode=&quot;singleInstance&quot;&gt;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

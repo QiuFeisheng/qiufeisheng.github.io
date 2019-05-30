@@ -232,6 +232,298 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/基础Demo36-封装HttpURLConnection和OkHttp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/基础Demo36-封装HttpURLConnection和OkHttp/" itemprop="url">基础Demo36-封装HttpURLConnection和OkHttp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T00:00:00+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、封装HttpURLConnection"><a href="#1、封装HttpURLConnection" class="headerlink" title="1、封装HttpURLConnection"></a>1、封装HttpURLConnection</h3><pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+public static void sendHttpGET(final String address, final HttpCallbackListener listener) {
+
+
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(address);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod(&quot;GET&quot;);
+                connection.setConnectTimeout(8000);
+                connection.setReadTimeout(8000);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                InputStream in = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                if (listener != null) {
+                    // 回调onFinish()方法
+                    listener.onFinish(response.toString());
+                }
+            } catch (Exception e) {
+                if (listener != null) {
+                    // 回调onError()方法
+                    listener.onError(e);
+                }
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
+    }).start();
+  }
+}
+</code></pre><p>在子线程用回调来处理返回的数据或者错误，然后重写onFinish可以使用Handler或者runOnUiThread返回到主线程更新UI</p>
+<pre><code>public interface HttpCallbackListener {
+
+void onFinish(String response);
+
+void onError(Exception e);
+
+}
+</code></pre><h3 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h3><p>public void loginByPost(String userName, String userPass) {</p>
+<pre><code>    try {
+
+        // 请求的地址
+        String spec = &quot;http://172.16.237.200:8080/video/login.do&quot;;
+        // 根据地址创建URL对象
+        URL url = new URL(spec);
+        // 根据URL对象打开链接
+        HttpURLConnection urlConnection = (HttpURLConnection) url
+                .openConnection();
+        // 设置请求的方式
+        urlConnection.setRequestMethod(&quot;POST&quot;);
+        // 设置请求的超时时间
+        urlConnection.setReadTimeout(5000);
+        urlConnection.setConnectTimeout(5000);
+        // 传递的数据
+        String data = &quot;username=&quot; + URLEncoder.encode(userName, &quot;UTF-8&quot;)
+                + &quot;&amp;userpass=&quot; + URLEncoder.encode(userPass, &quot;UTF-8&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Connection&quot;, &quot;keep-alive&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Type&quot;,
+                &quot;application/x-www-form-urlencoded&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Length&quot;,
+                String.valueOf(data.getBytes().length));
+        // 设置请求的头
+        urlConnection
+                .setRequestProperty(&quot;User-Agent&quot;,
+                        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0&quot;);
+
+        urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
+        urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
+                                        //setDoInput的默认值就是true
+        //获取输出流
+        OutputStream os = urlConnection.getOutputStream();
+        os.write(data.getBytes());
+        os.flush();
+        if (urlConnection.getResponseCode() == 200) {
+            // 获取响应的输入流对象
+            InputStream is = urlConnection.getInputStream();
+            // 创建字节输出流对象
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            // 定义读取的长度
+            int len = 0;
+            // 定义缓冲区
+            byte buffer[] = new byte[1024];
+            // 按照缓冲区的大小，循环读取
+            while ((len = is.read(buffer)) != -1) {
+                // 根据读取的长度写入到os对象中
+                baos.write(buffer, 0, len);
+            }
+            // 释放资源
+            is.close();
+            baos.close();
+            // 返回字符串
+            final String result = new String(baos.toByteArray());
+
+            // 通过runOnUiThread方法进行修改主线程的控件内容
+            LoginActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // 在这里把返回的数据写在控件上 会出现什么情况尼
+                    tv_result.setText(result);
+                }
+            });
+
+        } else {
+            System.out.println(&quot;链接失败.........&quot;);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>}</p>
+<p>封装OkHttp</p>
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+    public static void sendOkHttpRequest(final String address, final okhttp3.Callback callback) {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+            .url(address)
+            .build();
+    client.newCall(request).enqueue(callback);
+}
+
+}
+</code></pre><p>调用示例：</p>
+<pre><code>HttpUtil.sendOkHttpRequest(“https//www.baidu.com”,new okhttp3.Callback() {
+
+@Override
+public void onResponse(Call call,Response response)throws IOException{
+
+        String responseData=response.body().string();
+}
+
+
+@Override
+public void onFailure(Call call,IOException e){
+
+}
+
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/基础Demo35-解析Json数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2813,193 +3105,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/26/基础Demo26-SharedPreferences存储/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/26/基础Demo26-SharedPreferences存储/" itemprop="url">基础Demo26-SharedPreferences存储</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T00:00:00+08:00">
-                2019-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>优点：以键值对Key-Value的形式存储值，比文本存储数据更加方便快捷。</p>
-<h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:orientation=&quot;vertical&quot; &gt;
-
-&lt;Button
-    android:id=&quot;@+id/save_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Save data&quot;
-    /&gt;
-
-&lt;Button
-    android:id=&quot;@+id/restore_data&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Restore data&quot;
-    /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-
-public class MainActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button saveData = (Button) findViewById(R.id.save_data);
-    saveData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences.Editor editor = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE).edit();
-            editor.putString(&quot;name&quot;, &quot;Tom&quot;);
-            editor.putInt(&quot;age&quot;, 28);
-            editor.putBoolean(&quot;married&quot;, true);
-            editor.apply();
-        }
-    });
-    Button restoreData = (Button) findViewById(R.id.restore_data);
-    restoreData.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences pref = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE);
-            String name = pref.getString(&quot;name&quot;, &quot;&quot;);
-            int age = pref.getInt(&quot;age&quot;, 0);   //后面是默认值，取不到值的替代值
-            boolean married = pref.getBoolean(&quot;married&quot;, false);
-
-            Toast.makeText(MainActivity.this,&quot;name is &quot; + name,Toast.LENGTH_SHORT).show();
-          //  Toast.makeText(MainActivity.this,&quot;age is &quot; + age,Toast.LENGTH_SHORT).show();
-         //   Toast.makeText(MainActivity.this,&quot;married is &quot; + married,Toast.LENGTH_SHORT).show();
-            Log.d(&quot;MainActivity&quot;, &quot;name is &quot; + name);
-            Log.d(&quot;MainActivity&quot;, &quot;age is &quot; + age);
-            Log.d(&quot;MainActivity&quot;, &quot;married is &quot; + married);
-        }
-    });
-  }
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3050,7 +3155,7 @@ protected void onCreate(Bundle savedInstanceState) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
