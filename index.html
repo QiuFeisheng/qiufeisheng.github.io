@@ -1234,6 +1234,167 @@ font-size:25px;
 
 &lt;/body&gt;
 &lt;/html&gt;
+</code></pre><h5 id="14-类的子选择器"><a href="#14-类的子选择器" class="headerlink" title="14:类的子选择器"></a>14:类的子选择器</h5><p>用法示例：<br>    .food&gt;li{border:1px solid red;}</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>子选择符</title><br><style type="text/css"><br>.food&gt;li{border:1px solid red;}/<em>添加边框样式（粗细为1px， 颜色为红色的实线）</em>/<br><br>.first&gt;span{border:1px solid red;}<br></style><br></head><br><body><br><p class="first">三年级时，<span>我还是一个胆小如鼠的小女孩</span>，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br><h1>食物</h1><br><ul class="food"><br>    <li>水果<br>        <ul><br>            <li>香蕉</li><br>            <li>苹果</li><br>            <li>梨</li><br>        </ul><br>    </li><br>    <li>蔬菜<br>        <ul><br>            <li>白菜</li><br>            <li>油菜</li><br>            <li>卷心菜</li><br>        </ul><br>    </li><br></ul><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;子选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.food&gt;li{border:1px solid red;}/*添加边框样式（粗细为1px， 颜色为红色的实线）*/
+
+.first&gt;span{border:1px solid red;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;first&quot;&gt;三年级时，&lt;span&gt;我还是一个胆小如鼠的小女孩&lt;/span&gt;，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;h1&gt;食物&lt;/h1&gt;
+&lt;ul class=&quot;food&quot;&gt;
+    &lt;li&gt;水果
+        &lt;ul&gt;
+            &lt;li&gt;香蕉&lt;/li&gt;
+            &lt;li&gt;苹果&lt;/li&gt;
+            &lt;li&gt;梨&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;蔬菜
+        &lt;ul&gt;
+            &lt;li&gt;白菜&lt;/li&gt;
+            &lt;li&gt;油菜&lt;/li&gt;
+            &lt;li&gt;卷心菜&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="15：后代选择器"><a href="#15：后代选择器" class="headerlink" title="15：后代选择器"></a>15：后代选择器</h5><p>与子选择器的区别如下：</p>
+<p>子选择器（child selector）仅是指它的直接后代，或者你可以理解为作用于子元素的第一代后代。而后代选择器是作用于所有子后代元素。</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>后代选择器</title><br><style type="text/css"><br>.first span{color:red;}<br><br>.food li{<br>    border:1px solid red;/<em>添加边框样式（粗细为1px， 颜色为红色的实线）</em>/<br>}<br></style><br></head><br><body><br> <p class="first">三年级时，我还是一个<span>胆小如鼠</span>的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br><!--下面是本小节任务代码--><br><ul class="food"><br>    <li>水果<br>        <ul><br>            <li>香蕉</li><br>            <li>苹果</li><br>            <li>梨</li><br>        </ul><br>    </li><br>    <li>蔬菜<br>        <ul><br>            <li>白菜</li><br>            <li>油菜</li><br>            <li>卷心菜</li><br>        </ul><br>    </li><br></ul><br><br></body><br></html>
+
+
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;后代选择器&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.first span{color:red;}
+
+.food li{
+    border:1px solid red;/*添加边框样式（粗细为1px， 颜色为红色的实线）*/    
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;!--下面是本小节任务代码--&gt;
+&lt;ul class=&quot;food&quot;&gt;
+    &lt;li&gt;水果
+        &lt;ul&gt;
+            &lt;li&gt;香蕉&lt;/li&gt;
+            &lt;li&gt;苹果&lt;/li&gt;
+            &lt;li&gt;梨&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;蔬菜
+        &lt;ul&gt;
+            &lt;li&gt;白菜&lt;/li&gt;
+            &lt;li&gt;油菜&lt;/li&gt;
+            &lt;li&gt;卷心菜&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="16-通用选择器"><a href="#16-通用选择器" class="headerlink" title="16:通用选择器"></a>16:通用选择器</h5><p>通用选择器是功能最强大的选择器，它使用一个（*）号指定，它的作用是匹配html中所有标签元素，如下使用下面代码使用html中任意标签元素字体颜色全部设置为红色：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;* 选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+* {color:red;font-size:20px;}
+
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p&gt;三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="17：伪类选择符"><a href="#17：伪类选择符" class="headerlink" title="17：伪类选择符"></a>17：伪类选择符</h5><p>（1）用于设置鼠标滑过时的文字样式</p>
+<p>（2）a:hover</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;伪类选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+    a:hover{
+        color:red;
+        font-size:20px;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;    body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;a href=&quot;http://www.imooc.com&quot;&gt;胆小如鼠&lt;/a&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p id=&quot;second&quot;&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很&lt;span&gt;简单&lt;/span&gt;的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre><h5 id="18-分组选择符"><a href="#18-分组选择符" class="headerlink" title="18:分组选择符"></a>18:分组选择符</h5><p>当你想为html中多个标签元素设置同一个样式时，可以使用分组选择符（，），如下代码为右侧代码编辑器中的h1、span标签同时设置字体颜色为红色：</p>
+<pre><code>h1,span{color:red;}
+</code></pre><p>等价于：</p>
+<pre><code> h1{color:red;}
+span{color:red;}
+
+
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;分组选择符&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+h1,span{color:red;}
+
+.first,#second span{color:green;}
+&lt;/style&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p id=&quot;second&quot;&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很&lt;span&gt;简单&lt;/span&gt;的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="19-CSS的样式继承"><a href="#19-CSS的样式继承" class="headerlink" title="19:CSS的样式继承"></a>19:CSS的样式继承</h5><p>比如下面代码：如某种颜色应用于p标签，这个颜色设置不仅应用p标签，还应用于p标签中的所有子元素文本，这里子元素为span标签。</p>
+<pre><code>p{color:red;}
+
+&lt;p&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩。&lt;/p&gt;
+</code></pre><p>可见右侧结果窗口中p中的文本与span中的文本都设置为了红色。但注意有一些css样式是不具有继承性的。如border:1px solid red;</p>
+<h5 id="20：特殊性-权值"><a href="#20：特殊性-权值" class="headerlink" title="20：特殊性==权值"></a>20：特殊性==权值</h5><pre><code>p{color:red;}
+.first{color:green;}
+&lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩。&lt;/p&gt;
+</code></pre><p>p和.first都匹配到了p这个标签上，那么会显示哪种颜色呢？green是正确的颜色，那么为什么呢？是因为浏览器是根据权值来判断使用哪种css样式的，权值高的就使用哪种css样式。</p>
+<pre><code>p{color:red;} /*权值为1*/
+p span{color:green;} /*权值为1+1=2*/
+.warning{color:white;} /*权值为10*/
+p span.warning{color:purple;} /*权值为1+1+10=12*/
+#footer .note p{color:yellow;} /*权值为100+10+1=111*/
 </code></pre>
           
         
