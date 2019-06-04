@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1:前端html文件的总架构-标签思想  2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document &amp;lt;!DOCTYPE HTML&amp;gt; &amp;lt;html&amp;gt;   &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;Content-Type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS的小Demo">
+<meta property="og:url" content="http://yoursite.com/2019/03/07/JS的小Demo/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1:前端html文件的总架构-标签思想  2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document &amp;lt;!DOCTYPE HTML&amp;gt; &amp;lt;html&amp;gt;   &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;Content-Type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/07/JS的小Demo/7.png">
+<meta property="og:updated_time" content="2019-06-04T09:31:01.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS的小Demo">
+<meta name="twitter:description" content="1:前端html文件的总架构-标签思想  2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document &amp;lt;!DOCTYPE HTML&amp;gt; &amp;lt;html&amp;gt;   &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;Content-Type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quo">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/07/JS的小Demo/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/07/JS的小Demo/">
+
+
+
+
+
+  <title>JS的小Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/JS的小Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS的小Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T00:00:00+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-前端html文件的总架构-标签思想"><a href="#1-前端html文件的总架构-标签思想" class="headerlink" title="1:前端html文件的总架构-标签思想"></a>1:前端html文件的总架构-标签思想</h3><p> <img src="/2019/03/07/JS的小Demo/1.png" alt></p>
+<h3 id="2-一个标签对应一个JS的DOM对象，整个html标签对应的是对象document"><a href="#2-一个标签对应一个JS的DOM对象，整个html标签对应的是对象document" class="headerlink" title="2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document"></a>2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document</h3><p><img src="/2019/03/07/JS的小Demo/2.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt; 
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;热身&lt;/title&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+      &lt;p id=&quot;p1&quot;&gt;我是第一段文字&lt;/p&gt;
+      &lt;p id=&quot;p2&quot;&gt;我是第二段文字&lt;/p&gt;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    document.write(&quot;hello&quot;);
+    document.getElementById(&quot;p1&quot;).style.color=&quot;blue&quot;;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h3 id="3-head里面的script标签"><a href="#3-head里面的script标签" class="headerlink" title="3: head里面的script标签"></a>3: head里面的script标签</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb18030&quot;&gt;
+    &lt;title&gt;插入js代码&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;   document.write(&quot;开启JS之旅!&quot;);
+    &lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="4：script内容引用外部js文件，不直接写"><a href="#4：script内容引用外部js文件，不直接写" class="headerlink" title="4：script内容引用外部js文件，不直接写"></a>4：script内容引用外部js文件，不直接写</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;引用JS文件&lt;/title&gt;
+&lt;script src=&quot;scrip    t.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>script.js</p>
+<pre><code>document.write(&quot;Hello JS&quot;)；
+</code></pre><h3 id="5-head和body标签放置script标签的位置"><a href="#5-head和body标签放置script标签的位置" class="headerlink" title="5: head和body标签放置script标签的位置"></a>5: head和body标签放置script标签的位置</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;JS代码的位置&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  document.write(&quot;I love &quot;)
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+   document.write(&quot;JS&quot;)
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>text代表类型，javascript是告诉浏览器这是JS语言</p>
+<h3 id="6：script里面的JS语言的注释也是：-和"><a href="#6：script里面的JS语言的注释也是：-和" class="headerlink" title="6：script里面的JS语言的注释也是： //  和  / /"></a>6：script里面的JS语言的注释也是： //  和  /<em> </em>/</h3><h3 id="7：看script标签"><a href="#7：看script标签" class="headerlink" title="7：看script标签"></a>7：看script标签</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;判断语句&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var score =80; //score变量存储成绩，初值为80
+      if(score&gt;=60)
+    {
+     document.write(&quot;很棒，成绩及格了。&quot;);
+    }
+  else
+    {
+     document.write(&quot;加油，成绩不及格。&quot;);
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="8：看script标签函数的使用"><a href="#8：看script标签函数的使用" class="headerlink" title="8：看script标签函数的使用"></a>8：看script标签函数的使用</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;函数调用&lt;/title&gt;
+   &lt;script type=&quot;text/javascript&quot;&gt;
+       function contxt() //定义函数
+      {
+         alert(&quot;哈哈，调用函数了!&quot;);
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+   &lt;form&gt;
+      &lt;input type=&quot;button&quot;  value=&quot;点击我&quot; onclick=&quot;contxt()&quot; /&gt;  
+   &lt;/form&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h3 id="9：看script标签的输出"><a href="#9：看script标签的输出" class="headerlink" title="9：看script标签的输出"></a>9：看script标签的输出</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;document.write&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var mystr=&quot;我是&quot;;
+    var mychar=&quot;JavaScript&quot;;
+   document.write(mychar+&quot;&lt;br /&gt;&quot;);
+   document.write(mystr+mychar+&quot;的忠实粉丝&quot;);
+
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="10：看script标签的alert"><a href="#10：看script标签的alert" class="headerlink" title="10：看script标签的alert"></a>10：看script标签的alert</h3><p> <img src="/2019/03/07/JS的小Demo/3.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;alert&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var mychar=&quot;I love JavaScript&quot;;
+    alert(mychar);
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，弹出对话框&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="11-看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true-false"><a href="#11-看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true-false" class="headerlink" title="11:看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true/false"></a>11:看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true/false</h3><p>  <img src="/2019/03/07/JS的小Demo/4.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;confirm&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var mymessage=confirm(&quot;你是女生吗？&quot;)         ;
+    if(mymessage==true)
+    {
+        document.write(&quot;你是女士!&quot;);
+    }
+    else
+    {
+        document.write(&quot;你是男士!&quot;);
+    }
+  }    
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，弹出确认对话框&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="12：看script标签的prompt-有点类似alert-EditText"><a href="#12：看script标签的prompt-有点类似alert-EditText" class="headerlink" title="12：看script标签的prompt,有点类似alert+EditText"></a>12：看script标签的prompt,有点类似alert+EditText</h3><p>  <img src="/2019/03/07/JS的小Demo/5.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;prompt&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var score; //score变量，用来存储用户输入的成绩值。
+    score =prompt(&quot;请输入你的成绩：&quot;);               ;
+    if(score&gt;=90)
+    {
+       document.write(&quot;你很棒!&quot;);
+    }
+    else if(score&gt;=75)
+    {
+       document.write(&quot;不错吆!&quot;);
+    }
+    else if(score&gt;=60)
+    {
+       document.write(&quot;要加油!&quot;);
+    }
+    else
+    {
+       document.write(&quot;要努力了!&quot;);
+    }
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，对成绩做评价!&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="13：看script标签打开新窗口"><a href="#13：看script标签打开新窗口" class="headerlink" title="13：看script标签打开新窗口"></a>13：看script标签打开新窗口</h3><p>  <img src="/2019/03/07/JS的小Demo/5.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;window.open&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  function Wopen(){
+
+window.open(&apos;http://www.imooc.com&apos;,&apos;_blank&apos;,&apos;width=600,height=400,menubar=no,toolbar=no, status=no,scrollbars=yes&apos;)
+  } 
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;Wopen()&quot; value=&quot;点击我，打开新窗口!&quot; / &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="14：看script标签关闭窗口"><a href="#14：看script标签关闭窗口" class="headerlink" title="14：看script标签关闭窗口"></a>14：看script标签关闭窗口</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;close()&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+     var mywin=window.open(&quot;http://www.imooc.com&quot;);
+     mywin.close();
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="15：小综合"><a href="#15：小综合" class="headerlink" title="15：小综合"></a>15：小综合</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt; new document &lt;/title&gt;  
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gbk&quot;/&gt;   
+  &lt;script type=&quot;text/javascript&quot;&gt;  
+
+   function openWindow()
+{var open=confirm(&quot;确认新建窗口打开网站吗？&quot;);
+if(open==true)
+    // 新窗口打开时弹出确认框，是否打开
+{var url=prompt(&quot;通过输入对话框，确定打开的网址&quot;,&quot;http://www.imooc.com&quot;);
+if(url!=null)
+    // 通过输入对话框，确定打开的网址，默认为 http：//www.imooc.com/
+{window.open(url,&quot;_blank&quot;,&apos;width=400px,height=500px,menubar=no,toolbar=no&apos;);    
+}
+    //打开的窗口要求，宽400像素，高500像素，无菜单栏、无工具栏。
+else
+{alert(&quot;再见！&quot;);}
+}   
+else
+{alert(&quot;再见！&quot;);}
+    }
+
+  &lt;/script&gt; 
+ &lt;/head&gt; 
+ &lt;body&gt; 
+      &lt;input type=&quot;button&quot; value=&quot;新窗口打开网站&quot; onclick=&quot;openWindow()&quot; /&gt; 
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="16-看script标签的DOM"><a href="#16-看script标签的DOM" class="headerlink" title="16:看script标签的DOM"></a>16:看script标签的DOM</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;document.getElementById&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id=&quot;con&quot;&gt;JavaScript&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var mychar=document.getElementById(&apos;con&apos;);
+  document.write(&quot;结果:&quot;+mychar); //输出获取的P标签。 
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="17-看script标签的innerHTML"><a href="#17-看script标签的innerHTML" class="headerlink" title="17:看script标签的innerHTML"></a>17:看script标签的innerHTML</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;innerHTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2 id=&quot;con&quot;&gt;javascript&lt;/H2&gt;
+&lt;p&gt; JavaScript是一种基于对象、事件驱动的简单脚本语言，嵌入在HTML文档中，由浏览器负责解释和执行，在网页上产生动态的显示效果并实现与用户交互功能。&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var mychar=document.getElementById(&apos;con&apos;);           ;
+  document.write(&quot;原标题:&quot;+mychar.innerHTML+&quot;&lt;br&gt;&quot;); //输出原h2标签内容
+  mychar.innerHTML=&quot;Hello World&quot;;
+  document.write(&quot;修改后的标题:&quot;+mychar.innerHTML); //输出修改后h2标签内容
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="18-看script标签改变DOM对象的样式"><a href="#18-看script标签改变DOM对象的样式" class="headerlink" title="18:看script标签改变DOM对象的样式"></a>18:看script标签改变DOM对象的样式</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;style样式&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;I love JavaScript&lt;/H2&gt;
+  &lt;p&gt; JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var mychar= document.getElementById(&quot;con&quot;);
+    mychar.style.color=&quot;red&quot;;
+    mychar.style.backgroundColor=&quot;#CCC&quot;;
+    mychar.style.width=&quot;300px&quot;;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="19：看script标签构造函数隐藏和显示内容"><a href="#19：看script标签构造函数隐藏和显示内容" class="headerlink" title="19：看script标签构造函数隐藏和显示内容"></a>19：看script标签构造函数隐藏和显示内容</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;
+&lt;title&gt;display&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt; 
+        function hidetext()  
+        {  
+        var mychar = document.getElementById(&quot;con&quot;);
+        mychar.style.display=&quot;none&quot;;
+        }  
+        function showtext()  
+        {  
+        var mychar = document.getElementById(&quot;con&quot;);
+        mychar.style.display=&quot;block&quot;;
+        }
+    &lt;/script&gt; 
+&lt;/head&gt; 
+&lt;body&gt;  
+    &lt;h1&gt;JavaScript&lt;/h1&gt;  
+    &lt;p id=&quot;con&quot;&gt;做为一个Web开发师来说，如果你想提供漂亮的网页、令用户满意的上网体验，JavaScript是必不可少的工具。&lt;/p&gt; 
+    &lt;form&gt;
+       &lt;input type=&quot;button&quot; onclick=&quot;hidetext()&quot; value=&quot;隐藏内容&quot; /&gt; 
+       &lt;input type=&quot;button&quot; onclick=&quot;showtext()&quot; value=&quot;显示内容&quot; /&gt; 
+    &lt;/form&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</code></pre><h3 id="20：看script标签改变类名来改变CSS"><a href="#20：看script标签改变类名来改变CSS" class="headerlink" title="20：看script标签改变类名来改变CSS"></a>20：看script标签改变类名来改变CSS</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;
+&lt;title&gt;className属性&lt;/title&gt;
+&lt;style&gt;
+    body{ font-size:16px;}
+    .one{
+        border:1px solid #eee;
+        width:230px;
+        height:50px;
+        background:#ccc;
+        color:red;
+    }
+    .two{
+        border:1px solid #ccc;
+        width:230px;
+        height:50px;
+        background:#9CF;
+        color:blue;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p id=&quot;p1&quot; &gt; JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+    &lt;input type=&quot;button&quot; value=&quot;添加样式&quot; onclick=&quot;add()&quot;/&gt;
+    &lt;p id=&quot;p2&quot; class=&quot;one&quot;&gt;JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+    &lt;input type=&quot;button&quot; value=&quot;更改外观&quot; onclick=&quot;modify()&quot;/&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+       function add(){
+          var p1 = document.getElementById(&quot;p1&quot;);
+          p1.className=&quot;one&quot;;
+       }
+       function modify(){
+          var p2 = document.getElementById(&quot;p2&quot;);
+          p2.className=&quot;two&quot;;
+       }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="21：综合"><a href="#21：综合" class="headerlink" title="21：综合"></a>21：综合</h3><p>  <img src="/2019/03/07/JS的小Demo/7.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; Content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;javascript&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body{font-size:12px;}
+#txt{
+    height:400px;
+    width:600px;
+    border:#333 solid 1px;
+    padding:5px;}
+p{
+    line-height:18px;
+    text-indent:2em;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;
+  &lt;div id=&quot;txt&quot;&gt; 
+     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;
+        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;
+        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;
+        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form&gt;
+  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;
+&lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;changeColor()&quot; &gt;  
+&lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;changeSize()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;changeHide()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;changeShow()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;changeSetting()&quot;&gt;
+  &lt;/form&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+//定义&quot;改变颜色&quot;的函数
+function changeColor(){
+var txt=document.getElementById(&apos;txt&apos;);
+txt.style.color=&apos;blue&apos;;
+txt.style.backgroundColor=&apos;red&apos;;
+}
+
+
+//定义&quot;改变宽高&quot;的函数
+function changeSize(){
+
+   var txt2=document.getElementById(&apos;txt&apos;); 
+   txt2.style.width=&quot;800px&quot;;
+   txt2.style.height=&quot;600px&quot;;
+}
+
+//定义&quot;隐藏内容&quot;的函数
+function changeHide(){
+
+     var txt3=document.getElementById(&apos;txt&apos;);
+     txt3.style.display=&apos;none&apos;;
+}
+
+//定义&quot;显示内容&quot;的函数
+function changeShow(){
+
+     var txt4=document.getElementById(&apos;txt&apos;);
+     txt4.style.display=&apos;block&apos;;
+}
+
+//定义&quot;取消设置&quot;的函数
+function changeSetting(){
+         var txt5=document.getElementById(&apos;txt&apos;);
+        var message=confirm(&quot;你确定要重置所有设置么？&quot;);
+        if(message==true){
+            txt5.removeAttribute(&apos;style&apos;);
+        }
+    }
+
+
+      &lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre><p>或者更简便的写法</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;txttent-Type&quot; txttent=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;javascript&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body{font-size:12px;}
+#txt{
+    height:400px;
+    width:600px;
+    border:#333 solid 1px;
+    padding:5px;}
+p{
+    line-height:18px;
+    text-indent:2em;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;
+  &lt;div id=&quot;txt&quot;&gt; 
+     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;
+        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;
+        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;
+        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form&gt;
+  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;
+    &lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;set.changeColor()&quot;&gt;  
+    &lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;set.changeSize()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;set.objHide()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;set.objShow()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;set.offSet()&quot;&gt;
+  &lt;/form&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+   var txt=document.getElementById(&quot;txt&quot;);
+   var set={
+    changeColor:function(){
+        txt.style.color=&quot;red&quot;;
+        txt.style.backgroundColor=&quot;#ccc&quot;;
+    },
+    changeSize:function(){
+        txt.style.width=&quot;300px&quot;;
+        txt.style.height=&quot;300px&quot;;
+    },
+    objHide:function(){
+        txt.style.display=&quot;none&quot;;
+    },    
+    objShow:function(){
+        txt.style.display=&quot;block&quot;;
+    },
+    offSet:function(){
+        var message=confirm(&quot;你确定要重置所有设置么？&quot;);
+        if(message==true){
+            txt.removeAttribute(&apos;style&apos;);
+        }
+    }
+  }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/06/HTML-CSS基础Demo/" rel="next" title="HTML-CSS基础Demo">
+                <i class="fa fa-chevron-left"></i> HTML-CSS基础Demo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/08/JS碎片知识点/" rel="prev" title="JS碎片知识点">
+                JS碎片知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-前端html文件的总架构-标签思想"><span class="nav-number">1.</span> <span class="nav-text">1:前端html文件的总架构-标签思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一个标签对应一个JS的DOM对象，整个html标签对应的是对象document"><span class="nav-number">2.</span> <span class="nav-text">2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-head里面的script标签"><span class="nav-number">3.</span> <span class="nav-text">3: head里面的script标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4：script内容引用外部js文件，不直接写"><span class="nav-number">4.</span> <span class="nav-text">4：script内容引用外部js文件，不直接写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-head和body标签放置script标签的位置"><span class="nav-number">5.</span> <span class="nav-text">5: head和body标签放置script标签的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6：script里面的JS语言的注释也是：-和"><span class="nav-number">6.</span> <span class="nav-text">6：script里面的JS语言的注释也是： //  和  / /</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7：看script标签"><span class="nav-number">7.</span> <span class="nav-text">7：看script标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8：看script标签函数的使用"><span class="nav-number">8.</span> <span class="nav-text">8：看script标签函数的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9：看script标签的输出"><span class="nav-number">9.</span> <span class="nav-text">9：看script标签的输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10：看script标签的alert"><span class="nav-number">10.</span> <span class="nav-text">10：看script标签的alert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true-false"><span class="nav-number">11.</span> <span class="nav-text">11:看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true/false</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12：看script标签的prompt-有点类似alert-EditText"><span class="nav-number">12.</span> <span class="nav-text">12：看script标签的prompt,有点类似alert+EditText</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13：看script标签打开新窗口"><span class="nav-number">13.</span> <span class="nav-text">13：看script标签打开新窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14：看script标签关闭窗口"><span class="nav-number">14.</span> <span class="nav-text">14：看script标签关闭窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15：小综合"><span class="nav-number">15.</span> <span class="nav-text">15：小综合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-看script标签的DOM"><span class="nav-number">16.</span> <span class="nav-text">16:看script标签的DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-看script标签的innerHTML"><span class="nav-number">17.</span> <span class="nav-text">17:看script标签的innerHTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-看script标签改变DOM对象的样式"><span class="nav-number">18.</span> <span class="nav-text">18:看script标签改变DOM对象的样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19：看script标签构造函数隐藏和显示内容"><span class="nav-number">19.</span> <span class="nav-text">19：看script标签构造函数隐藏和显示内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20：看script标签改变类名来改变CSS"><span class="nav-number">20.</span> <span class="nav-text">20：看script标签改变类名来改变CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21：综合"><span class="nav-number">21.</span> <span class="nav-text">21：综合</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

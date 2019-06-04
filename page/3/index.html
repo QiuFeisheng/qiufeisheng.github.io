@@ -232,546 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/17/基础Demo47-完全融合屏幕/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/17/基础Demo47-完全融合屏幕/" itemprop="url">基础Demo47-完全融合屏幕</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-17T00:00:00+08:00">
-                2019-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、在某子控件的所有父布局加入属性："><a href="#1、在某子控件的所有父布局加入属性：" class="headerlink" title="1、在某子控件的所有父布局加入属性："></a>1、在某子控件的所有父布局加入属性：</h3><pre><code>android:fitsSystemWindows=”true”
-</code></pre><p>activity_fruit.xml  （这里的目标控件是ImageView）</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;android.support.design.widget.CoordinatorLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:fitsSystemWindows=&quot;true&quot;&gt;
-
-&lt;android.support.design.widget.AppBarLayout
-    android:id=&quot;@+id/appBar&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;250dp&quot;
-    android:fitsSystemWindows=&quot;true&quot;&gt;
-
-    &lt;android.support.design.widget.CollapsingToolbarLayout
-        android:id=&quot;@+id/collapsing_toolbar&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
-        android:fitsSystemWindows=&quot;true&quot;
-        app:contentScrim=&quot;?attr/colorPrimary&quot;
-        app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed&quot;&gt;
-
-        &lt;ImageView
-            android:id=&quot;@+id/fruit_image_view&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            android:scaleType=&quot;centerCrop&quot;
-            android:fitsSystemWindows=&quot;true&quot;
-            app:layout_collapseMode=&quot;parallax&quot; /&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            app:layout_collapseMode=&quot;pin&quot; /&gt;
-    &lt;/android.support.design.widget.CollapsingToolbarLayout&gt;
-&lt;/android.support.design.widget.AppBarLayout&gt;
-
-&lt;android.support.v4.widget.NestedScrollView
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
-
-    &lt;LinearLayout
-        android:orientation=&quot;vertical&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;&gt;
-
-        &lt;android.support.v7.widget.CardView
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:layout_marginBottom=&quot;15dp&quot;
-            android:layout_marginLeft=&quot;15dp&quot;
-            android:layout_marginRight=&quot;15dp&quot;
-            android:layout_marginTop=&quot;35dp&quot;
-            app:cardCornerRadius=&quot;4dp&quot;&gt;
-
-            &lt;TextView
-                android:id=&quot;@+id/fruit_content_text&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;wrap_content&quot;
-                android:layout_margin=&quot;10dp&quot; /&gt;
-        &lt;/android.support.v7.widget.CardView&gt;
-    &lt;/LinearLayout&gt;
-&lt;/android.support.v4.widget.NestedScrollView&gt;
-
-&lt;android.support.design.widget.FloatingActionButton
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_margin=&quot;16dp&quot;
-    android:src=&quot;@drawable/ic_comment&quot;
-    app:layout_anchor=&quot;@id/appBar&quot;
-    app:layout_anchorGravity=&quot;bottom|end&quot; /&gt;
-
-&lt;/android.support.design.widget.CoordinatorLayout&gt;
-</code></pre><h3 id="2、写一个融合的stytle"><a href="#2、写一个融合的stytle" class="headerlink" title="2、写一个融合的stytle"></a>2、写一个融合的stytle</h3><p>（1）res—&gt;New—&gt;Directory—&gt;values-v21—New—&gt;Values resource file—&gt;styles.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;resources&gt;
-
-&lt;style name=&quot;FruitActivityTheme&quot; parent=&quot;AppTheme&quot;&gt;
-
-
-    &lt;item name=&quot;android:statusBarColor&quot;&gt;@android:color/transparent&lt;/item&gt;
-&lt;/style&gt;
-
-&lt;/resources&gt;
-</code></pre><p>（2）修改values—&gt;styles.xml:  API21以下用这个，25用上面那个</p>
-<resources><br><br>    <!-- Base application theme. --><br>    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"><br>        <!-- Customize your theme here. --><br>        <item name="colorPrimary">@color/colorPrimary</item><br>        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><br>        <item name="colorAccent">@color/colorAccent</item><br>        <item name="android:textColorPrimary">@color/colorWhite</item><br>    </style><br><br>    <style name="FruitActivityTheme." parent="AppTheme"></style><br>    </resources>
-
-
-<p>（3）Activity的theme引用</p>
-<pre><code>&lt;activity android:name=&quot;.FruitActivity&quot;
-android:theme=&quot;@style/FruitActivityTheme&quot;&gt;
-
-&lt;/activity&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/基础Demo46-标题栏折叠效果（震撼）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/16/基础Demo46-标题栏折叠效果（震撼）/" itemprop="url">基础Demo46-标题栏折叠效果（震撼）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T00:00:00+08:00">
-                2019-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-fruit-xml"><a href="#1、activity-fruit-xml" class="headerlink" title="1、activity_fruit.xml"></a>1、activity_fruit.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;android.support.design.widget.CoordinatorLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:fitsSystemWindows=&quot;true&quot;&gt;
-
-&lt;android.support.design.widget.AppBarLayout
-    android:id=&quot;@+id/appBar&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;250dp&quot;
-    android:fitsSystemWindows=&quot;true&quot;&gt;
-
-    &lt;android.support.design.widget.CollapsingToolbarLayout
-        android:id=&quot;@+id/collapsing_toolbar&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
-        android:fitsSystemWindows=&quot;true&quot;
-        app:contentScrim=&quot;?attr/colorPrimary&quot;
-        app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed&quot;&gt;
-
-        &lt;ImageView
-            android:id=&quot;@+id/fruit_image_view&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            android:scaleType=&quot;centerCrop&quot;
-            android:fitsSystemWindows=&quot;true&quot;
-            app:layout_collapseMode=&quot;parallax&quot; /&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            app:layout_collapseMode=&quot;pin&quot; /&gt;
-    &lt;/android.support.design.widget.CollapsingToolbarLayout&gt;
-&lt;/android.support.design.widget.AppBarLayout&gt;
-
-&lt;android.support.v4.widget.NestedScrollView
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    app:layout_behavior=&quot;android.support.design.widget.AppBarLayout$ScrollingViewBehavior&quot;&gt;
-
-    &lt;LinearLayout
-        android:orientation=&quot;vertical&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;&gt;
-
-        &lt;android.support.v7.widget.CardView
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:layout_marginBottom=&quot;15dp&quot;
-            android:layout_marginLeft=&quot;15dp&quot;
-            android:layout_marginRight=&quot;15dp&quot;
-            android:layout_marginTop=&quot;35dp&quot;
-            app:cardCornerRadius=&quot;4dp&quot;&gt;
-
-            &lt;TextView
-                android:id=&quot;@+id/fruit_content_text&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;wrap_content&quot;
-                android:layout_margin=&quot;10dp&quot; /&gt;
-        &lt;/android.support.v7.widget.CardView&gt;
-    &lt;/LinearLayout&gt;
-&lt;/android.support.v4.widget.NestedScrollView&gt;
-
-&lt;android.support.design.widget.FloatingActionButton
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_margin=&quot;16dp&quot;
-    android:src=&quot;@drawable/ic_comment&quot;
-    app:layout_anchor=&quot;@id/appBar&quot;
-    app:layout_anchorGravity=&quot;bottom|end&quot; /&gt;
-&lt;/android.support.design.widget.CoordinatorLayout&gt;
-</code></pre><h3 id="2、FruitActivity-java"><a href="#2、FruitActivity-java" class="headerlink" title="2、FruitActivity.java"></a>2、FruitActivity.java</h3><pre><code>import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.bumptech.glide.Glide;
-
-public class FruitActivity extends AppCompatActivity {
-
-public static final String FRUIT_NAME = &quot;fruit_name&quot;;
-
-public static final String FRUIT_IMAGE_ID = &quot;fruit_image_id&quot;;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_fruit);
-    Intent intent = getIntent();
-    String fruitName = intent.getStringExtra(FRUIT_NAME);
-    int fruitImageId = intent.getIntExtra(FRUIT_IMAGE_ID, 0);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-    ImageView fruitImageView = (ImageView) findViewById(R.id.fruit_image_view);
-    TextView fruitContentText = (TextView) findViewById(R.id.fruit_content_text);
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    if (actionBar != null) {
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-    collapsingToolbar.setTitle(fruitName);
-    Glide.with(this).load(fruitImageId).into(fruitImageView);
-    String fruitContent = generateFruitContent(fruitName);
-    fruitContentText.setText(fruitContent);
-}
-
-private String generateFruitContent(String fruitName) {
-    StringBuilder fruitContent = new StringBuilder();
-    for (int i = 0; i &lt; 500; i++) {
-        fruitContent.append(fruitName);
-    }
-    return fruitContent.toString();
-}
-
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-        case android.R.id.home:
-            finish();
-            return true;
-    }
-    return super.onOptionsItemSelected(item);
-}
-}
-</code></pre><h3 id="3、FruitAdapter-java"><a href="#3、FruitAdapter-java" class="headerlink" title="3、FruitAdapter.java"></a>3、FruitAdapter.java</h3><pre><code>import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import java.util.List;
-
-public class FruitAdapter extends RecyclerView.Adapter&lt;FruitAdapter.ViewHolder&gt;{
-
-private static final String TAG = &quot;FruitAdapter&quot;;
-
-private Context mContext;
-
-private List&lt;Fruit&gt; mFruitList;
-
-static class ViewHolder extends RecyclerView.ViewHolder {
-    CardView cardView;
-    ImageView fruitImage;
-    TextView fruitName;
-
-    public ViewHolder(View view) {
-        super(view);
-        cardView = (CardView) view;
-        fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
-        fruitName = (TextView) view.findViewById(R.id.fruit_name);
-    }
-}
-
-public FruitAdapter(List&lt;Fruit&gt; fruitList) {
-    mFruitList = fruitList;
-}
-
-@Override
-public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    if (mContext == null) {
-        mContext = parent.getContext();
-    }
-    View view = LayoutInflater.from(mContext).inflate(R.layout.fruit_item, parent, false);
-    final ViewHolder holder = new ViewHolder(view);
-   holder.cardView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int position = holder.getAdapterPosition();
-            Fruit fruit = mFruitList.get(position);
-            Intent intent = new Intent(mContext, FruitActivity.class);
-            intent.putExtra(FruitActivity.FRUIT_NAME, fruit.getName());
-            intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, fruit.getImageId());
-            mContext.startActivity(intent);
-        }
-    });
-    return holder;
-}
-
-@Override
-public void onBindViewHolder(ViewHolder holder, int position) {
-    Fruit fruit = mFruitList.get(position);
-    holder.fruitName.setText(fruit.getName());
-    Glide.with(mContext).load(fruit.getImageId()).into(holder.fruitImage);
-}
-
-@Override
-public int getItemCount() {
-    return mFruitList.size();
-}
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/基础Demo45-下拉刷新SwipeRefreshLayout/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3370,6 +2830,417 @@ startActivity(intent);
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/基础Demo37-联网请求框架Rxjava2+Retrofit2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/07/基础Demo37-联网请求框架Rxjava2+Retrofit2/" itemprop="url">基础Demo37-联网请求框架Rxjava2+Retrofit2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T00:00:00+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/基础Demo36-封装HttpURLConnection和OkHttp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/基础Demo36-封装HttpURLConnection和OkHttp/" itemprop="url">基础Demo36-封装HttpURLConnection和OkHttp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T00:00:00+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、封装HttpURLConnection"><a href="#1、封装HttpURLConnection" class="headerlink" title="1、封装HttpURLConnection"></a>1、封装HttpURLConnection</h3><pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+public static void sendHttpGET(final String address, final HttpCallbackListener listener) {
+
+
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(address);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod(&quot;GET&quot;);
+                connection.setConnectTimeout(8000);
+                connection.setReadTimeout(8000);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                InputStream in = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                if (listener != null) {
+                    // 回调onFinish()方法
+                    listener.onFinish(response.toString());
+                }
+            } catch (Exception e) {
+                if (listener != null) {
+                    // 回调onError()方法
+                    listener.onError(e);
+                }
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
+    }).start();
+  }
+}
+</code></pre><p>在子线程用回调来处理返回的数据或者错误，然后重写onFinish可以使用Handler或者runOnUiThread返回到主线程更新UI</p>
+<pre><code>public interface HttpCallbackListener {
+
+void onFinish(String response);
+
+void onError(Exception e);
+
+}
+</code></pre><h3 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h3><p>public void loginByPost(String userName, String userPass) {</p>
+<pre><code>    try {
+
+        // 请求的地址
+        String spec = &quot;http://172.16.237.200:8080/video/login.do&quot;;
+        // 根据地址创建URL对象
+        URL url = new URL(spec);
+        // 根据URL对象打开链接
+        HttpURLConnection urlConnection = (HttpURLConnection) url
+                .openConnection();
+        // 设置请求的方式
+        urlConnection.setRequestMethod(&quot;POST&quot;);
+        // 设置请求的超时时间
+        urlConnection.setReadTimeout(5000);
+        urlConnection.setConnectTimeout(5000);
+        // 传递的数据
+        String data = &quot;username=&quot; + URLEncoder.encode(userName, &quot;UTF-8&quot;)
+                + &quot;&amp;userpass=&quot; + URLEncoder.encode(userPass, &quot;UTF-8&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Connection&quot;, &quot;keep-alive&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Type&quot;,
+                &quot;application/x-www-form-urlencoded&quot;);
+        // 设置请求的头
+        urlConnection.setRequestProperty(&quot;Content-Length&quot;,
+                String.valueOf(data.getBytes().length));
+        // 设置请求的头
+        urlConnection
+                .setRequestProperty(&quot;User-Agent&quot;,
+                        &quot;Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0&quot;);
+
+        urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
+        urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
+                                        //setDoInput的默认值就是true
+        //获取输出流
+        OutputStream os = urlConnection.getOutputStream();
+        os.write(data.getBytes());
+        os.flush();
+        if (urlConnection.getResponseCode() == 200) {
+            // 获取响应的输入流对象
+            InputStream is = urlConnection.getInputStream();
+            // 创建字节输出流对象
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            // 定义读取的长度
+            int len = 0;
+            // 定义缓冲区
+            byte buffer[] = new byte[1024];
+            // 按照缓冲区的大小，循环读取
+            while ((len = is.read(buffer)) != -1) {
+                // 根据读取的长度写入到os对象中
+                baos.write(buffer, 0, len);
+            }
+            // 释放资源
+            is.close();
+            baos.close();
+            // 返回字符串
+            final String result = new String(baos.toByteArray());
+
+            // 通过runOnUiThread方法进行修改主线程的控件内容
+            LoginActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // 在这里把返回的数据写在控件上 会出现什么情况尼
+                    tv_result.setText(result);
+                }
+            });
+
+        } else {
+            System.out.println(&quot;链接失败.........&quot;);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>}</p>
+<p>封装OkHttp</p>
+<pre><code>import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+    public static void sendOkHttpRequest(final String address, final okhttp3.Callback callback) {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+            .url(address)
+            .build();
+    client.newCall(request).enqueue(callback);
+}
+
+}
+</code></pre><p>调用示例：</p>
+<pre><code>HttpUtil.sendOkHttpRequest(“https//www.baidu.com”,new okhttp3.Callback() {
+
+@Override
+public void onResponse(Call call,Response response)throws IOException{
+
+        String responseData=response.body().string();
+}
+
+
+@Override
+public void onFailure(Call call,IOException e){
+
+}
+
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -3420,7 +3291,7 @@ startActivity(intent);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

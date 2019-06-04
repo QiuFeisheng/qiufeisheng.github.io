@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/7/">
+  <link rel="canonical" href="http://yoursite.com/page/7/"/>
 
 
 
@@ -153,7 +153,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">QiuFeisheng'Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -183,7 +183,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
           </a>
@@ -193,7 +193,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -232,289 +232,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/基础Demo7-日志打印当前界面所属于的Activity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/07/基础Demo7-日志打印当前界面所属于的Activity/" itemprop="url">基础Demo7-日志打印当前界面所属于的Activity</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-07T00:00:00+08:00">
-                2019-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###应用场景：用于接收旧项目阅读源码和修改代码的时候，可以知道当前界面所属的Activity是哪一个Activity，有时候非常有用</p>
-<p>（1）有共同父类的：就在父类的onCreate里面加：</p>
-<pre><code>@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-
-LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-}
-</code></pre><p>（2）没有父类的，就创建父类：BaseActivity</p>
-<pre><code> import android.os.Bundle;
- import android.support.annotation.Nullable;
- import android.support.v7.app.AppCompatActivity;
-
-public class BaseActivity extends AppCompatActivity {
-
-@Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-  }
-}
-</code></pre><p>（3）Activity较复杂的，直接在每个Activity的onCreate()方法中加：</p>
-<pre><code>LogUtil.d(&quot;当前Activity是： &quot;+getClass().getSimpleName());
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/基础Demo6-Activity的4S启动模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/06/基础Demo6-Activity的4S启动模式/" itemprop="url">基础Demo6-Activity的4S启动模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-06T00:00:00+08:00">
-                2019-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、Standard"><a href="#1、Standard" class="headerlink" title="1、Standard"></a>1、Standard</h3><p>：默认的启动模式，一个Activity可以创建无限个实例</p>
-<h3 id="2、SingleTop"><a href="#2、SingleTop" class="headerlink" title="2、SingleTop"></a>2、SingleTop</h3><p>：程序正处于当前Activity A时，即栈顶，用Intent再跳转到A，不会再创建A的实例，此时不能无限生成A,但是如果是ABC,跳转到A会再生成一个实例，最后是ABCA，此时这两个A是不一样的噢，特别是数据方面。</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTop&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="3、SingleTask"><a href="#3、SingleTask" class="headerlink" title="3、SingleTask"></a>3、SingleTask</h3><p>： 简单粗暴，例如是ABC—-&gt;跳转到A，会直接将C,B finish掉，让A直接暴露在栈顶，此时就是运行状态onResume()</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleTask&quot;&gt;
-&lt;/activity&gt;
-</code></pre><h3 id="4、SingleInstance"><a href="#4、SingleInstance" class="headerlink" title="4、SingleInstance"></a>4、SingleInstance</h3><p>: 独立的返回栈，对于要被其他程序共享调用的Activity，我们可以将该Activity的启动模式设置为SingleInstance， ABC—-C–A–B</p>
-<pre><code>&lt;activity
-android:name=&quot;.Main2Activity&quot;
-android:launchMode=&quot;singleInstance&quot;&gt;
-&lt;/activity&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/基础Demo5-Activity意外回收保存数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -660,7 +382,7 @@ initData();
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -839,7 +561,7 @@ finish();
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1005,7 +727,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1269,7 +991,7 @@ Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1462,11 +1184,2820 @@ public boolean onOptionsItemSelected(MenuItem item) {
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/JS碎片知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/08/JS碎片知识点/" itemprop="url">JS碎片知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="备注：最具体的笔记是廖神的笔记"><a href="#备注：最具体的笔记是廖神的笔记" class="headerlink" title="备注：最具体的笔记是廖神的笔记"></a>备注：最具体的笔记是廖神的笔记</h5><blockquote>
+<p><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023021271742944" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1022910821149312/1023021271742944</a></p>
+</blockquote>
+<h5 id="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；"><a href="#1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；" class="headerlink" title="1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；"></a>1：JavaScript是一种运行在浏览器中的解释型脚本语言；也是一种动态语言，特点是声明变量类型为var，而不是静态写死；</h5><h5 id="2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；"><a href="#2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；" class="headerlink" title="2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；"></a>2：Web世界里面，因为只有JavaScript可以跨平台，跨浏览器驱动网页，与用户交互，所以必须学习JS；Java不够用；</h5><h5 id="3：Node-js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node-js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；"><a href="#3：Node-js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node-js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；" class="headerlink" title="3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node.js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；"></a>3：Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境，可以类比成JDK；其大部门模块都是用JS来编写的。Node.js的出现让JS的应用范围广，前端和服务器都可以使用，JS焕发新春；</h5><h5 id="4：JavaScript由网景公司的Brenden-Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1-2-3-4-5-6就是JS的版本；"><a href="#4：JavaScript由网景公司的Brenden-Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1-2-3-4-5-6就是JS的版本；" class="headerlink" title="4：JavaScript由网景公司的Brenden Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1,2,3,4,5,6就是JS的版本；"></a>4：JavaScript由网景公司的Brenden Eich在1995年设计出，跟Java没什么关系，当初只是为了“蹭Java”的热度，哈哈哈哈哈；ES1,2,3,4,5,6就是JS的版本；</h5><h5 id="5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；"><a href="#5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；" class="headerlink" title="5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；"></a>5：JS的语句可以加分号；结束，也可以不加，但是最好是加，以免系统自动补充；号时歧义，养成好的习惯；</h5><h5 id="6：JavaScript不区分整数和浮点数，统一用Number类型表示；"><a href="#6：JavaScript不区分整数和浮点数，统一用Number类型表示；" class="headerlink" title="6：JavaScript不区分整数和浮点数，统一用Number类型表示；"></a>6：JavaScript不区分整数和浮点数，统一用Number类型表示；</h5><h5 id="7：JS里的字符串可以是单引号，也可以是双引号，都可以；"><a href="#7：JS里的字符串可以是单引号，也可以是双引号，都可以；" class="headerlink" title="7：JS里的字符串可以是单引号，也可以是双引号，都可以；"></a>7：JS里的字符串可以是单引号，也可以是双引号，都可以；</h5><h5 id="8：JS里面坚持使用-来做比较，作用与Java的-一样，但是JS的-很诡异，坚决忽略掉，不要使用就对了；"><a href="#8：JS里面坚持使用-来做比较，作用与Java的-一样，但是JS的-很诡异，坚决忽略掉，不要使用就对了；" class="headerlink" title="8：JS里面坚持使用===来做比较，作用与Java的==一样，但是JS的==很诡异，坚决忽略掉，不要使用就对了；"></a>8：JS里面坚持使用===来做比较，作用与Java的==一样，但是JS的==很诡异，坚决忽略掉，不要使用就对了；</h5><h5 id="9：JavaScript的一个数组可以包括任意数据类型"><a href="#9：JavaScript的一个数组可以包括任意数据类型" class="headerlink" title="9：JavaScript的一个数组可以包括任意数据类型"></a>9：JavaScript的一个数组可以包括任意数据类型</h5><pre><code>例如：[1, 2, 3.14, &apos;Hello&apos;, null, true];
+</code></pre><h5 id="10：-new-Array-1-2-3-也是创建一个数组，不过建议还是-创建数组好一点；"><a href="#10：-new-Array-1-2-3-也是创建一个数组，不过建议还是-创建数组好一点；" class="headerlink" title="10： new Array(1,2,3)也是创建一个数组，不过建议还是[]创建数组好一点；"></a>10： new Array(1,2,3)也是创建一个数组，不过建议还是[]创建数组好一点；</h5><pre><code>new Array(1,2,3)===[1,2,3]
+</code></pre><h5 id="11：JS的对象-key-value集合，原理还是一样的，构造对象也就是在构造属性；"><a href="#11：JS的对象-key-value集合，原理还是一样的，构造对象也就是在构造属性；" class="headerlink" title="11：JS的对象==key-value集合，原理还是一样的，构造对象也就是在构造属性；"></a>11：JS的对象==key-value集合，原理还是一样的，构造对象也就是在构造属性；</h5><pre><code>var person = {
+name: &apos;Bob&apos;,
+age: 20,
+tags: [&apos;js&apos;, &apos;web&apos;, &apos;mobile&apos;],
+city: &apos;Beijing&apos;,
+hasCar: true,
+zipcode: null
+};
+</code></pre><p>备注：key都是字符串类型，value可以是任意数据类型</p>
+<h5 id="12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一"><a href="#12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一" class="headerlink" title="12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一;"></a>12：JS是动态语言，动态语言的特点之一就是声明变量的时候没有写死指定该变量的数据类型，这是与Java静态语言的区别之一;</h5><pre><code>var a = 123; // a的值是整数123
+a = &apos;ABC&apos;; // a变为字符串
+
+int a = 123; // a是整数类型变量，类型用int申明，这是Java
+a = &quot;ABC&quot;; // 错误：不能把字符串赋给整型变量
+</code></pre><h5 id="13：JS的日志打印是：-console-log-……"><a href="#13：JS的日志打印是：-console-log-……" class="headerlink" title="13：JS的日志打印是： console.log(……);"></a>13：JS的日志打印是： console.log(……);</h5><pre><code>var x = 100;
+console.log(x);
+</code></pre><h5 id="14-’use-strict’-模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；"><a href="#14-’use-strict’-模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；" class="headerlink" title="14:’use strict’;模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；"></a>14:’use strict’;模式，目的是为了使用var声明所有的变量，不要使用全局变量，目的是为了防止变量冲突；</h5><h5 id="15：多行字符串：可以使用-n也行，不过-更加方便"><a href="#15：多行字符串：可以使用-n也行，不过-更加方便" class="headerlink" title="15：多行字符串：可以使用\n也行，不过...更加方便"></a>15：多行字符串：可以使用\n也行，不过<code>...</code>更加方便</h5><pre><code>`这是一个
+多行
+字符串`;
+</code></pre><h5 id="16：模板字符串"><a href="#16：模板字符串" class="headerlink" title="16：模板字符串"></a>16：模板字符串</h5><p>：也可以使用+号来连接，不过更加高效</p>
+<pre><code>&apos;use strict&apos;;
+
+// 如果浏览器支持模板字符串，将会替换字符串内部的变量:
+var name = &apos;小明&apos;;
+var age = 20;
+console.log(`你好, ${name}, 你今年${age}岁了!`);
+</code></pre><h5 id="17：直接给Array的length赋一个新的值会导致Array大小的变化："><a href="#17：直接给Array的length赋一个新的值会导致Array大小的变化：" class="headerlink" title="17：直接给Array的length赋一个新的值会导致Array大小的变化："></a>17：直接给Array的length赋一个新的值会导致Array大小的变化：</h5><pre><code>var arr = [1, 2, 3];
+arr.length; // 3
+arr.length = 6;
+arr; // arr变为[1, 2, 3, undefined, undefined, undefined]
+arr.length = 2;
+arr; // arr变为[1, 2]
+</code></pre><h5 id="18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化："><a href="#18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：" class="headerlink" title="18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化："></a>18：如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化：</h5><pre><code>var arr = [1, 2, 3];
+arr[5] = &apos;x&apos;;
+arr; // arr变为[1, 2, 3, undefined, undefined, &apos;x&apos;]
+</code></pre><p>大多数其他编程语言不允许直接改变数组的大小，越界访问索引会报错。然而，JavaScript的Array却不会有任何错误。<strong>在编写代码时，不建议直接修改Array的大小</strong></p>
+<h5 id="19：-indexOf是返回索引值"><a href="#19：-indexOf是返回索引值" class="headerlink" title="19： indexOf是返回索引值"></a>19： indexOf是返回索引值</h5><pre><code>var arr = [10, 20, &apos;30&apos;, &apos;xyz&apos;];
+arr.indexOf(10); // 元素10的索引为0
+arr.indexOf(20); // 元素20的索引为1
+arr.indexOf(30); // 元素30没有找到，返回-1
+arr.indexOf(&apos;30&apos;); // 元素&apos;30&apos;的索引为2
+</code></pre><h5 id="20：Slice（）类似String的substring"><a href="#20：Slice（）类似String的substring" class="headerlink" title="20：Slice（）类似String的substring"></a>20：Slice（）类似String的substring</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;];
+arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+arr.slice(3); // 从索引3开始到结束: [&apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;]
+
+var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;];
+var aCopy = arr.slice();
+aCopy; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;]
+aCopy === arr; // false    
+</code></pre><h5 id="21：unshift和shift"><a href="#21：unshift和shift" class="headerlink" title="21：unshift和shift"></a>21：unshift和shift</h5><p>如果要往Array的头部添加若干元素，使用unshift()方法，shift()方法则把Array的第一个元素删掉：</p>
+<pre><code>var arr = [1, 2];
+arr.unshift(&apos;A&apos;, &apos;B&apos;); // 返回Array新的长度: 4
+arr; // [&apos;A&apos;, &apos;B&apos;, 1, 2]
+arr.shift(); // &apos;A&apos;
+arr; // [&apos;B&apos;, 1, 2]
+arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次
+arr; // []
+arr.shift(); // 空数组继续shift不会报错，而是返回undefined
+arr; // []
+</code></pre><h5 id="22：sort"><a href="#22：sort" class="headerlink" title="22：sort()"></a>22：sort()</h5><pre><code>var arr = [&apos;B&apos;, &apos;C&apos;, &apos;A&apos;];
+arr.sort();
+arr; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+</code></pre><h5 id="23-reverse"><a href="#23-reverse" class="headerlink" title="23:reverse()"></a>23:reverse()</h5><pre><code>var arr = [&apos;one&apos;, &apos;two&apos;, &apos;three&apos;];
+arr.reverse(); 
+arr; // [&apos;three&apos;, &apos;two&apos;, &apos;one&apos;]
+</code></pre><h5 id="24-splice"><a href="#24-splice" class="headerlink" title="24:splice()"></a>24:splice()</h5><pre><code>var arr = [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Yahoo&apos;, &apos;AOL&apos;, &apos;Excite&apos;, &apos;Oracle&apos;];
+// 从索引2开始删除3个元素,然后再添加两个元素:
+arr.splice(2, 3, &apos;Google&apos;, &apos;Facebook&apos;); // 返回删除的元素 [&apos;Yahoo&apos;, &apos;AOL&apos;, &apos;Excite&apos;]
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Google&apos;, &apos;Facebook&apos;, &apos;Oracle&apos;]
+// 只删除,不添加:
+arr.splice(2, 2); // [&apos;Google&apos;, &apos;Facebook&apos;]
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Oracle&apos;]
+// 只添加,不删除:
+arr.splice(2, 0, &apos;Google&apos;, &apos;Facebook&apos;); // 返回[],因为没有删除任何元素
+arr; // [&apos;Microsoft&apos;, &apos;Apple&apos;, &apos;Google&apos;, &apos;Facebook&apos;, &apos;Oracle&apos;]
+</code></pre><h5 id="25-concat"><a href="#25-concat" class="headerlink" title="25:concat()"></a>25:concat()</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+var added = arr.concat([1, 2, 3]);
+added; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3]
+arr; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+
+//可以自动拆数组然后再添加元素
+var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+arr.concat(1, 2, [3, 4]); // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3, 4]
+</code></pre><h5 id="26：join"><a href="#26：join" class="headerlink" title="26：join()"></a>26：join()</h5><pre><code>var arr = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, 1, 2, 3];
+arr.join(&apos;-&apos;); // &apos;A-B-C-1-2-3&apos;
+</code></pre><h5 id="27-JS的对象是key-value集合"><a href="#27-JS的对象是key-value集合" class="headerlink" title="27:JS的对象是key-value集合"></a>27:JS的对象是key-value集合</h5><pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+school: &apos;No.1 Middle School&apos;,
+height: 1.70,
+weight: 65,
+score: null
+};
+</code></pre><hr>
+<pre><code>//含特殊字符的key属性名要用&apos;&apos;
+var xiaohong = {
+name: &apos;小红&apos;,
+&apos;middle-school&apos;: &apos;No.1 Middle School&apos;
+};
+
+//访问方式如下
+xiaohong[&apos;middle-school&apos;]; // &apos;No.1 Middle School&apos;
+xiaohong[&apos;name&apos;]; // &apos;小红&apos;
+xiaohong.name; // &apos;小红&apos;
+</code></pre><p>（2）检验某个对象是否含有某个属性，in是包含父类继承二类的属性，hasOwnProperty()是自身增加的属性</p>
+<pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+school: &apos;No.1 Middle School&apos;,
+height: 1.70,
+weight: 65,
+score: null
+};
+&apos;name&apos; in xiaoming; // true
+&apos;grade&apos; in xiaoming; // false
+
+
+
+var xiaoming = {
+name: &apos;小明&apos;
+};
+xiaoming.hasOwnProperty(&apos;name&apos;); // true
+xiaoming.hasOwnProperty(&apos;toString&apos;); // false
+</code></pre><h5 id="28：for循环"><a href="#28：for循环" class="headerlink" title="28：for循环"></a>28：for循环</h5><pre><code>var arr = [&apos;Apple&apos;, &apos;Google&apos;, &apos;Microsoft&apos;];
+var i, x;
+for (i=0; i&lt;arr.length; i++) {
+x = arr[i];
+console.log(x);
+}
+</code></pre><hr>
+<pre><code>var x = 0;
+for (;;) { // 将无限循环下去
+if (x &gt; 100) {
+    break; // 通过if判断来退出循环
+}
+ console.log(x);
+x ++;
+}
+</code></pre><hr>
+<p>for…in类似Java的增强for循环</p>
+<pre><code>var o = {
+name: &apos;Jack&apos;,
+age: 20,
+city: &apos;Beijing&apos;
+};
+for (var key in o) {
+console.log(key); // &apos;name&apos;, &apos;age&apos;, &apos;city&apos;
+}
+
+
+var o = {
+name: &apos;Jack&apos;,
+age: 20,
+city: &apos;Beijing&apos;
+};
+for (var key in o) {
+if (o.hasOwnProperty(key)) {
+    console.log(key); // &apos;name&apos;, &apos;age&apos;, &apos;city&apos;
+}
+}
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+for (var i in a) {
+console.log(i); // &apos;0&apos;, &apos;1&apos;, &apos;2&apos;
+console.log(a[i]); // &apos;A&apos;, &apos;B&apos;, &apos;C&apos;
+}
+</code></pre><h5 id="29：while"><a href="#29：while" class="headerlink" title="29：while"></a>29：while</h5><pre><code>var x = 0;
+var n = 99;
+while (n &gt; 0) {
+x = x + n;
+n = n - 2;
+}
+x; // 2500
+
+
+var n = 0;
+do {
+n = n + 1;
+} while (n &lt; 100);
+n; // 
+</code></pre><h5 id="30-Map-类似Java的HashMap，也是key-value存值"><a href="#30-Map-类似Java的HashMap，也是key-value存值" class="headerlink" title="30:Map(类似Java的HashMap，也是key-value存值)"></a>30:Map(类似Java的HashMap，也是key-value存值)</h5><pre><code>var m = new Map([[&apos;Michael&apos;, 95], [&apos;Bob&apos;, 75], [&apos;Tracy&apos;, 85]]);
+m.get(&apos;Michael&apos;); // 95
+
+
+var m = new Map(); // 空Map
+m.set(&apos;Adam&apos;, 67); // 添加新的key-value
+m.set(&apos;Bob&apos;, 59);
+m.has(&apos;Adam&apos;); // 是否存在key &apos;Adam&apos;: true
+m.get(&apos;Adam&apos;); // 67
+m.delete(&apos;Adam&apos;); // 删除key &apos;Adam&apos;
+m.get(&apos;Adam&apos;); // undefined
+
+
+var m = new Map();
+m.set(&apos;Adam&apos;, 67);
+m.set(&apos;Adam&apos;, 88);
+m.get(&apos;Adam&apos;); // 88
+</code></pre><h5 id="31：Set-类似Java的HashSet-key不能重复"><a href="#31：Set-类似Java的HashSet-key不能重复" class="headerlink" title="31：Set(类似Java的HashSet,key不能重复)"></a>31：Set(类似Java的HashSet,key不能重复)</h5><p>Set和Map类似，也是一组key的集合，但不存储value</p>
+<pre><code>var s1 = new Set(); // 空Set
+var s2 = new Set([1, 2, 3]); // 含1, 2, 3
+
+var s = new Set([1, 2, 3, 3, &apos;3&apos;]);
+s; // Set {1, 2, 3, &quot;3&quot;}
+
+
+s.add(4);
+s; // Set {1, 2, 3, 4}
+s.add(4);
+s; // 仍然是 Set {1, 2, 3, 4}
+
+var s = new Set([1, 2, 3]);
+s; // Set {1, 2, 3}
+s.delete(3);
+s; // Set {1, 2}
+</code></pre><h5 id="32：iterator类型包含三种：Array-Map-Set"><a href="#32：iterator类型包含三种：Array-Map-Set" class="headerlink" title="32：iterator类型包含三种：Array,Map,Set"></a>32：iterator类型包含三种：Array,Map,Set</h5><p>主要用来循环遍历这三种数据类型</p>
+<pre><code>var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);
+var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);
+for (var x of a) { // 遍历Array
+console.log(x);
+}
+for (var x of s) { // 遍历Set
+console.log(x);
+}
+for (var x of m) { // 遍历Map
+console.log(x[0] + &apos;=&apos; + x[1]);
+}
+</code></pre><p>（1）for…in遍历得到的是Array的索引值，for…of是Array的元素值</p>
+<pre><code>var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.name = &apos;Hello&apos;;
+for (var x in a) {
+console.log(x); // &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;name&apos;
+}
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.name = &apos;Hello&apos;;
+for (var x of a) {
+console.log(x); // &apos;A&apos;, &apos;B&apos;, &apos;C&apos;
+}
+</code></pre><p>更好的方式是直接使用iterable内置的forEach方法</p>
+<pre><code>&apos;use strict&apos;;
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.forEach(function (element, index, array) {
+// element: 指向当前元素的值
+// index: 指向当前索引
+// array: 指向Array对象本身
+console.log(element + &apos;, index = &apos; + index);
+});
+
+
+var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.forEach(function (element) {
+console.log(element);
+});
+
+
+var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);
+m.forEach(function (value, key, map) {
+console.log(value);
+});
+
+
+var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);
+s.forEach(function (element, sameElement, set) {
+console.log(element);
+});
+</code></pre><h5 id="33：定义函数"><a href="#33：定义函数" class="headerlink" title="33：定义函数"></a>33：定义函数</h5><p>总共有两种方式：</p>
+<pre><code>function abs(x) {
+if (x &gt;= 0) {
+    return x;
+} else {
+    return -x;
+    }
+}
+
+
+var abs = function (x) {
+if (x &gt;= 0) {
+    return x;
+} else {
+    return -x;
+    }
+};
+
+
+abs(10); // 返回10
+abs(-9); // 返回9
+abs(10, &apos;blablabla&apos;); // 返回10
+abs(-9, &apos;haha&apos;, &apos;hehe&apos;, null); // 返回9
+abs(); // 返回NaN
+</code></pre><h5 id="34：arguments"><a href="#34：arguments" class="headerlink" title="34：arguments"></a>34：arguments</h5><p>永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array</p>
+<pre><code>function foo(x) {
+console.log(&apos;x = &apos; + x); // 10
+for (var i=0; i&lt;arguments.length; i++) {
+    console.log(&apos;arg &apos; + i + &apos; = &apos; + arguments[i]); // 10, 20, 30
+}
+}
+foo(10, 20, 30);
+
+
+x = 10
+arg 0 = 10
+arg 1 = 20
+arg 2 = 30
+
+
+
+
+function abs() {
+if (arguments.length === 0) {
+    return 0;
+}
+var x = arguments[0];
+return x &gt;= 0 ? x : -x;
+}
+abs(); // 0
+abs(10); // 10
+abs(-9); // 9
+
+
+
+// foo(a[, b], c)
+// 接收2~3个参数，b是可选参数，如果只传2个参数，b默认为null：
+function foo(a, b, c) {
+if (arguments.length === 2) {
+    // 实际拿到的参数是a和b，c为undefined
+    c = b; // 把b赋给c
+    b = null; // b变为默认值
+}
+// ...
+}
+</code></pre><h5 id="35-rest参数"><a href="#35-rest参数" class="headerlink" title="35:rest参数"></a>35:rest参数</h5><pre><code>function foo(a, b, ...rest) {
+console.log(&apos;a = &apos; + a);
+console.log(&apos;b = &apos; + b);
+console.log(rest);
+}
+
+foo(1, 2, 3, 4, 5);
+// 结果:
+// a = 1
+// b = 2
+// Array [ 3, 4, 5 ]
+
+foo(1);
+// 结果:
+// a = 1
+// b = undefined
+// Array []
+</code></pre><h5 id="36：注意return的多行写法"><a href="#36：注意return的多行写法" class="headerlink" title="36：注意return的多行写法"></a>36：注意return的多行写法</h5><p>防止自动补充;带来歧义</p>
+<pre><code>//效果错误
+function foo() {
+return
+    { name: &apos;foo&apos; };
+}
+
+foo(); // undefined
+
+
+function foo() {
+return { // 这里不会自动加分号，因为{表示语句尚未结束
+    name: &apos;foo&apos;
+};
+}
+</code></pre><h5 id="37：作用域"><a href="#37：作用域" class="headerlink" title="37：作用域"></a>37：作用域</h5><p>内部变量可以访问外部变量，同名变量，内部变量会屏蔽外部变量，各写各的</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var x = 1;
+function bar() {
+    var y = x + 1; // bar可以访问foo的变量x!
+}
+var z = y + 1; // ReferenceError! foo不可以访问bar的变量y!
+}
+
+
+
+function foo() {
+var x = 1;
+function bar() {
+    var x = &apos;A&apos;;
+    console.log(&apos;x in bar() = &apos; + x); // &apos;A&apos;
+}
+console.log(&apos;x in foo() = &apos; + x); // 1
+bar();
+}
+
+foo();
+</code></pre><p>输出值</p>
+<pre><code>x in foo() = 1
+
+x in bar() = A
+</code></pre><p>这说明JavaScript的函数在查找变量时从自身函数定义开始，从“内”向“外”查找</p>
+<h5 id="38：变量提升"><a href="#38：变量提升" class="headerlink" title="38：变量提升"></a>38：变量提升</h5><p>未提前声明的变量会被自动声明，但是不会自动赋值</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var x = &apos;Hello, &apos; + y;
+console.log(x);
+var y = &apos;Bob&apos;;
+}
+
+foo();    
+
+
+function foo() {
+var y; // 提升变量y的申明，此时y为undefined
+var x = &apos;Hello, &apos; + y;
+console.log(x);
+y = &apos;Bob&apos;;
+}
+
+
+
+function foo() {
+var
+    x = 1, // x初始化为1
+    y = x + 1, // y初始化为2
+    z, i; // z和i为undefined
+// 其他语句:
+for (i=0; i&lt;100; i++) {
+    ...
+        }
+}
+</code></pre><h5 id="39：全局作用域"><a href="#39：全局作用域" class="headerlink" title="39：全局作用域"></a>39：全局作用域</h5><p>：全局变量是绑定到全局对象window的其中一个属性</p>
+<pre><code>&apos;use strict&apos;;
+
+var course = &apos;Learn JavaScript&apos;;
+alert(course); // &apos;Learn JavaScript&apos;
+alert(window.course); // &apos;Learn JavaScript&apos;
+</code></pre><p>函数也算变量，而且是全局变量，感觉JS是万物皆变量</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+alert(&apos;foo&apos;);
+}
+
+foo(); // 直接调用foo()
+window.foo(); // 通过window.foo()调用
+</code></pre><h5 id="40：名字空间"><a href="#40：名字空间" class="headerlink" title="40：名字空间"></a>40：名字空间</h5><p>减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中。例如：</p>
+<pre><code>// 唯一的全局变量MYAPP:
+var MYAPP = {};
+
+// 其他变量:
+MYAPP.name = &apos;myapp&apos;;
+MYAPP.version = 1.0;
+
+// 其他函数:
+MYAPP.foo = function () {
+return &apos;foo&apos;;
+};    
+</code></pre><h5 id="41：局部作用域-let"><a href="#41：局部作用域-let" class="headerlink" title="41：局部作用域-let"></a>41：局部作用域-let</h5><p>为了解决块级作用域，ES6引入了新的关键字let，用let替代var可以申明一个块级作用域的变量：</p>
+<pre><code>&apos;use strict&apos;;
+
+function foo() {
+var sum = 0;
+for (let i=0; i&lt;100; i++) {
+    sum += i;
+}
+// SyntaxError:
+i += 1;
+}
+</code></pre><h5 id="42：常量"><a href="#42：常量" class="headerlink" title="42：常量"></a>42：常量</h5><p>ES6标准引入了新的关键字const来定义常量，const与let都具有块级作用域：</p>
+<pre><code>&apos;use strict&apos;;
+
+const PI = 3.14;
+PI = 3; // 某些浏览器不报错，但是无效果！
+PI; // 3.14
+</code></pre><h5 id="43：解构赋值"><a href="#43：解构赋值" class="headerlink" title="43：解构赋值"></a>43：解构赋值</h5><pre><code>var array = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;];
+var x = array[0];
+var y = array[1];
+var z = array[2];
+
+
+
+&apos;use strict&apos;;
+
+// 如果浏览器支持解构赋值就不会报错:
+var [x, y, z] = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;];
+</code></pre><hr>
+<pre><code>let [x, [y, z]] = [&apos;hello&apos;, [&apos;JavaScript&apos;, &apos;ES6&apos;]];
+x; // &apos;hello&apos;
+y; // &apos;JavaScript&apos;
+z; // &apos;ES6&apos;
+</code></pre><hr>
+<pre><code>let [, , z] = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;]; // 忽略前两个元素，只对z赋值第三个元素
+z; // &apos;ES6&apos;
+</code></pre><hr>
+<pre><code>&apos;use strict&apos;;
+
+var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;,
+school: &apos;No.4 middle school&apos;
+};
+var {name, age, passport} = person;
+</code></pre><p>对一个对象进行解构赋值时，同样可以直接对嵌套的对象属性进行赋值，只要保证对应的层次是一致的：</p>
+<pre><code>var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;,
+school: &apos;No.4 middle school&apos;,
+address: {
+    city: &apos;Beijing&apos;,
+    street: &apos;No.1 Road&apos;,
+    zipcode: &apos;100001&apos;
+}
+};
+var {name, address: {city, zip}} = person;
+name; // &apos;小明&apos;
+city; // &apos;Beijing&apos;
+zip; // undefined, 因为属性名是zipcode而不是zip
+// 注意: address不是变量，而是为了让city和zip获得嵌套的address对象的属性:
+address; // Uncaught ReferenceError: address is not defined
+</code></pre><p>解构赋值还可以使用默认值，这样就避免了不存在的属性返回undefined的问题：</p>
+<pre><code>var person = {
+name: &apos;小明&apos;,
+age: 20,
+gender: &apos;male&apos;,
+passport: &apos;G-12345678&apos;
+};
+
+// 如果person对象没有single属性，默认赋值为true:
+var {name, single=true} = person;
+name; // &apos;小明&apos;
+single; // true
+</code></pre><p>使用场景</p>
+<p>（1）解构赋值在很多时候可以大大简化代码</p>
+<pre><code>var x=1, y=2;
+[x, y] = [y, x]
+</code></pre><p>（2）快速获取当前页面的域名和路径：</p>
+<pre><code>var {hostname:domain, pathname:path} = location;
+</code></pre><p>（3）下面的函数可以快速创建一个Date对象：</p>
+<pre><code>function buildDate({year, month, day, hour=0, minute=0, second=0}) {
+return new Date(year + &apos;-&apos; + month + &apos;-&apos; + day + &apos; &apos; + hour + &apos;:&apos; + minute + &apos;:&apos; + second);
+}
+</code></pre><p>它的方便之处在于传入的对象只需要year、month和day这三个属性：</p>
+<pre><code>buildDate({ year: 2017, month: 1, day: 1 });
+// Sun Jan 01 2017 00:00:00 GMT+0800 (CST)
+</code></pre><h5 id="44：方法-对象绑定的函数"><a href="#44：方法-对象绑定的函数" class="headerlink" title="44：方法==对象绑定的函数"></a>44：方法==对象绑定的函数</h5><pre><code>var xiaoming = {
+name: &apos;小明&apos;,
+birth: 1990,
+age: function () {
+    var y = new Date().getFullYear();
+    return y - this.birth;
+}
+};
+
+xiaoming.age; // function xiaoming.age()
+xiaoming.age(); // 今年调用是25,明年调用就变成26了
+</code></pre><h5 id="45-高阶函数-函数function-f1-a-b-c-的参数a-b-c中只要有一个参数变量是指向函数的，那f1里面就可以调用这个函数，包裹了别的函数，此时f1就可以称为高阶函数；"><a href="#45-高阶函数-函数function-f1-a-b-c-的参数a-b-c中只要有一个参数变量是指向函数的，那f1里面就可以调用这个函数，包裹了别的函数，此时f1就可以称为高阶函数；" class="headerlink" title="45:高阶函数==函数function f1(a,b,c)的参数a,b,c中只要有一个参数变量是指向函数的，那f1里面就可以调用这个函数，包裹了别的函数，此时f1就可以称为高阶函数；"></a>45:高阶函数==函数function f1(a,b,c)的参数a,b,c中只要有一个参数变量是指向函数的，那f1里面就可以调用这个函数，包裹了别的函数，此时f1就可以称为高阶函数；</h5><h5 id="46：JS里面的思想更偏向万物皆变量，变量可以接受函数，也可以接受值；"><a href="#46：JS里面的思想更偏向万物皆变量，变量可以接受函数，也可以接受值；" class="headerlink" title="46：JS里面的思想更偏向万物皆变量，变量可以接受函数，也可以接受值；"></a>46：JS里面的思想更偏向万物皆变量，变量可以接受函数，也可以接受值；</h5><h5 id="47：Array的API：map-是属于一个高阶函数，形参是接受一个函数f2，然后对Array的每个元素进行f2处理作为新元素，从而构造一个新的Array，不过还是同一个Array变量，只是值不一样了；"><a href="#47：Array的API：map-是属于一个高阶函数，形参是接受一个函数f2，然后对Array的每个元素进行f2处理作为新元素，从而构造一个新的Array，不过还是同一个Array变量，只是值不一样了；" class="headerlink" title="47：Array的API：map()是属于一个高阶函数，形参是接受一个函数f2，然后对Array的每个元素进行f2处理作为新元素，从而构造一个新的Array，不过还是同一个Array变量，只是值不一样了；"></a>47：Array的API：map()是属于一个高阶函数，形参是接受一个函数f2，然后对Array的每个元素进行f2处理作为新元素，从而构造一个新的Array，不过还是同一个Array变量，只是值不一样了；</h5><h5 id="48：Array的API：reduce-function-x-y-……-就是一个数组两元素地推函数；就这么简单理解就行，很容易的，看廖神的Demo即可；"><a href="#48：Array的API：reduce-function-x-y-……-就是一个数组两元素地推函数；就这么简单理解就行，很容易的，看廖神的Demo即可；" class="headerlink" title="48：Array的API：reduce(function(x,y){……});就是一个数组两元素地推函数；就这么简单理解就行，很容易的，看廖神的Demo即可；"></a>48：Array的API：reduce(function(x,y){……});就是一个数组两元素地推函数；就这么简单理解就行，很容易的，看廖神的Demo即可；</h5><h5 id="49：Array的API：filter-是一个跟map-很类似的高阶函数，形参也是接收一个函数，不过是作用于每个元素-true的就留下来，false的就删除掉，类似一个筛选函数。其实只要构造好筛选函数就可以了。"><a href="#49：Array的API：filter-是一个跟map-很类似的高阶函数，形参也是接收一个函数，不过是作用于每个元素-true的就留下来，false的就删除掉，类似一个筛选函数。其实只要构造好筛选函数就可以了。" class="headerlink" title="49：Array的API：filter()是一个跟map()很类似的高阶函数，形参也是接收一个函数，不过是作用于每个元素,true的就留下来，false的就删除掉，类似一个筛选函数。其实只要构造好筛选函数就可以了。"></a>49：Array的API：filter()是一个跟map()很类似的高阶函数，形参也是接收一个函数，不过是作用于每个元素,true的就留下来，false的就删除掉，类似一个筛选函数。其实只要构造好筛选函数就可以了。</h5><pre><code> arr = [1, 2, 4, 5, 6, 9, 10, 15];
+var r = arr.filter(function (x) {
+return x % 2 !== 0;
+});
+r; // [1, 5, 9, 15]
+</code></pre><h5 id="50：Array的API：sort-是一个高阶函数，但是默认是按ASCII码来排序的，一般我们都要重写一个函数传到sort-里面进行排序；例如数字从小到大；"><a href="#50：Array的API：sort-是一个高阶函数，但是默认是按ASCII码来排序的，一般我们都要重写一个函数传到sort-里面进行排序；例如数字从小到大；" class="headerlink" title="50：Array的API：sort()是一个高阶函数，但是默认是按ASCII码来排序的，一般我们都要重写一个函数传到sort()里面进行排序；例如数字从小到大；"></a>50：Array的API：sort()是一个高阶函数，但是默认是按ASCII码来排序的，一般我们都要重写一个函数传到sort()里面进行排序；例如数字从小到大；</h5><pre><code>&apos;use strict&apos;;
+
+var arr = [10, 20, 1, 2];
+arr.sort(function (x, y) {
+    if (x &lt; y) {
+        return -1;
+    }
+    if (x &gt; y) {
+        return 1;
+    }
+    return 0;
+});
+
+console.log(arr); // [1, 2, 10, 20]
+</code></pre><h5 id="51：Array的其它高阶函数API"><a href="#51：Array的其它高阶函数API" class="headerlink" title="51：Array的其它高阶函数API"></a>51：Array的其它高阶函数API</h5><p>（1）every(function(s){…}):可以判断数组的所有元素是否满足测试条件;返回true/false</p>
+<p> (2)find(function(s){…}):可以查找符合条件的第一个元素，如果找到了，返回这个元素or undefined;</p>
+<p> (3)findIndex:也是查找符合条件的第一个元素，不同之处在于findIndex()会返回这个元素的索引，如果没有找到，返回-1;</p>
+<p> (4)forEach()和map()类似，它也把每个元素依次作用于传入的函数，但不会返回新的数组。forEach()常用于遍历数组，因此，传入的函数不需要返回值;</p>
+<h5 id="52-闭包-高阶函数返回一个函数，而不是函数处理完后的结果，要多一次调用才有结果"><a href="#52-闭包-高阶函数返回一个函数，而不是函数处理完后的结果，要多一次调用才有结果" class="headerlink" title="52:闭包==高阶函数返回一个函数，而不是函数处理完后的结果，要多一次调用才有结果"></a>52:闭包==高阶函数返回一个函数，而不是函数处理完后的结果，要多一次调用才有结果</h5><pre><code>function lazy_sum(arr) {
+var sum = function () {
+    return arr.reduce(function (x, y) {
+        return x + y;
+    });
+}
+return sum;
+}
+
+
+var f = lazy_sum([1, 2, 3, 4, 5]); // function sum()
+
+
+f(); // 15
+</code></pre><h5 id="53-箭头函数-Java匿名类那种感觉，目的是为了简化代码"><a href="#53-箭头函数-Java匿名类那种感觉，目的是为了简化代码" class="headerlink" title="53:箭头函数==Java匿名类那种感觉，目的是为了简化代码"></a>53:箭头函数==Java匿名类那种感觉，目的是为了简化代码</h5><pre><code>x =&gt; x * x
+
+
+x =&gt; {
+    if (x &gt; 0) {
+        return x * x;
+    }
+    else {
+        return - x * x;
+    }
+}
+</code></pre><h5 id="54-generator就是能够返回多次的“函数-yield就是类似返回"><a href="#54-generator就是能够返回多次的“函数-yield就是类似返回" class="headerlink" title="54:generator就是能够返回多次的“函数,yield就是类似返回"></a>54:generator就是能够返回多次的“函数,yield就是类似返回</h5><pre><code>function* foo(x) {
+    yield x + 1;
+    yield x + 2;
+    return x + 3;
+}
+</code></pre><h5 id="55-Date是日期类，RegExp是正则表达式"><a href="#55-Date是日期类，RegExp是正则表达式" class="headerlink" title="55:Date是日期类，RegExp是正则表达式"></a>55:Date是日期类，RegExp是正则表达式</h5><h5 id="56：Json"><a href="#56：Json" class="headerlink" title="56：Json"></a>56：Json</h5><p>序列化：对象—》Json字符串</p>
+<pre><code>var s = JSON.stringify(xiaoming);
+console.log(s);
+</code></pre><p>反序列化：Json字符串—》对象</p>
+<pre><code>var obj = JSON.parse(&apos;{&quot;name&quot;:&quot;小明&quot;,&quot;age&quot;:14}&apos;, function (key, value) {
+if (key === &apos;name&apos;) {
+    return value + &apos;同学&apos;;
+}
+return value;
+});
+console.log(JSON.stringify(obj)); // {name: &apos;小明同学&apos;, age: 14}
+</code></pre><h5 id="57-创建对象"><a href="#57-创建对象" class="headerlink" title="57:创建对象"></a>57:创建对象</h5><p>（1）JS的原型==Java的类</p>
+<p>（2）JS对象—》原型对象</p>
+<p>arr —-&gt; Array.prototype —-&gt; Object.prototype —-&gt; null</p>
+<p>（3）JS才是真正的万物皆对象，连函数也是对象，也有原型链</p>
+<p>（4）构造函数==new 普通函数</p>
+<pre><code>xiaoming ↘
+xiaohong -→ Student.prototype ----&gt; Object.prototype ----&gt; null
+xiaojun  ↗
+</code></pre><p>（5）类似工厂方法new 对象</p>
+<pre><code>function createStudent(props) {
+    return new Student(props || {})
+}
+</code></pre><p>（6）</p>
+<pre><code>//公共属性的写法
+function Cat(name) {
+//
+  this.name=name;
+}
+
+//公共方法使用原型对象来写
+Cat.prototype.say = function(){ return &apos;Hello, &apos; + this.name + &apos;!&apos;;}
+</code></pre><h5 id="class"><a href="#class" class="headerlink" title="class"></a>class</h5><p>还是class方便啊</p>
+<pre><code> class Student {
+    constructor(name) {
+    this.name = name;
+    }
+
+    hello() {
+        alert(&apos;Hello, &apos; + this.name + &apos;!&apos;);
+    }
+}
+
+
+
+class PrimaryStudent extends Student {
+    constructor(name, grade) {
+    super(name); // 记得用super调用父类的构造方法!
+    this.grade = grade;
+}
+
+myGrade() {
+    alert(&apos;I am at grade &apos; + this.grade);
+    }
+}
+</code></pre><h5 id="JS可以获取浏览器的很多对象"><a href="#JS可以获取浏览器的很多对象" class="headerlink" title="JS可以获取浏览器的很多对象"></a>JS可以获取浏览器的很多对象</h5><p>（1）浏览器==Android系统</p>
+<p>（2）window对象==浏览器窗口：可以获取innerWidth和innerHeight属性，网页净宽高</p>
+<p>（3）navigator对象==浏览器信息：</p>
+<pre><code>navigator.appName：浏览器名称；
+navigator.appVersion：浏览器版本；......
+</code></pre><p> (4)screen对象==屏幕信息</p>
+<pre><code>screen.width：屏幕宽度，以像素为单位；
+screen.height：屏幕高度，以像素为单位；
+screen.colorDepth：返回颜色位数，如8、16、24。
+</code></pre><p>（5）location对象==location对象表示当前页面的URL信息</p>
+<pre><code>location.protocol; // &apos;http&apos;
+location.host; // &apos;www.example.com&apos;
+location.port; // &apos;8080&apos;
+location.pathname; // &apos;/path/index.html&apos;
+location.search; // &apos;?a=1&amp;b=2&apos;
+location.hash; // &apos;TOP&apos;
+</code></pre><p>（6）document对象==当前网页的HTML的DOM</p>
+<pre><code>document.title = &apos;努力学习JavaScript!&apos;;
+</code></pre><p>（7）history对象==浏览器浏览历史信息</p>
+<h5 id="DOM的初步理解"><a href="#DOM的初步理解" class="headerlink" title="DOM的初步理解"></a>DOM的初步理解</h5><p>（1）HTML网页—–》浏览器解析—-》DOM树</p>
+<p>（2）一个HTML标签或者&lt;div标签就是一个DOM的节点，然后使用JS就可以对DOM节点进行操作，间接对HTML的网页内容显示进行操作，应该是这样吧</p>
+<h5 id="DOM的操作也是增删改查"><a href="#DOM的操作也是增删改查" class="headerlink" title="DOM的操作也是增删改查"></a>DOM的操作也是增删改查</h5><p>（1）更新（修改）</p>
+<pre><code>var js = document.getElementById(&apos;test-js&apos;);
+
+js.innerText = &apos;JavaScript&apos;;
+
+js.style.color = &apos;#ff0000&apos;;
+
+js.style.fontWeight = &apos;bold&apos;;
+
+
+
+
+
+
+// 获取&lt;p id=&quot;p-id&quot;&gt;...&lt;/p&gt;
+var p = document.getElementById(&apos;p-id&apos;);
+// 设置文本为abc:
+p.innerHTML = &apos;ABC&apos;; // &lt;p id=&quot;p-id&quot;&gt;ABC&lt;/p&gt;
+// 设置HTML:
+p.innerHTML = &apos;ABC &lt;span style=&quot;color:red&quot;&gt;RED&lt;/span&gt; XYZ&apos;;
+// &lt;p&gt;...&lt;/p&gt;的内部结构已修改
+
+
+// 获取&lt;p id=&quot;p-id&quot;&gt;...&lt;/p&gt;
+var p = document.getElementById(&apos;p-id&apos;);
+// 设置文本:
+p.innerText = &apos;&lt;script&gt;alert(&quot;Hi&quot;)&lt;/script&gt;&apos;;
+// HTML被自动编码，无法设置一个&lt;script&gt;节点:
+// &lt;p id=&quot;p-id&quot;&gt;&amp;lt;script&amp;gt;alert(&quot;Hi&quot;)&amp;lt;/script&amp;gt;&lt;/p&gt;
+
+
+// 获取&lt;p id=&quot;p-id&quot;&gt;...&lt;/p&gt;
+var p = document.getElementById(&apos;p-id&apos;);
+// 设置CSS:
+p.style.color = &apos;#ff0000&apos;;
+p.style.fontSize = &apos;20px&apos;;
+p.style.paddingTop = &apos;2em&apos;;
+</code></pre><p>（2）DOM节点内再插入子节点： </p>
+<p>appendChild()<br>    var<br>    list = document.getElementById(‘list’),</p>
+<pre><code>haskell = document.createElement(&apos;p&apos;);
+haskell.id = &apos;haskell&apos;;
+haskell.innerText = &apos;Haskell&apos;;
+
+list.appendChild(haskell);
+</code></pre><p>插入到指定位置<br>    var<br>    list = document.getElementById(‘list’),<br>    ref = document.getElementById(‘python’),<br>    haskell = document.createElement(‘p’);<br>    haskell.id = ‘haskell’;<br>    haskell.innerText = ‘Haskell’;<br>    list.insertBefore(haskell, ref);</p>
+<p>（3）删除节点：得到当前节点和父节点，然后removeChild就删掉了</p>
+<pre><code>// 拿到待删除节点:
+var self = document.getElementById(&apos;to-be-removed&apos;);
+// 拿到父节点:
+var parent = self.parentElement;
+// 删除:
+var removed = parent.removeChild(self);
+removed === self; // true
+</code></pre><h5 id="操作表单"><a href="#操作表单" class="headerlink" title="操作表单"></a>操作表单</h5><p>（1）HTML的&lt;input type=”text”就是表单输入控件，以下都是：</p>
+<pre><code>文本框，对应的&lt;input type=&quot;text&quot;&gt;，用于输入文本；
+
+口令框，对应的&lt;input type=&quot;password&quot;&gt;，用于输入口令；
+
+单选框，对应的&lt;input type=&quot;radio&quot;&gt;，用于选择一项；
+
+复选框，对应的&lt;input type=&quot;checkbox&quot;&gt;，用于选择多项；
+
+下拉框，对应的&lt;select&gt;，用于选择一项；
+
+隐藏文本，对应的&lt;input type=&quot;hidden&quot;&gt;，用户不可见，但表单提交时会把隐藏文本发送到服务器。
+
+
+
+// &lt;input type=&quot;text&quot; id=&quot;email&quot;&gt;
+var input = document.getElementById(&apos;email&apos;);
+input.value = &apos;test@example.com&apos;; // 文本框的内容已更新
+</code></pre><p>用&lt;form元素的submit()提交表单</p>
+<pre><code>&lt;!-- HTML --&gt;
+&lt;form id=&quot;login-form&quot; method=&quot;post&quot; onsubmit=&quot;return checkForm()&quot;&gt;
+&lt;input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot;&gt;
+&lt;input type=&quot;password&quot; id=&quot;input-password&quot;&gt;
+&lt;input type=&quot;hidden&quot; id=&quot;md5-password&quot; name=&quot;password&quot;&gt;
+&lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+function checkForm() {
+    var input_pwd = document.getElementById(&apos;input-password&apos;);
+    var md5_pwd = document.getElementById(&apos;md5-password&apos;);
+    // 把用户输入的明文变为MD5:
+    md5_pwd.value = toMD5(input_pwd.value);
+    // 继续下一步:
+    return true;
+}
+&lt;/script&gt;
+</code></pre><h5 id="AJAX—JavaScript执行异步网络请求"><a href="#AJAX—JavaScript执行异步网络请求" class="headerlink" title="AJAX—JavaScript执行异步网络请求"></a>AJAX—JavaScript执行异步网络请求</h5><p>：主要依靠XMLHttpRequest对象，低版本是ActiveXObject对象</p>
+<pre><code>function success(text) {
+    var textarea = document.getElementById(&apos;test-response-text&apos;);
+    textarea.value = text;
+}
+
+function fail(code) {
+    var textarea = document.getElementById(&apos;test-response-text&apos;);
+    textarea.value = &apos;Error code: &apos; + code;
+}
+
+var request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
+
+request.onreadystatechange = function () { // 状态发生变化时，函数被回调
+    if (request.readyState === 4) { // 成功完成
+        // 判断响应结果:
+        if (request.status === 200) {
+        // 成功，通过responseText拿到响应的文本:
+        return success(request.responseText);
+    } else {
+        // 失败，根据响应码判断失败原因:
+        return fail(request.status);
+    }
+} else {
+    // HTTP请求还在继续...
+    }
+}
+
+// 发送请求:
+request.open(&apos;GET&apos;, &apos;/api/categories&apos;);
+request.send();
+
+alert(&apos;请求已发送，请等待响应...&apos;);
+</code></pre><h5 id="Promise—将异步执行的代码分离：-执行代码—-处理结果代码分离"><a href="#Promise—将异步执行的代码分离：-执行代码—-处理结果代码分离" class="headerlink" title="Promise—将异步执行的代码分离： 执行代码—-处理结果代码分离"></a>Promise—将异步执行的代码分离： 执行代码—-处理结果代码分离</h5><pre><code>function test(resolve, reject) {
+var timeOut = Math.random() * 2;
+log(&apos;set timeout to: &apos; + timeOut + &apos; seconds.&apos;);
+setTimeout(function () {
+    if (timeOut &lt; 1) {
+        log(&apos;call resolve()...&apos;);
+        resolve(&apos;200 OK&apos;);
+    }
+    else {
+        log(&apos;call reject()...&apos;);
+        reject(&apos;timeout in &apos; + timeOut + &apos; seconds.&apos;);
+    }
+}, timeOut * 1000);
+}
+
+
+
+var p1 = new Promise(test);
+var p2 = p1.then(function (result) {
+console.log(&apos;成功：&apos; + result);
+});
+var p3 = p2.catch(function (reason) {
+console.log(&apos;失败：&apos; + reason);
+});
+</code></pre><p><img src="/2019/03/08/JS碎片知识点/HTML-CSS的知识点总结/601.png" alt></p>
+<h5 id="Canvas是HTML5的一个组件-lt-替代了Flash可以使用JS在网页上进行绘制，类似Android的自定义View"><a href="#Canvas是HTML5的一个组件-lt-替代了Flash可以使用JS在网页上进行绘制，类似Android的自定义View" class="headerlink" title="Canvas是HTML5的一个组件&lt;,替代了Flash可以使用JS在网页上进行绘制，类似Android的自定义View"></a>Canvas是HTML5的一个组件&lt;,替代了Flash可以使用JS在网页上进行绘制，类似Android的自定义View</h5><p>使用方式：</p>
+<p>（1）在JS中获取Canvas组件的Dom对象，然后调用各种API进行绘制，例如getContext()；<br>（2）绘制图形和文本都行；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/JS的小Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/07/JS的小Demo/" itemprop="url">JS的小Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T00:00:00+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-前端html文件的总架构-标签思想"><a href="#1-前端html文件的总架构-标签思想" class="headerlink" title="1:前端html文件的总架构-标签思想"></a>1:前端html文件的总架构-标签思想</h3><p> <img src="/2019/03/07/JS的小Demo/1.png" alt></p>
+<h3 id="2-一个标签对应一个JS的DOM对象，整个html标签对应的是对象document"><a href="#2-一个标签对应一个JS的DOM对象，整个html标签对应的是对象document" class="headerlink" title="2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document"></a>2:一个标签对应一个JS的DOM对象，整个html标签对应的是对象document</h3><p><img src="/2019/03/07/JS的小Demo/2.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt; 
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;热身&lt;/title&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+      &lt;p id=&quot;p1&quot;&gt;我是第一段文字&lt;/p&gt;
+      &lt;p id=&quot;p2&quot;&gt;我是第二段文字&lt;/p&gt;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    document.write(&quot;hello&quot;);
+    document.getElementById(&quot;p1&quot;).style.color=&quot;blue&quot;;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h3 id="3-head里面的script标签"><a href="#3-head里面的script标签" class="headerlink" title="3: head里面的script标签"></a>3: head里面的script标签</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb18030&quot;&gt;
+    &lt;title&gt;插入js代码&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;   document.write(&quot;开启JS之旅!&quot;);
+    &lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="4：script内容引用外部js文件，不直接写"><a href="#4：script内容引用外部js文件，不直接写" class="headerlink" title="4：script内容引用外部js文件，不直接写"></a>4：script内容引用外部js文件，不直接写</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;引用JS文件&lt;/title&gt;
+&lt;script src=&quot;scrip    t.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>script.js</p>
+<pre><code>document.write(&quot;Hello JS&quot;)；
+</code></pre><h3 id="5-head和body标签放置script标签的位置"><a href="#5-head和body标签放置script标签的位置" class="headerlink" title="5: head和body标签放置script标签的位置"></a>5: head和body标签放置script标签的位置</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;JS代码的位置&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  document.write(&quot;I love &quot;)
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+   document.write(&quot;JS&quot;)
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>text代表类型，javascript是告诉浏览器这是JS语言</p>
+<h3 id="6：script里面的JS语言的注释也是：-和"><a href="#6：script里面的JS语言的注释也是：-和" class="headerlink" title="6：script里面的JS语言的注释也是： //  和  / /"></a>6：script里面的JS语言的注释也是： //  和  /<em> </em>/</h3><h3 id="7：看script标签"><a href="#7：看script标签" class="headerlink" title="7：看script标签"></a>7：看script标签</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;判断语句&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var score =80; //score变量存储成绩，初值为80
+      if(score&gt;=60)
+    {
+     document.write(&quot;很棒，成绩及格了。&quot;);
+    }
+  else
+    {
+     document.write(&quot;加油，成绩不及格。&quot;);
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="8：看script标签函数的使用"><a href="#8：看script标签函数的使用" class="headerlink" title="8：看script标签函数的使用"></a>8：看script标签函数的使用</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;函数调用&lt;/title&gt;
+   &lt;script type=&quot;text/javascript&quot;&gt;
+       function contxt() //定义函数
+      {
+         alert(&quot;哈哈，调用函数了!&quot;);
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+   &lt;form&gt;
+      &lt;input type=&quot;button&quot;  value=&quot;点击我&quot; onclick=&quot;contxt()&quot; /&gt;  
+   &lt;/form&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h3 id="9：看script标签的输出"><a href="#9：看script标签的输出" class="headerlink" title="9：看script标签的输出"></a>9：看script标签的输出</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;document.write&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var mystr=&quot;我是&quot;;
+    var mychar=&quot;JavaScript&quot;;
+   document.write(mychar+&quot;&lt;br /&gt;&quot;);
+   document.write(mystr+mychar+&quot;的忠实粉丝&quot;);
+
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="10：看script标签的alert"><a href="#10：看script标签的alert" class="headerlink" title="10：看script标签的alert"></a>10：看script标签的alert</h3><p> <img src="/2019/03/07/JS的小Demo/3.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;alert&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var mychar=&quot;I love JavaScript&quot;;
+    alert(mychar);
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，弹出对话框&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="11-看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true-false"><a href="#11-看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true-false" class="headerlink" title="11:看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true/false"></a>11:看script标签的confirm，弹出对话框，比alert多了两个按钮，确定or取消，还有返回值true/false</h3><p>  <img src="/2019/03/07/JS的小Demo/4.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;confirm&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var mymessage=confirm(&quot;你是女生吗？&quot;)         ;
+    if(mymessage==true)
+    {
+        document.write(&quot;你是女士!&quot;);
+    }
+    else
+    {
+        document.write(&quot;你是男士!&quot;);
+    }
+  }    
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，弹出确认对话框&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="12：看script标签的prompt-有点类似alert-EditText"><a href="#12：看script标签的prompt-有点类似alert-EditText" class="headerlink" title="12：看script标签的prompt,有点类似alert+EditText"></a>12：看script标签的prompt,有点类似alert+EditText</h3><p>  <img src="/2019/03/07/JS的小Demo/5.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;prompt&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  function rec(){
+    var score; //score变量，用来存储用户输入的成绩值。
+    score =prompt(&quot;请输入你的成绩：&quot;);               ;
+    if(score&gt;=90)
+    {
+       document.write(&quot;你很棒!&quot;);
+    }
+    else if(score&gt;=75)
+    {
+       document.write(&quot;不错吆!&quot;);
+    }
+    else if(score&gt;=60)
+    {
+       document.write(&quot;要加油!&quot;);
+    }
+    else
+    {
+       document.write(&quot;要努力了!&quot;);
+    }
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;rec()&quot; value=&quot;点击我，对成绩做评价!&quot; /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="13：看script标签打开新窗口"><a href="#13：看script标签打开新窗口" class="headerlink" title="13：看script标签打开新窗口"></a>13：看script标签打开新窗口</h3><p>  <img src="/2019/03/07/JS的小Demo/5.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;window.open&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  function Wopen(){
+
+window.open(&apos;http://www.imooc.com&apos;,&apos;_blank&apos;,&apos;width=600,height=400,menubar=no,toolbar=no, status=no,scrollbars=yes&apos;)
+  } 
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input name=&quot;button&quot; type=&quot;button&quot; onClick=&quot;Wopen()&quot; value=&quot;点击我，打开新窗口!&quot; / &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="14：看script标签关闭窗口"><a href="#14：看script标签关闭窗口" class="headerlink" title="14：看script标签关闭窗口"></a>14：看script标签关闭窗口</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;close()&lt;/title&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+     var mywin=window.open(&quot;http://www.imooc.com&quot;);
+     mywin.close();
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="15：小综合"><a href="#15：小综合" class="headerlink" title="15：小综合"></a>15：小综合</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt; new document &lt;/title&gt;  
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gbk&quot;/&gt;   
+  &lt;script type=&quot;text/javascript&quot;&gt;  
+
+   function openWindow()
+{var open=confirm(&quot;确认新建窗口打开网站吗？&quot;);
+if(open==true)
+    // 新窗口打开时弹出确认框，是否打开
+{var url=prompt(&quot;通过输入对话框，确定打开的网址&quot;,&quot;http://www.imooc.com&quot;);
+if(url!=null)
+    // 通过输入对话框，确定打开的网址，默认为 http：//www.imooc.com/
+{window.open(url,&quot;_blank&quot;,&apos;width=400px,height=500px,menubar=no,toolbar=no&apos;);    
+}
+    //打开的窗口要求，宽400像素，高500像素，无菜单栏、无工具栏。
+else
+{alert(&quot;再见！&quot;);}
+}   
+else
+{alert(&quot;再见！&quot;);}
+    }
+
+  &lt;/script&gt; 
+ &lt;/head&gt; 
+ &lt;body&gt; 
+      &lt;input type=&quot;button&quot; value=&quot;新窗口打开网站&quot; onclick=&quot;openWindow()&quot; /&gt; 
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="16-看script标签的DOM"><a href="#16-看script标签的DOM" class="headerlink" title="16:看script标签的DOM"></a>16:看script标签的DOM</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;document.getElementById&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id=&quot;con&quot;&gt;JavaScript&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var mychar=document.getElementById(&apos;con&apos;);
+  document.write(&quot;结果:&quot;+mychar); //输出获取的P标签。 
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="17-看script标签的innerHTML"><a href="#17-看script标签的innerHTML" class="headerlink" title="17:看script标签的innerHTML"></a>17:看script标签的innerHTML</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;innerHTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2 id=&quot;con&quot;&gt;javascript&lt;/H2&gt;
+&lt;p&gt; JavaScript是一种基于对象、事件驱动的简单脚本语言，嵌入在HTML文档中，由浏览器负责解释和执行，在网页上产生动态的显示效果并实现与用户交互功能。&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var mychar=document.getElementById(&apos;con&apos;);           ;
+  document.write(&quot;原标题:&quot;+mychar.innerHTML+&quot;&lt;br&gt;&quot;); //输出原h2标签内容
+  mychar.innerHTML=&quot;Hello World&quot;;
+  document.write(&quot;修改后的标题:&quot;+mychar.innerHTML); //输出修改后h2标签内容
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="18-看script标签改变DOM对象的样式"><a href="#18-看script标签改变DOM对象的样式" class="headerlink" title="18:看script标签改变DOM对象的样式"></a>18:看script标签改变DOM对象的样式</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;style样式&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;I love JavaScript&lt;/H2&gt;
+  &lt;p&gt; JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var mychar= document.getElementById(&quot;con&quot;);
+    mychar.style.color=&quot;red&quot;;
+    mychar.style.backgroundColor=&quot;#CCC&quot;;
+    mychar.style.width=&quot;300px&quot;;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="19：看script标签构造函数隐藏和显示内容"><a href="#19：看script标签构造函数隐藏和显示内容" class="headerlink" title="19：看script标签构造函数隐藏和显示内容"></a>19：看script标签构造函数隐藏和显示内容</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;
+&lt;title&gt;display&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt; 
+        function hidetext()  
+        {  
+        var mychar = document.getElementById(&quot;con&quot;);
+        mychar.style.display=&quot;none&quot;;
+        }  
+        function showtext()  
+        {  
+        var mychar = document.getElementById(&quot;con&quot;);
+        mychar.style.display=&quot;block&quot;;
+        }
+    &lt;/script&gt; 
+&lt;/head&gt; 
+&lt;body&gt;  
+    &lt;h1&gt;JavaScript&lt;/h1&gt;  
+    &lt;p id=&quot;con&quot;&gt;做为一个Web开发师来说，如果你想提供漂亮的网页、令用户满意的上网体验，JavaScript是必不可少的工具。&lt;/p&gt; 
+    &lt;form&gt;
+       &lt;input type=&quot;button&quot; onclick=&quot;hidetext()&quot; value=&quot;隐藏内容&quot; /&gt; 
+       &lt;input type=&quot;button&quot; onclick=&quot;showtext()&quot; value=&quot;显示内容&quot; /&gt; 
+    &lt;/form&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</code></pre><h3 id="20：看script标签改变类名来改变CSS"><a href="#20：看script标签改变类名来改变CSS" class="headerlink" title="20：看script标签改变类名来改变CSS"></a>20：看script标签改变类名来改变CSS</h3><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;
+&lt;title&gt;className属性&lt;/title&gt;
+&lt;style&gt;
+    body{ font-size:16px;}
+    .one{
+        border:1px solid #eee;
+        width:230px;
+        height:50px;
+        background:#ccc;
+        color:red;
+    }
+    .two{
+        border:1px solid #ccc;
+        width:230px;
+        height:50px;
+        background:#9CF;
+        color:blue;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p id=&quot;p1&quot; &gt; JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+    &lt;input type=&quot;button&quot; value=&quot;添加样式&quot; onclick=&quot;add()&quot;/&gt;
+    &lt;p id=&quot;p2&quot; class=&quot;one&quot;&gt;JavaScript使网页显示动态效果并实现与用户交互功能。&lt;/p&gt;
+    &lt;input type=&quot;button&quot; value=&quot;更改外观&quot; onclick=&quot;modify()&quot;/&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+       function add(){
+          var p1 = document.getElementById(&quot;p1&quot;);
+          p1.className=&quot;one&quot;;
+       }
+       function modify(){
+          var p2 = document.getElementById(&quot;p2&quot;);
+          p2.className=&quot;two&quot;;
+       }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="21：综合"><a href="#21：综合" class="headerlink" title="21：综合"></a>21：综合</h3><p>  <img src="/2019/03/07/JS的小Demo/7.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; Content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;javascript&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body{font-size:12px;}
+#txt{
+    height:400px;
+    width:600px;
+    border:#333 solid 1px;
+    padding:5px;}
+p{
+    line-height:18px;
+    text-indent:2em;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;
+  &lt;div id=&quot;txt&quot;&gt; 
+     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;
+        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;
+        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;
+        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form&gt;
+  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;
+&lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;changeColor()&quot; &gt;  
+&lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;changeSize()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;changeHide()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;changeShow()&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;changeSetting()&quot;&gt;
+  &lt;/form&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+//定义&quot;改变颜色&quot;的函数
+function changeColor(){
+var txt=document.getElementById(&apos;txt&apos;);
+txt.style.color=&apos;blue&apos;;
+txt.style.backgroundColor=&apos;red&apos;;
+}
+
+
+//定义&quot;改变宽高&quot;的函数
+function changeSize(){
+
+   var txt2=document.getElementById(&apos;txt&apos;); 
+   txt2.style.width=&quot;800px&quot;;
+   txt2.style.height=&quot;600px&quot;;
+}
+
+//定义&quot;隐藏内容&quot;的函数
+function changeHide(){
+
+     var txt3=document.getElementById(&apos;txt&apos;);
+     txt3.style.display=&apos;none&apos;;
+}
+
+//定义&quot;显示内容&quot;的函数
+function changeShow(){
+
+     var txt4=document.getElementById(&apos;txt&apos;);
+     txt4.style.display=&apos;block&apos;;
+}
+
+//定义&quot;取消设置&quot;的函数
+function changeSetting(){
+         var txt5=document.getElementById(&apos;txt&apos;);
+        var message=confirm(&quot;你确定要重置所有设置么？&quot;);
+        if(message==true){
+            txt5.removeAttribute(&apos;style&apos;);
+        }
+    }
+
+
+      &lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre><p>或者更简便的写法</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;txttent-Type&quot; txttent=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;javascript&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body{font-size:12px;}
+#txt{
+    height:400px;
+    width:600px;
+    border:#333 solid 1px;
+    padding:5px;}
+p{
+    line-height:18px;
+    text-indent:2em;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;
+  &lt;div id=&quot;txt&quot;&gt; 
+     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;
+        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;
+        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;
+        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form&gt;
+  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;
+    &lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;set.changeColor()&quot;&gt;  
+    &lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;set.changeSize()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;set.objHide()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;set.objShow()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;set.offSet()&quot;&gt;
+  &lt;/form&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+   var txt=document.getElementById(&quot;txt&quot;);
+   var set={
+    changeColor:function(){
+        txt.style.color=&quot;red&quot;;
+        txt.style.backgroundColor=&quot;#ccc&quot;;
+    },
+    changeSize:function(){
+        txt.style.width=&quot;300px&quot;;
+        txt.style.height=&quot;300px&quot;;
+    },
+    objHide:function(){
+        txt.style.display=&quot;none&quot;;
+    },    
+    objShow:function(){
+        txt.style.display=&quot;block&quot;;
+    },
+    offSet:function(){
+        var message=confirm(&quot;你确定要重置所有设置么？&quot;);
+        if(message==true){
+            txt.removeAttribute(&apos;style&apos;);
+        }
+    }
+  }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/HTML-CSS基础Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/06/HTML-CSS基础Demo/" itemprop="url">HTML-CSS基础Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="1、Web前端技术框架"><a href="#1、Web前端技术框架" class="headerlink" title="1、Web前端技术框架"></a>1、Web前端技术框架</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/1.png" alt></p>
+<h5 id="2、html文件的结构"><a href="#2、html文件的结构" class="headerlink" title="2、html文件的结构"></a>2、html文件的结构</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/2.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;认识html文件基本结构&lt;/title&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+    &lt;h1&gt;在本小节中，你将学会认识html文件基本结构&lt;/h1&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h5 id="3-标签title—设置网页在浏览器的标题栏"><a href="#3-标签title—设置网页在浏览器的标题栏" class="headerlink" title="3:标签title—设置网页在浏览器的标题栏"></a>3:标签title—设置网页在浏览器的标题栏</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/3.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;hello world&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;欢迎来到慕课网&lt;/h1&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="4-注释"><a href="#4-注释" class="headerlink" title="4:注释"></a>4:注释</h5><p>：html和xml的注释快捷键都是： Ctrl + Shift + /  </p>
+<p>&lt;!-XXX–&gt;</p>
+<h5 id="5-标签body——存放网页显示内容"><a href="#5-标签body——存放网页显示内容" class="headerlink" title="5:标签body——存放网页显示内容"></a>5:标签body——存放网页显示内容</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/4.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;了不起的盖茨比&lt;/h1&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫&lt;em&gt;尼克•卡拉威&lt;/em&gt;（托比•马奎尔Tobey Maguire 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的&lt;span&gt;美国梦&lt;/span&gt;，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&lt;strong&gt;&quot;爵士乐时代&quot;&lt;/strong&gt;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>h1:是一级标题标签</p>
+<p>p:段落标签</p>
+<p>strong：是黑体加粗标签</p>
+<h5 id="6：h是——n级标题标签"><a href="#6：h是——n级标题标签" class="headerlink" title="6：h是——n级标题标签"></a>6：h是——n级标题标签</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/5.jpg" alt></p>
+<h5 id="7：span标签——设置文字颜色和字体等style"><a href="#7：span标签——设置文字颜色和字体等style" class="headerlink" title="7：span标签——设置文字颜色和字体等style"></a>7：span标签——设置文字颜色和字体等style</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+
+&lt;style&gt;
+span{
+color:blue;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（托比•马奎尔Tobey Maguire 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的&lt;span&gt;美国梦&lt;/span&gt;，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"><a href="#8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）" class="headerlink" title="8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）"></a>8：q标签——引用文字，浏览器识别后自动加双引号（不需要自己加）</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/6.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;q标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;周瑜，不可否认，他是历史上一个了不起的英雄人物！确实也配的上那句&lt;q&gt;聪明秀出为之英，胆略过人为之雄。&lt;/q&gt;  &lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="9：blockquote标签——引用长文本，短文本用q"><a href="#9：blockquote标签——引用长文本，短文本用q" class="headerlink" title="9：blockquote标签——引用长文本，短文本用q"></a>9：blockquote标签——引用长文本，短文本用q</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/7.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;blockquote标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;心似桂花开&lt;/h2&gt;
+
+&lt;p&gt;大家都在忙于自认为最重要的事情，却没能享受到人生的乐趣，反而要吞下苦果？&lt;/p&gt;
+&lt;blockquote&gt;暗淡轻黄体性柔，情疏迹远只香留。何须浅碧深红色，自是花中第一流。&lt;/blockquote&gt;
+&lt;p&gt;这是李清照《咏桂》中的词句，在李清照看来，桂花暗淡青黄，性情温柔，淡泊自适，远比那些大红大紫争奇斗艳花值得称道。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="10：br标签——文本间进行换行"><a href="#10：br标签——文本间进行换行" class="headerlink" title="10：br标签——文本间进行换行"></a>10：br标签——文本间进行换行</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/8.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;br标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;《咏桂》&lt;/h2&gt;
+&lt;p&gt;暗淡轻黄体性柔，&lt;br /&gt;情疏迹远只香留。&lt;br /&gt;何须浅碧深红色，&lt;br /&gt;自是花中第一流。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="11：-amp-nbsp标签——为网页文本添加空格"><a href="#11：-amp-nbsp标签——为网页文本添加空格" class="headerlink" title="11：&amp;nbsp标签——为网页文本添加空格"></a>11：&amp;nbsp标签——为网页文本添加空格</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/9.jpg" alt></p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/10.jpg" alt></p>
+<h5 id="12：hr标签——添加水平横线"><a href="#12：hr标签——添加水平横线" class="headerlink" title="12：hr标签——添加水平横线"></a>12：hr标签——添加水平横线</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/11.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;hr标签使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;火车飞驰过暗夜里的村庄，月光，总是太容易让思念寂寞，太容易让人觉得孤独。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;每一枚被风吹起的蒲公英，都载满了一双眼睛的深情告别与一个目光的依依不舍。那天，我拿着行李，带上一个背影的祝福与惆怅，挥手告别了这片土地。我不知道，我何时会回来。&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="13：address标签——为网页加入地址信息"><a href="#13：address标签——为网页加入地址信息" class="headerlink" title="13：address标签——为网页加入地址信息"></a>13：address标签——为网页加入地址信息</h5><p>：默认是斜体，也可以通过CSS来改变样式</p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/12.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;address标签介绍&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h2&gt;慕课网&lt;/h2&gt;
+&lt;p&gt;超酷的互联网、IT技术免费学习平台，创新的网络一站式学习、实践体验；服务及时贴心，内容专业、有趣易学。专注服务互联网工程师快速成为技术高手!公司地址:&lt;address&gt;北京市西城区德外大街10号&lt;/address&gt; &lt;/p&gt; 
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="14：code标签——加在一行代码外面"><a href="#14：code标签——加在一行代码外面" class="headerlink" title="14：code标签——加在一行代码外面"></a>14：code标签——加在一行代码外面</h5><p><code>代码语言</code></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;code标签介绍&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;我们可能知道水平渐变的实现，类似这样：&lt;code&gt;{background-image:linear-gradient(left, red 100px, yellow 200px);}&lt;/code&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="15：pre标签——加入大段代码"><a href="#15：pre标签——加入大段代码" class="headerlink" title="15：pre标签——加入大段代码"></a>15：pre标签——加入大段代码</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;pre标签的使用&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;pre&gt;
+var message=&quot;欢迎&quot;;
+for(var i=1;i&lt;=10;i++)&lt;br&gt;
+{&lt;br&gt;
+alert(message); &lt;br&gt;
+}&lt;br&gt;
+&lt;/pre&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="16：ul标签——无序号的信息列表"><a href="#16：ul标签——无序号的信息列表" class="headerlink" title="16：ul标签——无序号的信息列表"></a>16：ul标签——无序号的信息列表</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/13.jpg" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt; p标签&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;
+&lt;li&gt;
+     我的第一个列表信息&lt;/li&gt;
+     &lt;li&gt;
+     我的第二个列表信息&lt;/li&gt;
+     &lt;li&gt;
+     我的第三个列表信息&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="17-ol标签——有序号的信息列表"><a href="#17-ol标签——有序号的信息列表" class="headerlink" title="17:ol标签——有序号的信息列表"></a>17:ol标签——有序号的信息列表</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/20.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt; p标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;ol&gt;
+   &lt;li&gt;我的第一个列表信息。&lt;/li&gt;
+   &lt;li&gt;我的第一个列表信息。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="18：div划分独立逻辑"><a href="#18：div划分独立逻辑" class="headerlink" title="18：div划分独立逻辑"></a>18：div划分独立逻辑</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/21.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;div标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;&lt;h2&gt;热门课程排行榜&lt;/h2&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;ol&gt;
+    &lt;li&gt;前端开发面试心法 &lt;/li&gt;
+    &lt;li&gt;零基础学习html&lt;/li&gt;
+    &lt;li&gt;javascript全攻略&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;h2&gt;最新课程排行&lt;/h2&gt;&lt;/div&gt;
+
+
+&lt;div&gt;
+&lt;ol&gt;
+    &lt;li&gt;版本管理工具介绍—Git篇 &lt;/li&gt;
+    &lt;li&gt;Canvas绘图详解&lt;/li&gt;
+    &lt;li&gt;QQ5.0侧滑菜单&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+</code></pre><h5 id="19：-lt-div-id-”版块名称”——div模块分配id值，进行标示"><a href="#19：-lt-div-id-”版块名称”——div模块分配id值，进行标示" class="headerlink" title="19：&lt;div  id=”版块名称”——div模块分配id值，进行标示"></a>19：&lt;div  id=”版块名称”——div模块分配id值，进行标示</h5><pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;div标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div id=&quot;hotList&quot;&gt;
+   &lt;h2&gt;热门课程排行榜&lt;/h2&gt;
+&lt;ol&gt;
+   &lt;li&gt;前端开发面试心法 &lt;/li&gt;
+  &lt;li&gt;零基础学习html&lt;/li&gt;
+   &lt;li&gt;javascript全攻略&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+
+&lt;div id=&quot;learningInstructed&quot;&gt;
+&lt;h2&gt;web前端开发导学课程&lt;/h2&gt;
+&lt;ul&gt;
+   &lt;li&gt;网页专业名词大扫盲 &lt;/li&gt;
+   &lt;li&gt;网站职位定位指南&lt;/li&gt;
+   &lt;li&gt;为您解密Yahoo网站制作流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="20：table-tbody-tr-th标签——展示表格"><a href="#20：table-tbody-tr-th标签——展示表格" class="headerlink" title="20：table,tbody,tr,th标签——展示表格"></a>20：table,tbody,tr,th标签——展示表格</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/22.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;认识table表标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+
+&lt;tr&gt;
+  &lt;th&gt;班级&lt;/th&gt;
+  &lt;th&gt;学生数&lt;/th&gt;
+  &lt;th&gt;平均成绩&lt;/th&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;一班&lt;/td&gt;
+  &lt;td&gt;30&lt;/td&gt;
+  &lt;td&gt;89&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;二班&lt;/td&gt;
+  &lt;td&gt;35&lt;/td&gt;
+  &lt;td&gt;85&lt;/td&gt;
+&lt;/tr&gt;
+
+ &lt;tr&gt;
+  &lt;td&gt;三班&lt;/td&gt;
+  &lt;td&gt;32&lt;/td&gt;
+  &lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="21：表格加入CSS样式——加入横线边框"><a href="#21：表格加入CSS样式——加入横线边框" class="headerlink" title="21：表格加入CSS样式——加入横线边框"></a>21：表格加入CSS样式——加入横线边框</h5><p>：在head里面加入style样式设置table的样式</p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/23.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;为表格添加边框&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+table tr td,th{border:1px solid #000;}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+&lt;table summary=&quot;&quot;&gt;
+  &lt;tr&gt;
+&lt;th&gt;班级&lt;/th&gt;
+&lt;th&gt;学生数&lt;/th&gt;
+&lt;th&gt;平均成绩&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;一班&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;89&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;二班&lt;/td&gt;
+&lt;td&gt;35&lt;/td&gt;
+&lt;td&gt;85&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;三班&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="22：table-summary——摘要；caption——表格标题"><a href="#22：table-summary——摘要；caption——表格标题" class="headerlink" title="22：table summary——摘要；caption——表格标题"></a>22：table summary——摘要；caption——表格标题</h5><p>：摘要在浏览器是不显示出来的，但是对搜索引擎可以更好读懂表格</p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/24.png" alt><br>    &lt;!DOCTYPE HTML&gt;<br>    <html></html></p>
+<pre><code>&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;认识table表标签&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+table tr td,th{
+border:1px solid #000;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+
+&lt;table summary=&quot;本表格记录2012年到2013年库存记录，记录包括U盘和耳机库存量&quot;&gt;
+
+  &lt;caption&gt;2012年到2013年库存记录&lt;/caption&gt;
+
+
+  &lt;tr&gt;
+&lt;th&gt;产品名称 &lt;/th&gt;
+&lt;th&gt;品牌 &lt;/th&gt;
+&lt;th&gt;库存量（个） &lt;/th&gt;
+&lt;th&gt;入库时间 &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;耳机 &lt;/td&gt;
+&lt;td&gt;联想 &lt;/td&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;td&gt;2013-1-2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;U盘 &lt;/td&gt;
+&lt;td&gt;金士顿 &lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;2013-8-10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;U盘 &lt;/td&gt;
+&lt;td&gt;爱国者 &lt;/td&gt;
+&lt;td&gt;133&lt;/td&gt;
+&lt;td&gt;2013-3-25&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="23：a标签——为文本设置超链接"><a href="#23：a标签——为文本设置超链接" class="headerlink" title="23：a标签——为文本设置超链接"></a>23：a标签——为文本设置超链接</h5><pre><code>&lt;a  href=&quot;目标网址&quot;  title=&quot;鼠标滑过显示的文本&quot;&gt;链接显示的文本&lt;/a&gt;
+</code></pre><p>title类似Android的Toast功能，不过要鼠标划过去才能显示内容</p>
+<p>效果</p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/25.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;ul&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;前端开发面试心法&quot;&gt;前端开发面试心法&lt;/a&gt; &lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;零基础学习html&quot;&gt;零基础学习html&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;JavaScript全攻略&quot;&gt;JavaScript全攻略&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot; title=&quot;点击查看托比•马奎尔Tobey Maguire的个人简介&quot;&gt;托比•马奎尔Tobey Maguire&lt;/a&gt; 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="24：在新建的浏览器窗口打开链接"><a href="#24：在新建的浏览器窗口打开链接" class="headerlink" title="24：在新建的浏览器窗口打开链接"></a>24：在新建的浏览器窗口打开链接</h5><pre><code>&lt;a href=&quot;目标网址&quot; target=&quot;_blank&quot;&gt;click here!&lt;/a&gt;
+</code></pre><p>主要是：target=”_blank”来实现的</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot; target=&quot;_blank&quot;&gt;托比•马奎尔Tobey Maguire &lt;/a&gt;饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+&lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="25：mailto标签——发送邮件"><a href="#25：mailto标签——发送邮件" class="headerlink" title="25：mailto标签——发送邮件"></a>25：mailto标签——发送邮件</h5><p> <img src="/2019/03/06/HTML-CSS基础Demo/26.png" alt></p>
+<p> <img src="/2019/03/06/HTML-CSS基础Demo/27.png" alt></p>
+<h5 id="26：img标签——为网页插入图片"><a href="#26：img标签——为网页插入图片" class="headerlink" title="26：img标签——为网页插入图片"></a>26：img标签——为网页插入图片</h5><pre><code>&lt;img src=&quot;图片地址&quot; alt=&quot;下载失败时的替换文本&quot; title = &quot;提示文本&quot;&gt;
+
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;了不起的盖茨比&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;1922年的春天，一个想要成名名叫尼克•卡拉威（&lt;a href=&quot;http://www.m1905.com/mdb/star/3316/&quot;&gt;托比•马奎尔Tobey Maguire &lt;/a&gt;饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。&lt;/p&gt;
+
+  &lt;p&gt;菲茨杰拉德，二十世纪美国文学巨擘之一，兼具作家和编剧双重身份。他以诗人的敏感和戏剧家的想象为&quot;爵士乐时代&quot;吟唱华丽挽歌，其诗人和梦想家的气质亦为那个奢靡年代的不二注解。&lt;/p&gt;
+
+  &lt;img src=&quot;http://img.mukewang.com/52da54ed0001ecfa04120172.jpg&quot; title=&quot;电影介绍&quot;&gt; 
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="27-form表单——与用户进行交互"><a href="#27-form表单——与用户进行交互" class="headerlink" title="27:form表单——与用户进行交互"></a>27:form表单——与用户进行交互</h5><pre><code>&lt;form   method=&quot;传送方式&quot;   action=&quot;保存前端发送数据的服务器文件&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>表单标签</title><br></head><br><body><br><form method="post" action="save.php"><br>      <label for="username">用户名:</label><br>      <input type="text" name="username" id="username" value><br>      <label for="pass">密码:</label><br>      <input type="password" name="pass" id="pass" value><br>      <input type="submit" value="确定" name="submit"><br>      <input type="reset" value="重置" name="reset"><br></form><br></body><br></html>
+
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;表单标签&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+  &lt;label for=&quot;username&quot;&gt;用户名:&lt;/label&gt;
+  &lt;input type=&quot;text&quot;  name=&quot;username&quot; id=&quot;username&quot; value=&quot;&quot; /&gt;
+  &lt;label for=&quot;pass&quot;&gt;密码:&lt;/label&gt;
+  &lt;input type=&quot;password&quot;  name=&quot;pass&quot; id=&quot;pass&quot; value=&quot;&quot; /&gt;    
+  &lt;input type=&quot;submit&quot; value=&quot;确定&quot;  name=&quot;submit&quot; /&gt;
+  &lt;input type=&quot;reset&quot; value=&quot;重置&quot; name=&quot;reset&quot; /&gt;
+&lt;/form&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="28：文本输入框、密码输入框"><a href="#28：文本输入框、密码输入框" class="headerlink" title="28：文本输入框、密码输入框"></a>28：文本输入框、密码输入框</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>文本输入框、密码输入框</title><br></head><br><body><br><form method="post" action="save.php"><br>    账户:<br>    <input type="text" name="myName"><br>    <br><br>    密码:<br><input type="password" name="pass"><br></form><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;文本输入框、密码输入框&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form  method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+账户: 
+&lt;input  type=&quot;text&quot;  name=&quot;myName&quot; /&gt;
+&lt;br&gt;
+密码: 
+&lt;input  type=&quot;password&quot;  name=&quot;pass&quot; /&gt;
+&lt;/form&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="29：文本域——支持多行文本输入"><a href="#29：文本域——支持多行文本输入" class="headerlink" title="29：文本域——支持多行文本输入"></a>29：文本域——支持多行文本输入</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>文本域</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>个人简介：</label><br>    <textarea cols="50" rows="10">在这里输入内容…</textarea><br>    <input type="submit" value="确定" name="submit"><br>    <input type="reset" value="重置" name="reset"><br></form><br></body><br></html>
+
+
+
+<pre><code>&lt;textarea  rows=&quot;行数&quot; cols=&quot;列数&quot;&gt;文本&lt;/textarea&gt;
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;文本域&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;个人简介：&lt;/label&gt;
+&lt;textarea cols=&quot;50&quot; rows=&quot;10&quot;&gt;在这里输入内容...&lt;/textarea&gt;
+&lt;input type=&quot;submit&quot; value=&quot;确定&quot;  name=&quot;submit&quot; /&gt;
+&lt;input type=&quot;reset&quot; value=&quot;重置&quot;  name=&quot;reset&quot; /&gt;
+&lt;/form&gt; 
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="30：单选框，复选框"><a href="#30：单选框，复选框" class="headerlink" title="30：单选框，复选框"></a>30：单选框，复选框</h5><pre><code>&lt;input   type=&quot;radio/checkbox&quot;   value=&quot;值&quot;    name=&quot;名称&quot;   checked=&quot;checked&quot;/&gt;
+</code></pre><p>1、type:</p>
+<p>   当 type=”radio” 时，控件为单选框</p>
+<p>   当 type=”checkbox” 时，控件为复选框</p>
+<p>2、value：提交数据到服务器的值（后台程序PHP使用）</p>
+<p>3、name：为控件命名，以备后台程序 ASP、PHP 使用</p>
+<p>4、checked：当设置 checked=”checked” 时，该选项被默认选中</p>
+<p>效果：</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>单选框、复选框</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>性别:</label><br>    <label>男</label><br>    <input type="radio" value="1" name="gender"><br>    <label>女</label><br>    <input type="radio" value="2" name="gender"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;单选框、复选框&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;性别:&lt;/label&gt;
+&lt;label&gt;男&lt;/label&gt;
+&lt;input type=&quot;radio&quot; value=&quot;1&quot;  name=&quot;gender&quot; /&gt;
+&lt;label&gt;女&lt;/label&gt;
+&lt;input type=&quot;radio&quot; value=&quot;2&quot;  name=&quot;gender&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="31：下拉列表框"><a href="#31：下拉列表框" class="headerlink" title="31：下拉列表框"></a>31：下拉列表框</h5><p>效果：</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>下拉列表框</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select><br>      <option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br></form><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;下拉列表框&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot; selected=&quot;selected&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="32：下拉列表框进行多选"><a href="#32：下拉列表框进行多选" class="headerlink" title="32：下拉列表框进行多选"></a>32：下拉列表框进行多选</h5><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>使用下拉列表框进行多选</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select multiple="multiple"><br>      <option value="看书">看书</option><br>      <option value="旅游">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;使用下拉列表框进行多选&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select multiple=&quot;multiple&quot;&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+</code></pre><h5 id="33：提交按钮"><a href="#33：提交按钮" class="headerlink" title="33：提交按钮"></a>33：提交按钮</h5><p>type：只有当type值设置为submit时，按钮才有提交作用</p>
+<p>value：按钮上显示的文字</p>
+<pre><code>&lt;input   type=&quot;submit&quot;   value=&quot;提交&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>提交按钮</title><br></head><br><body><br><form method="post" action="save.php"><br>    <label for="myName">姓名：</label><br>    <input type="text" value=" " name="myName "><br>    <input type="submit" value="提交" name="submitBtn"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;提交按钮&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form  method=&quot;post&quot; action=&quot;save.php&quot;&gt;
+&lt;label for=&quot;myName&quot;&gt;姓名：&lt;/label&gt;
+&lt;input type=&quot;text&quot; value=&quot; &quot; name=&quot;myName &quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;submitBtn&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="34：重置按钮"><a href="#34：重置按钮" class="headerlink" title="34：重置按钮"></a>34：重置按钮</h5><p>type：只有当type值设置为reset时，按钮才有重置作用</p>
+<p>value：按钮上显示的文字</p>
+<pre><code>&lt;input type=&quot;reset&quot; value=&quot;重置&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>重置按钮</title><br></head><br><body><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select><br>      <option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br>    <input type="submit" value="确定"><br>    <input type="reset" value="重置"><br></form><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;重置按钮&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;save.php&quot; method=&quot;post&quot; &gt;
+&lt;label&gt;爱好:&lt;/label&gt;
+&lt;select&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot; selected=&quot;selected&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;
+&lt;input type=&quot;submit&quot; value=&quot;确定&quot;  /&gt;
+&lt;input type=&quot;reset&quot; value=&quot;重置&quot;  /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="35：关联触发控件"><a href="#35：关联触发控件" class="headerlink" title="35：关联触发控件"></a>35：关联触发控件</h5><p>标签的 for 属性中的值应当与相关控件的 id 属性值一定要相同。</p>
+<pre><code>&lt;label for=&quot;控件id名称&quot;&gt;
+</code></pre><html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>form中的lable标签</title><br></head><br><br><body><br><form><br>   <label for="male">男</label><br>  <input type="radio" name="gender" id="male"><br>  <br><br>  <label for="female">女</label><br>  <input type="radio" name="gender" id="female"><br>  <br><br>  <label for="email">输入你的邮箱地址</label><br>  <input type="email" id="email" placeholder="Enter email"><br><br></form><br><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;form中的lable标签&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form&gt;
+   &lt;label for=&quot;male&quot;&gt;男&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;male&quot; /&gt;
+  &lt;br /&gt;
+  &lt;label for=&quot;female&quot;&gt;女&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;female&quot; /&gt;
+  &lt;br /&gt;
+  &lt;label for=&quot;email&quot;&gt;输入你的邮箱地址&lt;/label&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;Enter email&quot;&gt;
+
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="CSS碎片知识点"><a href="#CSS碎片知识点" class="headerlink" title="CSS碎片知识点"></a>CSS碎片知识点</h3><h4 id="1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗"><a href="#1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗" class="headerlink" title="1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗"></a>1：CSS的作用是-定义HTML内容（网页内容）在浏览器的显示样式：如文字大小，颜色，字体加粗</h4><p>：全称是层叠样式表-Cascading Style Sheets</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识CSS样式&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+p{
+   font-size:10px;/*设置文字字号*/
+   color:red;/*设置文字颜色*/
+   font-weight:bold;/*设置字体加粗*/
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;慕课网，超酷的互联网、IT技术免费学习平台，创新的网络一站式学习、实践体验；服务及时贴心，内容专业、有趣易学。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="2：span样式的使用"><a href="#2：span样式的使用" class="headerlink" title="2：span样式的使用"></a>2：span样式的使用</h4><p>（1）把目标短语用&lt;span 标签括起来；<br>（2）在style中定义span；</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+span{
+       color:blue;
+}
+&lt;/style&gt;
+</code></pre><p> <img src="/2019/03/06/HTML-CSS基础Demo/529.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;CSS样式的优势&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:blue;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;慕课网，&lt;span&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="3-CSS-选择符-属性-值"><a href="#3-CSS-选择符-属性-值" class="headerlink" title="3:CSS==选择符+属性+值"></a>3:CSS==选择符+属性+值</h4><p> <img src="/2019/03/06/HTML-CSS基础Demo/600.png" alt></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;CSS代码语法&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+p{
+   font-size:12px;
+   color:red;
+   font-weight:bold;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;慕课网，超酷的互联网、IT技术免费学习平台，创新的网络一站式学习、实践体验；服务及时贴心，内容专业、有趣易学。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="4-CSS的注释-块注释-其它的都不行"><a href="#4-CSS的注释-块注释-其它的都不行" class="headerlink" title="4:CSS的注释==块注释==/ /  其它的都不行"></a>4:CSS的注释==块注释==/<em> </em>/  其它的都不行</h4><h4 id="5：内联式CSS样式"><a href="#5：内联式CSS样式" class="headerlink" title="5：内联式CSS样式"></a>5：内联式CSS样式</h4><p>：style的代码直接写在HTML标签中</p>
+<pre><code>&lt;span style=&quot;color:blue&quot;&gt;超酷的互联网&lt;/span&gt;
+</code></pre><p>完整代码：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:red;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;慕课网，&lt;span style=&quot;color:blue&quot;&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="6：嵌入式CSS样式"><a href="#6：嵌入式CSS样式" class="headerlink" title="6：嵌入式CSS样式"></a>6：嵌入式CSS样式</h4><p>：样式代码写在style标签之中，而且是在head标签的style标签中</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;嵌入式css样式&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:blue;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+
+
+&lt;body&gt;
+    &lt;p&gt;慕课网，&lt;span&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="7-外部式CSS样式"><a href="#7-外部式CSS样式" class="headerlink" title="7:外部式CSS样式"></a>7:外部式CSS样式</h4><p>：（1）样式代码写在一个独立的.css文件中</p>
+<p>：（2）在head标签内使用link标签链接进来</p>
+<p>：（3）rel=”stylesheet” type=”text/css” 是固定写法不可修改</p>
+<p>style.css</p>
+<pre><code>span{
+   color:red;
+   font-size:20px;
+}
+</code></pre><p>index.html</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;嵌入式css样式&lt;/title&gt;
+&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;慕课网，&lt;span&gt;超酷的互联网&lt;/span&gt;、IT技术免费学习平台，创新的网络一站式学习、实践体验；&lt;span&gt;服务及时贴心&lt;/span&gt;，内容专业、&lt;span&gt;有趣易学&lt;/span&gt;。专注服务互联网工程师快速成为技术高手！&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h5 id="8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则"><a href="#8：三种CSS样式方法的优先级：内联-gt-嵌入式-gt-外部式—–》就近原则" class="headerlink" title="8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则"></a>8：三种CSS样式方法的优先级：内联&gt;嵌入式&gt;外部式—–》就近原则</h5><p>：口诀：内联嵌外部</p>
+<h5 id="9：选择器"><a href="#9：选择器" class="headerlink" title="9：选择器"></a>9：选择器</h5><pre><code>&lt;style type=&quot;text/css&quot;&gt;
+body{
+font-size:12px;
+color:red;    
+}
+&lt;/style&gt;
+</code></pre><p>（1）style是嵌入式CSS样式默认写法，可以忽略；<br>（2）CSS核心是：body就是选择器+ {CSS样式代码}</p>
+<h5 id="10：标签选择器：html-body-h1-p-img"><a href="#10：标签选择器：html-body-h1-p-img" class="headerlink" title="10：标签选择器：html,body,h1,p,img"></a>10：标签选择器：html,body,h1,p,img</h5><p>：意思就是选择器名称是html标签，例如html,body……这些都是<br>：设置好样式后，此标签的文本样式就被定好了</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>认识html标签</title><br><style type="text/css"><br>h1{<br>    font-weight:normal;<br>    color:red;<br>}<br><br><br><br></style><br></head><br><body><br>    <h1>勇气</h1><br>    <p>三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br>    <p>到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br>    <img src="http://img.mukewang.com/52b4113500018cf102000200.jpg"><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+h1{
+font-weight:normal;
+color:red;
+}
+
+
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+&lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>可见此时的标签选择器是h1，被h1标签包括的文本内容就变为了红色</p>
+<h5 id="11：类选择器的使用"><a href="#11：类选择器的使用" class="headerlink" title="11：类选择器的使用"></a>11：类选择器的使用</h5><p>（1）.小写类名aaa{CSS样式代码}<br>（2）&lt;span class=”aaa”]胆小如鼠&lt;/span]，这样就可以搞定了</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.stress{
+color:red;
+}
+
+
+.setGreen{
+color:green;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个&lt;span class=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个&lt;span class=&quot;stress&quot;&gt;勇气&lt;/span&gt;来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了三年级下学期时，我们班上了一节&lt;span class=&quot;setGreen&quot;&gt;公开课&lt;/span&gt;，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+&lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="12：ID选择器"><a href="#12：ID选择器" class="headerlink" title="12：ID选择器"></a>12：ID选择器</h5><p>（1）#ID选择器名{ CSS样式代码}<br>（2）&lt;span id=”stress”]胆小如鼠&lt;/span]</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;认识html标签&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+#stress{
+    color:red;
+}
+
+#setGreen{
+    color:green;
+}
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p&gt;三年级时，我还是一个&lt;span id=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p&gt;到了三年级下学期时，我们班上了一节&lt;span id=&quot;setGreen&quot;&gt;公开课&lt;/span&gt;，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="13-类选择器和ID选择器的区别"><a href="#13-类选择器和ID选择器的区别" class="headerlink" title="13:类选择器和ID选择器的区别"></a>13:类选择器和ID选择器的区别</h5><p>（1）一个类选择器可以使用多次，而一个ID选择器只能使用一次；<br>（2）一个文本元素可以同时设置多个类选择器，而只能设置一个ID选择器，看Demo就明白什么意思了</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>类和ID选择器的区别</title><br><style type="text/css"><br>.stress{<br>    color:red;<br>}<br>.bigsize{<br>    font-size:25px;<br>}<br>#stressid{<br>    color:red;<br>}<br>#bigsizeid{<br>    font-size:25px;<br>}<br></style><br></head><br><body><br>    <h1>勇气</h1><br>    <p>三年级时，我还是一个<span class="stress">胆小如鼠</span>的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个<span class="stress">勇气</span>来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br>    <p>到了<span class="stress bigsize">三年级</span>下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br>     <p>到了<span id="stressid bigsizeid">三年级</span>下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：”我来，我来。”我环顾了四周，就我没有举手。</p><br><br></body><br></html>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;类和ID选择器的区别&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.stress{
+color:red;
+}
+.bigsize{
+font-size:25px;
+}    
+#stressid{
+    color:red;
+}
+#bigsizeid{
+    font-size:25px;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;勇气&lt;/h1&gt;
+&lt;p&gt;三年级时，我还是一个&lt;span class=&quot;stress&quot;&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个&lt;span class=&quot;stress&quot;&gt;勇气&lt;/span&gt;来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;p&gt;到了&lt;span class=&quot;stress bigsize&quot;&gt;三年级&lt;/span&gt;下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+ &lt;p&gt;到了&lt;span id=&quot;stressid bigsizeid&quot;&gt;三年级&lt;/span&gt;下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="14-类的子选择器"><a href="#14-类的子选择器" class="headerlink" title="14:类的子选择器"></a>14:类的子选择器</h5><p>用法示例：<br>    .food&gt;li{border:1px solid red;}</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>子选择符</title><br><style type="text/css"><br>.food&gt;li{border:1px solid red;}/<em>添加边框样式（粗细为1px， 颜色为红色的实线）</em>/<br><br>.first&gt;span{border:1px solid red;}<br></style><br></head><br><body><br><p class="first">三年级时，<span>我还是一个胆小如鼠的小女孩</span>，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br><h1>食物</h1><br><ul class="food"><br>    <li>水果<br>        <ul><br>            <li>香蕉</li><br>            <li>苹果</li><br>            <li>梨</li><br>        </ul><br>    </li><br>    <li>蔬菜<br>        <ul><br>            <li>白菜</li><br>            <li>油菜</li><br>            <li>卷心菜</li><br>        </ul><br>    </li><br></ul><br></body><br></html>
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;子选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.food&gt;li{border:1px solid red;}/*添加边框样式（粗细为1px， 颜色为红色的实线）*/
+
+.first&gt;span{border:1px solid red;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;first&quot;&gt;三年级时，&lt;span&gt;我还是一个胆小如鼠的小女孩&lt;/span&gt;，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;h1&gt;食物&lt;/h1&gt;
+&lt;ul class=&quot;food&quot;&gt;
+    &lt;li&gt;水果
+        &lt;ul&gt;
+            &lt;li&gt;香蕉&lt;/li&gt;
+            &lt;li&gt;苹果&lt;/li&gt;
+            &lt;li&gt;梨&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;蔬菜
+        &lt;ul&gt;
+            &lt;li&gt;白菜&lt;/li&gt;
+            &lt;li&gt;油菜&lt;/li&gt;
+            &lt;li&gt;卷心菜&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="15：后代选择器"><a href="#15：后代选择器" class="headerlink" title="15：后代选择器"></a>15：后代选择器</h5><p>与子选择器的区别如下：</p>
+<p>子选择器（child selector）仅是指它的直接后代，或者你可以理解为作用于子元素的第一代后代。而后代选择器是作用于所有子后代元素。</p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>后代选择器</title><br><style type="text/css"><br>.first span{color:red;}<br><br>.food li{<br>    border:1px solid red;/<em>添加边框样式（粗细为1px， 颜色为红色的实线）</em>/<br>}<br></style><br></head><br><body><br> <p class="first">三年级时，我还是一个<span>胆小如鼠</span>的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。</p><br><!--下面是本小节任务代码--><br><ul class="food"><br>    <li>水果<br>        <ul><br>            <li>香蕉</li><br>            <li>苹果</li><br>            <li>梨</li><br>        </ul><br>    </li><br>    <li>蔬菜<br>        <ul><br>            <li>白菜</li><br>            <li>油菜</li><br>            <li>卷心菜</li><br>        </ul><br>    </li><br></ul><br><br></body><br></html>
+
+
+
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;后代选择器&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.first span{color:red;}
+
+.food li{
+    border:1px solid red;/*添加边框样式（粗细为1px， 颜色为红色的实线）*/    
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+&lt;!--下面是本小节任务代码--&gt;
+&lt;ul class=&quot;food&quot;&gt;
+    &lt;li&gt;水果
+        &lt;ul&gt;
+            &lt;li&gt;香蕉&lt;/li&gt;
+            &lt;li&gt;苹果&lt;/li&gt;
+            &lt;li&gt;梨&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;蔬菜
+        &lt;ul&gt;
+            &lt;li&gt;白菜&lt;/li&gt;
+            &lt;li&gt;油菜&lt;/li&gt;
+            &lt;li&gt;卷心菜&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="16-通用选择器"><a href="#16-通用选择器" class="headerlink" title="16:通用选择器"></a>16:通用选择器</h5><p>通用选择器是功能最强大的选择器，它使用一个（*）号指定，它的作用是匹配html中所有标签元素，如下使用下面代码使用html中任意标签元素字体颜色全部设置为红色：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;* 选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+* {color:red;font-size:20px;}
+
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p&gt;三年级时，我还是一个胆小如鼠的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很简单的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="17：伪类选择符"><a href="#17：伪类选择符" class="headerlink" title="17：伪类选择符"></a>17：伪类选择符</h5><p>（1）用于设置鼠标滑过时的文字样式</p>
+<p>（2）a:hover</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;伪类选择符&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+    a:hover{
+        color:red;
+        font-size:20px;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;    body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;a href=&quot;http://www.imooc.com&quot;&gt;胆小如鼠&lt;/a&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p id=&quot;second&quot;&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很&lt;span&gt;简单&lt;/span&gt;的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre><h5 id="18-分组选择符"><a href="#18-分组选择符" class="headerlink" title="18:分组选择符"></a>18:分组选择符</h5><p>当你想为html中多个标签元素设置同一个样式时，可以使用分组选择符（，），如下代码为右侧代码编辑器中的h1、span标签同时设置字体颜色为红色：</p>
+<pre><code>h1,span{color:red;}
+</code></pre><p>等价于：</p>
+<pre><code> h1{color:red;}
+span{color:red;}
+
+
+
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;分组选择符&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+h1,span{color:red;}
+
+.first,#second span{color:green;}
+&lt;/style&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;勇气&lt;/h1&gt;
+    &lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩，上课从来不敢回答老师提出的问题，生怕回答错了老师会批评我。就一直没有这个勇气来回答老师提出的问题。学校举办的活动我也没勇气参加。&lt;/p&gt;
+    &lt;p id=&quot;second&quot;&gt;到了三年级下学期时，我们班上了一节公开课，老师提出了一个很&lt;span&gt;简单&lt;/span&gt;的问题，班里很多同学都举手了，甚至成绩比我差很多的，也举手了，还说着：&quot;我来，我来。&quot;我环顾了四周，就我没有举手。&lt;/p&gt;
+    &lt;img src=&quot;http://img.mukewang.com/52b4113500018cf102000200.jpg&quot; &gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h5 id="19-CSS的样式继承"><a href="#19-CSS的样式继承" class="headerlink" title="19:CSS的样式继承"></a>19:CSS的样式继承</h5><p>比如下面代码：如某种颜色应用于p标签，这个颜色设置不仅应用p标签，还应用于p标签中的所有子元素文本，这里子元素为span标签。</p>
+<pre><code>p{color:red;}
+
+&lt;p&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩。&lt;/p&gt;
+</code></pre><p>可见右侧结果窗口中p中的文本与span中的文本都设置为了红色。但注意有一些css样式是不具有继承性的。如border:1px solid red;</p>
+<h5 id="20：特殊性-权值"><a href="#20：特殊性-权值" class="headerlink" title="20：特殊性==权值"></a>20：特殊性==权值</h5><pre><code>p{color:red;}
+.first{color:green;}
+&lt;p class=&quot;first&quot;&gt;三年级时，我还是一个&lt;span&gt;胆小如鼠&lt;/span&gt;的小女孩。&lt;/p&gt;
+</code></pre><p>p和.first都匹配到了p这个标签上，那么会显示哪种颜色呢？green是正确的颜色，那么为什么呢？是因为浏览器是根据权值来判断使用哪种css样式的，权值高的就使用哪种css样式。</p>
+<pre><code>p{color:red;} /*权值为1*/
+p span{color:green;} /*权值为1+1=2*/
+.warning{color:white;} /*权值为10*/
+p span.warning{color:purple;} /*权值为1+1+10=12*/
+#footer .note p{color:yellow;} /*权值为100+10+1=111*/
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1627,7 +4158,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
