@@ -232,152 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/基础Demo5-Activity意外回收保存数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/05/基础Demo5-Activity意外回收保存数据/" itemprop="url">基础Demo5-Activity意外回收保存数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-05T00:00:00+08:00">
-                2019-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。"><a href="#1、应用场景：Activity-A跳转到Activity-B-然后当系统内存不足的情况下，可能会回收Activity-A-所以当B-finish之后，回来的Activity-A的数据可能是重新初始化的，可能造成数据丢失。" class="headerlink" title="1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。"></a>1、应用场景：Activity A跳转到Activity B,然后当系统内存不足的情况下，可能会回收Activity A,所以当B finish之后，回来的Activity A的数据可能是重新初始化的，可能造成数据丢失。</h3><h3 id="2、Demo代码"><a href="#2、Demo代码" class="headerlink" title="2、Demo代码"></a>2、Demo代码</h3><pre><code>public static final String SAVE_KEY=&quot;save_key&quot;;
-private String data;
-......
-
-//1、重写onSaveInstanceState, data---&gt;key---&gt;outState： key是快递，outState是快递车
-
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-super.onSaveInstanceState(outState);
-
-outState.putString(SAVE_KEY,data);
-}
-
-
-//2、在onCreate()里面的savedInstanceState取值后再填充显示即可
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_main);
-
-if (savedInstanceState!=null){
-    String tempData=savedInstanceState.getString(SAVE_KEY);
-    Log.d(&quot;保存的数据&quot;,tempData);
- }
-initView();
-initData();
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/基础Demo4-Intent返回数据给上一个Activity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1136,6 +990,848 @@ public boolean onOptionsItemSelected(MenuItem item) {
   }
 
 }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/React基础Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/08/React基础Demo/" itemprop="url">React的个人笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>（一句话浓缩）</p>
+<h3 id="1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View"><a href="#1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View" class="headerlink" title="1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View"></a>1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View</h3><p> <img src="/2019/03/08/React基础Demo/1.png" alt></p>
+<h3 id="2、React是一个非常流行的框架，BAT也用，学一学有价值"><a href="#2、React是一个非常流行的框架，BAT也用，学一学有价值" class="headerlink" title="2、React是一个非常流行的框架，BAT也用，学一学有价值"></a>2、React是一个非常流行的框架，BAT也用，学一学有价值</h3><p><img src="/2019/03/08/React基础Demo/2.png" alt></p>
+<h3 id="3、create-react-app就是一个官方开发工具，目的是可以在new-Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率"><a href="#3、create-react-app就是一个官方开发工具，目的是可以在new-Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率" class="headerlink" title="3、create-react-app就是一个官方开发工具，目的是可以在new Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率"></a>3、create-react-app就是一个官方开发工具，目的是可以在new Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率</h3><h3 id="4、React的一个自定义组件（类似Android最简单的自定义view）"><a href="#4、React的一个自定义组件（类似Android最简单的自定义view）" class="headerlink" title="4、React的一个自定义组件（类似Android最简单的自定义view）"></a>4、React的一个自定义组件（类似Android最简单的自定义view）</h3><p>(1)improt React from ‘react’</p>
+<p>(2)extends React.Component</p>
+<p>(3)render(){  返回HTML渲染效果}</p>
+<p>(4)export default Welcome</p>
+<p>(5)index.js中 import Welcome</p>
+<p>(6)index.js中的ReactDOM传入Welcome组件显示出来</p>
+<p>Demo***</p>
+<p><strong>Welcome.js</strong></p>
+<pre><code>import React from &apos;react&apos;
+
+class Welcome extends React.Component{
+
+
+    render() {
+
+        return &lt;h1&gt;Hello World&lt;/h1&gt;
+    }
+}
+
+export default Welcome
+</code></pre><p><strong>index.js</strong></p>
+<pre><code>import React from &apos;react&apos;;
+import ReactDOM from &apos;react-dom&apos;;
+import &apos;./index.css&apos;;
+import App from &apos;./App&apos;;
+import Welcome from &apos;./Welcome&apos;;
+import * as serviceWorker from &apos;./serviceWorker&apos;;
+
+ReactDOM.render(&lt;Welcome /&gt;, document.getElementById(&apos;root&apos;));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre><p> <img src="/2019/03/08/React基础Demo/3.png" alt></p>
+<h3 id="5、render（）函数里面写的就是JSX代码，JSX特点如下："><a href="#5、render（）函数里面写的就是JSX代码，JSX特点如下：" class="headerlink" title="5、render（）函数里面写的就是JSX代码，JSX特点如下："></a>5、render（）函数里面写的就是JSX代码，JSX特点如下：</h3><p> <img src="/2019/03/08/React基础Demo/4.png" alt></p>
+<p> <img src="/2019/03/08/React基础Demo/5.png" alt></p>
+<p>（1）JSX里面的“特殊HTML”本质上是被编译成了React.createElement()方法，返回JS的对象，就是DOM对象，然后就可以渲染显示出来，所以最终还是通过DOM节点来显示的：HTML—》React.createElement()—》DOM</p>
+<p><strong>Demo***</strong></p>
+<pre><code>import React from &apos;react&apos;
+
+class Welcome extends React.Component{
+
+
+    render() {
+
+        return(
+        &lt;div&gt;
+        &lt;h1&gt;Hello React&lt;/h1&gt;
+        &lt;/div&gt;
+        )
+    }
+}
+export default Welcome
+</code></pre><p>return里面的代码可以替换成React.createElement()</p>
+<p> <img src="/2019/03/08/React基础Demo/6.png" alt></p>
+<h3 id="6、React的属性props"><a href="#6、React的属性props" class="headerlink" title="6、React的属性props"></a>6、React的属性props</h3><p> <img src="/2019/03/08/React基础Demo/7.png" alt></p>
+<p><strong>Demo***</strong></p>
+<p>  <img src="/2019/03/08/React基础Demo/8.png" alt></p>
+<p>自定义组件：NameCard.js</p>
+<pre><code>import React from &apos;react&apos;
+
+class NameCard extends React.Component{
+
+    render() {
+
+        //定义声明属性:JSX的写法：标签&lt;&gt;嵌套{ }
+        const {name,number,isHuman, tags}=this.props;
+        return(
+
+            &lt;div className=&apos;alert alert-success&apos;&gt;
+                &lt;h4 className=&apos;alert-heading&apos;&gt;{name}&lt;/h4&gt;
+
+                &lt;ul&gt;
+
+                    &lt;li&gt;电话：{number}&lt;/li&gt;
+                    &lt;li&gt;{isHuman?&apos;人类&apos; : &apos;外星人&apos;}&lt;/li&gt;
+                    &lt;hr/&gt;
+
+                    &lt;p&gt;
+                        {tags.map((tag,index)=&gt;(
+                            &lt;span className=&apos;badge badge-pill badge-primary&apos; key={index}&gt;{tag}&lt;/span&gt;
+                        ))}
+                    &lt;/p&gt;
+                &lt;/ul&gt;
+
+            &lt;/div&gt;
+                    )
+
+    }
+}
+
+export default NameCard;
+</code></pre><p>在组件Welcome.js中引入NameCard组件，并将数据通过props填充到NameCard显示出来</p>
+<pre><code>import React from &apos;react&apos;
+import NameCard from &apos;./components/NameCard&apos;
+const tags=[&apos;恐龙&apos;,&apos;美女&apos;]
+
+class Welcome extends React.Component{
+
+
+    render() {
+        return(
+         &lt;div&gt;
+
+         &lt;h1&gt;Hello React&lt;/h1&gt;
+         &lt;NameCard name=&apos;King&apos; number={123456789} isHuman tags={tags} /&gt;
+
+        &lt;/div&gt;
+        )
+    }
+}
+export default Welcome
+</code></pre><p>在index.js中引入Welcome组件</p>
+<pre><code>import React from &apos;react&apos;;
+import ReactDOM from &apos;react-dom&apos;;
+import &apos;./index.css&apos;;
+import App from &apos;./App&apos;;
+import Welcome from &apos;./Welcome&apos;;
+import * as serviceWorker from &apos;./serviceWorker&apos;;
+import &apos;bootstrap/dist/css/bootstrap.min.css&apos;
+
+ReactDOM.render(&lt;Welcome /&gt;, document.getElementById(&apos;root&apos;));
+
+serviceWorker.unregister();
+</code></pre><p>Demo总结：</p>
+<p>（1）Props（属性），组件—函数，输入—输出，V = f(props)</p>
+<p>（2）const和props声明属性; props是view的输入，render是view的输出</p>
+<p>（3）然后借用html&lt;&gt; + { }写好整个组件的view，data可以先不赋值，用props代替，然后在特定地方引用的时候才开始将Data存储到组件显示出来就可以了，例如：</p>
+<pre><code>&lt;NameCard name=&apos;King&apos; number={123456789} isHuman tags={tags} /&gt; //有点类似setter的写法
+</code></pre><h3 id="7、React的状态state"><a href="#7、React的状态state" class="headerlink" title="7、React的状态state"></a>7、React的状态state</h3><p>：只能用setState()来修改state的值</p>
+<p>  <img src="/2019/03/08/React基础Demo/9.png" alt></p>
+<p><strong>Demo***</strong></p>
+<p>(1)自定义LikesButton.js</p>
+<pre><code>import React from &apos;react&apos;
+
+class LikesButton extends React.Component{
+
+
+    constructor(pros){
+        super(pros);
+        this.state={
+            likes:0
+        }
+    }
+
+    render() {
+
+        return(
+
+            &lt;div className=&apos;likes-button-component&apos;&gt;
+
+                &lt;button
+                    type=&apos;button&apos;
+                    className=&quot;btn btn-outline-primary btn-lg&quot;
+                    onClick={()=&gt;{this.increaseLikes()}}
+                &gt;
+                    {this.state.likes}
+                &lt;/button&gt;
+            &lt;/div&gt;
+        )
+    }
+
+    increaseLikes() {
+
+        this.setState({
+            likes:++this.state.likes
+        })
+    }
+}
+export default LikesButton
+</code></pre><p>(2)引入LikesButton组件</p>
+<pre><code>import React from &apos;react&apos;
+import LikesButton from &apos;./components/LikesButton&apos;
+
+class Welcome extends React.Component{
+
+
+    render() {
+        return(
+         &lt;div&gt;
+
+         &lt;h1&gt;Hello React&lt;/h1&gt;
+        &lt;LikesButton/&gt;
+
+        &lt;/div&gt;
+        )
+    }
+}
+export default Welcome
+</code></pre><p> <img src="/2019/03/08/React基础Demo/10.png" alt></p>
+<p>点击后就会一直动态改变likes的值</p>
+<h3 id="8、React的生命周期"><a href="#8、React的生命周期" class="headerlink" title="8、React的生命周期"></a>8、React的生命周期</h3><p> <img src="/2019/03/08/React基础Demo/11.png" alt></p>
+<p> <img src="/2019/03/08/React基础Demo/12.png" alt></p>
+<p><strong>Demo***</strong></p>
+<p>DigitalClock.js</p>
+<pre><code>import React from &apos;react&apos;
+
+class DigitalClock extends React.Component{
+
+constructor(props){
+
+    super(props)
+    this.state={
+        date: new Date()
+    }
+}
+componentDidMount(){
+
+    this.timer=setInterval(()=&gt;{
+        this.setState({
+            date:new Date()
+        })
+    })
+}
+
+componentWillUnmount(){
+    clearInterval(this.timer)
+}
+
+
+componentDidUpdate(prevProps, prevState) {
+    console.log(prevState)
+}
+
+
+render() {
+
+    return(
+
+        &lt;div className=&apos;digital-clock-component jumbotron&apos;&gt;
+
+            &lt;h1&gt;
+                {this.state.date.toLocaleTimeString()}
+            &lt;/h1&gt;
+        &lt;/div&gt;
+    )
+}
+
+}
+
+export default DigitalClock
+</code></pre><p>Welcome.js<br>    import React from ‘react’<br>    import DigitalClock from ‘./components/DigitalClock’</p>
+<pre><code>class Welcome extends React.Component{
+
+
+render() {
+    return(
+     &lt;div&gt;
+
+     &lt;h1&gt;Hello React&lt;/h1&gt;
+    &lt;DigitalClock/&gt;
+
+    &lt;/div&gt;
+    )
+}
+}
+export default Welcome
+</code></pre><p>  <img src="/2019/03/08/React基础Demo/13.png" alt></p>
+<h3 id="9、React表单"><a href="#9、React表单" class="headerlink" title="9、React表单"></a>9、React表单</h3><p> <img src="/2019/03/08/React基础Demo/14.png" alt></p>
+<p>非受控组件-数据保存在DOM节点中<br>Demo***</p>
+<pre><code>import React from &apos;react&apos;
+
+class CommentBox extends React.Component{
+
+constructor(props){
+    super(props)
+    this.handleSubmit=this.handleSubmit.bind(this)
+}
+
+handleSubmit(event){
+    alert(this.textInput.value)
+    event.preventDefault()
+}
+
+render() {
+
+    return(
+
+        &lt;form className=&apos;p-5&apos; onSubmit={this.handleSubmit}&gt;
+            &lt;div className=&apos;form-group&apos;&gt;
+                &lt;label&gt;留言内容&lt;/label&gt;
+               &lt;input
+                    type=&apos;text&apos;
+                    className=&apos;form-control&apos;
+                    placeholder=&apos;请输入内容&apos;
+                   ref={(textInput)=&gt;{this.textInput=textInput}}
+               /&gt;
+            &lt;/div&gt;
+
+            &lt;button type=&apos;submit&apos; className=&apos;btn btn-primary&apos;&gt;
+                留言
+            &lt;/button&gt;
+
+        &lt;/form&gt;
+    )
+}
+
+}
+
+export default CommentBox
+</code></pre><p>附加：当一个组件没有生命周期和state的时候，可以写成一个function的形式，更加容易阅读</p>
+<h3 id="10、留言板Demo"><a href="#10、留言板Demo" class="headerlink" title="10、留言板Demo"></a>10、留言板Demo</h3><p> <img src="/2019/03/08/React基础Demo/15.png" alt><br> <img src="/2019/03/08/React基础Demo/16.png" alt></p>
+<p>Demo***</p>
+<p>CommentList.js</p>
+<pre><code>import React from &apos;react&apos;
+
+const CommentList=({comments})=&gt;{
+
+    return(
+
+        &lt;div className=&apos;comment-list-component&apos;&gt;
+
+        &lt;label&gt;评论列表&lt;/label&gt;
+
+        &lt;ul className=&apos;list-group mb-3&apos;&gt;
+            {
+
+                comments.map((comment,index)=&gt;
+                    &lt;li key={index} className=&quot;list-group-item&quot;&gt;{comment}&lt;/li&gt;
+                )
+            }
+        &lt;/ul&gt;
+    &lt;/div&gt;
+)
+}
+
+export default CommentList
+</code></pre><p>CommentBox.js</p>
+<pre><code>import React from &apos;react&apos;
+
+class CommentBox extends React.Component{
+
+constructor(props){
+    super(props)
+    this.handleSubmit=this.handleSubmit.bind(this)
+}
+
+handleSubmit(event){
+
+    this.props.onAddComment(this.textInput.value)
+    event.preventDefault()
+}
+
+render() {
+
+    return(
+
+        &lt;form className=&apos;p-5&apos; onSubmit={this.handleSubmit}&gt;
+            &lt;div className=&apos;form-group&apos;&gt;
+                &lt;label&gt;留言内容&lt;/label&gt;
+               &lt;input
+                    type=&apos;text&apos;
+                    className=&apos;form-control&apos;
+                    placeholder=&apos;请输入内容&apos;
+                   ref={(textInput)=&gt;{this.textInput=textInput}}
+               /&gt;
+            &lt;/div&gt;
+
+            &lt;button type=&apos;submit&apos; className=&apos;btn btn-primary&apos;&gt;
+                留言
+            &lt;/button&gt;
+
+            &lt;p&gt;已有{this.props.commentsLength}条评论&lt;/p&gt;
+
+        &lt;/form&gt;
+    )
+}
+
+}
+
+export default CommentBox
+</code></pre><p>App.js</p>
+<pre><code>import React from &apos;react&apos;;
+import logo from &apos;./logo.svg&apos;;
+import &apos;./App.css&apos;;
+import CommentList from &apos;./components/CommentList&apos;
+import CommentBox from &quot;./components/CommentBox&quot;;
+
+
+class App extends React.Component{
+
+      constructor(props){
+super(props)
+this.state={
+  comments:[&apos;this is my first comment&apos;]
+}
+
+this.addComment=this.addComment.bind(this)
+  }
+
+  addComment(comment){
+
+this.setState({
+   comments: [...this.state.comments,comment]
+})
+  }
+
+  render() {
+
+const {comments}=this.state
+return(
+    &lt;div className=&apos;App&apos;&gt;
+
+  &lt;header className=&apos;App-header&apos;&gt;
+    &lt;img src={logo} className=&apos;App-logo&apos; alt=&apos;logo&apos;/&gt;
+    &lt;h1 className=&apos;App-title&apos;&gt;Welcome to React&lt;/h1&gt;
+
+  &lt;/header&gt;
+
+      &lt;CommentList comments={comments}/&gt;
+      &lt;CommentBox
+          commentsLength={comments.length}
+          onAddComment={this.addComment}
+      /&gt;
+
+&lt;/div&gt;
+)
+
+  }
+
+}
+
+export default App;
+</code></pre><h3 id="11、Context-Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便"><a href="#11、Context-Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便" class="headerlink" title="11、Context Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便"></a>11、Context Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便</h3><p> <img src="/2019/03/08/React基础Demo/17.png" alt></p>
+<p> <img src="/2019/03/08/React基础Demo/18.png" alt></p>
+<p>Demo***</p>
+<p>theme-context.js</p>
+<pre><code>import React from &apos;react&apos;
+
+const ThemeContext=React.createContext()
+
+export default ThemeContext
+</code></pre><p>ThemeBar.js</p>
+<pre><code>import React from &apos;react&apos;
+import ThemeContext from &apos;../theme-context&apos;
+
+
+const ThemeBar=()=&gt;{
+
+return(
+
+    &lt;ThemeContext.Consumer&gt;{
+
+        theme=&gt;{
+           return(
+
+               &lt;div
+                   className=&apos;alert mt-5&apos;
+                   style={{backgroundColor:theme.bgColor,
+                       color:theme.color}}&gt;
+
+                   样式区域
+                   &lt;button className={theme.classnames}&gt;
+                       样式按钮
+                   &lt;/button&gt;
+               &lt;/div&gt;
+           )
+        }
+    }
+    &lt;/ThemeContext.Consumer&gt;
+)
+}
+
+export default ThemeBar
+</code></pre><p>App.js</p>
+<pre><code>import React from &apos;react&apos;;
+import logo from &apos;./logo.svg&apos;;
+import &apos;./App.css&apos;;
+import ThemeContext from &apos;./theme-context&apos;
+import ThemeBar from &apos;./components/ThemeBar&apos;
+
+
+const themes={
+
+  light:{
+classnames:&apos;btn btn-primary&apos;,
+bgColor:&apos;#eeeeee&apos;,
+color:&apos;#000&apos;
+  },
+  dark:{
+classnames: &apos;btn btn-light&apos;,
+bgColor: &apos;#222222&apos;,
+color:&apos;#fff&apos;
+  },
+}
+
+class App extends React.Component{
+
+  constructor(props){
+super(props)
+this.state={
+  theme: &apos;light&apos;
+}
+
+this.changeTheme=this.changeTheme.bind(this)
+  }
+
+changeTheme(theme){
+
+this.setState({
+  theme,
+})
+}
+
+  render() {
+
+return(
+    &lt;ThemeContext.Provider value={themes[this.state.theme]}&gt;
+    &lt;div className=&apos;App&apos;&gt;
+
+  &lt;header className=&apos;App-header&apos;&gt;
+    &lt;img src={logo} className=&apos;App-logo&apos; alt=&apos;logo&apos;/&gt;
+    &lt;h1 className=&apos;App-title&apos;&gt;Welcome to React&lt;/h1&gt;
+    &lt;a href=&apos;#theme-switcher&apos;
+        className=&apos;btn btn-light&apos;
+    onClick={()=&gt;{this.changeTheme(&apos;light&apos;)}}
+    &gt;
+    浅色主题
+    &lt;/a&gt;
+
+      &lt;a href=&apos;#theme-switcher&apos;
+         className=&apos;btn btn-secondary&apos;
+         onClick={()=&gt;{this.changeTheme(&apos;dark&apos;)}}
+         &gt;
+        深色主题
+      &lt;/a&gt;
+
+  &lt;/header&gt;
+      &lt;ThemeBar/&gt;
+
+&lt;/div&gt;
+    &lt;/ThemeContext.Provider&gt;
+)
+
+  }
+
+}
+
+export default App;
+</code></pre><hr>
+<h2 id="棋盘井字游戏"><a href="#棋盘井字游戏" class="headerlink" title="棋盘井字游戏"></a>棋盘井字游戏</h2><p> <img src="/2019/03/08/React基础Demo/19.png" alt></p>
+<p>Demo代码***</p>
+<p>(1)Square.js</p>
+<pre><code>import React from &apos;react&apos;
+
+function Square(props) {
+return (
+    &lt;button className=&quot;square&quot; onClick={props.onClick}&gt;
+        {props.value}
+    &lt;/button&gt;
+);
+}
+
+export default Square
+</code></pre><p>(2)Board.js</p>
+<pre><code>import React from &apos;react&apos;
+import Square from &apos;./Square&apos;
+import calculateWinner from &apos;./CalculateWinner&apos;
+
+class Board extends React.Component {
+renderSquare(i) {
+    return (
+        &lt;Square
+            value={this.props.squares[i]}
+            onClick={() =&gt; this.props.onClick(i)}
+        /&gt;
+    );
+}
+
+render() {
+    return (
+        &lt;div&gt;
+            &lt;div className=&quot;board-row&quot;&gt;
+                {this.renderSquare(0)}
+                {this.renderSquare(1)}
+                {this.renderSquare(2)}
+            &lt;/div&gt;
+            &lt;div className=&quot;board-row&quot;&gt;
+                {this.renderSquare(3)}
+                {this.renderSquare(4)}
+                {this.renderSquare(5)}
+            &lt;/div&gt;
+            &lt;div className=&quot;board-row&quot;&gt;
+                {this.renderSquare(6)}
+                {this.renderSquare(7)}
+                {this.renderSquare(8)}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}
+}
+
+export default Board
+</code></pre><p>(3)Game.js</p>
+<pre><code>import React from &apos;react&apos;
+import Board from &apos;./Board&apos;
+import calculateWinner from &apos;./CalculateWinner&apos;
+
+class Game extends React.Component {
+
+constructor(props) {
+    super(props);
+    this.state = {
+        history: [{
+            squares: Array(9).fill(null)
+        }],
+        stepNumber: 0,
+        xIsNext: true
+    };
+}
+
+handleClick(i) {
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
+    if (calculateWinner(squares) || squares[i]) {
+        return;
+    }
+    squares[i] = this.state.xIsNext ? &apos;X&apos; : &apos;O&apos;;
+    this.setState({
+        history: history.concat([{
+            squares: squares
+        }]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+    });
+}
+
+
+jumpTo(step) {
+    this.setState({
+        stepNumber: step,
+        xIsNext: (step % 2) === 0,
+    });
+}
+
+
+render() {
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    const winner = calculateWinner(current.squares);
+
+
+    const moves = history.map((step, move) =&gt; {
+        const desc = move ?
+            &apos;Go to move #&apos; + move :
+            &apos;Go to game start&apos;;
+        return (
+            &lt;li key={move}&gt;
+                &lt;button onClick={() =&gt; this.jumpTo(move)}&gt;{desc}&lt;/button&gt;
+            &lt;/li&gt;
+        );
+    });
+
+
+
+
+
+
+    let status;
+    if (winner) {
+        status = &apos;Winner: &apos; + winner;
+    } else {
+        status = &apos;Next player: &apos; + (this.state.xIsNext ? &apos;X&apos; : &apos;O&apos;);
+    }
+
+    return (
+        &lt;div className=&quot;game&quot;&gt;
+            &lt;div className=&quot;game-board&quot;&gt;
+                &lt;Board
+                    squares={current.squares}
+                    onClick={(i) =&gt; this.handleClick(i)}
+                /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;game-info&quot;&gt;
+                &lt;div&gt;{status}&lt;/div&gt;
+                &lt;ol&gt;{moves}&lt;/ol&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}
+}
+
+export default Game
+</code></pre><p>(4)CalculateWinner.js</p>
+<pre><code>import React from &apos;react&apos;
+
+
+function calculateWinner(squares) {
+const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+];
+for (let i = 0; i &lt; lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {
+        return squares[a];
+    }
+}
+return null;
+}
+
+export default calculateWinner
+</code></pre><p>(5)index.js</p>
+<pre><code>import React from &apos;react&apos;;
+import ReactDOM from &apos;react-dom&apos;;
+import &apos;./index.css&apos;;
+import * as serviceWorker from &apos;./serviceWorker&apos;;
+import &apos;bootstrap/dist/css/bootstrap.min.css&apos;
+import Game from &quot;./components/Game&quot;;
+
+ReactDOM.render(&lt;Game /&gt;, document.getElementById(&apos;root&apos;));
+serviceWorker.unregister();
 </code></pre>
           
         
