@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/05/基础Demod的总目录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/基础Demod的总目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/05/基础Demod的总目录/" itemprop="url">基础Demo的总目录</a></h1>
+                <a class="post-title-link" href="/2019/06/11/基础Demod的总目录/" itemprop="url">基础Demo的总目录</a></h1>
         
 
         <div class="post-meta">
@@ -263,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-05T00:00:00+08:00">
-                2019-06-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T00:00:00+08:00">
+                2019-06-11
               </time>
             
 
@@ -492,6 +492,484 @@
 <h4 id="65：基础Demo65-像素dp转化工具类"><a href="#65：基础Demo65-像素dp转化工具类" class="headerlink" title="65：基础Demo65-像素dp转化工具类"></a>65：基础Demo65-像素dp转化工具类</h4><blockquote>
 <p><a href="https://qiufeisheng.github.io/2019/06/02/%E5%9F%BA%E7%A1%80Demo65-%E5%83%8F%E7%B4%A0dp%E8%BD%AC%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB/" target="_blank" rel="noopener">https://qiufeisheng.github.io/2019/06/02/%E5%9F%BA%E7%A1%80Demo65-%E5%83%8F%E7%B4%A0dp%E8%BD%AC%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB/</a></p>
 </blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/基础Demo66-EventBus的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/03/基础Demo66-EventBus的使用/" itemprop="url">基础Demo66-EventBus的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-03T00:00:00+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <img src="/2019/06/03/基础Demo66-EventBus的使用/1.png" alt></p>
+<h4 id="1-Moudle下添加EventBus的依赖；"><a href="#1-Moudle下添加EventBus的依赖；" class="headerlink" title="1.Moudle下添加EventBus的依赖；"></a>1.Moudle下添加EventBus的依赖；</h4><pre><code>implementation &apos;org.greenrobot:eventbus:3.1.1&apos;
+</code></pre><h4 id="2-自定义EventBus的事件类；"><a href="#2-自定义EventBus的事件类；" class="headerlink" title="2.自定义EventBus的事件类；"></a>2.自定义EventBus的事件类；</h4><pre><code>public class Event {
+
+    //事件内容
+    private String message;
+
+    //初始化
+    public Event(String message){
+        this.message=message;
+    }
+
+    //getter
+    public String getMessage() {
+        return message;
+    }
+}
+</code></pre><h4 id="3-在OnCreate-函数中注册EventBus，在Ondestroy-函数中反注册；"><a href="#3-在OnCreate-函数中注册EventBus，在Ondestroy-函数中反注册；" class="headerlink" title="3.在OnCreate()函数中注册EventBus，在Ondestroy()函数中反注册；"></a>3.在OnCreate()函数中注册EventBus，在Ondestroy()函数中反注册；</h4><p>MainActivity.java</p>
+<pre><code>import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+
+private Button mOpenBtn;
+private TextView mInfoTxt;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    initView();
+    mOpenBtn.setOnClickListener(this);
+
+    EventBus.getDefault().register(this);
+}
+
+private void initView() {
+    mOpenBtn=(Button)findViewById(R.id.btn_jump);
+    mInfoTxt=(TextView) findViewById(R.id.tv_message);
+}
+
+@Override
+public void onClick(View v) {
+    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+    startActivity(intent);
+
+}
+
+
+@Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event event) {
+    String msg = event.getMessage();
+    mInfoTxt.setText(msg);
+}
+
+
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    //反注册
+    EventBus.getDefault().unregister(this);
+    }
+}
+</code></pre><p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+tools:context=&quot;.SecondActivity&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_post&quot;
+    android:text=&quot;发送事件&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>SecondActivity.java</p>
+<pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import org.greenrobot.eventbus.EventBus;
+
+
+public class SecondActivity extends AppCompatActivity {
+
+
+
+private Button mPostBtn;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_second);
+
+    mPostBtn=(Button)findViewById(R.id.btn_post);
+
+
+    mPostBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //发送事件
+                    EventBus.getDefault().post(new Event(&quot;Just do it&quot;));
+                }
+            }).start();
+
+        }
+    });
+}
+}
+</code></pre><p>activity_second.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+tools:context=&quot;.SecondActivity&quot;&gt;
+
+&lt;Button
+    android:id=&quot;@+id/btn_post&quot;
+    android:text=&quot;发送事件&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>  <img src="/2019/06/03/基础Demo66-EventBus的使用/2.png" alt></p>
+<p>  <img src="/2019/06/03/基础Demo66-EventBus的使用/3.png" alt></p>
+<p>  <img src="/2019/06/03/基础Demo66-EventBus的使用/4.png" alt></p>
+<hr>
+<h3 id="升级与剖析"><a href="#升级与剖析" class="headerlink" title="升级与剖析"></a>升级与剖析</h3><h4 id="4-事件类的剖析"><a href="#4-事件类的剖析" class="headerlink" title="4.事件类的剖析"></a>4.事件类的剖析</h4><p>发布事件中的参数是Event的实例，而订阅函数中的参数也是Event的实例，可以推断EventBus是通过post函数传进去的类的实例来确定调用哪个订阅函数的，是哪个就调用哪个，如果有多个订阅函数呢，那么这些函数都会被调用！</p>
+<p>FirstEvent.java</p>
+<pre><code>public class FirstEvent {
+
+private String messgae;
+
+public FirstEvent(String messgae) {
+    this.messgae = messgae;
+}
+
+public String getMessgae() {
+    return messgae;
+}
+}
+</code></pre><p>SecondEvent.java</p>
+<pre><code>public class SecondEvent {
+
+private String messgae;
+
+public SecondEvent(String messgae) {
+    this.messgae = messgae;
+}
+
+public String getMessgae() {
+    return messgae;
+}
+}
+</code></pre><p>ThirdEvent.java</p>
+<pre><code>public class ThirdEvent {
+
+private String messgae;
+
+public ThirdEvent(String messgae) {
+    this.messgae = messgae;
+}
+
+public String getMessgae() {
+    return messgae;
+}
+}
+</code></pre><p>FourthEvent.java</p>
+<pre><code>public class FourthEvent {
+
+private String messgae;
+
+public FourthEvent(String messgae) {
+    this.messgae = messgae;
+}
+
+public String getMessgae() {
+    return messgae;
+}
+}
+</code></pre><p>然后在MainActivity中，增加四种模式的订阅函数</p>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+private static final String TAG = &quot;MainActivity&quot;;
+
+@Bind(R.id.btn_open)
+Button mOpenBtn;
+
+@Bind(R.id.tv_showinfo)
+TextView mInfoTxt;
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    ButterKnife.bind(this);
+    //注册
+    EventBus.getDefault().register(this);
+
+}
+
+/**
+ * 事件响应方法
+ * @param event
+ */
+@Subscribe(threadMode = ThreadMode.MAIN)
+public void onEventMain(FirstEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventMain: &quot; + event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.POSTING)
+public void onEventPosting(SecondEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventPosting: &quot;+ event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.BACKGROUND)
+public void onEventBackgroud(ThirdEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventBackgroud: &quot; + event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.ASYNC)
+public void onEventAsync(FourthEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventAsync: &quot; + event.getMessgae());
+}
+
+//绑定点击事件
+@OnClick(R.id.btn_open)
+public void openSecondActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        startActivity(intent);
+
+}
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    //反注册
+    EventBus.getDefault().unregister(this);
+    }
+}
+</code></pre><p>接下来在SecondActivity中增加四个按钮，分别发送不同类别的事件</p>
+<pre><code>public class SecondActivity extends AppCompatActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_second);
+
+    ButterKnife.bind(this);
+}
+
+@OnClick(R.id.btn_post)
+public void onPostA() {
+    EventBus.getDefault().post(new FirstEvent(&quot;FirstEvent&quot;));
+}
+
+@OnClick(R.id.btn_post2)
+public void onPostB() {
+
+    EventBus.getDefault().post(new SecondEvent(&quot;SecondEvent&quot;));
+}
+
+@OnClick(R.id.btn_post3)
+public void onPostC() {
+
+    EventBus.getDefault().post(new ThirdEvent(&quot;ThirdEvent&quot;));
+}
+
+@OnClick(R.id.btn_post4)
+public void onPostD() {
+
+    EventBus.getDefault().post(new FourthEvent(&quot;FourthEvent&quot;));
+        }
+}
+</code></pre><blockquote>
+<p>运行后，分别顺序点击SecondActivity的四个按钮，打印信息如下：</p>
+</blockquote>
+<pre><code>03-31 02:53:45.950 4779-4779/com.example.michael.eventbusdemo I/MainActivity: onEventMain: FirstEvent
+03-31 02:53:47.528 4779-4779/com.example.michael.eventbusdemo I/MainActivity: onEventPosting: SecondEvent
+03-31 02:53:48.882 4779-4940/com.example.michael.eventbusdemo I/MainActivity: onEventBackgroud: ThirdEvent
+03-31 02:53:50.462 4779-4940/com.example.michael.eventbusdemo I/MainActivity: onEventAsync: FourthEvent
+</code></pre><blockquote>
+<p>由此可见，通过发布不同的事件类的实例，EventBus根据类的实例分别调用了不同的订阅函数来处理事件。</p>
+</blockquote>
+<p>那么，当同一个类的实例有多个函数订阅时，结果会是怎样呢？答案是，这些函数都会执行。下面我们来验证一下，将MainActivity中订阅函数的参数都改为FirstEvent，代码如下:</p>
+<pre><code>/**
+ * 事件响应方法
+ * @param event
+ */
+@Subscribe(threadMode = ThreadMode.MAIN)
+public void onEventMain(FirstEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventMain: &quot; + event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.POSTING)
+public void onEventPosting(FirstEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventPosting: &quot;+ event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.BACKGROUND)
+public void onEventBackgroud(FirstEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventBackgroud: &quot; + event.getMessgae());
+}
+
+@Subscribe(threadMode = ThreadMode.ASYNC)
+public void onEventAsync(FirstEvent event) {
+
+    String msg = event.getMessgae();
+    Log.i(TAG, &quot;onEventAsync: &quot; + event.getMessgae());
+}
+</code></pre><blockquote>
+<p>运行程序，点击SecondActivity的FirstEvent按钮，打印信息如下：</p>
+</blockquote>
+<pre><code>03-31 03:14:07.032 23611-23746/com.example.michael.eventbusdemo I/MainActivity: onEventAsync: FirstEvent
+03-31 03:14:07.033 23611-23611/com.example.michael.eventbusdemo I/MainActivity: onEventMain: FirstEvent
+03-31 03:14:07.033 23611-23611/com.example.michael.eventbusdemo I/MainActivity: onEventPosting: FirstEvent
+03-31 03:14:07.034 23611-23748/com.example.michael.eventbusdemo I/MainActivity: onEventBackgroud: FirstEvent
+</code></pre><blockquote>
+<p>分析可知，当SecondActivity发送FirstEvent事件过来的时候，这个四个订阅函数会同时接收到这个事件并执行。</p>
+</blockquote>
+<p>引用参考： <a href="https://www.jianshu.com/p/a040955194fc" target="_blank" rel="noopener">https://www.jianshu.com/p/a040955194fc</a></p>
 
           
         
@@ -2584,302 +3062,6 @@ class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/基础Demo55-基本动画Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/25/基础Demo55-基本动画Demo/" itemprop="url">基础Demo55-基本动画Demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-25T00:00:00+08:00">
-                2019-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、activity-splash-xml"><a href="#1、activity-splash-xml" class="headerlink" title="1、activity_splash.xml"></a>1、activity_splash.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:id=&quot;@+id/rl_splash_root&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-</code></pre><p>   android:background=”@drawable/splash_bg_newyear”&gt;</p>
-<pre><code>&lt;ImageView
-    android:id=&quot;@+id/img_sheep&quot;
-    android:layout_centerInParent=&quot;true&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:src=&quot;@drawable/splash_sheep_newyear&quot; /&gt;
-
-
-&lt;/RelativeLayout&gt;
-</code></pre><h3 id="2、SplashActivity-java"><a href="#2、SplashActivity-java" class="headerlink" title="2、SplashActivity.java"></a>2、SplashActivity.java</h3><pre><code>import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import com.example.newbeijing.activity.GuideActivity;
-import com.example.newbeijing.activity.MainActivity;
-import com.example.newbeijing.utils.CacheUtil;
-
-/**
- * 面向对象的本质：构造对象，调用象方
- */
-public class SplashActivity extends Activity {
-
-
-//静态常量做key，可以保持不变，刚好符合key的需求，且多处可用，所以使用静态
-public static final String START_MAIN = &quot;start_main&quot;;
-
-//view声明
-private RelativeLayout rl_splash_root;
-private ImageView img_sheep;
-
-//继承重写Activity的生命周期方法：onCreate()，且super先调用父类的onCreate做一些初始化操作吧（可查一下）
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    //初始化view
-    initView();
-
-    //初始化Data(准备Data + 把Data填充到view显示出来)
-    initData();
-
-
-
-
-
-}
-
-
-//初始化view
-private void initView() {
-
-    //将布局activity_splash.xml初始化成主view
-    setContentView(R.layout.activity_splash);
-
-    //初始化view
-    rl_splash_root = (RelativeLayout) findViewById(R.id.rl_splash_root);
-    img_sheep = (ImageView) findViewById(R.id.img_sheep);
-}
-
-
-
-//初始化Data（构造动画对象），填充数据显示出来
-private void initData() {
-
-
-    /**
-     * 构造AlphaAnimation渐变动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 渐变就是在可见与不可见之间慢慢切换
-     */
-    //构造器（起始透明度0不可见，末态透明度1完全可见）
-    AlphaAnimation aa=new AlphaAnimation(0,1);
-    //setter设置动画对象播放完后停在 播完的状态
-    aa.setFillAfter(true);
-
-
-    /**
-     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 缩放就是从大到小，或从小到大
-     */
-    //构造器：一般是fromX，Y一样，然后toX，Y一样，这样才不会变形，0.5,2,0.5，2，即从本身的0.5倍变成2倍，后面是旋转中心的位置，下面这个旋转中心值常用
-    ScaleAnimation sa=new ScaleAnimation(0,1,0,1, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-    //setter设置动画对象播放完后停在 播完的状态
-    sa.setFillAfter(true);
-
-
-    /**
-     * 构造ScaleAnimation缩放动画对象，目的是后期构造AnimationSet对象
-     * 类似Builder建造特殊对象的思想
-     * 缩放就是从大到小，或从小到大
-     */
-    //构造器：从0度开始旋转360度结束，旋转中心跟上面一样，X轴，左到右1，Y轴，上到1下
-    RotateAnimation ra=new RotateAnimation(0,360,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-    //setter设置动画对象播放完后停在 播完的状态
-    ra.setFillAfter(true);
-
-    /**
-     * 构造AnimationSet对象，叠加动画效果
-     * setDuration只是设置了整个动画的播放时间，
-     * 但是整个过程的播放速率，例如先快后慢，先慢后快，匀速，
-     * 是需要插值器Interpolator来设置的，不设置的话，默认匀速
-     */
-    AnimationSet set=new AnimationSet(false);
-    //setter调用象方初始化内部属性对象值，两个都可理解为setter
-    set.addAnimation(aa);
-    set.addAnimation(sa);
-    set.addAnimation(ra);
-    set.setDuration(1000);
-    ra.setFillAfter(true);
-
-    /**
-     * 属于将Data填充到view显示出来，通过调用象方
-     */
-    //开启动画
-    rl_splash_root.startAnimation(set);
-    //动画状态监听触发方法是写在set类内部的，所以这里的监听器对象本质上并不是监听器
-    //而是一个监听结果处理类的对象，会被在set内部的触发方法里调用此对象的象方，所以叫回调
-    set.setAnimationListener(new MyAnimationListener());
-}
-
-
-
-/**
- * 重写动画监听结果处理类，并不是监听触发类，是结果处理类来的，所以才叫回调
- */
-class MyAnimationListener implements Animation.AnimationListener{
-
-    /**
-     * 监听动画的接口，动画开始时，动画结束时，动画重复播放时，学会看方法名，一看就知道
-     * @param animation
-     */
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-
-        boolean isStartMain= CacheUtil.getBoolean(SplashActivity.this, START_MAIN);
-        Intent intent;
-        if (isStartMain){
-
-            //进去过主页面，则直接进入主页面
-            // 跳转到MainActivity
-            intent=new Intent(SplashActivity.this, MainActivity.class);
-
-        }else {
-            //没进去过主页面，则先进入引导页面
-            intent=new Intent(SplashActivity.this, GuideActivity.class);
-
-        }
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
-    }
-  }
-
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2930,7 +3112,7 @@ class MyAnimationListener implements Animation.AnimationListener{
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

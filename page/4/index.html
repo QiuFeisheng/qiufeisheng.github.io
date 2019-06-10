@@ -232,6 +232,420 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/基础Demo35-解析Json数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/05/基础Demo35-解析Json数据/" itemprop="url">基础Demo35-解析Json数据</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T00:00:00+08:00">
+                2019-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、学习原因："><a href="#1、学习原因：" class="headerlink" title="1、学习原因："></a>1、学习原因：</h3><p>因为有些时候公司的后台API返回的Json数据不符合GsonFormat自动生成实体类的标准，此时就只能手动写Json解析的实体类Bean，解析调用Gson.fromJson()即可，实体类首选GsonFormat, 不符合标准就手动写实体类</p>
+<h3 id="2、不能解析的情况："><a href="#2、不能解析的情况：" class="headerlink" title="2、不能解析的情况："></a>2、不能解析的情况：</h3><p>Key是数字，然后后面是字段……..，要学习一遍Json</p>
+<h3 id="3、访问本地主机的Tomcat的三种方式，不一定要查ip地址"><a href="#3、访问本地主机的Tomcat的三种方式，不一定要查ip地址" class="headerlink" title="3、访问本地主机的Tomcat的三种方式，不一定要查ip地址"></a>3、访问本地主机的Tomcat的三种方式，不一定要查ip地址</h3><p>（1）192.168.1.199:8080/web_home</p>
+<p>（2）localhost:8080/web_home(手机模拟器不可访问)</p>
+<p>（3）127.0.0.1:8080/web_home（手机模拟器不可访问，一般选择真机调试）</p>
+<h3 id="4、手动写Json解析实体类的流程"><a href="#4、手动写Json解析实体类的流程" class="headerlink" title="4、手动写Json解析实体类的流程"></a>4、手动写Json解析实体类的流程</h3><p>（1）打开HiJson</p>
+<p>（2）复制后台返回的全部Json数据，粘贴到HiJson</p>
+<p>（3）点击格式化Json字符串</p>
+<p>（4）黄色摄像头代表是一个对象</p>
+<p>（5）解析流程： 对象—》属性—》再看属性是否为对象（是）—》属性…..一层层解析即可</p>
+<p>属性1,2,3（一层层并列解析）</p>
+<p>所以对应：</p>
+<pre><code>public class Bean {
+private List data;   //注意，data,extend,retcode都是json数据的键名，不能打错
+private List extend; //打错一个键名，就得不到数据
+private int retcode; //最好的方式是：Hijson右键复制键名
+
+ }
+</code></pre><p>*data属性里又有对象，需要下一层解析</p>
+<p>*data里面有对象，所以List里面要指定此对象的类泛型，所以要写这个泛型类<br>而且是写成内部静态类public static class A{}的形式（内部静态类的好处？补一下）</p>
+<p>*然后打开对象0,1,2,3,4的所有字段（对应类里面的属性，Json里面称为字段），补充写到classA里面作为A的属性</p>
+<p>*然后写完所有的属性和静态内部类（泛型类）之后，开始写Getter,Setter</p>
+<p>*之后开始写:toString()，方便打印和debug数据</p>
+<p>*从里到外的类写Getter,Setter,toString()，这样不会出错</p>
+<p>***完整代码如下</p>
+<pre><code>package com.example.myapplication;
+import java.util.List;
+public class Bean {
+
+private List&lt;DetailPagerData&gt; data;
+private List extend;
+private int retcode;
+
+//3写Getter,Setter,toString()
+public List&lt;DetailPagerData&gt; getData() {
+    return data;
+}
+
+public List getExtend() {
+    return extend;
+}
+
+public int getRetcode() {
+    return retcode;
+}
+
+public void setData(List&lt;DetailPagerData&gt; data) {
+    this.data = data;
+}
+
+public void setExtend(List extend) {
+    this.extend = extend;
+}
+
+public void setRetcode(int retcode) {
+    this.retcode = retcode;
+}
+
+
+@Override
+public String toString() {
+    return &quot;Bean{&quot; +
+            &quot;data=&quot; + data +
+            &quot;, extend=&quot; + extend +
+            &quot;, retcode=&quot; + retcode +
+            &apos;}&apos;;
+}
+
+public static class DetailPagerData{
+
+    private int id;
+    private String title;
+    private int type;
+    private String url;
+    private String url1;
+    private String dayurl;
+    private String excurl;
+    private String weekurl;
+    private List&lt;ChildrenData&gt; children;
+   //2写Getter,Setter,toString()
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUrl1() {
+        return url1;
+    }
+
+    public String getDayurl() {
+        return dayurl;
+    }
+
+    public String getExcurl() {
+        return excurl;
+    }
+
+    public String getWeekurl() {
+        return weekurl;
+    }
+
+    public List&lt;ChildrenData&gt; getChildren() {
+        return children;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setUrl1(String url1) {
+        this.url1 = url1;
+    }
+
+    public void setDayurl(String dayurl) {
+        this.dayurl = dayurl;
+    }
+
+    public void setExcurl(String excurl) {
+        this.excurl = excurl;
+    }
+
+    public void setWeekurl(String weekurl) {
+        this.weekurl = weekurl;
+    }
+
+    public void setChildren(List&lt;ChildrenData&gt; children) {
+        this.children = children;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;DetailPagerData{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, title=&apos;&quot; + title + &apos;\&apos;&apos; +
+                &quot;, type=&quot; + type +
+                &quot;, url=&apos;&quot; + url + &apos;\&apos;&apos; +
+                &quot;, url1=&apos;&quot; + url1 + &apos;\&apos;&apos; +
+                &quot;, dayurl=&apos;&quot; + dayurl + &apos;\&apos;&apos; +
+                &quot;, excurl=&apos;&quot; + excurl + &apos;\&apos;&apos; +
+                &quot;, weekurl=&apos;&quot; + weekurl + &apos;\&apos;&apos; +
+                &quot;, children=&quot; + children +
+                &apos;}&apos;;
+    }
+
+    //内部类再嵌套内部类: 1写Getter,Setter,toString()
+    public static class ChildrenData{
+
+        private int id;
+        private String title;
+        private int type;
+        private String url;
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+       //可以打印日志，跟踪返回数据的解析情况
+        @Override
+        public String toString() {
+            return &quot;ChildrenData{&quot; +
+                    &quot;id=&quot; + id +
+                    &quot;, title=&apos;&quot; + title + &apos;\&apos;&apos; +
+                    &quot;, type=&quot; + type +
+                    &quot;, url=&apos;&quot; + url + &apos;\&apos;&apos; +
+                    &apos;}&apos;;
+        }
+    }
+}
+</code></pre><p>}</p>
+<h3 id="5、写完实体类后，开始真正解析Json数据"><a href="#5、写完实体类后，开始真正解析Json数据" class="headerlink" title="5、写完实体类后，开始真正解析Json数据"></a>5、写完实体类后，开始真正解析Json数据</h3><p>（1）使用JSONObject, JSONArray + for循环</p>
+<pre><code>String responseData=response.body().string();
+parseJson(responseData);
+
+private void parseJson(String jsonData){
+
+JSONArray jsonArray=new JSONArray(jsonData);
+try {
+    for (int i = 0; i &lt; jsonArray.length(); i++) {
+
+        JSONObject jsonObject = jsonArray.getJSONObject(i);
+        String id = jsonObject.getString(&quot;id&quot;);
+        String name = jsonObject.getString(&quot;id&quot;);
+        String version = jsonObject.getString(&quot;id&quot;);
+
+    }
+}catch (Exception e){
+    e.printStackTrace();
+      }
+ }
+</code></pre><p>（2）使用Gson解析</p>
+<p>*build.gradle: </p>
+<pre><code>compile ‘com.google.code.gson:gson:2.7’
+</code></pre><p>*简单Gson解析</p>
+<pre><code>// 2 解析JSON数据
+  Gson gson = new Gson();
+  ShopInfo shopInfo = gson.fromJson(json, ShopInfo.class);
+  // 3 展示数据
+  tv_gson_last.setText(shopInfo.toString())；
+</code></pre><p>*复杂Gson解析：解析Json数组</p>
+<pre><code>private void parseJson(String jsonData){
+
+Gson gson=new Gson();
+List&lt;App&gt; appList=gson.fromJson(jsonData,new TypeToken&lt;List&lt;App&gt;&gt;(){}.getType());
+for(App app: appList){
+ Log.d(“ManActivity”,”id is”+ app.getId());
+
+   }
+
+}
+</code></pre><p>1、添加依赖</p>
+<pre><code>implementation &apos;com.google.code.gson:gson:2.7&apos;
+</code></pre><p>2、Gson解析的示例</p>
+<pre><code>//初始化Data，填充Data到view显示出来：解析返回的json数据
+private void processData(String result) {
+
+//调用象方：解析json
+NewsCenterPagerBean bean=parsedJson(result);
+//日志打印检验是否成功
+String title=bean.getData().get(0).getChildren().get(1).getTitle();
+LogUtil.e(&quot;解析标题成功---------&quot;+title);
+
+
+
+//调用象方：初始化Data，得到左侧菜单的所有数据
+data=bean.getData();
+//构造对象：将context转回Activity
+MainActivity mainActivity= (MainActivity) context;
+//构造对象：得到左侧菜单的实例
+LeftMenuFragment leftMenuFragment=mainActivity.getLeftMenuFragment();
+
+
+//构造对象：初始化DataView，创建了4个view配合左侧菜单切换显示
+detailBasePagers=new ArrayList&lt;&gt;();
+detailBasePagers.add(new NewsMenuDetailPager(context,data.get(0)));
+detailBasePagers.add(new TopicMenuDetailPager(context,data.get(0)));
+detailBasePagers.add(new PhotoMenuDetailPager(context,data.get(2)));
+detailBasePagers.add(new InteracMenuDetailPager(context,data.get(2)));
+
+//调用象方：初始化Data，传递左侧菜单数据给左侧菜单，左侧菜单用setter接收
+leftMenuFragment.setData(data);
+}
+ //调用象方解析：Gson解析效率高
+private NewsCenterPagerBean parsedJson(String result) {
+return new Gson().fromJson(result,NewsCenterPagerBean.class);
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/04/基础Demo34-WebView最简单的用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2586,245 +3000,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/基础Demo25-文件存储/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/25/基础Demo25-文件存储/" itemprop="url">基础Demo25-文件存储</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-25T00:00:00+08:00">
-                2019-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、数据分为瞬时数据和持久数据，持久化技术可以让临时数据转变成持久数据"><a href="#1、数据分为瞬时数据和持久数据，持久化技术可以让临时数据转变成持久数据" class="headerlink" title="1、数据分为瞬时数据和持久数据，持久化技术可以让临时数据转变成持久数据"></a>1、数据分为瞬时数据和持久数据，持久化技术可以让临时数据转变成持久数据</h3><h3 id="2、Android保存数据的持久化技术分3种：-文件存储，SharedPreferences存储，数据库存储"><a href="#2、Android保存数据的持久化技术分3种：-文件存储，SharedPreferences存储，数据库存储" class="headerlink" title="2、Android保存数据的持久化技术分3种： 文件存储，SharedPreferences存储，数据库存储"></a>2、Android保存数据的持久化技术分3种： 文件存储，SharedPreferences存储，数据库存储</h3><h3 id="3、最后一种就是网络服务器存储，但不属于Android持久化技术。"><a href="#3、最后一种就是网络服务器存储，但不属于Android持久化技术。" class="headerlink" title="3、最后一种就是网络服务器存储，但不属于Android持久化技术。"></a>3、最后一种就是网络服务器存储，但不属于Android持久化技术。</h3><p>（1）文件存储适合存储简单的文本数据+二进制数据，使用的是BufferedWriter对象调用API .write(string)来实现存储:  使用的是BufferedReader调用.readLine()来读取文件存储的数据。</p>
-<p>activity_main.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:orientation=&quot;vertical&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;EditText
-    android:id=&quot;@+id/edit&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:hint=&quot;Type something here&quot;
-    /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>（2）MainActivity.java</p>
-<pre><code>import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.EditText;
-import android.widget.Toast;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
-
-public class MainActivity extends AppCompatActivity {
-
-private EditText edit;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    edit = (EditText) findViewById(R.id.edit);
-    String inputText = load();
-    if (!TextUtils.isEmpty(inputText)) {
-        edit.setText(inputText);
-        edit.setSelection(inputText.length());
-        Toast.makeText(this, &quot;Restoring succeeded&quot;, Toast.LENGTH_SHORT).show();
-    }
-}
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    String inputText = edit.getText().toString();
-    save(inputText);
-}
-
-public void save(String inputText) {
-    FileOutputStream out = null;
-    BufferedWriter writer = null;
-    try {
-        out = openFileOutput(&quot;data&quot;, Context.MODE_PRIVATE);
-        writer = new BufferedWriter(new OutputStreamWriter(out));
-        writer.write(inputText);
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (writer != null) {
-                writer.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-public String load() {
-    FileInputStream in = null;
-    BufferedReader reader = null;
-    StringBuilder content = new StringBuilder();
-    try {
-        in = openFileInput(&quot;data&quot;);
-        reader = new BufferedReader(new InputStreamReader(in));
-        String line = &quot;&quot;;
-        while ((line = reader.readLine()) != null) {
-            content.append(line);
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        if (reader != null) {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    return content.toString();
-    }
-
-}
-
-
-
-
-save()
-
-
-openFileOutput(“data”,Context.MODE_PRIVATE)---》FileOutputStream---》OutputStreamWriter---》BufferedWriter---》.write(sth)
-
-
- 1、FileOutputStream  2、OutputStreamWriter  3、BufferedWriter.write(sth)
-
-
-
- load()
-
-
-openFileInput(&quot;data&quot;)---InputStreamReader---BufferedReader---readLine()
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2875,7 +3050,7 @@ openFileInput(&quot;data&quot;)---InputStreamReader---BufferedReader---readLine(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
