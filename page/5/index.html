@@ -232,6 +232,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/26/基础Demo26-SharedPreferences存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/26/基础Demo26-SharedPreferences存储/" itemprop="url">基础Demo26-SharedPreferences存储</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T00:00:00+08:00">
+                2019-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>优点：以键值对Key-Value的形式存储值，比文本存储数据更加方便快捷。</p>
+<h3 id="1、activity-main-xml"><a href="#1、activity-main-xml" class="headerlink" title="1、activity_main.xml"></a>1、activity_main.xml</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:orientation=&quot;vertical&quot; &gt;
+
+&lt;Button
+    android:id=&quot;@+id/save_data&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Save data&quot;
+    /&gt;
+
+&lt;Button
+    android:id=&quot;@+id/restore_data&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Restore data&quot;
+    /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h3 id="2、MainActivity-java"><a href="#2、MainActivity-java" class="headerlink" title="2、MainActivity.java"></a>2、MainActivity.java</h3><pre><code>import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+public class MainActivity extends AppCompatActivity {
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Button saveData = (Button) findViewById(R.id.save_data);
+    saveData.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences.Editor editor = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE).edit();
+            editor.putString(&quot;name&quot;, &quot;Tom&quot;);
+            editor.putInt(&quot;age&quot;, 28);
+            editor.putBoolean(&quot;married&quot;, true);
+            editor.apply();
+        }
+    });
+    Button restoreData = (Button) findViewById(R.id.restore_data);
+    restoreData.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences pref = getSharedPreferences(&quot;data&quot;, MODE_PRIVATE);
+            String name = pref.getString(&quot;name&quot;, &quot;&quot;);
+            int age = pref.getInt(&quot;age&quot;, 0);   //后面是默认值，取不到值的替代值
+            boolean married = pref.getBoolean(&quot;married&quot;, false);
+
+            Toast.makeText(MainActivity.this,&quot;name is &quot; + name,Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(MainActivity.this,&quot;age is &quot; + age,Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(MainActivity.this,&quot;married is &quot; + married,Toast.LENGTH_SHORT).show();
+            Log.d(&quot;MainActivity&quot;, &quot;name is &quot; + name);
+            Log.d(&quot;MainActivity&quot;, &quot;age is &quot; + age);
+            Log.d(&quot;MainActivity&quot;, &quot;married is &quot; + married);
+        }
+    });
+  }
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/基础Demo25-文件存储/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2424,188 +2611,11 @@ public  RightFragment getContentFragment() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/16/基础Demo16-Fragment最常用的基类BaseFragment/" itemprop="url">基础Demo16-Fragment最常用的基类BaseFragment</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-16T00:00:00+08:00">
-                2019-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-
- /**
-    * 面向对象的本质：构造对象，调用象方
-    * 因为有抽象方法强制子类一定要重写，所以变成抽象类
-  */
-public abstract class BaseFragment extends Fragment {
-
-//上下文声明，Fragment习惯性把所在Activity的实例单独写出来
-public Activity context;
-
-/**
- * 重写生命周期方法：初始化context
- * @param savedInstanceState
- */
-@Override
-public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    context=getActivity();
-}
-
-/**
- * 创建视图时回调此方法，所以里面负责写创建视图的代码，创建实体对象，设置属性，但是不填充数据
- * @param inflater
- * @param container
- * @param savedInstanceState
- * @return
- */
-@Nullable
-@Override
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return initView();
-}
-
-//抽样方法，强制给子类自己写内容创建视图，而且是在onCreateView中执行
-public abstract View initView();
-
-/**
- * Activity创建时回调此方法，而且填充实体对象的数据
- * @param savedInstanceState
- */
-@Override
-public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-    initData();  //先有View,才能填充数据，所以不要把数据写到View里面去，可能会拖慢
-}
-
-public void initData() {
-
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2651,7 +2661,7 @@ public void initData() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
