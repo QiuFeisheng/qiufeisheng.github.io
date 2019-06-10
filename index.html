@@ -232,235 +232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/基础Demo67-Banner实现多样式轮播图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/10/基础Demo67-Banner实现多样式轮播图/" itemprop="url">基础Demo67-Banner实实现多样式轮播图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T20:19:35+08:00">
-                2019-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> <img src="/2019/06/10/基础Demo67-Banner实现多样式轮播图/1.gif" alt></p>
-<h4 id="1-Moudle下添加Github开源框架Banner的依赖"><a href="#1-Moudle下添加Github开源框架Banner的依赖" class="headerlink" title="1.Moudle下添加Github开源框架Banner的依赖"></a>1.Moudle下添加Github开源框架Banner的依赖</h4><pre><code>dependencies{
-    implementation &apos;com.youth.banner:banner:1.4.10&apos;  //最新版本
-}
-</code></pre><h4 id="2-添加权限"><a href="#2-添加权限" class="headerlink" title="2.添加权限"></a>2.添加权限</h4><pre><code>&lt;!-- if you want to load images from the internet --&gt;
-&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt; 
-
-&lt;!-- if you want to load images from a file OR from the internet --&gt;
-&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
-</code></pre><h4 id="3-布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；"><a href="#3-布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；" class="headerlink" title="3.布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；"></a>3.布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout
-        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;
-
-&lt;com.youth.banner.Banner
-    android:id=&quot;@+id/banner&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;200dp&quot; /&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h4 id="4-图片加载器：GlideImageLoader-java"><a href="#4-图片加载器：GlideImageLoader-java" class="headerlink" title="4.图片加载器：GlideImageLoader.java"></a>4.图片加载器：GlideImageLoader.java</h4><pre><code>import android.content.Context;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
-import com.youth.banner.loader.ImageLoader;
-
-public class GlideImageLoader extends ImageLoader {
-    @Override
-public void displayImage(Context context, Object path, ImageView imageView) {
-    //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
-    Glide.with(context.getApplicationContext())
-            .load(path)
-            .into(imageView);
-}
-
-//    @Override
-//    public ImageView createImageView(Context context) {
-//        //圆角
-//        return new RoundAngleImageView(context);
-//    }
-}
-</code></pre><h4 id="5-基本Demo：结合官方文档修改自定义属性来实现目标效果"><a href="#5-基本Demo：结合官方文档修改自定义属性来实现目标效果" class="headerlink" title="5.基本Demo：结合官方文档修改自定义属性来实现目标效果"></a>5.基本Demo：结合官方文档修改自定义属性来实现目标效果</h4><blockquote>
-<p><a href="https://github.com/youth5201314/banner" target="_blank" rel="noopener">点击此处查看Banner开源项目文档</a></p>
-</blockquote>
-<pre><code>import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerListener;
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements OnBannerListener {
-
-Banner banner;
-List&lt;String&gt;titles;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    initView();
-}
-
-private void initView() {
-    banner = (Banner) findViewById(R.id.banner);
-    //本地图片数据（资源文件）
-    List&lt;Integer&gt; list=new ArrayList&lt;&gt;();
-    list.add(R.drawable.a);
-    list.add(R.drawable.b);
-    list.add(R.drawable.c);
-
-
- //设置banner样式
-    banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-    banner.setImages(list);
-    banner .setImageLoader(new GlideImageLoader());
-    //设置banner动画效果
-    banner.setBannerAnimation(Transformer.DepthPage);
-    //设置标题集合（当banner样式有显示title时）
-    titles=new ArrayList&lt;&gt;();
-    titles.add(&quot;a&quot;);
-    titles.add(&quot;b&quot;);
-    titles.add(&quot;c&quot;);
-    banner.setBannerTitles(titles);
-    //设置自动轮播，默认为true
-    banner.isAutoPlay(true);
-    //设置轮播时间
-    banner.setDelayTime(1000);
-    //设置指示器位置（当banner模式中有指示器时）
-    banner.setIndicatorGravity(BannerConfig.RIGHT);
-    //点击事件
-    banner.setOnBannerListener(this);
-    //banner设置方法全部调用完毕时最后调用
-    banner.start();
-
-
-}
-
-
-@Override
-public void OnBannerClick(int position) {
-
-    Toast.makeText(getApplicationContext(),&quot;你点击了：&quot;+titles.get(position), Toast.LENGTH_SHORT).show();
-        }
-}
-</code></pre><p>示例效果1：</p>
-<p>   <img src="/2019/06/10/基础Demo67-Banner实现多样式轮播图/1.gif" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/基础Demod的总目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -492,7 +263,7 @@ public void OnBannerClick(int position) {
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T20:19:32+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T23:19:32+08:00">
                 2019-06-10
               </time>
             
@@ -724,6 +495,235 @@ public void OnBannerClick(int position) {
 <h4 id="66：基础Demo66-EventBus的使用"><a href="#66：基础Demo66-EventBus的使用" class="headerlink" title="66：基础Demo66-EventBus的使用"></a>66：基础Demo66-EventBus的使用</h4><blockquote>
 <p><a href="https://qiufeisheng.github.io/2019/06/03/%E5%9F%BA%E7%A1%80Demo66-EventBus%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">点击此处查看Demo66</a></p>
 </blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/基础Demo67-Banner实现多样式轮播图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/10/基础Demo67-Banner实现多样式轮播图/" itemprop="url">基础Demo67-Banner实实现多样式轮播图</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T20:19:35+08:00">
+                2019-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <img src="/2019/06/10/基础Demo67-Banner实现多样式轮播图/1.gif" alt></p>
+<h4 id="1-Moudle下添加Github开源框架Banner的依赖"><a href="#1-Moudle下添加Github开源框架Banner的依赖" class="headerlink" title="1.Moudle下添加Github开源框架Banner的依赖"></a>1.Moudle下添加Github开源框架Banner的依赖</h4><pre><code>dependencies{
+    implementation &apos;com.youth.banner:banner:1.4.10&apos;  //最新版本
+}
+</code></pre><h4 id="2-添加权限"><a href="#2-添加权限" class="headerlink" title="2.添加权限"></a>2.添加权限</h4><pre><code>&lt;!-- if you want to load images from the internet --&gt;
+&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt; 
+
+&lt;!-- if you want to load images from a file OR from the internet --&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre><h4 id="3-布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；"><a href="#3-布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；" class="headerlink" title="3.布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；"></a>3.布局文件加入Banner控件，自定义属性来完成目标需求，Banner是非常丰富和强大的开源框架，结合官方文档可以修改自定义属性，实现我们的目标效果，一般是在java文件中使用setter来定义；</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;com.youth.banner.Banner
+    android:id=&quot;@+id/banner&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;200dp&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h4 id="4-图片加载器：GlideImageLoader-java"><a href="#4-图片加载器：GlideImageLoader-java" class="headerlink" title="4.图片加载器：GlideImageLoader.java"></a>4.图片加载器：GlideImageLoader.java</h4><pre><code>import android.content.Context;
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+import com.youth.banner.loader.ImageLoader;
+
+public class GlideImageLoader extends ImageLoader {
+    @Override
+public void displayImage(Context context, Object path, ImageView imageView) {
+    //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
+    Glide.with(context.getApplicationContext())
+            .load(path)
+            .into(imageView);
+}
+
+//    @Override
+//    public ImageView createImageView(Context context) {
+//        //圆角
+//        return new RoundAngleImageView(context);
+//    }
+}
+</code></pre><h4 id="5-基本Demo：结合官方文档修改自定义属性来实现目标效果"><a href="#5-基本Demo：结合官方文档修改自定义属性来实现目标效果" class="headerlink" title="5.基本Demo：结合官方文档修改自定义属性来实现目标效果"></a>5.基本Demo：结合官方文档修改自定义属性来实现目标效果</h4><blockquote>
+<p><a href="https://github.com/youth5201314/banner" target="_blank" rel="noopener">点击此处查看Banner开源项目文档</a></p>
+</blockquote>
+<pre><code>import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Toast;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements OnBannerListener {
+
+Banner banner;
+List&lt;String&gt;titles;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    initView();
+}
+
+private void initView() {
+    banner = (Banner) findViewById(R.id.banner);
+    //本地图片数据（资源文件）
+    List&lt;Integer&gt; list=new ArrayList&lt;&gt;();
+    list.add(R.drawable.a);
+    list.add(R.drawable.b);
+    list.add(R.drawable.c);
+
+
+ //设置banner样式
+    banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+    banner.setImages(list);
+    banner .setImageLoader(new GlideImageLoader());
+    //设置banner动画效果
+    banner.setBannerAnimation(Transformer.DepthPage);
+    //设置标题集合（当banner样式有显示title时）
+    titles=new ArrayList&lt;&gt;();
+    titles.add(&quot;a&quot;);
+    titles.add(&quot;b&quot;);
+    titles.add(&quot;c&quot;);
+    banner.setBannerTitles(titles);
+    //设置自动轮播，默认为true
+    banner.isAutoPlay(true);
+    //设置轮播时间
+    banner.setDelayTime(1000);
+    //设置指示器位置（当banner模式中有指示器时）
+    banner.setIndicatorGravity(BannerConfig.RIGHT);
+    //点击事件
+    banner.setOnBannerListener(this);
+    //banner设置方法全部调用完毕时最后调用
+    banner.start();
+
+
+}
+
+
+@Override
+public void OnBannerClick(int position) {
+
+    Toast.makeText(getApplicationContext(),&quot;你点击了：&quot;+titles.get(position), Toast.LENGTH_SHORT).show();
+        }
+}
+</code></pre><p>示例效果1：</p>
+<p>   <img src="/2019/06/10/基础Demo67-Banner实现多样式轮播图/1.gif" alt></p>
 
           
         
