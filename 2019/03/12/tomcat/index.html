@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="1、一个工具类API获取同一个Context对象，任意地方使用public class MyApplication extends Application{            private static Context context;      @Override public void onCreate(){        context=getApplicationContext();">
+<meta name="description" content="1.程序架构 C/S架构(client/server)：含有客户端或移动端的就是C/S架构     QQ 微信 LOL  优点： 有一部分代码写在客户端， 用户体验比较好。  缺点：  服务器更新，客户端也要随着更新。 占用资源大。 客户端也要更新是因为客户端里的各种请求代码，请求接口或者解析代码是与服务器配套的，就类似一个锁和一把钥匙，锁里面的凹槽改变了，钥匙当然要改一下尺度，所以需要更新！要不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础Demo38-高级技巧">
-<meta property="og:url" content="http://yoursite.com/2019/05/08/基础Demo38-高级技巧/index.html">
+<meta property="og:title" content="后台03：Tomcat基础">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/tomcat/index.html">
 <meta property="og:site_name" content="QiuFeisheng&#39;Blog">
-<meta property="og:description" content="1、一个工具类API获取同一个Context对象，任意地方使用public class MyApplication extends Application{            private static Context context;      @Override public void onCreate(){        context=getApplicationContext();">
+<meta property="og:description" content="1.程序架构 C/S架构(client/server)：含有客户端或移动端的就是C/S架构     QQ 微信 LOL  优点： 有一部分代码写在客户端， 用户体验比较好。  缺点：  服务器更新，客户端也要随着更新。 占用资源大。 客户端也要更新是因为客户端里的各种请求代码，请求接口或者解析代码是与服务器配套的，就类似一个锁和一把钥匙，锁里面的凹槽改变了，钥匙当然要改一下尺度，所以需要更新！要不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T09:04:27.817Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tomcat/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tomcat/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tomcat/3.png">
+<meta property="og:updated_time" content="2019-06-11T06:56:32.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础Demo38-高级技巧">
-<meta name="twitter:description" content="1、一个工具类API获取同一个Context对象，任意地方使用public class MyApplication extends Application{            private static Context context;      @Override public void onCreate(){        context=getApplicationContext();">
+<meta name="twitter:title" content="后台03：Tomcat基础">
+<meta name="twitter:description" content="1.程序架构 C/S架构(client/server)：含有客户端或移动端的就是C/S架构     QQ 微信 LOL  优点： 有一部分代码写在客户端， 用户体验比较好。  缺点：  服务器更新，客户端也要随着更新。 占用资源大。 客户端也要更新是因为客户端里的各种请求代码，请求接口或者解析代码是与服务器配套的，就类似一个锁和一把钥匙，锁里面的凹槽改变了，钥匙当然要改一下尺度，所以需要更新！要不">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/12/tomcat/1.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/08/基础Demo38-高级技巧/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/12/tomcat/">
 
 
 
 
 
-  <title>基础Demo38-高级技巧 | QiuFeisheng'Blog</title>
+  <title>后台03：Tomcat基础 | QiuFeisheng'Blog</title>
   
 
 
@@ -232,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/基础Demo38-高级技巧/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuFeisheng">
@@ -249,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基础Demo38-高级技巧</h1>
+          <h1 class="post-title" itemprop="name headline">后台03：Tomcat基础</h1>
         
 
         <div class="post-meta">
@@ -261,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T00:00:00+08:00">
-                2019-05-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T00:00:00+08:00">
+                2019-03-12
               </time>
             
 
@@ -299,133 +303,97 @@
       
 
       
-        <h3 id="1、一个工具类API获取同一个Context对象，任意地方使用"><a href="#1、一个工具类API获取同一个Context对象，任意地方使用" class="headerlink" title="1、一个工具类API获取同一个Context对象，任意地方使用"></a>1、一个工具类API获取同一个Context对象，任意地方使用</h3><pre><code>public class MyApplication extends Application{
+        <h4 id="1-程序架构"><a href="#1-程序架构" class="headerlink" title="1.程序架构"></a>1.程序架构</h4><ul>
+<li><p>C/S架构(client/server)：含有客户端或移动端的就是C/S架构</p>
+<p><img src="/2019/03/12/tomcat/1.png" alt></p>
+</li>
+</ul>
+<blockquote>
+<p>QQ 微信 LOL</p>
+</blockquote>
+<p>优点：</p>
+<pre><code>有一部分代码写在客户端， 用户体验比较好。 
+</code></pre><p>缺点： </p>
+<pre><code>服务器更新，客户端也要随着更新。 占用资源大。 客户端也要更新是因为客户端里的各种请求代码，请求接口或者解析代码是与服务器配套的，就类似一个锁和一把钥匙，锁里面的凹槽改变了，钥匙当然要改一下尺度，所以需要更新！要不然开不了锁。
+</code></pre><ul>
+<li><p>B/S(browser/server)：用浏览器打开网页的就是B/S架构，很容易区分</p>
+<p><img src="/2019/03/12/tomcat/2.png" alt></p>
+</li>
+</ul>
+<blockquote>
+<p>网页游戏 ， WebQQ …（跟网页有关的都是B/S架构）</p>
+</blockquote>
+<p>优点： </p>
+<pre><code>客户端只要有浏览器就可以了。占用资源小， 不用更新。因为浏览器自带解析功能和请求功能，服务器改变不会改变对接方式和请求方式，内部数据交互是在前端网页更新写好了，所以到了浏览器这里当然不用更新。
+</code></pre><p>缺点：</p>
+<pre><code>用户体验不佳。 
+</code></pre><p>###Tomcat目录介绍</p>
+<p>bin##</p>
+<pre><code>&gt; 包含了一些jar ,  bat文件 。  startup.bat
+</code></pre><p>conf##<br>​<br>        tomcat的配置     server.xml  web.xml</p>
+<p>lib </p>
+<pre><code>tomcat运行所需的jar文件
+</code></pre><p>logs</p>
+<pre><code>运行的日志文件
+</code></pre><p>temp</p>
+<pre><code>临时文件
+</code></pre><p>webapps##</p>
+<pre><code>发布到tomcat服务器上的项目，就存放在这个目录。    
+</code></pre><p>work(目前不用管)</p>
+<pre><code>jsp翻译成class文件存放地
+</code></pre><p>​    </p>
+<p>##如何把一个项目发布到tomcat中</p>
+<blockquote>
+<p>需求： 如何能让其他的电脑访问我这台电脑上的资源 。 stu.xml</p>
+</blockquote>
+<pre><code>localhost : 本机地址
+</code></pre><h3 id="1-拷贝这个文件到webapps-ROOT底下，-在浏览器里面访问："><a href="#1-拷贝这个文件到webapps-ROOT底下，-在浏览器里面访问：" class="headerlink" title="1.拷贝这个文件到webapps/ROOT底下， 在浏览器里面访问："></a>1.拷贝这个文件到webapps/ROOT底下， 在浏览器里面访问：</h3><pre><code>    http://localhost:8080/stu.xml
 
-          private static Context context;
+* 在webaps下面新建一个文件夹xml  , 然后拷贝文件放置到这个文件夹中
+</code></pre><p>​<br>        <a href="http://localhost:8080/xml/stu.xml" target="_blank" rel="noopener">http://localhost:8080/xml/stu.xml</a></p>
+<pre><code>http://localhost:8080 ： 其实对应的是到webapps/root
+http://localhost:8080/xml/ : 对应是 webapps/xml
 
-    @Override
-public void onCreate(){
+使用IP地址访问：
 
-      context=getApplicationContext();
-    }
+http://192.168.37.48:8080/xml/stu.xml
+</code></pre><h3 id="2-配置虚拟路径"><a href="#2-配置虚拟路径" class="headerlink" title="2.配置虚拟路径"></a>2.配置虚拟路径</h3><p>使用localhost：8080 打开tomcat首页， 在左侧找到tomcat的文档入口， 点击进去后， 在左侧接着找到 Context入口，点击进入。</p>
+<pre><code>http://localhost:8080/docs/config/context.html
+</code></pre><ol>
+<li><p>在conf/server.xml 找到host元素节点。</p>
+</li>
+<li><p>加入以下内容。</p>
+</li>
+</ol>
+<pre><code>&lt;!-- docBase ：  项目的路径地址 如： D:\xml02\person.xml
+path : 对应的虚拟路径 一定要以/打头。
+对应的访问方式为： http://localhost:8080/a/person.xml --&gt;
+&lt;Context docBase=&quot;D:\xml02&quot; path=&quot;/a&quot;&gt;&lt;/Context&gt;
+</code></pre><ol start="3">
+<li>在浏览器地址栏上输入： <a href="http://localhost:8080/a/person.xml" target="_blank" rel="noopener">http://localhost:8080/a/person.xml</a></li>
+</ol>
+<h3 id="3-配置虚拟路径"><a href="#3-配置虚拟路径" class="headerlink" title="3.配置虚拟路径"></a>3.配置虚拟路径</h3><ol>
+<li><p>在tomcat/conf/catalina/localhost/ 文件夹下新建一个xml文件，名字可以自己定义。 person.xml</p>
+</li>
+<li><p>在这个文件里面写入以下内容</p>
+<pre><code>&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;
+&lt;Context docBase=&quot;D:\xml02&quot;&gt;&lt;/Context&gt;
+</code></pre></li>
+<li><p>在浏览器上面访问</p>
+<p><a href="http://localhost:8080/person/xml的名字即可" target="_blank" rel="noopener">http://localhost:8080/person/xml的名字即可</a></p>
+</li>
+</ol>
+<h3 id="给Eclipse配置Tomcat"><a href="#给Eclipse配置Tomcat" class="headerlink" title="给Eclipse配置Tomcat"></a>给Eclipse配置Tomcat</h3><ol>
+<li>在server里面 右键新建一个服务器， 选择到apache分类， 找到对应的tomcat版本， 接着一步一步配置即可。</li>
+<li><p>配置完毕后， 在server 里面， 右键刚才的服务器，然后open  ， 找到上面的Server Location , 选择中间的 Use Tomcat installation…</p>
+</li>
+<li><p>创建web工程， 在WebContent下定义html文件， 右键工程， run as server </p>
+</li>
+</ol>
+<h3 id="在Ecplise下创建Web过程的步骤："><a href="#在Ecplise下创建Web过程的步骤：" class="headerlink" title="在Ecplise下创建Web过程的步骤："></a>在Ecplise下创建Web过程的步骤：</h3><p>   New—&gt;other—&gt;Web—&gt;Dynamic Web Project—&gt;Next—&gt;Moudle_Version3.0—&gt;Next……</p>
+<p>   然后新建html网页，run Server之后，该Web项目会存储在Tomcat的wtpwebapps目录中</p>
+<p>   <img src="/2019/03/12/tomcat/3.png" alt></p>
 
-
-
-public static Context getContext(){
-
-     return context;
-}
-
-}
-</code></pre><p>（2）要在AndroidManifest.xml中配置Application类：</p>
-<pre><code>&lt; application android:name=”com......MyAplication”
-</code></pre><p>（3）调用</p>
-<p>MyApplition.getContext()可以随时随地用；</p>
-<p>（4）Application的配置有两种方式：</p>
-<p> *1：直接简单粗暴修改AndroidManifest.xml</p>
-<p> *2: 创建类MyApplition extends Application，然后在onCreate()方法中调用init方法初始化。而且一个应用程序只能配置一个Application。</p>
-<h3 id="2、使用Intent传递对象"><a href="#2、使用Intent传递对象" class="headerlink" title="2、使用Intent传递对象"></a>2、使用Intent传递对象</h3><p>备注：之前所遇到的Intent传递数据，都是传递基本数据类型，还可以传递对象哦，对象是属于引用数据类型。之前对应的都是intent.putExtra(KEY,”Tom”);<br>String name=getIntent().getStringExtra(KEY,””);来调用，现在是传递对象！</p>
-<p>Java规定，对象被传递需要满足2选1： 序列化或者分解后，才能被存储在磁盘中或者进行网络传输，反正对象不能直接传输，需要序列化或者分解才能传输，这是Java的规定。</p>
-<p>（1）序列化Serializable</p>
-<p>对象所属的类implements Serializable{}就可以使用Intent来传递对象了<br>eg:</p>
-<pre><code>import java.io.Serializable;
-
-public class Person implements Serializable {
-
-private String name;
-private int age;
-
-public String getName() {
-    return name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public int getAge() {
-    return age;
-}
-
-public void setAge(int age) {
-    this.age = age;
-}
-}
-</code></pre><p>传递：</p>
-<pre><code>Person person=new Person();
-person.setName(&quot;Tom&quot;);
-person.setAge(11);
-
-Intent intent=new Intent(MainActivity.this,SecondActivity.class);
-intent.putExtra(KEY,person);
-startActivity(intent);
-</code></pre><p>获取：<br>    Person person=(Person)getIntent().getSerializableExtra(KEY);</p>
-<p>（2）implements Parcelable{ }分解对象传递<br>：重写describeContents（）和 writeToParcel（）</p>
-<pre><code>import android.os.Parcel;
-import android.os.Parcelable;
-import java.io.Serializable;
-
-public class Person implements Parcelable {
-
-private String name;
-private int age;
-
-public String getName() {
-    return name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public int getAge() {
-    return age;
-}
-
-public void setAge(int age) {
-    this.age = age;
-}
-
-
-@Override
-public int describeContents() {
-    return 0;
-}
-
-@Override
-public void writeToParcel(Parcel dest, int flags) {
-
-    dest.writeString(name);
-    dest.writeInt(age);
-}
-
-
-public static final Parcelable.Creator&lt;Person&gt;CREATOR= new Creator&lt;Person&gt;() {
-    @Override
-    public Person createFromParcel(Parcel source) {
-       Person person=new Person();
-       person.name=source.readString();
-       person.age=source.readInt();
-       return person;
-    }
-
-    @Override
-    public Person[] newArray(int size) {
-        return new Person[size];
-    }
-};
-}
-</code></pre><p>传递：</p>
-<pre><code>Person person=new Person();
-person.setName(&quot;Tom&quot;);
-person.setAge(11);
-
-Intent intent=new Intent(MainActivity.this,SecondActivity.class);
-intent.putExtra(KEY,person);
-startActivity(intent);
-</code></pre><p>获取：</p>
-<pre><code>Person person=(Person)getIntent().getParcelableExtra(KEY);
-</code></pre>
       
     </div>
     
@@ -449,8 +417,8 @@ startActivity(intent);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/07/基础Demo37-联网请求框架Rxjava2+Retrofit2/" rel="next" title="基础Demo37-联网请求框架Rxjava2+Retrofit2">
-                <i class="fa fa-chevron-left"></i> 基础Demo37-联网请求框架Rxjava2+Retrofit2
+              <a href="/2019/03/11/JDBC基础Demo/" rel="next" title="后台02：JDBC基础Demo">
+                <i class="fa fa-chevron-left"></i> 后台02：JDBC基础Demo
               </a>
             
           </div>
@@ -459,8 +427,8 @@ startActivity(intent);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/09/基础Demo39-工具类打印日志LogUtil/" rel="prev" title="基础Demo39-工具类打印日志LogUtil">
-                基础Demo39-工具类打印日志LogUtil <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/01/基础Demo1--菜单Menu/" rel="prev" title="基础Demo1-菜单Menu">
+                基础Demo1-菜单Menu <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -575,7 +543,7 @@ startActivity(intent);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、一个工具类API获取同一个Context对象，任意地方使用"><span class="nav-number">1.</span> <span class="nav-text">1、一个工具类API获取同一个Context对象，任意地方使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用Intent传递对象"><span class="nav-number">2.</span> <span class="nav-text">2、使用Intent传递对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-程序架构"><span class="nav-number">1.</span> <span class="nav-text">1.程序架构</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1-拷贝这个文件到webapps-ROOT底下，-在浏览器里面访问："><span class="nav-number"></span> <span class="nav-text">1.拷贝这个文件到webapps/ROOT底下， 在浏览器里面访问：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置虚拟路径"><span class="nav-number"></span> <span class="nav-text">2.配置虚拟路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置虚拟路径"><span class="nav-number"></span> <span class="nav-text">3.配置虚拟路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给Eclipse配置Tomcat"><span class="nav-number"></span> <span class="nav-text">给Eclipse配置Tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Ecplise下创建Web过程的步骤："><span class="nav-number"></span> <span class="nav-text">在Ecplise下创建Web过程的步骤：</span></a></li></div>
             
 
           </div>
