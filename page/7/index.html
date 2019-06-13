@@ -1319,6 +1319,1119 @@ public boolean onOptionsItemSelected(MenuItem item) {
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/Servlet进阶/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/14/Servlet进阶/" itemprop="url">后台05：Servlet进阶Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T00:00:00+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Servlet配置方式"><a href="#Servlet配置方式" class="headerlink" title="Servlet配置方式"></a>Servlet配置方式</h3><ul>
+<li><ol>
+<li>全路径匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code> &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/bb&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+//题解
+</code></pre><blockquote>
+<p>Servlet的配置方式1：Src—&gt;New—&gt;Servlet—&gt;系统自动在web.xml自动配置Servlet的基本信息;</p>
+</blockquote>
+<blockquote>
+<p>作用类似类似Android的Manifest自动注册和配置；</p>
+</blockquote>
+<blockquote>
+<p>我们可以改url-pattern为/a 或者 /aa/bb都行，只要以/开头就行；</p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/a</p>
+</blockquote>
+<ul>
+<li><ol start="2">
+<li>路径匹配 , 前半段匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code>&lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+批注：以/ 开始 ， 但是以 * 结束，例如：/a/*，/* 都符合条件
+</code></pre><blockquote>
+<p>‘*’其实是一个通配符，匹配任意文字</p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/aa/xxxxxxxx/xxxx/xxx,都没问题，都可以访问 </p>
+</blockquote>
+<ul>
+<li><ol start="3">
+<li>以扩展名匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code>&lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;*.aa&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre><blockquote>
+<p>写法： 没有/  以 <em> 开始   </em>.扩展名    <em>.aa </em>.bb </p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/xxxxx/xxx/xx.aa就可以访问</p>
+</blockquote>
+<h3 id="ServletContext的作用和使用"><a href="#ServletContext的作用和使用" class="headerlink" title="ServletContext的作用和使用"></a>ServletContext的作用和使用</h3><ul>
+<li>1.让所有的Servlet都可以获取全局参数，而不仅仅局限在获取单个Servlet的局部参数</li>
+</ul>
+<p>[Demo本]</p>
+<p>web.xml配置全局的Servlet参数</p>
+<pre><code>   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot; id=&quot;WebApp_ID&quot; version=&quot;2.5&quot;&gt;
+  &lt;display-name&gt;TestServlet&lt;/display-name&gt;
+  &lt;welcome-file-list&gt;
+&lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+&lt;welcome-file&gt;index.htm&lt;/welcome-file&gt;
+&lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.html&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.htm&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+
+
+  &lt;!-- 配置全局的共享Servlet参数 --&gt;
+   &lt;context-param&gt;
+   &lt;param-name&gt;phonenumber&lt;/param-name&gt;
+   &lt;param-value&gt;15622391415&lt;/param-value&gt;
+   &lt;/context-param&gt;
+
+
+  &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/bb&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+   &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet2&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet2&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet2&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet2&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/cc&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><p>不同Servlet类都可以获取全局参数</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class MyServlet extends HttpServlet {
+private static final long serialVersionUID = 1L;
+
+
+public MyServlet() {
+    super();
+}
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //获取对象，调用象方：核心本质思想永远不会变
+    ServletContext context=getServletContext();
+    String number=context.getInitParameter(&quot;phonenumber&quot;);
+    System.out.println(&quot;这是01Servlet获取的全局参数值==&quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+
+访问：http://localhost:8080/TestServlet/a/bb
+
+
+import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet2 extends HttpServlet {
+private static final long serialVersionUID = 1L;
+
+
+public MyServlet() {
+    super();
+}
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    ServletContext context=getServletContext();
+    String number=context.getInitParameter(&quot;phonenumber&quot;);
+    System.out.println(&quot;这是02Servlet获取的全局参数值==&quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+
+访问：http://localhost:8080/TestServlet/a/cc
+</code></pre><ul>
+<li>2.获取Web过程下的WebContent的Web资源</li>
+</ul>
+<p>[Demo本]</p>
+<p>WebContent—&gt;New—&gt;folder—&gt;file—&gt;config.properties</p>
+<pre><code>PhoneNumber=15622391415
+</code></pre><p>MyServlet.java</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //构造ServletContext来获取File的绝对路径（就是真实路径）
+    ServletContext context=getServletContext();
+    String path = context.getRealPath(&quot;File/config.properties&quot;);
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=new FileInputStream(path);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+
+}
+</code></pre><blockquote>
+<p>String path = context.getRealPath(“file/config.properties”); //相对路径加载不了，只能获取绝对路径才能Load（真实路劲）</p>
+</blockquote>
+<blockquote>
+<p>path的值是这个真实路径：D:\tomcat\apache-tomcat-7.0.52\apache-tomcat-7.0.52\wtpwebapps\Demo03\</p>
+</blockquote>
+<blockquote>
+<p>访问：<a href="http://localhost:8080/TestServlet/a/bb就可以看到效果" target="_blank" rel="noopener">http://localhost:8080/TestServlet/a/bb就可以看到效果</a></p>
+</blockquote>
+<p>(2)上面也可以通过getResourceAsStream（）来实现</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //构造ServletContext来获取File的绝对路径（就是真实路径）
+    ServletContext context=getServletContext();
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=context.getResourceAsStream(&quot;File/config.properties&quot;);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+    is.close();
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+</code></pre><p>(3)还可以通过ClassLoader来实现</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=this.getClass().getClassLoader().getResourceAsStream(&quot;../../File/config.properties&quot;);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+    is.close();
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+</code></pre><blockquote>
+<p>ClassLoader()的路径是：D:\Tomcat\apache-tomcat-7.0.90\wtpwebapps\TestServlet\WEB-INF\classes</p>
+</blockquote>
+<blockquote>
+<p>但是我们要D:\Tomcat\apache-tomcat-7.0.90\wtpwebapps\TestServlet\File\config.properties，所以需要../../回到上两级目录才能进入File目录，搞定目录就是搞定了资源文件转换为流对象</p>
+</blockquote>
+<ul>
+<li><p>3.ServletContext实现Servlet间共享数据</p>
+<p><img src="/2019/03/14/Servlet进阶/2.gif" alt></p>
+<p><img src="/2019/03/14/Servlet进阶/1.png" alt></p>
+</li>
+</ul>
+<p>（1）创建一个登陆页面：login.xml</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;请输入你的账号密码&lt;/h2&gt;
+
+&lt;form action=&quot;LoginServlet&quot; method=&quot;get&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br &gt;
+&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt;&lt;br &gt;
+&lt;input type=&quot;submit&quot; value=&quot;登录&quot;/&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>（2）login.xml的Servlet: LoginServlet.java</p>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class LoginServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+
+    //get请求过来的数据，在url地址栏上就已经经过编码了，所以我们取到的就是乱码，
+    //tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+    //先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+    username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+    System.out.println(&quot;userName=&quot;+username+&quot;==password=&quot;+password);
+
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        response.setStatus(302);
+        response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+
+}
+</code></pre><p>(3)创建登陆成功页面：login_success.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;登录成功&lt;/h2&gt;
+
+&lt;a href=&quot;CountServlet&quot;&gt;欢迎光临&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>(4)login_success.html的Servlet</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class CountServlet extends HttpServlet {
+
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //1.取值
+    int count=(int)getServletContext().getAttribute(&quot;count&quot;);
+
+    //2.输出到Servlet所占的页面
+    response.getWriter().write(&quot;The number of users is &quot;+count);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        }
+
+    }
+</code></pre><p>最终效果</p>
+<p> <img src="/2019/03/14/Servlet进阶/2.gif" alt></p>
+<blockquote>
+<p>细节:所谓的真实路径是看访问路径，记住： 项目名/文件名就是访问路径</p>
+</blockquote>
+<pre><code>&lt;!--     
+A路径： Servlet的路径
+    http://localhost:8080/Demo4/login
+
+B路径： 当前这个html的路径：
+    http://localhost:8080/Demo4/login.html --&gt;
+
+
+&lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;
+    账号:&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;
+    密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt;&lt;br&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登录&quot;/&gt;
+&lt;/form&gt;
+</code></pre><blockquote>
+<p>ServletContext 何时创建， 何时销毁</p>
+</blockquote>
+<p>服务器启动的时候，会为托管的每一个web应用程序，创建一个ServletContext对象</p>
+<p>从服务器移除托管，或者是关闭服务器。 </p>
+<blockquote>
+<p>ServletContext 的作用范围</p>
+</blockquote>
+<p>只要在这个项目里面，都可以取。 只要同一个项目。 A项目 存， 在B项目取，是取不到的？ ServletContext对象不同。</p>
+<blockquote>
+<p>GET请求解决中文乱码</p>
+</blockquote>
+<pre><code>//tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+//先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+</code></pre><blockquote>
+<p>POST请求解决中文乱码：request.setCharacterEncoding(“UTF-8”);写在getParameter前面</p>
+</blockquote>
+<pre><code>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        response.setStatus(302);
+        response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+</code></pre><h3 id="2-Servlet的Response的简单使用"><a href="#2-Servlet的Response的简单使用" class="headerlink" title="2.Servlet的Response的简单使用"></a>2.Servlet的Response的简单使用</h3><pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class ResponseServlet extends HttpServlet {
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //一行代码搞定中文乱码问题，然后才开始写数据
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    //以字符流的形式写数据到浏览器显示
+    response.getWriter().write(&quot;我负责响应请求01&quot;);
+
+    //以字节流的形式写数据到浏览器显示
+    //response.getOutputStream().write(&quot;我负责响应请求02&quot;.getBytes());
+
+
+    //设置请求状态和头部
+    //response.setStatus(sc);
+    //response.setHeader(name, value);
+
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+
+}
+</code></pre><blockquote>
+<p>response.setContentType(“text/html;charset=UTF-8”);//一行代码搞定乱码</p>
+</blockquote>
+<h3 id="3-Response演练下载Web资源"><a href="#3-Response演练下载Web资源" class="headerlink" title="3.Response演练下载Web资源"></a>3.Response演练下载Web资源</h3><p>（1）download文件夹复制到WebContent的目录下</p>
+<p>（2）写下载页面downlad.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+ &lt;h2&gt;静态展示&lt;/h2&gt;
+&lt;a href=&quot;download/aa.jpg&quot; &gt;aa.jpg&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/bb.txt&quot; &gt;bb.txt&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/cc.png&quot; &gt;cc.png&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/cc.rar&quot; &gt;cc.rar&lt;/a&gt;&lt;br&gt;
+
+&lt;h2&gt;动态下载&lt;/h2&gt;
+&lt;a href=&quot;DownloadServlet?filename=aa.jpg&quot; &gt;aa.jpg&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=bb.txt&quot; &gt;bb.txt&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=cc.png&quot; &gt;cc.png&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=cc.rar&quot; &gt;cc.rar&lt;/a&gt;&lt;br&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>(3)超链接到Servlet来完成下载操作</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class DownloadServlet extends HttpServlet {
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //从html中拿到filename
+    String filename=request.getParameter(&quot;filename&quot;);
+
+    //file在Web中的资源路劲
+    String path=getServletContext().getRealPath(&quot;download/&quot;+filename);
+
+    //设置动作类型，点击后即可下载
+    response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=&quot;+filename);
+
+
+
+    InputStream is=new FileInputStream(path);
+    OutputStream os=response.getOutputStream();
+
+    int len=0;
+    byte[] buffer=new byte[1024];
+    while((len=is.read(buffer))!=-1) {
+        os.write(buffer,0,len);
+    }
+
+    os.close();
+    is.close();
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+
+    }
+</code></pre><p> <img src="/2019/03/14/Servlet进阶/3.gif" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/13/Servlet/" itemprop="url">后台04：Servlet基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T00:00:00+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <img src="/2019/03/13/Servlet/1.png" alt></p>
+<h3 id="Web资源"><a href="#Web资源" class="headerlink" title="Web资源"></a>Web资源</h3><p>在http协议当中，规定了请求和响应双方， 客户端(一般是指浏览器B/S架构)和服务器端。与web相关的资源。 </p>
+<p>有两种分类</p>
+<ul>
+<li><p>静态资源：<strong>静态网页</strong></p>
+<p>  html 、 js、 css</p>
+</li>
+<li><p>动态资源：<strong>动态网页**</strong>==与用户交互的网页，例如注册账号**</p>
+<p>  servlet/jsp</p>
+</li>
+</ul>
+<hr>
+<h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><ul>
+<li>servlet是什么?<strong>（在Java里面是以接口Interface的形式存在）</strong></li>
+</ul>
+<blockquote>
+<p>其实就是一个java程序，运行在我们的web服务器软件（例如tomcat）上，<strong>用于接收和响应客户端（浏览器）的http请求</strong>。 </p>
+</blockquote>
+<blockquote>
+<p>更多的是配合动态资源jsp来做。 当然静态资源也需要使用到servlet，只不过是Tomcat里面已经定义好了一个 DefaultServlet</p>
+</blockquote>
+<h3 id="Hello-Servlet工程"><a href="#Hello-Servlet工程" class="headerlink" title="Hello Servlet工程"></a>Hello Servlet工程</h3><ol>
+<li><p>得写一个Web工程 ， 要有一个服务器（在Ecplise配置Tomcat:new Server就可以搞定，看上一节）</p>
+</li>
+<li><p>测试运行Web工程</p>
+<pre><code>1. 新建一个类， 实现Servlet接口
+
+2. 配置Servlet ， 用意： 告诉服务器，我们的应用有这么些个servlet。
+
+    在webContent/WEB-INF/web.xml里面写上以下内容。
+</code></pre></li>
+</ol>
+<pre><code>&lt;!-- 向tomcat报告， 我这个应用里面有这个servlet， 名字叫做HelloServlet , 具体的路径是com.itheima.servlet.HelloServlet --&gt;
+&lt;servlet&gt;
+    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.itheima.servlet.HelloServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+
+&lt;!-- 注册servlet的映射。  servletName : 找到上面注册的具体servlet，  url-pattern: 在地址栏上的path 一定要以/打头 --&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/a&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><h4 id="3-访问方式：在地址栏上输入-http-localhost-8080-项目名称-a"><a href="#3-访问方式：在地址栏上输入-http-localhost-8080-项目名称-a" class="headerlink" title="3. 访问方式：在地址栏上输入 http://localhost:8080/项目名称/a"></a>3. 访问方式：在地址栏上输入 <a href="http://localhost:8080/项目名称/a" target="_blank" rel="noopener">http://localhost:8080/项目名称/a</a></h4><h3 id="Servlet执行过程"><a href="#Servlet执行过程" class="headerlink" title="Servlet执行过程"></a>Servlet执行过程</h3><p>  <img src="/2019/03/13/Servlet/2.png" alt></p>
+<h3 id="Servlet的通用写法-因为不需要此接口的所有方法，所以直接extends它的实现类就可以了"><a href="#Servlet的通用写法-因为不需要此接口的所有方法，所以直接extends它的实现类就可以了" class="headerlink" title="Servlet的通用写法:因为不需要此接口的所有方法，所以直接extends它的实现类就可以了"></a>Servlet的通用写法:因为不需要此接口的所有方法，所以直接extends它的实现类就可以了</h3><pre><code>Servlet (接口)（主要重写service（）方法）
+    |
+    |
+GenericServlet（通用实现类）
+    |
+    |
+HttpServlet （用于处理http的请求，重写doGet()和doPost()，因为源码里面执行的service()是回调doGet()和doPost()，所以直接重写这两个方法更加直接）
+</code></pre><ol>
+<li><p>定义一个类，继承HttpServlet 复写doGet 和 doPost</p>
+<p><img src="/2019/03/13/Servlet/3.png" alt></p>
+</li>
+</ol>
+<h2 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h2><ul>
+<li>生命周期（类似Android的Activity和Service生命周期函数）</li>
+</ul>
+<blockquote>
+<p>从创建到销毁的一段时间</p>
+</blockquote>
+<ul>
+<li>生命周期方法（如何监听如何调用不用管，知道怎么重写和时机会被回调即可）</li>
+</ul>
+<blockquote>
+<p>从创建到销毁，所调用的那些方法。</p>
+</blockquote>
+<ul>
+<li><p>init方法</p>
+<pre><code>在创建该servlet的实例时，就执行该方法。
+一个servlet只会初始化一次， init方法只会执行一次
+默认情况下是 ： 初次访问该servlet，才会创建实例。 
+</code></pre></li>
+<li><p>service方法</p>
+<pre><code>只要客户端来了一个请求，那么就执行这个方法了。
+  该方法可以被执行很多次。 一次请求，对应一次service方法的调用
+</code></pre></li>
+<li><p>destroy方法</p>
+</li>
+</ul>
+<pre><code>servlet销毁的时候，就会执行该方法
+
+    1. 该项目从tomcat的里面移除。
+    2. 正常关闭tomcat就会执行 shutdown.bat //推荐这种
+</code></pre><blockquote>
+<p>doGet 和 doPost不算生命周期方法，所谓的生命周期方法是指，从对象的创建到销毁一定会执行的方法， 但是这两个方法，不一定会执行。</p>
+</blockquote>
+<pre><code>import java.io.IOException;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet implements Servlet {
+
+
+@Override
+public void init(ServletConfig config) throws ServletException {
+    // TODO Auto-generated method stub
+    System.out.println(&quot;我被初始化啦&quot;);
+}
+
+
+@Override
+public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+
+    System.out.println(&quot;我被service啦&quot;);
+}
+
+@Override
+public void destroy() {
+    // TODO Auto-generated method stub
+    System.out.println(&quot;我被销毁啦&quot;);
+}
+
+@Override
+public ServletConfig getServletConfig() {
+    // TODO Auto-generated method stub
+    return null;
+}
+
+@Override
+public String getServletInfo() {
+    // TODO Auto-generated method stub
+    return null;
+    }
+
+}
+</code></pre><h3 id="让Servlet创建实例的时机提前。"><a href="#让Servlet创建实例的时机提前。" class="headerlink" title="让Servlet创建实例的时机提前。"></a>让Servlet创建实例的时机提前。</h3><p>####原因：只有在浏览器访问Servlet的时候，Servlet此时才会初始化init创建实例，否则是不会创建实例的；</p>
+<ol>
+<li><p>默认情况下，只有在初次访问servlet的时候，才会执行init方法。 有的时候，我们可能需要在这个方法里面执行一些初始化工作，甚至是做一些比较耗时的逻辑。 </p>
+</li>
+<li><p>那么这个时候，初次访问，可能会在init方法中逗留太久的时间。 那么有没有方法可以让这个初始化的时机提前一点。 </p>
+</li>
+<li><p>在配置的时候， 使用load-on-startup元素来指定， 给定的数字越小，启动的时机就越早。 一般不写负数， 从2开始即可。 <load-on-startup>2</load-on-startup></p>
+</li>
+</ol>
+<pre><code>&lt;servlet&gt;
+      &lt;servlet-name&gt;HelloServlet04&lt;/servlet-name&gt;
+      &lt;servlet-class&gt;com.itheima.servlet.HelloServlet04&lt;/servlet-class&gt;
+      &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+</code></pre><p>##ServletConfig（一个类来的，构造对象后可以获取web.xml的Servlet配置信息）</p>
+<blockquote>
+<p>Servlet的配置，通过这个对象，可以获取servlet在配置的时候一些信息</p>
+</blockquote>
+<blockquote>
+<p>先说 ， 在写怎么用， 最后说有什么用。</p>
+</blockquote>
+<pre><code>import java.io.IOException;
+import java.util.Enumeration;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet03 extends HttpServlet{
+
+@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    //1. 得到servlet配置对象 专门用于在配置servlet的信息
+            ServletConfig config = getServletConfig();
+
+            //获取到的是配置servlet里面servlet-name 的文本内容
+            String servletName = config.getServletName();
+            System.out.println(&quot;servletName=&quot;+servletName);
+
+
+            //2、。 可以获取具体的某一个参数。 
+            String address = config.getInitParameter(&quot;address&quot;);
+            System.out.println(&quot;address=&quot;+address);
+
+
+            //3.获取所有的参数名称
+            Enumeration&lt;String&gt; names = config.getInitParameterNames();
+            //遍历取出所有的参数名称
+            while (names.hasMoreElements()) {
+                String key = (String) names.nextElement();
+                String value = config.getInitParameter(key);
+                System.out.println(&quot;key===&quot;+key + &quot;   value=&quot;+value);
+
+                }
+    }
+
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    }
+}
+</code></pre><p>web.xml</p>
+<pre><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;MyServlet03&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;com.qiufeisheng.myservlet.MyServlet03&lt;/servlet-class&gt;
+
+  &lt;init-param&gt;
+  &lt;param-name&gt;pa1&lt;/param-name&gt;
+  &lt;param-value&gt;pa11&lt;/param-value&gt;
+  &lt;/init-param&gt;
+
+  &lt;init-param&gt;
+  &lt;param-name&gt;address&lt;/param-name&gt;    
+  &lt;param-value&gt;beijing&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;MyServlet03&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/c&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre><p>###为什么需要有这个ServletConfig</p>
+<ol>
+<li><p>未来我们自己开发的一些应用，使用到了一些技术，或者一些代码，我们不会。 但是有人写出来了。它的代码放置在了自己的servlet类里面。 </p>
+</li>
+<li><p>刚好这个servlet 里面需要一个数字或者叫做变量值。 但是这个值不能是固定了。 所以要求使用到这个servlet的公司，在注册servlet的时候，必须要在web.xml里面，声明init-params</p>
+</li>
+</ol>
+<h3 id="总而言之就是"><a href="#总而言之就是" class="headerlink" title="总而言之就是"></a>总而言之就是</h3><p>某人写好了一个Servlet，打包成jar包给所有人使用，但是配置文件打包不了，特别是想让用户自定义参数，而且是.class文件，修改不了源码，所以只能提前用ServletConfig在打包前写好规则，规定一定要某某参数，否则访问这个Servlet的时候回报错，此时就需要ServletConfig提前写好规则；是给打包者写规则，让用户在web.xml中自定义参数值来实现的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>Http协议</p>
+<pre><code>1. 使用HttpWacht 抓包看一看http请求背后的细节。 
+
+2. 基本了解 请求和响应的数据内容
+
+        请求行、 请求头 、请求体
+        响应行、响应头、响应体
+
+3. Get和Post的区别
+</code></pre></li>
+<li><p>Servlet【重点】</p>
+<pre><code>1. 会使用简单的servlet
+
+    1.写一个类，实现接口Servlet
+    2. 配置Servlet
+    3. 会访问Setvlet
+
+2. Servlet的生命周期
+
+    init 一次 创建对象 默认初次访问就会调用或者可以通过配置，让它提前 load-on-startup
+    service    多次，一次请求对应一次service
+    destory 一次 销毁的时候 从服务器移除 或者 正常关闭服务器
+
+3. ServletConfig
+
+    获取配置的信息， params
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2493,1072 +3606,6 @@ public void testUpdate() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/MySQL基础Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/10/MySQL基础Demo/" itemprop="url">后台01：MySQL的基础Demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T00:00:00+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、视角"><a href="#1、视角" class="headerlink" title="1、视角"></a>1、视角</h3><p>（1）一行数据==一条记录==一个对象==多个字段（列，属性）</p>
-<p>（2）主键要求==定位每一条记录==几乎不要修改==所以不要带业务==自定义id==BIGINT(且不能是null)</p>
-<p>（3）联合主键也可以理解，N个字段不要全部相同即可，不过很少用，因为关系复杂</p>
-<p>（4）系数据库通过外键可以实现一对多、多对多和一对一的关系。外键既可以通过数据库来约束，也可以不设置约束，仅依靠应用程序的逻辑来保证。</p>
-<p>（5）通过对数据库表创建索引，可以提高查询速度；缺点是插入更新数据慢</p>
-<p>（6）通过创建唯一索引，可以保证某一列的值具有唯一性，例如身份证列</p>
-<h3 id="2、基本查询：-查询所有的行与列-查询某个表的所有数据"><a href="#2、基本查询：-查询所有的行与列-查询某个表的所有数据" class="headerlink" title="2、基本查询： 查询所有的行与列==查询某个表的所有数据"></a>2、基本查询： 查询所有的行与列==查询某个表的所有数据</h3><pre><code>SELECT * FROM 表名     //*代表所有
-</code></pre><p>SELECT * FROM students</p>
-<p> <img src="/2019/03/10/MySQL基础Demo/1.png" alt></p>
-<h3 id="3、条件查询：查询某个表中符合某条件的数据"><a href="#3、条件查询：查询某个表中符合某条件的数据" class="headerlink" title="3、条件查询：查询某个表中符合某条件的数据"></a>3、条件查询：查询某个表中符合某条件的数据</h3><pre><code>SELECT * FROM 表名 WHERE 条件表达式
-</code></pre><p>SELECT * FROM students WHERE score &gt;= 80;</p>
-<p>SELECT * FROM students WHERE score &lt;&gt; 80;  <strong>//不等于80</strong></p>
-<p>SELECT * FROM students WHERE score &gt;= 80 AND gender = ‘M’;</p>
-<p>SELECT * FROM students WHERE NOT class_id = 2;</p>
-<p>SELECT * FROM students WHERE (score &lt; 80 OR score &gt; 90) AND gender = ‘M’;</p>
-<p>SELECT * FROM students WHERE score &gt;= 60 AND score &lt;= 90；</p>
-<p>SELECT * FROM students WHERE score BETWEEN 60 AND 90；</p>
-<p> <img src="/2019/03/10/MySQL基础Demo/2.png" alt></p>
-<h3 id="4、投影查询：查询特定某几列的数据（显示的时候还可以改列名）"><a href="#4、投影查询：查询特定某几列的数据（显示的时候还可以改列名）" class="headerlink" title="4、投影查询：查询特定某几列的数据（显示的时候还可以改列名）"></a>4、投影查询：查询特定某几列的数据（显示的时候还可以改列名）</h3><pre><code>SELECT 字段1列名，字段2列名，字段3列名 FROM 表名 （WHERE表达式）
-
-SELECT 字段1列名 改名1，字段2列名，字段3列名 FROM 表名 （WHERE表达式）
-</code></pre><p>SELECT id, score points, name FROM students;</p>
-<p>SELECT id, score points, name FROM students WHERE gender = ‘M’;</p>
-<p> <img src="/2019/03/10/MySQL基础Demo/3.png" alt></p>
-<h3 id="5、排序查询：安装某个条件排序后显示出来"><a href="#5、排序查询：安装某个条件排序后显示出来" class="headerlink" title="5、排序查询：安装某个条件排序后显示出来"></a>5、排序查询：安装某个条件排序后显示出来</h3><pre><code>SELECT ......ORDER BY （例如列名） DESC(降序/默认ASC升序）
-</code></pre><p>SELECT id, name, gender, score FROM students ORDER BY score;</p>
-<p>SELECT id, name, gender, score FROM students ORDER BY score DESC;</p>
-<p>SELECT id, name, gender, score FROM students ORDER BY score DESC, gender;</p>
-<p>SELECT id, name, gender, score FROM students WHERE class_id = 1 ORDER BY score DESC;</p>
-<p> <img src="/2019/03/10/MySQL基础Demo/4.png" alt></p>
-<h3 id="6、分页查询：把数据分成A页，从索引为B查询到所在页截至"><a href="#6、分页查询：把数据分成A页，从索引为B查询到所在页截至" class="headerlink" title="6、分页查询：把数据分成A页，从索引为B查询到所在页截至"></a>6、分页查询：把数据分成A页，从索引为B查询到所在页截至</h3><pre><code>LIMT 每页的数据条数 OFFSET 当前索引开始查
-</code></pre><p>SELECT id, name, gender, score FROM students ORDER BY score DESC LIMIT 3 OFFSET 0;</p>
-<p>SELECT id, name, gender, score FROM students ORDER BY score DESC LIMIT 3 OFFSET 0;</p>
-<p>SELECT id, name, gender, score FROM students ORDER BY score DESC LIMIT 3 OFFSET 0;</p>
-<p> <img src="/2019/03/10/MySQL基础Demo/5.png" alt></p>
-<h3 id="7、聚合查询：计算总数、合计值、平均值、最大值和最小值"><a href="#7、聚合查询：计算总数、合计值、平均值、最大值和最小值" class="headerlink" title="7、聚合查询：计算总数、合计值、平均值、最大值和最小值"></a>7、聚合查询：计算总数、合计值、平均值、最大值和最小值</h3><p>总行数==总数据量</p>
-<pre><code>SELECT COUNT(*) FROM students;
-SELECT COUNT(*) number FROM students;  //设置别名
-</code></pre><p> <img src="/2019/03/10/MySQL基础Demo/6.png" alt></p>
-<pre><code>SELECT COUNT(*) boys FROM students WHERE gender = &apos;M&apos;; //为M的总行数
-</code></pre><p>  <img src="/2019/03/10/MySQL基础Demo/7.png" alt></p>
-<pre><code>SELECT AVG(score) average FROM students WHERE gender = &apos;M&apos;;//男生的总平均数
-</code></pre><p>  <img src="/2019/03/10/MySQL基础Demo/8.png" alt></p>
-<p>如果聚合查询的WHERE条件没有匹配到任何行，COUNT()会返回0，而SUM()、AVG()、MAX()和MIN()会返回NULL：</p>
-<pre><code>SELECT class_id, COUNT(*) num FROM students GROUP BY class_id;//每个班的总数，而且还显示了班的id
-</code></pre><p>  <img src="/2019/03/10/MySQL基础Demo/9.png" alt></p>
-<h3 id="8、多表查询：使用多表查询可以获取M-x-N行记录；一对多的拼接"><a href="#8、多表查询：使用多表查询可以获取M-x-N行记录；一对多的拼接" class="headerlink" title="8、多表查询：使用多表查询可以获取M x N行记录；一对多的拼接"></a>8、多表查询：使用多表查询可以获取M x N行记录；一对多的拼接</h3><pre><code>SELECT * FROM students, classes;
-
-SELECT students.id sid,students.name,students.gender,students.score,classes.id cid,classes.name cname FROM students, classes;
-
-SELECT s.id sid, s.name,s.gender,s.score,c.id cid, c.name cname FROM students s, classes c WHERE s.gender = &apos;M&apos; AND c.id = 1;
-</code></pre><p>  <img src="/2019/03/10/MySQL基础Demo/10.png" alt></p>
-<h3 id="9、连接查询：我们希望结果集同时包含所在班级的名称，上面的结果集只有class-id列，缺少对应班级的name列。存放班级名称的name列存储在classes表中。"><a href="#9、连接查询：我们希望结果集同时包含所在班级的名称，上面的结果集只有class-id列，缺少对应班级的name列。存放班级名称的name列存储在classes表中。" class="headerlink" title="9、连接查询：我们希望结果集同时包含所在班级的名称，上面的结果集只有class_id列，缺少对应班级的name列。存放班级名称的name列存储在classes表中。"></a>9、连接查询：我们希望结果集同时包含所在班级的名称，上面的结果集只有class_id列，缺少对应班级的name列。存放班级名称的name列存储在classes表中。</h3><pre><code>SELECT s.id, s.name, s.class_id, c.name class_name, s.gender, s.score FROM students s INNER JOIN classes c ON s.class_id = c.id;
-</code></pre><p>   <img src="/2019/03/10/MySQL基础Demo/11.png" alt></p>
-<h3 id="10、INSERT插入数据"><a href="#10、INSERT插入数据" class="headerlink" title="10、INSERT插入数据"></a>10、INSERT插入数据</h3><pre><code>INSERT INTO 表名 （字段列1,字段列名2，字段列名3）VALUES(值1，值2，值3)
-
-INSERT INTO students (class_id, name, gender, score) VALUES (1, &apos;大宝&apos;, &apos;M&apos;, 87)，(2, &apos;二宝&apos;, &apos;M&apos;, 81);
-
-SELECT * FROM students;
-</code></pre><p>   <img src="/2019/03/10/MySQL基础Demo/12.png" alt></p>
-<h3 id="11、UPDATE更新数据：我们就可以一次更新表中的一条或多条记录。"><a href="#11、UPDATE更新数据：我们就可以一次更新表中的一条或多条记录。" class="headerlink" title="11、UPDATE更新数据：我们就可以一次更新表中的一条或多条记录。"></a>11、UPDATE更新数据：我们就可以一次更新表中的一条或多条记录。</h3><pre><code>UPDATE 表名 SET 字段1=值1, 字段2=值2 WHERE 条件;
-
-
-UPDATE students SET name=&apos;大牛&apos;, score=66 WHERE id=1;
-SELECT * FROM students WHERE id=1;
-
-
-UPDATE students SET name=&apos;小牛&apos;, score=77 WHERE id&gt;=5 AND id&lt;=7;
-SELECT * FROM students;
-</code></pre><p> <img src="/2019/03/10/MySQL基础Demo/13.png" alt></p>
-<h3 id="12、DELETE删除数据：删除符合条件的行数据"><a href="#12、DELETE删除数据：删除符合条件的行数据" class="headerlink" title="12、DELETE删除数据：删除符合条件的行数据"></a>12、DELETE删除数据：删除符合条件的行数据</h3><pre><code>DELETE FROM 表名 WHERE 条件;
-
-DELETE FROM students WHERE id=1;
-SELECT * FROM students;
-
-DELETE FROM students WHERE id&gt;=5 AND id&lt;=7;
--- 查询并观察结果:
-SELECT * FROM students;
-</code></pre><p> <img src="/2019/03/10/MySQL基础Demo/14.png" alt></p>
-<h3 id="13、管理MySQL"><a href="#13、管理MySQL" class="headerlink" title="13、管理MySQL"></a>13、管理MySQL</h3><p> <img src="/2019/03/10/MySQL基础Demo/15.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/16.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/17.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/18.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/19.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/20.png" alt></p>
-<p> <img src="/2019/03/10/MySQL基础Demo/21.png" alt></p>
-<h3 id="14、常用SQL语句"><a href="#14、常用SQL语句" class="headerlink" title="14、常用SQL语句"></a>14、常用SQL语句</h3><p>1、插入和替换</p>
-<pre><code>REPLACE INTO students (id, class_id, name, gender, score) VALUES (1, 1, &apos;小明&apos;, &apos;F&apos;, 99);
-</code></pre><p>2、插入或更新</p>
-<pre><code>INSERT INTO students (id, class_id, name, gender, score) VALUES (1, 1, &apos;小明&apos;, &apos;F&apos;, 99) ON DUPLICATE KEY UPDATE name=&apos;小明&apos;, gender=&apos;F&apos;, score=99;
-</code></pre><p>3、插入或忽略</p>
-<pre><code>INSERT IGNORE INTO students (id, class_id, name, gender, score) VALUES (1, 1, &apos;小明&apos;, &apos;F&apos;, 99);
-</code></pre><p>4、快照（copy）</p>
-<pre><code>-- 对class_id=1的记录进行快照，并存储为新表students_of_class1:
-CREATE TABLE students_of_class1 SELECT * FROM students WHERE class_id=1;
-</code></pre><p>5、写入查询结果集</p>
-<pre><code>CREATE TABLE statistics (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    class_id BIGINT NOT NULL,
-    average DOUBLE NOT NULL,
-    PRIMARY KEY (id)
-);
-
-INSERT INTO statistics (class_id, average) SELECT class_id, AVG(score) FROM students GROUP BY class_id;
-</code></pre><p> <img src="/2019/03/10/MySQL基础Demo/22.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/React基础Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuFeisheng">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiuFeisheng'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/09/React基础Demo/" itemprop="url">前端03：React的基础Demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T00:00:00+08:00">
-                2019-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>（一句话浓缩）</p>
-<h3 id="1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View"><a href="#1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View" class="headerlink" title="1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View"></a>1、React是FaceBook封装好的JS库（框架），主要用于快速高效写用户界面，是MVC中的View</h3><p> <img src="/2019/03/09/React基础Demo/1.png" alt></p>
-<h3 id="2、React是一个非常流行的框架，BAT也用，学一学有价值"><a href="#2、React是一个非常流行的框架，BAT也用，学一学有价值" class="headerlink" title="2、React是一个非常流行的框架，BAT也用，学一学有价值"></a>2、React是一个非常流行的框架，BAT也用，学一学有价值</h3><p><img src="/2019/03/09/React基础Demo/2.png" alt></p>
-<h3 id="3、create-react-app就是一个官方开发工具，目的是可以在new-Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率"><a href="#3、create-react-app就是一个官方开发工具，目的是可以在new-Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率" class="headerlink" title="3、create-react-app就是一个官方开发工具，目的是可以在new Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率"></a>3、create-react-app就是一个官方开发工具，目的是可以在new Project的时候帮助我们配置好Project的各种文件，提高创建Project的效率</h3><h3 id="4、React的一个自定义组件（类似Android最简单的自定义view）"><a href="#4、React的一个自定义组件（类似Android最简单的自定义view）" class="headerlink" title="4、React的一个自定义组件（类似Android最简单的自定义view）"></a>4、React的一个自定义组件（类似Android最简单的自定义view）</h3><p>(1)improt React from ‘react’</p>
-<p>(2)extends React.Component</p>
-<p>(3)render(){  返回HTML渲染效果}</p>
-<p>(4)export default Welcome</p>
-<p>(5)index.js中 import Welcome</p>
-<p>(6)index.js中的ReactDOM传入Welcome组件显示出来</p>
-<p>Demo***</p>
-<p><strong>Welcome.js</strong></p>
-<pre><code>import React from &apos;react&apos;
-
-class Welcome extends React.Component{
-
-
-    render() {
-
-        return &lt;h1&gt;Hello World&lt;/h1&gt;
-    }
-}
-
-export default Welcome
-</code></pre><p><strong>index.js</strong></p>
-<pre><code>import React from &apos;react&apos;;
-import ReactDOM from &apos;react-dom&apos;;
-import &apos;./index.css&apos;;
-import App from &apos;./App&apos;;
-import Welcome from &apos;./Welcome&apos;;
-import * as serviceWorker from &apos;./serviceWorker&apos;;
-
-ReactDOM.render(&lt;Welcome /&gt;, document.getElementById(&apos;root&apos;));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-</code></pre><p> <img src="/2019/03/09/React基础Demo/3.png" alt></p>
-<h3 id="5、render（）函数里面写的就是JSX代码，JSX特点如下："><a href="#5、render（）函数里面写的就是JSX代码，JSX特点如下：" class="headerlink" title="5、render（）函数里面写的就是JSX代码，JSX特点如下："></a>5、render（）函数里面写的就是JSX代码，JSX特点如下：</h3><p> <img src="/2019/03/09/React基础Demo/4.png" alt></p>
-<p> <img src="/2019/03/09/React基础Demo/5.png" alt></p>
-<p>（1）JSX里面的“特殊HTML”本质上是被编译成了React.createElement()方法，返回JS的对象，就是DOM对象，然后就可以渲染显示出来，所以最终还是通过DOM节点来显示的：HTML—》React.createElement()—》DOM</p>
-<p><strong>Demo***</strong></p>
-<pre><code>import React from &apos;react&apos;
-
-class Welcome extends React.Component{
-
-
-    render() {
-
-        return(
-        &lt;div&gt;
-        &lt;h1&gt;Hello React&lt;/h1&gt;
-        &lt;/div&gt;
-        )
-    }
-}
-export default Welcome
-</code></pre><p>return里面的代码可以替换成React.createElement()</p>
-<p> <img src="/2019/03/09/React基础Demo/6.png" alt></p>
-<h3 id="6、React的属性props"><a href="#6、React的属性props" class="headerlink" title="6、React的属性props"></a>6、React的属性props</h3><p> <img src="/2019/03/09/React基础Demo/7.png" alt></p>
-<p><strong>Demo***</strong></p>
-<p>  <img src="/2019/03/09/React基础Demo/8.png" alt></p>
-<p>自定义组件：NameCard.js</p>
-<pre><code>import React from &apos;react&apos;
-
-class NameCard extends React.Component{
-
-    render() {
-
-        //定义声明属性:JSX的写法：标签&lt;&gt;嵌套{ }
-        const {name,number,isHuman, tags}=this.props;
-        return(
-
-            &lt;div className=&apos;alert alert-success&apos;&gt;
-                &lt;h4 className=&apos;alert-heading&apos;&gt;{name}&lt;/h4&gt;
-
-                &lt;ul&gt;
-
-                    &lt;li&gt;电话：{number}&lt;/li&gt;
-                    &lt;li&gt;{isHuman?&apos;人类&apos; : &apos;外星人&apos;}&lt;/li&gt;
-                    &lt;hr/&gt;
-
-                    &lt;p&gt;
-                        {tags.map((tag,index)=&gt;(
-                            &lt;span className=&apos;badge badge-pill badge-primary&apos; key={index}&gt;{tag}&lt;/span&gt;
-                        ))}
-                    &lt;/p&gt;
-                &lt;/ul&gt;
-
-            &lt;/div&gt;
-                    )
-
-    }
-}
-
-export default NameCard;
-</code></pre><p>在组件Welcome.js中引入NameCard组件，并将数据通过props填充到NameCard显示出来</p>
-<pre><code>import React from &apos;react&apos;
-import NameCard from &apos;./components/NameCard&apos;
-const tags=[&apos;恐龙&apos;,&apos;美女&apos;]
-
-class Welcome extends React.Component{
-
-
-    render() {
-        return(
-         &lt;div&gt;
-
-         &lt;h1&gt;Hello React&lt;/h1&gt;
-         &lt;NameCard name=&apos;King&apos; number={123456789} isHuman tags={tags} /&gt;
-
-        &lt;/div&gt;
-        )
-    }
-}
-export default Welcome
-</code></pre><p>在index.js中引入Welcome组件</p>
-<pre><code>import React from &apos;react&apos;;
-import ReactDOM from &apos;react-dom&apos;;
-import &apos;./index.css&apos;;
-import App from &apos;./App&apos;;
-import Welcome from &apos;./Welcome&apos;;
-import * as serviceWorker from &apos;./serviceWorker&apos;;
-import &apos;bootstrap/dist/css/bootstrap.min.css&apos;
-
-ReactDOM.render(&lt;Welcome /&gt;, document.getElementById(&apos;root&apos;));
-
-serviceWorker.unregister();
-</code></pre><p>Demo总结：</p>
-<p>（1）Props（属性），组件—函数，输入—输出，V = f(props)</p>
-<p>（2）const和props声明属性; props是view的输入，render是view的输出</p>
-<p>（3）然后借用html&lt;&gt; + { }写好整个组件的view，data可以先不赋值，用props代替，然后在特定地方引用的时候才开始将Data存储到组件显示出来就可以了，例如：</p>
-<pre><code>&lt;NameCard name=&apos;King&apos; number={123456789} isHuman tags={tags} /&gt; //有点类似setter的写法
-</code></pre><h3 id="7、React的状态state"><a href="#7、React的状态state" class="headerlink" title="7、React的状态state"></a>7、React的状态state</h3><p>：只能用setState()来修改state的值</p>
-<p>  <img src="/2019/03/09/React基础Demo/9.png" alt></p>
-<p><strong>Demo***</strong></p>
-<p>(1)自定义LikesButton.js</p>
-<pre><code>import React from &apos;react&apos;
-
-class LikesButton extends React.Component{
-
-
-    constructor(pros){
-        super(pros);
-        this.state={
-            likes:0
-        }
-    }
-
-    render() {
-
-        return(
-
-            &lt;div className=&apos;likes-button-component&apos;&gt;
-
-                &lt;button
-                    type=&apos;button&apos;
-                    className=&quot;btn btn-outline-primary btn-lg&quot;
-                    onClick={()=&gt;{this.increaseLikes()}}
-                &gt;
-                    {this.state.likes}
-                &lt;/button&gt;
-            &lt;/div&gt;
-        )
-    }
-
-    increaseLikes() {
-
-        this.setState({
-            likes:++this.state.likes
-        })
-    }
-}
-export default LikesButton
-</code></pre><p>(2)引入LikesButton组件</p>
-<pre><code>import React from &apos;react&apos;
-import LikesButton from &apos;./components/LikesButton&apos;
-
-class Welcome extends React.Component{
-
-
-    render() {
-        return(
-         &lt;div&gt;
-
-         &lt;h1&gt;Hello React&lt;/h1&gt;
-        &lt;LikesButton/&gt;
-
-        &lt;/div&gt;
-        )
-    }
-}
-export default Welcome
-</code></pre><p> <img src="/2019/03/09/React基础Demo/10.png" alt></p>
-<p>点击后就会一直动态改变likes的值</p>
-<h3 id="8、React的生命周期"><a href="#8、React的生命周期" class="headerlink" title="8、React的生命周期"></a>8、React的生命周期</h3><p> <img src="/2019/03/09/React基础Demo/11.png" alt></p>
-<p> <img src="/2019/03/09/React基础Demo/12.png" alt></p>
-<p><strong>Demo***</strong></p>
-<p>DigitalClock.js</p>
-<pre><code>import React from &apos;react&apos;
-
-class DigitalClock extends React.Component{
-
-constructor(props){
-
-    super(props)
-    this.state={
-        date: new Date()
-    }
-}
-componentDidMount(){
-
-    this.timer=setInterval(()=&gt;{
-        this.setState({
-            date:new Date()
-        })
-    })
-}
-
-componentWillUnmount(){
-    clearInterval(this.timer)
-}
-
-
-componentDidUpdate(prevProps, prevState) {
-    console.log(prevState)
-}
-
-
-render() {
-
-    return(
-
-        &lt;div className=&apos;digital-clock-component jumbotron&apos;&gt;
-
-            &lt;h1&gt;
-                {this.state.date.toLocaleTimeString()}
-            &lt;/h1&gt;
-        &lt;/div&gt;
-    )
-}
-
-}
-
-export default DigitalClock
-</code></pre><p>Welcome.js<br>    import React from ‘react’<br>    import DigitalClock from ‘./components/DigitalClock’</p>
-<pre><code>class Welcome extends React.Component{
-
-
-render() {
-    return(
-     &lt;div&gt;
-
-     &lt;h1&gt;Hello React&lt;/h1&gt;
-    &lt;DigitalClock/&gt;
-
-    &lt;/div&gt;
-    )
-}
-}
-export default Welcome
-</code></pre><p>  <img src="/2019/03/09/React基础Demo/13.png" alt></p>
-<h3 id="9、React表单"><a href="#9、React表单" class="headerlink" title="9、React表单"></a>9、React表单</h3><p> <img src="/2019/03/09/React基础Demo/14.png" alt></p>
-<p>非受控组件-数据保存在DOM节点中<br>Demo***</p>
-<pre><code>import React from &apos;react&apos;
-
-class CommentBox extends React.Component{
-
-constructor(props){
-    super(props)
-    this.handleSubmit=this.handleSubmit.bind(this)
-}
-
-handleSubmit(event){
-    alert(this.textInput.value)
-    event.preventDefault()
-}
-
-render() {
-
-    return(
-
-        &lt;form className=&apos;p-5&apos; onSubmit={this.handleSubmit}&gt;
-            &lt;div className=&apos;form-group&apos;&gt;
-                &lt;label&gt;留言内容&lt;/label&gt;
-               &lt;input
-                    type=&apos;text&apos;
-                    className=&apos;form-control&apos;
-                    placeholder=&apos;请输入内容&apos;
-                   ref={(textInput)=&gt;{this.textInput=textInput}}
-               /&gt;
-            &lt;/div&gt;
-
-            &lt;button type=&apos;submit&apos; className=&apos;btn btn-primary&apos;&gt;
-                留言
-            &lt;/button&gt;
-
-        &lt;/form&gt;
-    )
-}
-
-}
-
-export default CommentBox
-</code></pre><p>附加：当一个组件没有生命周期和state的时候，可以写成一个function的形式，更加容易阅读</p>
-<h3 id="10、留言板Demo"><a href="#10、留言板Demo" class="headerlink" title="10、留言板Demo"></a>10、留言板Demo</h3><p> <img src="/2019/03/09/React基础Demo/15.png" alt><br> <img src="/2019/03/09/React基础Demo/16.png" alt></p>
-<p>Demo***</p>
-<p>CommentList.js</p>
-<pre><code>import React from &apos;react&apos;
-
-const CommentList=({comments})=&gt;{
-
-    return(
-
-        &lt;div className=&apos;comment-list-component&apos;&gt;
-
-        &lt;label&gt;评论列表&lt;/label&gt;
-
-        &lt;ul className=&apos;list-group mb-3&apos;&gt;
-            {
-
-                comments.map((comment,index)=&gt;
-                    &lt;li key={index} className=&quot;list-group-item&quot;&gt;{comment}&lt;/li&gt;
-                )
-            }
-        &lt;/ul&gt;
-    &lt;/div&gt;
-)
-}
-
-export default CommentList
-</code></pre><p>CommentBox.js</p>
-<pre><code>import React from &apos;react&apos;
-
-class CommentBox extends React.Component{
-
-constructor(props){
-    super(props)
-    this.handleSubmit=this.handleSubmit.bind(this)
-}
-
-handleSubmit(event){
-
-    this.props.onAddComment(this.textInput.value)
-    event.preventDefault()
-}
-
-render() {
-
-    return(
-
-        &lt;form className=&apos;p-5&apos; onSubmit={this.handleSubmit}&gt;
-            &lt;div className=&apos;form-group&apos;&gt;
-                &lt;label&gt;留言内容&lt;/label&gt;
-               &lt;input
-                    type=&apos;text&apos;
-                    className=&apos;form-control&apos;
-                    placeholder=&apos;请输入内容&apos;
-                   ref={(textInput)=&gt;{this.textInput=textInput}}
-               /&gt;
-            &lt;/div&gt;
-
-            &lt;button type=&apos;submit&apos; className=&apos;btn btn-primary&apos;&gt;
-                留言
-            &lt;/button&gt;
-
-            &lt;p&gt;已有{this.props.commentsLength}条评论&lt;/p&gt;
-
-        &lt;/form&gt;
-    )
-}
-
-}
-
-export default CommentBox
-</code></pre><p>App.js</p>
-<pre><code>import React from &apos;react&apos;;
-import logo from &apos;./logo.svg&apos;;
-import &apos;./App.css&apos;;
-import CommentList from &apos;./components/CommentList&apos;
-import CommentBox from &quot;./components/CommentBox&quot;;
-
-
-class App extends React.Component{
-
-      constructor(props){
-super(props)
-this.state={
-  comments:[&apos;this is my first comment&apos;]
-}
-
-this.addComment=this.addComment.bind(this)
-  }
-
-  addComment(comment){
-
-this.setState({
-   comments: [...this.state.comments,comment]
-})
-  }
-
-  render() {
-
-const {comments}=this.state
-return(
-    &lt;div className=&apos;App&apos;&gt;
-
-  &lt;header className=&apos;App-header&apos;&gt;
-    &lt;img src={logo} className=&apos;App-logo&apos; alt=&apos;logo&apos;/&gt;
-    &lt;h1 className=&apos;App-title&apos;&gt;Welcome to React&lt;/h1&gt;
-
-  &lt;/header&gt;
-
-      &lt;CommentList comments={comments}/&gt;
-      &lt;CommentBox
-          commentsLength={comments.length}
-          onAddComment={this.addComment}
-      /&gt;
-
-&lt;/div&gt;
-)
-
-  }
-
-}
-
-export default App;
-</code></pre><h3 id="11、Context-Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便"><a href="#11、Context-Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便" class="headerlink" title="11、Context Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便"></a>11、Context Demo：目的是为了解决数据多层传递的问题，props不太方便，Context会相对更加方便</h3><p> <img src="/2019/03/09/React基础Demo/17.png" alt></p>
-<p> <img src="/2019/03/09/React基础Demo/18.png" alt></p>
-<p>Demo***</p>
-<p>theme-context.js</p>
-<pre><code>import React from &apos;react&apos;
-
-const ThemeContext=React.createContext()
-
-export default ThemeContext
-</code></pre><p>ThemeBar.js</p>
-<pre><code>import React from &apos;react&apos;
-import ThemeContext from &apos;../theme-context&apos;
-
-
-const ThemeBar=()=&gt;{
-
-return(
-
-    &lt;ThemeContext.Consumer&gt;{
-
-        theme=&gt;{
-           return(
-
-               &lt;div
-                   className=&apos;alert mt-5&apos;
-                   style={{backgroundColor:theme.bgColor,
-                       color:theme.color}}&gt;
-
-                   样式区域
-                   &lt;button className={theme.classnames}&gt;
-                       样式按钮
-                   &lt;/button&gt;
-               &lt;/div&gt;
-           )
-        }
-    }
-    &lt;/ThemeContext.Consumer&gt;
-)
-}
-
-export default ThemeBar
-</code></pre><p>App.js</p>
-<pre><code>import React from &apos;react&apos;;
-import logo from &apos;./logo.svg&apos;;
-import &apos;./App.css&apos;;
-import ThemeContext from &apos;./theme-context&apos;
-import ThemeBar from &apos;./components/ThemeBar&apos;
-
-
-const themes={
-
-  light:{
-classnames:&apos;btn btn-primary&apos;,
-bgColor:&apos;#eeeeee&apos;,
-color:&apos;#000&apos;
-  },
-  dark:{
-classnames: &apos;btn btn-light&apos;,
-bgColor: &apos;#222222&apos;,
-color:&apos;#fff&apos;
-  },
-}
-
-class App extends React.Component{
-
-  constructor(props){
-super(props)
-this.state={
-  theme: &apos;light&apos;
-}
-
-this.changeTheme=this.changeTheme.bind(this)
-  }
-
-changeTheme(theme){
-
-this.setState({
-  theme,
-})
-}
-
-  render() {
-
-return(
-    &lt;ThemeContext.Provider value={themes[this.state.theme]}&gt;
-    &lt;div className=&apos;App&apos;&gt;
-
-  &lt;header className=&apos;App-header&apos;&gt;
-    &lt;img src={logo} className=&apos;App-logo&apos; alt=&apos;logo&apos;/&gt;
-    &lt;h1 className=&apos;App-title&apos;&gt;Welcome to React&lt;/h1&gt;
-    &lt;a href=&apos;#theme-switcher&apos;
-        className=&apos;btn btn-light&apos;
-    onClick={()=&gt;{this.changeTheme(&apos;light&apos;)}}
-    &gt;
-    浅色主题
-    &lt;/a&gt;
-
-      &lt;a href=&apos;#theme-switcher&apos;
-         className=&apos;btn btn-secondary&apos;
-         onClick={()=&gt;{this.changeTheme(&apos;dark&apos;)}}
-         &gt;
-        深色主题
-      &lt;/a&gt;
-
-  &lt;/header&gt;
-      &lt;ThemeBar/&gt;
-
-&lt;/div&gt;
-    &lt;/ThemeContext.Provider&gt;
-)
-
-  }
-
-}
-
-export default App;
-</code></pre><hr>
-<h2 id="棋盘井字游戏"><a href="#棋盘井字游戏" class="headerlink" title="棋盘井字游戏"></a>棋盘井字游戏</h2><p> <img src="/2019/03/09/React基础Demo/19.png" alt></p>
-<p>Demo代码***</p>
-<p>(1)Square.js</p>
-<pre><code>import React from &apos;react&apos;
-
-function Square(props) {
-return (
-    &lt;button className=&quot;square&quot; onClick={props.onClick}&gt;
-        {props.value}
-    &lt;/button&gt;
-);
-}
-
-export default Square
-</code></pre><p>(2)Board.js</p>
-<pre><code>import React from &apos;react&apos;
-import Square from &apos;./Square&apos;
-import calculateWinner from &apos;./CalculateWinner&apos;
-
-class Board extends React.Component {
-renderSquare(i) {
-    return (
-        &lt;Square
-            value={this.props.squares[i]}
-            onClick={() =&gt; this.props.onClick(i)}
-        /&gt;
-    );
-}
-
-render() {
-    return (
-        &lt;div&gt;
-            &lt;div className=&quot;board-row&quot;&gt;
-                {this.renderSquare(0)}
-                {this.renderSquare(1)}
-                {this.renderSquare(2)}
-            &lt;/div&gt;
-            &lt;div className=&quot;board-row&quot;&gt;
-                {this.renderSquare(3)}
-                {this.renderSquare(4)}
-                {this.renderSquare(5)}
-            &lt;/div&gt;
-            &lt;div className=&quot;board-row&quot;&gt;
-                {this.renderSquare(6)}
-                {this.renderSquare(7)}
-                {this.renderSquare(8)}
-            &lt;/div&gt;
-        &lt;/div&gt;
-    );
-}
-}
-
-export default Board
-</code></pre><p>(3)Game.js</p>
-<pre><code>import React from &apos;react&apos;
-import Board from &apos;./Board&apos;
-import calculateWinner from &apos;./CalculateWinner&apos;
-
-class Game extends React.Component {
-
-constructor(props) {
-    super(props);
-    this.state = {
-        history: [{
-            squares: Array(9).fill(null)
-        }],
-        stepNumber: 0,
-        xIsNext: true
-    };
-}
-
-handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-        return;
-    }
-    squares[i] = this.state.xIsNext ? &apos;X&apos; : &apos;O&apos;;
-    this.setState({
-        history: history.concat([{
-            squares: squares
-        }]),
-        stepNumber: history.length,
-        xIsNext: !this.state.xIsNext,
-    });
-}
-
-
-jumpTo(step) {
-    this.setState({
-        stepNumber: step,
-        xIsNext: (step % 2) === 0,
-    });
-}
-
-
-render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
-
-
-    const moves = history.map((step, move) =&gt; {
-        const desc = move ?
-            &apos;Go to move #&apos; + move :
-            &apos;Go to game start&apos;;
-        return (
-            &lt;li key={move}&gt;
-                &lt;button onClick={() =&gt; this.jumpTo(move)}&gt;{desc}&lt;/button&gt;
-            &lt;/li&gt;
-        );
-    });
-
-
-
-
-
-
-    let status;
-    if (winner) {
-        status = &apos;Winner: &apos; + winner;
-    } else {
-        status = &apos;Next player: &apos; + (this.state.xIsNext ? &apos;X&apos; : &apos;O&apos;);
-    }
-
-    return (
-        &lt;div className=&quot;game&quot;&gt;
-            &lt;div className=&quot;game-board&quot;&gt;
-                &lt;Board
-                    squares={current.squares}
-                    onClick={(i) =&gt; this.handleClick(i)}
-                /&gt;
-            &lt;/div&gt;
-            &lt;div className=&quot;game-info&quot;&gt;
-                &lt;div&gt;{status}&lt;/div&gt;
-                &lt;ol&gt;{moves}&lt;/ol&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    );
-}
-}
-
-export default Game
-</code></pre><p>(4)CalculateWinner.js</p>
-<pre><code>import React from &apos;react&apos;
-
-
-function calculateWinner(squares) {
-const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-];
-for (let i = 0; i &lt; lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {
-        return squares[a];
-    }
-}
-return null;
-}
-
-export default calculateWinner
-</code></pre><p>(5)index.js</p>
-<pre><code>import React from &apos;react&apos;;
-import ReactDOM from &apos;react-dom&apos;;
-import &apos;./index.css&apos;;
-import * as serviceWorker from &apos;./serviceWorker&apos;;
-import &apos;bootstrap/dist/css/bootstrap.min.css&apos;
-import Game from &quot;./components/Game&quot;;
-
-ReactDOM.render(&lt;Game /&gt;, document.getElementById(&apos;root&apos;));
-serviceWorker.unregister();
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3609,7 +3656,7 @@ serviceWorker.unregister();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

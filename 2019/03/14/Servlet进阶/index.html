@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Servlet配置方式  全路径匹配    [Demo本]  &amp;lt;servlet&amp;gt; &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt; &amp;lt;display-name&amp;gt;MyServlet&amp;lt;/display-name&amp;gt; &amp;lt;servlet-name&amp;gt;MyServlet&amp;lt;/servlet-name&amp;gt; &amp;lt;servlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后台05：Servlet进阶Demo">
+<meta property="og:url" content="http://yoursite.com/2019/03/14/Servlet进阶/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="Servlet配置方式  全路径匹配    [Demo本]  &amp;lt;servlet&amp;gt; &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt; &amp;lt;display-name&amp;gt;MyServlet&amp;lt;/display-name&amp;gt; &amp;lt;servlet-name&amp;gt;MyServlet&amp;lt;/servlet-name&amp;gt; &amp;lt;servlet">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/Servlet进阶/2.gif">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/Servlet进阶/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/Servlet进阶/2.gif">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/Servlet进阶/3.gif">
+<meta property="og:updated_time" content="2019-06-13T11:38:25.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后台05：Servlet进阶Demo">
+<meta name="twitter:description" content="Servlet配置方式  全路径匹配    [Demo本]  &amp;lt;servlet&amp;gt; &amp;lt;description&amp;gt;&amp;lt;/description&amp;gt; &amp;lt;display-name&amp;gt;MyServlet&amp;lt;/display-name&amp;gt; &amp;lt;servlet-name&amp;gt;MyServlet&amp;lt;/servlet-name&amp;gt; &amp;lt;servlet">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/14/Servlet进阶/2.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/14/Servlet进阶/">
+
+
+
+
+
+  <title>后台05：Servlet进阶Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/Servlet进阶/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后台05：Servlet进阶Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T00:00:00+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Servlet配置方式"><a href="#Servlet配置方式" class="headerlink" title="Servlet配置方式"></a>Servlet配置方式</h3><ul>
+<li><ol>
+<li>全路径匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code> &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/bb&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+//题解
+</code></pre><blockquote>
+<p>Servlet的配置方式1：Src—&gt;New—&gt;Servlet—&gt;系统自动在web.xml自动配置Servlet的基本信息;</p>
+</blockquote>
+<blockquote>
+<p>作用类似类似Android的Manifest自动注册和配置；</p>
+</blockquote>
+<blockquote>
+<p>我们可以改url-pattern为/a 或者 /aa/bb都行，只要以/开头就行；</p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/a</p>
+</blockquote>
+<ul>
+<li><ol start="2">
+<li>路径匹配 , 前半段匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code>&lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+批注：以/ 开始 ， 但是以 * 结束，例如：/a/*，/* 都符合条件
+</code></pre><blockquote>
+<p>‘*’其实是一个通配符，匹配任意文字</p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/aa/xxxxxxxx/xxxx/xxx,都没问题，都可以访问 </p>
+</blockquote>
+<ul>
+<li><ol start="3">
+<li>以扩展名匹配</li>
+</ol>
+</li>
+</ul>
+<p>[Demo本]</p>
+<pre><code>&lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;*.aa&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre><blockquote>
+<p>写法： 没有/  以 <em> 开始   </em>.扩展名    <em>.aa </em>.bb </p>
+</blockquote>
+<blockquote>
+<p>访问方式：localhost:8080/项目名称/xxxxx/xxx/xx.aa就可以访问</p>
+</blockquote>
+<h3 id="ServletContext的作用和使用"><a href="#ServletContext的作用和使用" class="headerlink" title="ServletContext的作用和使用"></a>ServletContext的作用和使用</h3><ul>
+<li>1.让所有的Servlet都可以获取全局参数，而不仅仅局限在获取单个Servlet的局部参数</li>
+</ul>
+<p>[Demo本]</p>
+<p>web.xml配置全局的Servlet参数</p>
+<pre><code>   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot; id=&quot;WebApp_ID&quot; version=&quot;2.5&quot;&gt;
+  &lt;display-name&gt;TestServlet&lt;/display-name&gt;
+  &lt;welcome-file-list&gt;
+&lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+&lt;welcome-file&gt;index.htm&lt;/welcome-file&gt;
+&lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.html&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.htm&lt;/welcome-file&gt;
+&lt;welcome-file&gt;default.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+
+
+  &lt;!-- 配置全局的共享Servlet参数 --&gt;
+   &lt;context-param&gt;
+   &lt;param-name&gt;phonenumber&lt;/param-name&gt;
+   &lt;param-value&gt;15622391415&lt;/param-value&gt;
+   &lt;/context-param&gt;
+
+
+  &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/bb&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+   &lt;servlet&gt;
+&lt;description&gt;&lt;/description&gt;
+&lt;display-name&gt;MyServlet2&lt;/display-name&gt;
+&lt;servlet-name&gt;MyServlet2&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.qiufeisheng.servlet.MyServlet2&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;MyServlet2&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/a/cc&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><p>不同Servlet类都可以获取全局参数</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class MyServlet extends HttpServlet {
+private static final long serialVersionUID = 1L;
+
+
+public MyServlet() {
+    super();
+}
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //获取对象，调用象方：核心本质思想永远不会变
+    ServletContext context=getServletContext();
+    String number=context.getInitParameter(&quot;phonenumber&quot;);
+    System.out.println(&quot;这是01Servlet获取的全局参数值==&quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+
+访问：http://localhost:8080/TestServlet/a/bb
+
+
+import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet2 extends HttpServlet {
+private static final long serialVersionUID = 1L;
+
+
+public MyServlet() {
+    super();
+}
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    ServletContext context=getServletContext();
+    String number=context.getInitParameter(&quot;phonenumber&quot;);
+    System.out.println(&quot;这是02Servlet获取的全局参数值==&quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+
+访问：http://localhost:8080/TestServlet/a/cc
+</code></pre><ul>
+<li>2.获取Web过程下的WebContent的Web资源</li>
+</ul>
+<p>[Demo本]</p>
+<p>WebContent—&gt;New—&gt;folder—&gt;file—&gt;config.properties</p>
+<pre><code>PhoneNumber=15622391415
+</code></pre><p>MyServlet.java</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //构造ServletContext来获取File的绝对路径（就是真实路径）
+    ServletContext context=getServletContext();
+    String path = context.getRealPath(&quot;File/config.properties&quot;);
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=new FileInputStream(path);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+
+}
+</code></pre><blockquote>
+<p>String path = context.getRealPath(“file/config.properties”); //相对路径加载不了，只能获取绝对路径才能Load（真实路劲）</p>
+</blockquote>
+<blockquote>
+<p>path的值是这个真实路径：D:\tomcat\apache-tomcat-7.0.52\apache-tomcat-7.0.52\wtpwebapps\Demo03\</p>
+</blockquote>
+<blockquote>
+<p>访问：<a href="http://localhost:8080/TestServlet/a/bb就可以看到效果" target="_blank" rel="noopener">http://localhost:8080/TestServlet/a/bb就可以看到效果</a></p>
+</blockquote>
+<p>(2)上面也可以通过getResourceAsStream（）来实现</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //构造ServletContext来获取File的绝对路径（就是真实路径）
+    ServletContext context=getServletContext();
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=context.getResourceAsStream(&quot;File/config.properties&quot;);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+    is.close();
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+</code></pre><p>(3)还可以通过ClassLoader来实现</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //加载目标文件，构造Properties对象
+    Properties pro=new Properties();
+    InputStream is=this.getClass().getClassLoader().getResourceAsStream(&quot;../../File/config.properties&quot;);
+    pro.load(is);
+
+    String number=pro.getProperty(&quot;PhoneNumber&quot;);
+    System.out.println(&quot;MyNumber is &quot;+number);
+    is.close();
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+}
+</code></pre><blockquote>
+<p>ClassLoader()的路径是：D:\Tomcat\apache-tomcat-7.0.90\wtpwebapps\TestServlet\WEB-INF\classes</p>
+</blockquote>
+<blockquote>
+<p>但是我们要D:\Tomcat\apache-tomcat-7.0.90\wtpwebapps\TestServlet\File\config.properties，所以需要../../回到上两级目录才能进入File目录，搞定目录就是搞定了资源文件转换为流对象</p>
+</blockquote>
+<ul>
+<li><p>3.ServletContext实现Servlet间共享数据</p>
+<p><img src="/2019/03/14/Servlet进阶/2.gif" alt></p>
+<p><img src="/2019/03/14/Servlet进阶/1.png" alt></p>
+</li>
+</ul>
+<p>（1）创建一个登陆页面：login.xml</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;请输入你的账号密码&lt;/h2&gt;
+
+&lt;form action=&quot;LoginServlet&quot; method=&quot;get&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br &gt;
+&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt;&lt;br &gt;
+&lt;input type=&quot;submit&quot; value=&quot;登录&quot;/&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>（2）login.xml的Servlet: LoginServlet.java</p>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class LoginServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+
+    //get请求过来的数据，在url地址栏上就已经经过编码了，所以我们取到的就是乱码，
+    //tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+    //先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+    username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+    System.out.println(&quot;userName=&quot;+username+&quot;==password=&quot;+password);
+
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        response.setStatus(302);
+        response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+
+}
+</code></pre><p>(3)创建登陆成功页面：login_success.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;登录成功&lt;/h2&gt;
+
+&lt;a href=&quot;CountServlet&quot;&gt;欢迎光临&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>(4)login_success.html的Servlet</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class CountServlet extends HttpServlet {
+
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //1.取值
+    int count=(int)getServletContext().getAttribute(&quot;count&quot;);
+
+    //2.输出到Servlet所占的页面
+    response.getWriter().write(&quot;The number of users is &quot;+count);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        }
+
+    }
+</code></pre><p>最终效果</p>
+<p> <img src="/2019/03/14/Servlet进阶/2.gif" alt></p>
+<blockquote>
+<p>细节:所谓的真实路径是看访问路径，记住： 项目名/文件名就是访问路径</p>
+</blockquote>
+<pre><code>&lt;!--     
+A路径： Servlet的路径
+    http://localhost:8080/Demo4/login
+
+B路径： 当前这个html的路径：
+    http://localhost:8080/Demo4/login.html --&gt;
+
+
+&lt;form action=&quot;login&quot; method=&quot;get&quot;&gt;
+    账号:&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;
+    密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt;&lt;br&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登录&quot;/&gt;
+&lt;/form&gt;
+</code></pre><blockquote>
+<p>ServletContext 何时创建， 何时销毁</p>
+</blockquote>
+<p>服务器启动的时候，会为托管的每一个web应用程序，创建一个ServletContext对象</p>
+<p>从服务器移除托管，或者是关闭服务器。 </p>
+<blockquote>
+<p>ServletContext 的作用范围</p>
+</blockquote>
+<p>只要在这个项目里面，都可以取。 只要同一个项目。 A项目 存， 在B项目取，是取不到的？ ServletContext对象不同。</p>
+<blockquote>
+<p>GET请求解决中文乱码</p>
+</blockquote>
+<pre><code>//tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+//先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+</code></pre><blockquote>
+<p>POST请求解决中文乱码：request.setCharacterEncoding(“UTF-8”);写在getParameter前面</p>
+</blockquote>
+<pre><code>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        response.setStatus(302);
+        response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+}
+</code></pre><h3 id="2-Servlet的Response的简单使用"><a href="#2-Servlet的Response的简单使用" class="headerlink" title="2.Servlet的Response的简单使用"></a>2.Servlet的Response的简单使用</h3><pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class ResponseServlet extends HttpServlet {
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //一行代码搞定中文乱码问题，然后才开始写数据
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    //以字符流的形式写数据到浏览器显示
+    response.getWriter().write(&quot;我负责响应请求01&quot;);
+
+    //以字节流的形式写数据到浏览器显示
+    //response.getOutputStream().write(&quot;我负责响应请求02&quot;.getBytes());
+
+
+    //设置请求状态和头部
+    //response.setStatus(sc);
+    //response.setHeader(name, value);
+
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+
+}
+</code></pre><blockquote>
+<p>response.setContentType(“text/html;charset=UTF-8”);//一行代码搞定乱码</p>
+</blockquote>
+<h3 id="3-Response演练下载Web资源"><a href="#3-Response演练下载Web资源" class="headerlink" title="3.Response演练下载Web资源"></a>3.Response演练下载Web资源</h3><p>（1）download文件夹复制到WebContent的目录下</p>
+<p>（2）写下载页面downlad.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+ &lt;h2&gt;静态展示&lt;/h2&gt;
+&lt;a href=&quot;download/aa.jpg&quot; &gt;aa.jpg&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/bb.txt&quot; &gt;bb.txt&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/cc.png&quot; &gt;cc.png&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;download/cc.rar&quot; &gt;cc.rar&lt;/a&gt;&lt;br&gt;
+
+&lt;h2&gt;动态下载&lt;/h2&gt;
+&lt;a href=&quot;DownloadServlet?filename=aa.jpg&quot; &gt;aa.jpg&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=bb.txt&quot; &gt;bb.txt&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=cc.png&quot; &gt;cc.png&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;DownloadServlet?filename=cc.rar&quot; &gt;cc.rar&lt;/a&gt;&lt;br&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>(3)超链接到Servlet来完成下载操作</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class DownloadServlet extends HttpServlet {
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //从html中拿到filename
+    String filename=request.getParameter(&quot;filename&quot;);
+
+    //file在Web中的资源路劲
+    String path=getServletContext().getRealPath(&quot;download/&quot;+filename);
+
+    //设置动作类型，点击后即可下载
+    response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=&quot;+filename);
+
+
+
+    InputStream is=new FileInputStream(path);
+    OutputStream os=response.getOutputStream();
+
+    int len=0;
+    byte[] buffer=new byte[1024];
+    while((len=is.read(buffer))!=-1) {
+        os.write(buffer,0,len);
+    }
+
+    os.close();
+    is.close();
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+
+    }
+</code></pre><p> <img src="/2019/03/14/Servlet进阶/3.gif" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/13/Servlet/" rel="next" title="后台04：Servlet基础">
+                <i class="fa fa-chevron-left"></i> 后台04：Servlet基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/01/基础Demo1--菜单Menu/" rel="prev" title="基础Demo1-菜单Menu">
+                基础Demo1-菜单Menu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet配置方式"><span class="nav-number">1.</span> <span class="nav-text">Servlet配置方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext的作用和使用"><span class="nav-number">2.</span> <span class="nav-text">ServletContext的作用和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Servlet的Response的简单使用"><span class="nav-number">3.</span> <span class="nav-text">2.Servlet的Response的简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Response演练下载Web资源"><span class="nav-number">4.</span> <span class="nav-text">3.Response演练下载Web资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
