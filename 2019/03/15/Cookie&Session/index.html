@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="解决GET请求下载文件资源时的文件名为中文的问题 针对浏览器类型，对文件名字做编码处理 Firefox (Base64) , IE、Chrome … 使用的是URLEncoder  /*  * 如果文件的名字带有中文，那么需要对这个文件名进行编码处理  * 如果是IE ，或者  Chrome （谷歌浏览器） ，使用URLEncoding 编码  * 如果是Firefox ， 使用Base64编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后台06：Servlet进阶Demo">
+<meta property="og:url" content="http://yoursite.com/2019/03/15/Cookie&Session/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="解决GET请求下载文件资源时的文件名为中文的问题 针对浏览器类型，对文件名字做编码处理 Firefox (Base64) , IE、Chrome … 使用的是URLEncoder  /*  * 如果文件的名字带有中文，那么需要对这个文件名进行编码处理  * 如果是IE ，或者  Chrome （谷歌浏览器） ，使用URLEncoding 编码  * 如果是Firefox ， 使用Base64编码">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/5.gif">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/5.gif">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/7.png">
+<meta property="og:updated_time" content="2019-06-18T06:43:24.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后台06：Servlet进阶Demo">
+<meta name="twitter:description" content="解决GET请求下载文件资源时的文件名为中文的问题 针对浏览器类型，对文件名字做编码处理 Firefox (Base64) , IE、Chrome … 使用的是URLEncoder  /*  * 如果文件的名字带有中文，那么需要对这个文件名进行编码处理  * 如果是IE ，或者  Chrome （谷歌浏览器） ，使用URLEncoding 编码  * 如果是Firefox ， 使用Base64编码">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/15/Cookie&Session/Cookie&Session/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/15/Cookie&Session/">
+
+
+
+
+
+  <title>后台06：Servlet进阶Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/Cookie&Session/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后台06：Servlet进阶Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-15T00:00:00+08:00">
+                2019-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="解决GET请求下载文件资源时的文件名为中文的问题"><a href="#解决GET请求下载文件资源时的文件名为中文的问题" class="headerlink" title="解决GET请求下载文件资源时的文件名为中文的问题"></a>解决GET请求下载文件资源时的文件名为中文的问题</h3><blockquote>
+<p>针对浏览器类型，对文件名字做编码处理 Firefox (Base64) , IE、Chrome … 使用的是URLEncoder</p>
+</blockquote>
+<pre><code>/*
+ * 如果文件的名字带有中文，那么需要对这个文件名进行编码处理
+ * 如果是IE ，或者  Chrome （谷歌浏览器） ，使用URLEncoding 编码
+ * 如果是Firefox ， 使用Base64编码
+ */
+//获取来访的客户端类型
+String clientType = request.getHeader(&quot;User-Agent&quot;);
+
+if(clientType.contains(&quot;Firefox&quot;)){
+    fileName = DownLoadUtil.base64EncodeFileName(fileName);
+}else{
+    //IE ，或者  Chrome （谷歌浏览器） ，
+    //对中文的名字进行编码处理
+    fileName = URLEncoder.encode(fileName,&quot;UTF-8&quot;);
+}
+</code></pre><h3 id="Servlet的html跳转：重定向或者请求转发来实现"><a href="#Servlet的html跳转：重定向或者请求转发来实现" class="headerlink" title="Servlet的html跳转：重定向或者请求转发来实现"></a>Servlet的html跳转：重定向或者请求转发来实现</h3><p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/1.png" alt></p>
+<p>[普通早期写法]：</p>
+<blockquote>
+<p>response.setStatus(302);</p>
+</blockquote>
+<blockquote>
+<p>response.setHeader(“Location”,”login_success.html”);</p>
+</blockquote>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class LoginServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   //request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    //get请求过来的数据，在url地址栏上就已经经过编码了，所以我们取到的就是乱码，
+    //tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+    //先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+    username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+    System.out.println(&quot;userName=&quot;+username+&quot;==password=&quot;+password);
+
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        response.setStatus(302);
+        response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+        }
+    }
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+            }
+    }
+</code></pre><p>[重定向写法]</p>
+<blockquote>
+<p>response.sendRedirect(“login_success.html”);</p>
+</blockquote>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LoginServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+   //request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    //get请求过来的数据，在url地址栏上就已经经过编码了，所以我们取到的就是乱码，
+    //tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+    //先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+    username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+    System.out.println(&quot;userName=&quot;+username+&quot;==password=&quot;+password);
+
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //重定向写法
+        response.sendRedirect(&quot;login_success.html&quot;);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+
+}
+</code></pre><blockquote>
+<ol>
+<li>地址上显示的是最后的那个资源的路径地址</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>请求次数最少有两次， 服务器在第一次请求后，会返回302 以及一个地址， 浏览器在根据这个地址，执行第二次访问。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>可以跳转到任意路径。 不是自己的工程也可以跳。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>效率稍微低一点， 执行两次请求。 </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="5">
+<li>后续的请求，没法使用上一次的request存储的数据，或者 没法使用上一次的request对象，因为这是两次不同的请求。</li>
+</ol>
+</blockquote>
+<p>[请求转发写法]</p>
+<blockquote>
+<p>request.getRequestDispatcher(“login_success.html”).forward(request, response);</p>
+</blockquote>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LoginServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    //1.获取客户端提交的数据
+    String username=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    //get请求过来的数据，在url地址栏上就已经经过编码了，所以我们取到的就是乱码，
+    //tomcat收到了这批数据，getParameter 默认使用ISO-8859-1去解码
+    //先让文字回到ISO-8859-1对应的字节数组 ， 然后再按utf-8组拼字符串
+    username = new String(username.getBytes(&quot;ISO-8859-1&quot;) , &quot;UTF-8&quot;);
+    System.out.println(&quot;userName=&quot;+username+&quot;==password=&quot;+password);
+
+
+    //输出响应
+    System.out.println(&quot;username==&quot;+username+&quot;  &quot;+&quot;password==&quot;+password);
+    PrintWriter pw=response.getWriter();
+
+    //构造ServletContext对象来存取登录次数，从而让登录成功页面的Servlet共享数据
+    Object obj=getServletContext().getAttribute(&quot;count&quot;);
+    int totalNumber=0;
+    if(obj!=null) {
+        totalNumber=(int)obj;
+    }
+    getServletContext().setAttribute(&quot;count&quot;, totalNumber+1);
+
+
+
+    //html跳转
+    if(&quot;admin&quot;.equals(username)&amp;&amp;&quot;123&quot;.equals(password)) {
+
+        //设置状态码302可以重定位网页资源
+        //response.setStatus(302);
+        //response.setHeader(&quot;Location&quot;,&quot;login_success.html&quot;);
+        response.sendRedirect(&quot;login_success.html&quot;);
+        //request.getRequestDispatcher(&quot;login_success.html&quot;).forward(request, response);
+    }else {
+
+        //登录失败就直接在Servlet的页面输出响应，上面是跳转到别的html页面
+        pw.write(&quot;login failed&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+}
+</code></pre><blockquote>
+<ol>
+<li>地址上显示的是请求servlet的地址。  返回200 ok</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>请求次数只有一次， 因为是服务器内部帮客户端执行了后续的工作。 </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>只能跳转自己项目的资源路径 。  </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>效率上稍微高一点，因为只执行一次请求。 </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="5">
+<li>可以使用上一次的request对象。</li>
+</ol>
+</blockquote>
+<p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/1.png" alt></p>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>[简单使用：服务器添加Cookie返回给客户端]</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CookieServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //一行代码搞定中文乱码问题，然后才开始写数据
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    //构造Cookie对象
+    Cookie cookie=new Cookie(&quot;name&quot;,&quot;testvalue&quot;);
+    //把cookie对象添加到response对象返回给客户端缓存起来
+    response.addCookie(cookie);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+            }
+}
+</code></pre><blockquote>
+<p>http的请求是无状态。 客户端与服务器在通讯的时候，是无状态的，其实就是客户端在第二次来访的时候，服务器根本就不知道这个客户端以前有没有来访问过。 为了更好的用户体验，更好的交互 [自动登录]，其实从公司层面讲，就是为了更好的收集用户习惯[大数据];服务器可以通过给定客户端一个Cookie，缓存在客户端那里就可以记录客户端访问本服务器的历史</p>
+</blockquote>
+<blockquote>
+<p>饼干. 其实是一份小数据， 是服务器给客户端，并且存储在客户端上的一份小数据</p>
+</blockquote>
+<blockquote>
+<p>应用场景：自动登录、浏览记录、购物车</p>
+</blockquote>
+<blockquote>
+<p>客户端收到的信息里面，响应头中多了一个字段 Set-Cookie</p>
+</blockquote>
+<p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/2.png" alt></p>
+<p>[<strong>简单使用：服务器端获取客户端请求携带的Cookie</strong>]</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CookieServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //一行代码搞定中文乱码问题，然后才开始写数据
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    Cookie cookie=new Cookie(&quot;name2&quot;,&quot;1001&quot;);
+    response.addCookie(cookie);
+
+
+    Cookie[] cookies=request.getCookies();
+    if(cookies!=null) {
+
+        for(Cookie c:cookies) {
+
+            String cookieName=c.getName();
+            String cookieValue=c.getValue();
+            System.out.println(&quot;cookieNmae== &quot;+cookieName);
+            System.out.println(&quot;cookieValue== &quot;+cookieValue);
+        }
+    }
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+
+}
+</code></pre><blockquote>
+<p>Cookie[] cookies=request.getCookies();</p>
+</blockquote>
+<p>[<strong>Cookie常用API</strong>]</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CookieServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //一行代码搞定中文乱码问题，然后才开始写数据
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    Cookie cookie=new Cookie(&quot;name2&quot;,&quot;1001&quot;);
+
+    //关闭浏览器后，cookie就没有了。 ---&gt; 针对没有设置cookie的有效期。
+            //    expiry： 有效 以秒计算。
+            //正值 ： 表示 在这个数字过后，cookie将会失效。
+            //负值： 关闭浏览器，那么cookie就失效， 默认值是 -1
+            cookie.setMaxAge(60 * 60 * 24 * 7);
+
+            //赋值新的值
+            //cookie.setValue(newValue);
+
+            //用于指定只有请求了指定的域名，才会带上该cookie
+            cookie.setDomain(&quot;.itheima.com&quot;);
+
+            //只有访问该域名下的cookieDemo的这个路径地址才会带cookie
+            cookie.setPath(&quot;/CookieDemo&quot;);
+
+            response.addCookie(cookie);
+
+    //获取Cookie
+    Cookie[] cookies=request.getCookies();
+    if(cookies!=null) {
+
+        for(Cookie c:cookies) {
+
+            String cookieName=c.getName();
+            String cookieValue=c.getValue();
+            System.out.println(&quot;cookieNmae== &quot;+cookieName);
+            System.out.println(&quot;cookieValue== &quot;+cookieValue);
+        }
+    }
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+}
+</code></pre><p>[<strong>Cookie显示客户端上一次访问服务器的时间</strong>]</p>
+<blockquote>
+<ol>
+<li>判断账号是否正确</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>如果正确，则获取cookie。 但是得到的cookie是一个数组， 我们要从数组里面找到我们想要的对象。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>如果找到的对象为空，表明是第一次登录。那么要添加cookie</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>如果找到的对象不为空， 表明不是第一次登录。 </li>
+</ol>
+</blockquote>
+<p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/4.png" alt></p>
+<p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/5.gif" alt></p>
+<p>time_login.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;欢迎登陆&lt;/h2&gt;
+
+&lt;form action=&quot;TimeServlet&quot;&gt;
+账号&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt; &lt;br &gt;
+密码&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt; &lt;br &gt;
+&lt;input type=&quot;submit&quot; value=&quot;登陆&quot;/&gt; &lt;br &gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>CookieUtil.java</p>
+<pre><code>import javax.servlet.http.Cookie;
+
+public class CookieUtil {
+
+
+public static Cookie findCookie(Cookie[] cookies,String cookieName) {
+
+    if(cookies!=null) {
+        for(Cookie cookie:cookies) {
+            if(cookieName.equals(cookie.getName())) {
+                return cookie;
+            }
+        }
+    }
+    return null;
+    }
+}
+</code></pre><p>TimeServlet.java</p>
+<pre><code>import java.io.IOException;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class TimeServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    String userName=request.getParameter(&quot;username&quot;);
+    String password=request.getParameter(&quot;password&quot;);
+
+    if(&quot;admin&quot;.equals(userName) &amp;&amp; &quot;123&quot;.equals(password)){
+        //获取cookie last-name --- &gt;
+        Cookie [] cookies = request.getCookies();
+
+        //从数组里面找出我们想要的cookie
+        Cookie cookie = CookieUtil.findCookie(cookies, &quot;last&quot;);
+
+        //是第一次登录，没有cookie
+        if(cookie == null){
+
+            Cookie c = new Cookie(&quot;last&quot;, System.currentTimeMillis()+&quot;&quot;);
+            c.setMaxAge(60*60); //一个小时
+            response.addCookie(c);
+
+            response.getWriter().write(&quot;欢迎您, &quot;+userName);
+
+        }else{
+            //1. 去以前的cookie第二次登录，有cookie
+            long lastVisitTime = Long.parseLong(cookie.getValue());
+
+            //2. 输出到界面，
+            response.getWriter().write(&quot;欢迎您, &quot;+userName +&quot;,上次来访时间是：&quot;+new Date(lastVisitTime));
+
+
+            //3. 重置登录的时间
+            cookie.setValue(System.currentTimeMillis()+&quot;&quot;);
+            response.addCookie(cookie);
+        }
+    }else{
+        response.getWriter().write(&quot;登陆失败 &quot;);
+    }
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+
+}
+
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+    }
+
+}
+</code></pre><p> <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/5.gif" alt></p>
+<p>[Cookie来实现浏览记录]</p>
+<p>  <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/6.png" alt></p>
+<p>点击html—&gt;Servlet来response Cookie—&gt;跳转到详情html</p>
+<p>ProductInfoServlet.java: 来response cookie来给客户端</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ProductInfoServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //接收页面跳转时的id参数值
+    String id=request.getParameter(&quot;id&quot;);
+
+    //Cookie查询
+    Cookie[] cookies=request.getCookies();
+    Cookie cookie=CookieUtil.findCookie(cookies, &quot;history&quot;);
+
+    //第一次浏览
+    if(cookie==null) {
+
+        Cookie c=new Cookie(&quot;history&quot;,id);
+        response.addCookie(c);
+
+        //存完cookie再跳转
+        response.sendRedirect(&quot;product_info.htm&quot;);
+    }else {
+
+        //第二次访问服务器，服务器就拿第一次存给客户端的Cookie，并拼接新的Cookie值
+        String ids=cookie.getValue();
+        cookie.setValue(id+&quot;#&quot;+ids);
+        response.addCookie(cookie);
+
+        //跳转
+        response.sendRedirect(&quot;product_info.htm&quot;);
+
+    }
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+            }
+}
+</code></pre><blockquote>
+<p>一个Cookie对象就可以实现浏览记录，值使用#来拼接每个页面的id值：3#2#1，其它符号作为分隔符也可以</p>
+</blockquote>
+<p>[JSP的格式==html + java==翻译成一个Servlet的类]</p>
+<pre><code>//定义全局变量
+
+&lt;%! int a = 99; %&gt;
+
+//定义局部变量
+&lt;% int b = 999; %&gt;
+
+//在jsp页面上，显示 a 和 b的值，
+&lt;%=a %&gt; 
+&lt;%=b %&gt;
+</code></pre><p>[JSP显示浏览记录:导包快捷键：Alt+/]</p>
+<pre><code>&lt;%@page import=&quot;org.apache.jasper.tagplugins.jstl.core.ForEach&quot;%&gt;
+&lt;%@page import=&quot;com.itheima.util.CookieUtil&quot;%&gt;
+&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+......
+......
+
+&lt;ul style=&quot;list-style: none;&quot;&gt;
+            &lt;%
+            Cookie[] cookie = request.getCookies();
+            Cookie cook =     CookieUtil.findCookie(cookie, &quot;history&quot;);
+            if(cook == null){
+                %&gt;
+                &lt;h2&gt;您还没浏览任何商品&lt;/h2&gt;
+
+                &lt;%
+            }else{
+            String [] id =    cook.getValue().split(&quot;#&quot;);
+            for(String i : id){
+                %&gt;
+                &lt;li style=&quot;width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;&quot;&gt;&lt;img src=&quot;products/1/cs1000&lt;%=i %&gt;.jpg&quot; width=&quot;130px&quot; height=&quot;130px&quot; /&gt;&lt;/li&gt;
+        &lt;%            
+            }
+            }
+
+            %&gt;
+            &lt;/ul&gt;
+    ......
+    ......
+</code></pre><p>[JSP清除浏览记录]<br>本质是写一个同key的cookie来代替原先的cookie，并setMaxAge(0)删除掉，再重定向回当前html</p>
+<pre><code>&lt;h2&gt;&lt;a href=&quot;ClearHistoryServlet&quot;&gt;清除浏览记录&lt;/a&gt;&lt;/h2&gt;
+
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ClearHistoryServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    Cookie cookie=new Cookie(&quot;history&quot;,&quot;&quot;);
+    cookie.setMaxAge(0);
+    //cookie.setPath(&quot;/CookieDemo02&quot;);
+    response.addCookie(cookie);
+
+    response.sendRedirect(&quot;product_list.jsp&quot;);
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    doGet(request, response);
+        }
+    }
+</code></pre><p>[Cookie总结]</p>
+<blockquote>
+<p> 服务器给客户端发送过来的一小份数据，并且存放在客户端上。</p>
+</blockquote>
+<blockquote>
+<p> 获取cookie， 添加cookie</p>
+</blockquote>
+<pre><code>request.getCookie();
+
+response.addCookie();
+</code></pre><blockquote>
+<p> Cookie分类</p>
+</blockquote>
+<pre><code>会话Cookie
+    默认情况下，关闭了浏览器，那么cookie就会消失。
+
+持久Cookie
+
+    在一定时间内，都有效，并且会保存在客户端上。 
+
+    cookie.setMaxAge(0); //设置立即删除
+
+    cookie.setMaxAge(100); //100 秒
+</code></pre><blockquote>
+<p>Cookie的安全问题。</p>
+</blockquote>
+<pre><code>由于Cookie会保存在客户端上，所以有安全隐患问题。
+还有一个问题， Cookie的大小与个数有限制,浏览器只支持每个Web服务器的20个Cookie,总共300个。 
+为了解决这个问题 ---&gt; Session来解决需求.
+</code></pre><p>[Session]</p>
+<blockquote>
+<p>会话 ， Session是基于Cookie的一种会话机制。 Cookie是服务器返回一小份数据给客户端，并且存放在客户端上。 Session是，数据存放在服务器端。</p>
+</blockquote>
+<blockquote>
+<p>创建: 如果有在servlet里面调用了 request.getSession()就会创建Session对象</p>
+</blockquote>
+<blockquote>
+<p>销毁：session 是存放在服务器的内存中的一份数据。 当然可以持久化. Redis . 即使关了浏览器，session也不会销毁。</p>
+</blockquote>
+<pre><code>1. 关闭服务器
+2. session会话时间过期。 有效期过了，默认有效期： 30分钟。
+</code></pre><p>[Session常用API]</p>
+<pre><code>//得到会话ID
+String id = session.getId();
+
+//存值
+session.setAttribute(name, value);
+
+//取值
+session.getAttribute(name);
+
+//移除值
+session.removeAttribute(name);
+</code></pre><p>[Session实现简单购物车]</p>
+<p>  <img src="/2019/03/15/Cookie&Session/Cookie&amp;Session/7.png" alt></p>
+<p>product_list.jsp</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;a href=&quot;CarServlet?id=0&quot;&gt;&lt;h3&gt;Iphone7&lt;/h3&gt;&lt;/a&gt;
+&lt;a href=&quot;CarServlet?id=1&quot;&gt;&lt;h3&gt;Iphone6&lt;/h3&gt;&lt;/a&gt;
+&lt;a href=&quot;CarServlet?id=2&quot;&gt;&lt;h3&gt;Iphone5&lt;/h3&gt;&lt;/a&gt;
+&lt;a href=&quot;CarServlet?id=3&quot;&gt;&lt;h3&gt;Iphone4&lt;/h3&gt;&lt;/a&gt;
+&lt;a href=&quot;CarServlet?id=4&quot;&gt;&lt;h3&gt;Iphone3&lt;/h3&gt;&lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>CartServlet.java</p>
+<pre><code>import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CarServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    //获取jsp超链接传过来的参数id的值
+    int id=Integer.parseInt(request.getParameter(&quot;id&quot;));
+    String[] names= {&quot;Iphone7&quot;,&quot;Iphone6&quot;,&quot;Iphone5&quot;,&quot;Iphone4&quot;,&quot;Iphone3&quot;};//模拟数据库数据
+    String name=names[id];
+
+    //从Session里面取map的key的值
+    Map&lt;String,Integer&gt; map=(Map&lt;String,Integer&gt;)request.getSession().getAttribute(&quot;cart&quot;);
+    if(map==null) {
+        map = new LinkedHashMap&lt;String , Integer&gt;();
+        request.getSession().setAttribute(&quot;cart&quot;, map);
+    }
+    // 判断购物车里面有没有该商品
+    if(map.containsKey(name)){
+        //在原来的值基础上  + 1 
+        map.put(name, map.get(name) + 1 );
+    }else{
+        //没有购买过该商品，当前数量为1 。
+        map.put(name, 1);
+    }
+
+    //4. 输出界面。（跳转:很神奇，java里面加html，html在write方法里面竟然可以跳转）
+    response.getWriter().write(&quot;&lt;a href=&apos;product_list.jsp&apos;&gt;&lt;h3&gt;继续购物&lt;/h3&gt;&lt;/a&gt;&lt;br&gt;&quot;);
+    response.getWriter().write(&quot;&lt;a href=&apos;cart.jsp&apos;&gt;&lt;h3&gt;去购物车结算&lt;/h3&gt;&lt;/a&gt;&quot;);
+
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+        }
+}
+</code></pre><p>cart.jsp(购物车的具体页面)</p>
+<pre><code>&lt;%@page import=&quot;java.util.Map&quot;%&gt;
+&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt; 您的购物车商品如下&lt;/h2&gt;
+
+//获取到map,map的key是商品名称，value是数量；Session--&gt;从cart取map--&gt;从map取value
+
+&lt;%
+ Map&lt;String,Integer&gt; map=(Map&lt;String,Integer&gt;)session.getAttribute(&quot;cart&quot;);
+
+if(map!=null){
+
+    for(String key:map.keySet()){
+
+        int value=map.get(key);
+        //key是名称，value是数量
+        %&gt; 
+
+        &lt;h3&gt;商品名称：  &lt;%=key %&gt;  数量： &lt;%=value %&gt;&lt;/h3&gt;
+        &lt;%
+        }
+}
+
+%&gt;
+
+&lt;a href=&quot;ClearCartServlet&quot;&gt;&lt;h2&gt;清空购物车&lt;/h2&gt;&lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>ClearCartServlet.java(清除购物车)</p>
+<pre><code>import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class ClearCartServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    HttpSession session = request.getSession();
+
+    //移除整个Session的所有数据
+    session.invalidate();
+
+    //移除Session某个key的数据
+    session.removeAttribute(&quot;cart&quot;);
+
+    //回到购物车页面
+    response.sendRedirect(&quot;cart.jsp&quot;);
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+    }
+
+}
+</code></pre><p>##总结：</p>
+<p>【最重要】<br>Cookie和Session对象都是在服务器程序构造的，上面的例子都是服务器接收了html(或jsp)页面的数据，<br>然后构造Cookie或者Session对象，如果是Cookie，我们就通过response这个便车返回给客户端<br>如果是session，就不用返回，下次再访问服务器的时候，我们在服务器端做一次检查就可以了</p>
+<ul>
+<li>请求转发和重定向（面试经常问。）</li>
+</ul>
+<ul>
+<li><p>Cookie</p>
+<p>  服务器给客户端发送一小份数据， 存放在客户端上。</p>
+<p>  基本用法：</p>
+<pre><code>添加cookie
+
+获取cookie。
+</code></pre><p>  演练例子：</p>
+<pre><code>1. 获取上一次访问时间
+
+2. 获取商品浏览记录。
+</code></pre></li>
+<li><p>什么时候有cookie</p>
+<p>  response.addCookie(new Cookie())</p>
+</li>
+<li><p>Cookie 分类</p>
+<pre><code>会话Cookie
+
+    关闭浏览器，就失效
+
+持久cookie
+
+    存放在客户端上。 在指定的期限内有效。 
+
+    setMaxAge();
+</code></pre></li>
+</ul>
+<ul>
+<li><p>Session</p>
+<pre><code>也是基于cookie的一种会话技术，  数据存放存放在服务器端
+
+会在cookie里面添加一个字段 JSESSIONID . 是tomcat服务器生成。 
+
+setAttribute 存数据
+
+getAttribute 取数据
+
+removeAttribute  移除数据
+
+getSessionId();  获取会话id
+
+invalidate() 强制让会话失效。
+</code></pre></li>
+<li><p>创建和销毁</p>
+<p>  ，调用request.getSesion创建 </p>
+<p>   服务器关闭 ， 会话超时（30分）</p>
+</li>
+</ul>
+<p>setAttribute 存放的值， 在浏览器关闭后，还有没有。  有！，就算客户端把电脑砸了也还有。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/14/Servlet进阶/" rel="next" title="后台05：Servlet进阶Demo">
+                <i class="fa fa-chevron-left"></i> 后台05：Servlet进阶Demo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/01/基础Demo1--菜单Menu/" rel="prev" title="基础Demo1-菜单Menu">
+                基础Demo1-菜单Menu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决GET请求下载文件资源时的文件名为中文的问题"><span class="nav-number">1.</span> <span class="nav-text">解决GET请求下载文件资源时的文件名为中文的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet的html跳转：重定向或者请求转发来实现"><span class="nav-number">2.</span> <span class="nav-text">Servlet的html跳转：重定向或者请求转发来实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">3.</span> <span class="nav-text">Cookie</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
