@@ -232,6 +232,984 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/JDBC基础Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/11/JDBC基础Demo/" itemprop="url">后台02：JDBC基础Demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T00:00:00+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、JDBC视角"><a href="#1、JDBC视角" class="headerlink" title="1、JDBC视角"></a>1、JDBC视角</h3><p>（1）JDBC的作用就是实现：JAVA可以操作数据库；用JAVA代码的形式操作数据库，而不是直接通过命令行或者GUI来操作数据库，这是另外一种操作形式；</p>
+<p>（2）sun公司提供了JDBC驱动为载体，应用层的开发人员通过JDBC驱动，便能与各种数据库交互，而不再是每种数据库写一套交互代码框架，提高开发效率，要不然真的很烦；</p>
+<p> <img src="/2019/03/11/JDBC基础Demo/1.png" alt></p>
+<p> <img src="/2019/03/11/JDBC基础Demo/2.png" alt></p>
+<h3 id="2、JDBC-Debug感受：版本不兼容，使用方式发生改变"><a href="#2、JDBC-Debug感受：版本不兼容，使用方式发生改变" class="headerlink" title="2、JDBC Debug感受：版本不兼容，使用方式发生改变"></a>2、JDBC Debug感受：版本不兼容，使用方式发生改变</h3><p>（1）MySQL在安装的时候，注意特定文件的配置，服务的开启与关闭，版本问题；</p>
+<p>（2）JDBC一直报错的原因：JDBC驱动和MySQL的版本根本不对接的问题，很多小细节一改变，配置方式和使用方式就会发生改变；所以Debug的时候，版本不兼容以后也要成为一种思考的思路，然后Google搜索特定版本的使用方式，根据Demo来使用就可以了；</p>
+<h3 id="Demo1"><a href="#Demo1" class="headerlink" title="Demo1"></a>Demo1</h3><p>（1）导入JDBC驱动jar包，注意jar包版本要与数据库版本对接，而且调用方式有区别；</p>
+<p>（2）new–&gt;lib—&gt;粘贴jar包—&gt;右键add to Buidth—&gt;才能开始使用；</p>
+<p>（3）API使用方式根据最新用法</p>
+<pre><code>import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Connection;
+
+
+public class MainTest {
+
+public static void main(String[] args) {
+
+    try {
+
+        //1、注册驱动
+        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
+        String url=&quot;jdbc:mysql://localhost:3306/jdbc?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&quot;;
+        String user=&quot;root&quot;;
+        String passward=&quot;8875696127m&quot;;
+
+        //2、建立连接：（协议：数据库地址，用户名，密码）
+        Connection conn= DriverManager.getConnection(url,user,passward);
+
+        //3、拿到状态对象来与数据库交互
+        Statement state=conn.createStatement();
+
+        //4、尝试查询，ResultSet类似一个JavaBean，可以从getter和key中拿到表的每个对象的数据
+        String sql=&quot;select * from students&quot;;
+        ResultSet res=state.executeQuery(sql);
+
+        //5、结果集类似从JavaBean拿数据并显示出来
+        while(res.next()) {
+
+            int id=res.getInt(&quot;id&quot;);
+            String name=res.getString(&quot;name&quot;);
+            int age=res.getInt(&quot;age&quot;);
+
+            System.out.println(&quot;id= &quot;+id+&quot;  &quot;+&quot;name= &quot;+name+&quot;  &quot;+&quot;age= &quot;+age);
+
+        }
+
+        //从下往上关闭服务，类似IO流
+        res.close();
+        state.close();
+        conn.close();
+
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }        
+    }
+}
+</code></pre><p>（4）二次封装和重构最终版</p>
+<pre><code>import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class JDBCUtil {
+
+//读取xxx.properties文件来填充，习惯性写法
+static String driverClass = null;
+static String url = null;
+static String user = null;
+static String password= null;
+static{
+    try {
+        //1. 创建一个属性配置对象
+        Properties properties = new Properties();
+        //使用类加载器，去读取src底下的资源文件。 后面在servlet
+        InputStream is = JDBCUtil.class.getClassLoader().getResourceAsStream(&quot;pass.properties&quot;);
+        //导入输入流。
+        properties.load(is);
+
+        //读取属性
+        driverClass = properties.getProperty(&quot;driverClass&quot;);
+        url = properties.getProperty(&quot;url&quot;);
+        user = properties.getProperty(&quot;user&quot;);
+        password = properties.getProperty(&quot;password&quot;);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+
+/**
+ * 获取连接对象
+ * @return
+ */
+public static Connection getConn(){
+    Connection conn = null;
+    try {
+
+        //静态代码块 ---&gt; 类加载了，就执行。 java.sql.DriverManager.registerDriver(new Driver());
+        Class.forName(driverClass);
+
+        conn = DriverManager.getConnection(url, user, password);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return conn;
+}
+
+
+
+//释放资源
+public static void release(ResultSet res,Statement state,Connection conn) {
+
+    closeRes(res);
+    closeState(state);
+    closeConnection(conn);
+}
+
+private static void closeRes(ResultSet res) {
+
+    try {
+        if(res!=null) {
+            res.close();
+        }
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+        res=null;
+    }
+}
+
+
+private static void closeState(Statement state) {
+
+    try {
+        if(state!=null) {
+            state.close();
+        }
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+        state=null;
+    }
+}
+
+
+private static void closeConnection(Connection conn) {
+
+try {
+    if(conn!=null) {
+        conn.close();
+    }
+
+} catch (SQLException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+}finally {
+    conn=null;
+        }
+    }
+
+
+}
+</code></pre><p>MainTest</p>
+<pre><code>import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import com.qiufeisheng.util.JDBCUtil;
+import java.sql.Connection;
+
+public class MainTest {
+
+public static void main(String[] args) {
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+
+    try {
+
+        //1、注册驱动；2、建立连接，都抽取在JDBCUtil中读取
+         conn= JDBCUtil.getConn();
+
+        //3、拿到状态对象来与数据库交互
+        state=conn.createStatement();
+
+        //4、尝试查询，ResultSet类似一个JavaBean，可以从getter和key中拿到表的每个对象的数据
+        String sql=&quot;select * from students&quot;;
+        res=state.executeQuery(sql);
+
+        //5、类似从JavaBean拿数据并显示出来
+        while(res.next()) {
+
+            int id=res.getInt(&quot;id&quot;);
+            String name=res.getString(&quot;name&quot;);
+            int age=res.getInt(&quot;age&quot;);
+
+            System.out.println(&quot;id= &quot;+id+&quot;  &quot;+&quot;name= &quot;+name+&quot;  &quot;+&quot;age= &quot;+age);
+
+        }
+
+
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+
+    JDBCUtil.release(res, state, conn);
+        }    
+    }
+}
+</code></pre><p>1驱动、2连接、3state、4result、5get、6close</p>
+<h3 id="Demo2-JDBC实现CRUD的查询（用JUnit单元测试）"><a href="#Demo2-JDBC实现CRUD的查询（用JUnit单元测试）" class="headerlink" title="Demo2: JDBC实现CRUD的查询（用JUnit单元测试）"></a>Demo2: JDBC实现CRUD的查询（用JUnit单元测试）</h3><p>（1）导入jar包的方式：工程目录–》右键新建Folder—》lib–》粘贴jar包—》右键Add build to path<br>（2）导入junit包的方式：工程目录–》右键Build Path—》Add libraies—》JUnit—》finish<br>（3）方法上面+ @Test：然后点击右上角的outline—&gt;选择方法进行JUnit测试（窗口视图乱了，有上角的java就可以Reset恢复窗口）</p>
+<pre><code>import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import org.junit.Test;
+import com.qiufeisheng.util.JDBCUtil;
+
+public class JUnitTest {
+
+@Test
+public void testQuery() {
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;select * from students&quot;;
+         res=state.executeQuery(sql);
+
+        //遍历读取
+        while(res.next()) {
+
+            String name=res.getString(&quot;name&quot;);
+            int age=res.getInt(&quot;age&quot;);
+
+            System.out.println(name+&quot;  &quot;+age);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, state, conn);
+    }
+    }
+}
+</code></pre><h3 id="Demo3-JDBC实现CRUD的添加（用JUnit单元测试）"><a href="#Demo3-JDBC实现CRUD的添加（用JUnit单元测试）" class="headerlink" title="Demo3: JDBC实现CRUD的添加（用JUnit单元测试）"></a>Demo3: JDBC实现CRUD的添加（用JUnit单元测试）</h3><pre><code>@Test
+public void testInsert() {
+
+
+
+    Connection conn=null;
+    Statement state=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;INSERT INTO students VALUES(null,&apos;feifei&apos;,22)&quot;;
+         int res=state.executeUpdate(sql);
+
+        if(res&gt;0) {
+            System.out.println(&quot;更新成功&quot;);
+        }else {
+            System.out.println(&quot;更新失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(state, conn);
+    }
+}
+</code></pre><h3 id="Demo4-JDBC实现CRUD的删除和更新（用JUnit单元测试）"><a href="#Demo4-JDBC实现CRUD的删除和更新（用JUnit单元测试）" class="headerlink" title="Demo4:JDBC实现CRUD的删除和更新（用JUnit单元测试）"></a>Demo4:JDBC实现CRUD的删除和更新（用JUnit单元测试）</h3><pre><code>    //删除
+
+@Test
+public void testDelete() {
+
+    Connection conn=null;
+    Statement state=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;DELETE FROM students WHERE name=&apos;feifei&apos;&quot;;
+         int res=state.executeUpdate(sql);
+
+        if(res&gt;0) {
+            System.out.println(&quot;删除成功&quot;);
+        }else {
+            System.out.println(&quot;删除失败&quot;);
+        }        
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(state, conn);
+    }
+}
+
+
+
+
+//更新数据
+@Test
+public void testUpdate() {
+
+
+    Connection conn=null;
+    Statement state=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;UPDATE students set age=10 WHERE name=&apos;xiaoming&apos;&quot;;
+         int res=state.executeUpdate(sql);
+
+        if(res&gt;0) {
+            System.out.println(&quot;更新成功&quot;);
+        }else {
+            System.out.println(&quot;更新失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(state, conn);
+    }
+}
+</code></pre><h3 id="DAO模式的思想：DAO-Data-Access-Objects-封装接口和API"><a href="#DAO模式的思想：DAO-Data-Access-Objects-封装接口和API" class="headerlink" title="DAO模式的思想：DAO==Data Access Objects==封装接口和API"></a>DAO模式的思想：DAO==Data Access Objects==封装接口和API</h3><p>（1）就是把数据库的数据CRUD操作封装，提供接口给用户直接调用；<br>（2）好处：1是开发的时候用利于分工合作，解耦，各自完成特定接口的实现类，不用挤在一个类里面实现；2是封装数据库操作，符合对内封闭，对外开放原则；<br>（3）直接new一个实现类对象，然后调用API就可以实现数据库的操作了，啥都不用做；</p>
+<pre><code>public interface UserDao {
+
+    /**
+     * 查询
+     */
+    void findAll();
+
+}
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import com.qiufeisheng.dao.UserDao;
+import com.qiufeisheng.util.JDBCUtil;;
+public class UserDaoImple implements UserDao {
+
+@Override
+public void findAll() {
+    // TODO Auto-generated method stub
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;select * from students&quot;;
+         res=state.executeQuery(sql);
+
+        //遍历读取
+        while(res.next()) {
+
+            String name=res.getString(&quot;name&quot;);
+            int age=res.getInt(&quot;age&quot;);
+
+            System.out.println(name+&quot;  &quot;+age);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, state, conn);
+    }
+}
+
+}
+
+
+import org.junit.Test;
+import com.qiufeisheng.daoimple.UserDaoImple;
+
+public class TestDemo {
+
+@Test
+public void testDao() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.findAll();
+    }
+
+}
+</code></pre><h3 id="DAO模式下验证用户登录"><a href="#DAO模式下验证用户登录" class="headerlink" title="DAO模式下验证用户登录"></a>DAO模式下验证用户登录</h3><p>接口：UserDao.java</p>
+<pre><code>public interface UserDao {
+
+/**
+ * 查询
+ */
+void findAll();
+
+void login(String username,String password);
+}
+</code></pre><p>接口实现类：UserDaoImple.java</p>
+<pre><code>import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import com.qiufeisheng.dao.UserDao;
+import com.qiufeisheng.util.JDBCUtil;;
+public class UserDaoImple implements UserDao {
+
+@Override
+public void findAll() {
+    // TODO Auto-generated method stub
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句
+        String sql=&quot;select * from infomation&quot;;
+         res=state.executeQuery(sql);
+
+        //遍历读取
+        while(res.next()) {
+
+            String username=res.getString(&quot;username&quot;);
+            String password=res.getString(&quot;password&quot;);
+
+            System.out.println(username+&quot; &quot;+password);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, state, conn);
+    }
+}
+
+@Override
+public void login(String username, String password) {
+    // TODO Auto-generated method stub
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+         state = conn.createStatement();
+
+        //state执行sql语句: 双引号和+的作用是将username变成String
+        String sql=&quot;select * from infomation WHERE username=&apos;&quot;+username+&quot;&apos; AND password=&apos;&quot;+password+&quot;&apos;&quot;;
+         res=state.executeQuery(sql);
+
+        //遍历读取
+        if(res.next()) {
+
+            System.out.println(&quot;登录成功&quot;);
+        }else {
+            System.out.println(&quot;登录失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, state, conn);
+        }
+
+    }
+
+}
+</code></pre><p>单元测试类：TestDemo.java</p>
+<pre><code>import org.junit.Test;
+import com.qiufeisheng.daoimple.UserDaoImple;
+
+public class TestDemo {
+
+@Test
+public void testDao() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.findAll();
+}
+
+
+@Test
+public void testLogin() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.login(&quot;xiaohong&quot;, &quot;456&quot;);
+    }
+}
+</code></pre><h4 id="Statement安全问题"><a href="#Statement安全问题" class="headerlink" title="Statement安全问题"></a>Statement安全问题</h4><p>:Statement执行 ，其实是拼接sql语句的。  先拼接sql语句，然后在一起执行。 </p>
+<p>最坑的是用户输入的String若含有关键字，会被自动识别当做关键字来使用；</p>
+<pre><code>String sql = &quot;select * from t_user where username=&apos;&quot;+ username  +&quot;&apos; and password=&apos;&quot;+ password +&quot;&apos;&quot;;
+
+UserDao dao = new UserDaoImpl();
+dao.login(&quot;admin&quot;, &quot;100234khsdf88&apos; or &apos;1=1&quot;);
+
+SELECT * FROM t_user WHERE username=&apos;admin&apos; AND PASSWORD=&apos;100234khsdf88&apos; or &apos;1=1&apos; 
+
+前面先拼接sql语句， 如果变量里面带有了 数据库的关键字，那么一并认为是关键字。 不认为是普通的字符串。 
+rs = st.executeQuery(sql);
+</code></pre><h3 id="PreparedStatement解决：改一下实现类的查询，将交互载体Statement升级为PreparedStatement，可以解决关键字的问题"><a href="#PreparedStatement解决：改一下实现类的查询，将交互载体Statement升级为PreparedStatement，可以解决关键字的问题" class="headerlink" title="PreparedStatement解决：改一下实现类的查询，将交互载体Statement升级为PreparedStatement，可以解决关键字的问题"></a>PreparedStatement解决：改一下实现类的查询，将交互载体Statement升级为PreparedStatement，可以解决关键字的问题</h3><pre><code>@Override
+public void login(String username, String password) {
+    // TODO Auto-generated method stub
+
+    Connection conn=null;
+    Statement state=null;
+    ResultSet res=null;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+        //state执行sql语句: 双引号和+的作用是将username变成String
+        String sql=&quot;select * from infomation WHERE username= ? AND password=?&quot;;
+         PreparedStatement ps=conn.prepareStatement(sql);
+        ps.setString(1,username);
+        ps.setString(2, password);
+
+         res=ps.executeQuery();
+
+        //遍历读取
+        if(res.next()) {
+
+            System.out.println(&quot;登录成功&quot;);
+        }else {
+            System.out.println(&quot;登录失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, state, conn);
+    }
+
+}
+</code></pre><p>PreparedStatement实现向数据库insert数据</p>
+<pre><code>//（1）接口
+public interface UserDao {
+
+/**
+ * 查询
+ */
+void findAll();
+
+void login(String username,String password);
+
+//插入用户名和密码
+void insert(String username,String password);
+}
+
+
+
+//（2）实现类向数据库插入数据
+@Override
+public void insert(String username, String password) {
+    // TODO Auto-generated method stub
+
+
+
+    Connection conn=null;
+    PreparedStatement ps=null;
+    int res=0;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+        //state执行sql语句: 双引号和+的作用是将username变成String
+        String sql=&quot;INSERT INTO infomation VALUES(NULL,?,?)&quot;;
+         ps=conn.prepareStatement(sql);
+        ps.setString(1,username);
+        ps.setString(2, password);
+
+         res=ps.executeUpdate();
+
+        //遍历读取
+        if(res&gt;0) {
+
+            System.out.println(&quot;添加成功&quot;);
+        }else {
+            System.out.println(&quot;添加失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps,conn);
+    }
+}
+
+
+
+（3）单元测试
+
+
+import org.junit.Test;
+import com.qiufeisheng.daoimple.UserDaoImple;
+
+public class TestDemo {
+
+@Test
+public void testDao() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.findAll();
+}
+
+
+@Test
+public void testLogin() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.login(&quot;xiaohong&quot;, &quot;456&quot;);
+}
+
+
+@Test
+public void testInsert() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.insert(&quot;xiaoai&quot;, &quot;789&quot;);
+    }
+}
+</code></pre><p>PreparedStatement实现向数据库删除数据</p>
+<pre><code>//接口
+public interface UserDao {
+
+/**
+ * 查询
+ */
+void findAll();
+
+void login(String username,String password);
+
+//插入用户名和密码
+void insert(String username,String password);
+
+void delete(int id);
+}
+
+
+
+//实现类的方法：删除数据库的数据
+@Override
+public void delete(int id) {
+    // TODO Auto-generated method stub
+
+
+    Connection conn=null;
+    PreparedStatement ps=null;
+    int res=0;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+        //state执行sql语句: 双引号和+的作用是将username变成String
+        String sql=&quot;DELETE FROM infomation WHERE id = ?&quot;;
+         ps=conn.prepareStatement(sql);
+        ps.setInt(1,id);
+
+
+         res=ps.executeUpdate();
+
+        //遍历读取
+        if(res&gt;0) {
+
+            System.out.println(&quot;删除成功&quot;);
+        }else {
+            System.out.println(&quot;删除失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps,conn);
+    }
+}
+
+
+
+
+//单元测试
+@Test
+public void testDelete() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.delete(3);
+}
+</code></pre><p>PreparedStatement实现向数据更新修改数据</p>
+<pre><code>//（1）接口
+public interface UserDao {
+
+/**
+ * 查询
+ */
+void findAll();
+
+void login(String username,String password);
+
+//插入用户名和密码
+void insert(String username,String password);
+
+//删除数据
+void delete(int id);
+
+void update(int id,String name);
+}
+
+
+
+
+//（2）实现类：更新数据==修改数据
+@Override
+public void update(int id, String name) {
+    // TODO Auto-generated method stub
+
+
+    Connection conn=null;
+    PreparedStatement ps=null;
+    int res=0;
+
+    try {
+        //注册+连接+获取连接对象
+         conn = JDBCUtil.getConn();
+
+        //获取state对象与数据库交互
+        //state执行sql语句: 双引号和+的作用是将username变成String
+        String sql=&quot;UPDATE infomation SET username=? WHERE id=?&quot;;
+         ps=conn.prepareStatement(sql);
+        ps.setString(1,name);
+        ps.setInt(2,id);
+
+         res=ps.executeUpdate();
+
+        //遍历读取
+        if(res&gt;0) {
+
+            System.out.println(&quot;更新修改数据成功&quot;);
+        }else {
+            System.out.println(&quot;更新修改数据失败&quot;);
+        }
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps,conn);
+    }
+
+}
+
+
+//单元测试
+@Test
+public void testUpdate() {
+
+    UserDaoImple user=new UserDaoImple();
+    user.update(1, &quot;xiaofei&quot;);
+}
+</code></pre><h4 id="PrepareStatement总结"><a href="#PrepareStatement总结" class="headerlink" title="PrepareStatement总结"></a>PrepareStatement总结</h4><blockquote>
+<p>该对象就是替换前面的statement对象。</p>
+</blockquote>
+<ol>
+<li>相比较以前的statement， 预先处理给定的sql语句，对其执行语法检查。 在sql语句里面使用 ? 占位符来替代后续要传递进来的变量。 后面进来的变量值，将会被看成是字符串，不会产生任何的关键字。</li>
+</ol>
+<pre><code>String sql = &quot;insert into t_user values(null , ? , ?)&quot;;
+ ps = conn.prepareStatement(sql);
+
+ //给占位符赋值 从左到右数过来，1 代表第一个问号， 永远你是1开始。
+ ps.setString(1, userName);
+ ps.setString(2, password);
+</code></pre><p>###总结：</p>
+<ol>
+<li><p>JDBC入门</p>
+</li>
+<li><p>抽取工具类  ###</p>
+</li>
+<li><p>Statement CRUD ###</p>
+<pre><code>演练crud
+</code></pre></li>
+<li><p>Dao模式  ###</p>
+<pre><code>声明与实现分开
+</code></pre></li>
+<li><p>PrepareStament CRUD ###</p>
+<pre><code>预处理sql语句，解决上面statement出现的问题
+</code></pre></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/MySQL基础Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4154,7 +5132,7 @@ p span.warning{color:purple;} /*权值为1+1+10=12*/
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
