@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java Server Page[什么是jsp]  jsp==html + java==翻译成一个Servlet类==html加上动态数据效果  [学生管理系统Demo]   [1.登录页面：login.jsp] &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后台07：JSP&amp;JSTL">
+<meta property="og:url" content="http://yoursite.com/2019/03/16/JSP+JSTL/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="Java Server Page[什么是jsp]  jsp==html + java==翻译成一个Servlet类==html加上动态数据效果  [学生管理系统Demo]   [1.登录页面：login.jsp] &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEn">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/16/JSP+JSTL/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/16/JSP+JSTL/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/16/JSP+JSTL/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/16/JSP+JSTL/4.gif">
+<meta property="og:updated_time" content="2019-06-20T06:56:01.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后台07：JSP&amp;JSTL">
+<meta name="twitter:description" content="Java Server Page[什么是jsp]  jsp==html + java==翻译成一个Servlet类==html加上动态数据效果  [学生管理系统Demo]   [1.登录页面：login.jsp] &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEn">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/16/JSP+JSTL/3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/16/JSP+JSTL/">
+
+
+
+
+
+  <title>后台07：JSP&JSTL | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/16/JSP+JSTL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后台07：JSP&JSTL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-16T00:00:00+08:00">
+                2019-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Java-Server-Page"><a href="#Java-Server-Page" class="headerlink" title="Java Server Page"></a>Java Server Page</h3><p>[什么是jsp]</p>
+<blockquote>
+<p><strong>jsp==html + java==翻译成一个Servlet类==html加上动态数据效果</strong></p>
+</blockquote>
+<p>[学生管理系统Demo]</p>
+<p> <img src="/2019/03/16/JSP+JSTL/3.png" alt></p>
+<p>[1.登录页面：login.jsp]</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;form action=&quot;LoginServlet&quot; method=&quot;post&quot;&gt;
+
+账号：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt; &lt;br &gt;
+密码：&lt;input type=&quot;text&quot; name=&quot;password&quot;/&gt; &lt;br &gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Login&quot;/&gt; 
+
+  &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><blockquote>
+<p>第一行记得改UTF-8，防止乱码</p>
+</blockquote>
+<blockquote>
+<p>&lt;form 里面的&lt;input可以理解为表单输入控件</p>
+</blockquote>
+<blockquote>
+<p>action属性代表点击submit后就会触发Post请求跳转到LoginServlet程序</p>
+</blockquote>
+<p>[2.LoginServlet.java]</p>
+<pre><code>import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.qfs.dao.StudentDao;
+import com.qfs.dao.imple.StudentDaoImple;
+import com.qfs.dao.imple.UserDaoImple;
+import domain.Student;
+
+/**
+     * 处理登录的Servlet
+ */
+public class LoginServlet extends HttpServlet {
+
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //解决中文乱码的问题
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+    response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+    //1.从request请求体获取参数值:即登录界面的用户信息
+    String username = request.getParameter(&quot;username&quot;);
+    String password = request.getParameter(&quot;password&quot;);
+
+    //使用Dao来访问数据库，并返回查询结果
+    boolean isSuccess=new UserDaoImple().login(username,password);
+
+    //身份验证成功
+    if(isSuccess) {
+
+        //Dao取数据和传数据，作用域Session对象通用取数据
+        StudentDao st=new StudentDaoImple();
+        List&lt;Student&gt; list=st.findAll();
+        System.out.println(&quot;&quot;+list.size());
+        //session作用域来存值，其它地方通用取数据
+        request.getSession().setAttribute(&quot;list&quot;, list);
+
+        response.sendRedirect(&quot;Student.jsp&quot;);
+    }else {
+        response.getWriter().write(&quot;登录失败咯&quot;);
+    }
+}
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+            }
+
+    }
+</code></pre><blockquote>
+<p>解决中文乱码</p>
+</blockquote>
+<blockquote>
+<p>获取login.jsp表单控件的数据，用Dao来访问数据库进行身份验证</p>
+</blockquote>
+<blockquote>
+<p>验证成功，用Dao来访问学生数据库的表的数据，数据存储在对象中，对象存储在集合中</p>
+</blockquote>
+<blockquote>
+<p>在把学生数据存储到同用作用域Session中</p>
+</blockquote>
+<blockquote>
+<p>跳转到下一个页面显示学生数据：Student.jsp(通过作用域Session获取数据)</p>
+</blockquote>
+<p>[3.User.Dao]</p>
+<pre><code>public interface UserDao {
+
+    //用户登录时访问用户数据库数据，返回查询结果
+    boolean login(String username,String password);
+}
+</code></pre><p>[4.UserDaoImple]</p>
+<pre><code>import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import com.qfs.dao.UserDao;
+import com.qfs.util.JDBCUtil;
+
+public class UserDaoImple implements UserDao {
+
+private Connection conn;
+private PreparedStatement ps;
+private ResultSet res;
+
+@Override
+public boolean login(String username,String password) {
+
+    try {
+    //连接数据库
+     conn = JDBCUtil.getConn();
+
+
+    //准备查询数据库
+    String sql=&quot;SELECT * FROM t_user WHERE username=? AND password=?&quot;;
+    ps = conn.prepareStatement(sql);
+    ps.setString(1,username);
+    ps.setString(2,password);
+
+
+    //开始查询数据库
+   res = ps.executeQuery();
+
+   //返回查询结果
+    return res.next();
+
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(res, ps, conn);
+    }
+
+    return false;
+    }    
+}
+</code></pre><blockquote>
+<p>需要导入数据库工具类JDBCUtil.java</p>
+</blockquote>
+<p>[5.JDBCUtil.java]</p>
+<pre><code>import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class JDBCUtil {
+
+//读取xxx.properties文件来填充
+static String driverClass = null;
+static String url = null;
+static String user = null;
+static String password= null;
+static{
+    try {
+        //1. 创建一个属性配置对象
+        Properties properties = new Properties();
+        //使用类加载器，去读取src底下的资源文件。 后面在servlet
+        InputStream is = JDBCUtil.class.getClassLoader().getResourceAsStream(&quot;pass.properties&quot;);
+        //导入输入流。
+        properties.load(is);
+
+        //读取属性
+        driverClass = properties.getProperty(&quot;driverClass&quot;);
+        url = properties.getProperty(&quot;url&quot;);
+        user = properties.getProperty(&quot;user&quot;);
+        password = properties.getProperty(&quot;password&quot;);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+
+/**
+ * 获取连接对象
+ * @return
+ */
+public static Connection getConn(){
+    Connection conn = null;
+    try {
+
+        //静态代码块 ---&gt; 类加载了，就执行。 java.sql.DriverManager.registerDriver(new Driver());
+        Class.forName(driverClass);
+
+        conn = DriverManager.getConnection(url, user, password);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return conn;
+}
+
+
+public static void release(ResultSet res,Statement state,Connection conn) {
+
+    closeRes(res);
+    closeState(state);
+    closeConnection(conn);
+}
+
+public static void release(Statement state,Connection conn) {
+
+    closeState(state);
+    closeConnection(conn);
+}
+
+private static void closeRes(ResultSet res) {
+
+    try {
+        if(res!=null) {
+            res.close();
+        }
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+        res=null;
+    }
+}
+
+
+private static void closeState(Statement state) {
+
+    try {
+        if(state!=null) {
+            state.close();
+        }
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }finally {
+        state=null;
+    }
+}
+
+
+private static void closeConnection(Connection conn) {
+
+try {
+    if(conn!=null) {
+        conn.close();
+    }
+
+} catch (SQLException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+}finally {
+    conn=null;
+        }
+            }    
+    }
+</code></pre><blockquote>
+<p>粘贴JDBC的驱动文件</p>
+</blockquote>
+<p>[6.pass.properties文件]</p>
+<pre><code>driverClass=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://localhost:3306/stums?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT
+user=root
+password=8875696127m
+</code></pre><blockquote>
+<p>粘贴在Src目录下，stums是要访问的数据库名称，改这里就可以了</p>
+</blockquote>
+<p>[7.StudentDao]</p>
+<pre><code>import java.util.List;
+import domain.Student;
+
+public interface StudentDao {
+
+    List&lt;Student&gt; findAll();
+}
+</code></pre><blockquote>
+<p>查询数据库的学生数据</p>
+</blockquote>
+<p>[8.StudentDaoImple.java]</p>
+<pre><code>import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import com.qfs.dao.StudentDao;
+import com.qfs.util.JDBCUtil;
+import domain.Student;
+
+public class StudentDaoImple implements StudentDao {
+
+private Connection conn;
+private PreparedStatement ps;
+private ResultSet res;
+List&lt;Student&gt; list;
+@Override
+public List&lt;Student&gt; findAll() {
+
+    try {
+        //连接数据库
+         conn = JDBCUtil.getConn();
+
+
+        //准备查询数据库
+        String sql=&quot;SELECT * FROM t_student&quot;;
+        ps = conn.prepareStatement(sql);
+
+        //开始查询数据库,并返回结果
+       res = ps.executeQuery();
+       list=new ArrayList&lt;&gt;();
+       while(res.next()) {
+
+           Student student=new Student();
+           student.setId(res.getInt(&quot;id&quot;));
+           student.setName(res.getString(&quot;name&quot;));
+           student.setAge(res.getInt(&quot;age&quot;));
+           student.setGender(res.getString(&quot;gender&quot;));
+           student.setAddress(res.getString(&quot;address&quot;));
+           list.add(student);
+
+       }
+
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.release(res, ps, conn);
+        }
+    return list;
+        }
+
+}
+</code></pre><p>[9.bean: Student.java]</p>
+<pre><code>public class Student {
+
+  private int id;
+  private String name;
+  private int age;
+  private String gender;
+  private String address;
+
+
+public int getId() {
+    return id;
+}
+public void setId(int id) {
+    this.id = id;
+}
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+public int getAge() {
+    return age;
+}
+public void setAge(int age) {
+    this.age = age;
+}
+public String getGender() {
+    return gender;
+}
+public void setGender(String gender) {
+    this.gender = gender;
+}
+public String getAddress() {
+    return address;
+}
+public void setAddress(String address) {
+    this.address = address;
+}
+
+}
+</code></pre><blockquote>
+<p>数据多了就存储在对象，对象多了就存储在集合；请求数据，返回数据，解析数据，填充显示view</p>
+</blockquote>
+<p>[10.Student.jsp]</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;学生管理系统&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;800&quot;&gt;
+
+
+  &lt;tr align=&quot;center&quot;&gt;
+
+    &lt;td&gt;编号&lt;/td&gt;
+    &lt;td&gt;姓名&lt;/td&gt;
+    &lt;td&gt;年龄&lt;/td&gt;
+    &lt;td&gt;性别&lt;/td&gt;
+    &lt;td&gt;住址&lt;/td&gt;
+    &lt;td&gt;操作&lt;/td&gt;
+  &lt;/tr&gt;
+
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;stu&quot;&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+
+    &lt;td&gt;${stu.id}&lt;/td&gt;
+    &lt;td&gt;${stu.name}&lt;/td&gt;
+    &lt;td&gt;${stu.age}&lt;/td&gt;
+    &lt;td&gt;${stu.gender}&lt;/td&gt;
+    &lt;td&gt;${stu.address}&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;#&quot;&gt;更新&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+
+
+&lt;/c:forEach&gt;
+
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><blockquote>
+<p>导入JSTL的两个标签库： jstl.jar和standard.jar</p>
+</blockquote>
+<hr>
+<p>[什么是jsp]</p>
+<blockquote>
+<p><strong>jsp==html + java==翻译成一个Servlet类==html加上动态数据效果</strong></p>
+</blockquote>
+<blockquote>
+<p>从用户角度看待 ，就是是一个网页 ， 从程序员角度看待 ， 其实是一个java类， 它继承了servlet，所以可以直接说jsp 就是一个Servlet.</p>
+</blockquote>
+<p>[为什么会有jsp]</p>
+<blockquote>
+<p>html 多数情况下用来显示静态内容 ， 一成不变的。 但是有时候我们需要在网页上显示一些动态数据， 比如： 查询所有的学生信息， 根据姓名去查询具体某个学生。  这些动作都需要去查询数据库，然后在网页上显示。 html是不支持写java代码  ， jsp里面可以写java代码。</p>
+</blockquote>
+<p><strong>[JSP的三大指令：page指令]</strong></p>
+<pre><code>&lt;%@ page language=&quot;java&quot; 
+contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+</code></pre><blockquote>
+<p>属性language: 表明jsp页面中可以写java代码</p>
+</blockquote>
+<blockquote>
+<p>属性contentType: 其实即使说这个文件是什么类型，告诉浏览器我是什么内容类型，以及使用什么编码</p>
+</blockquote>
+<blockquote>
+<p>属性contentType=”text/html; charset=UTF-8”</p>
+</blockquote>
+<blockquote>
+<p>属性text/html  MIMEType 这是一个文本，html网页</p>
+</blockquote>
+<blockquote>
+<p>属性pageEncoding,jsp的内容编码格式</p>
+</blockquote>
+<blockquote>
+<p>属性extends 用于指定jsp翻译成java文件后，继承的父类是谁，一般不用改。</p>
+</blockquote>
+<blockquote>
+<p>属性import 导包使用的，一般不用手写。</p>
+</blockquote>
+<blockquote>
+<p>属性session </p>
+</blockquote>
+<blockquote>
+<p>值可选的有true or false .</p>
+</blockquote>
+<blockquote>
+<p>用于控制在这个jsp页面里面，能够直接使用session对象。</p>
+</blockquote>
+<blockquote>
+<p>具体的区别是，请看翻译后的java文件   如果该值是true , 那么在代码里面会有getSession（）的调用，如果是false :  那么就不会有该方法调用，也就是没有session对象了。在页面上自然也就不能使用session了。</p>
+</blockquote>
+<blockquote>
+<p>属性errorPage指的是错误的页面， 值需要给错误的页面路径</p>
+</blockquote>
+<blockquote>
+<p>属性isErrorPage上面的errorPage 用于指定错误的时候跑到哪一个页面去。 那么这个isErroPage , 就是声明某一个页面到底是不是错误的页面。</p>
+</blockquote>
+<p><strong>[JSP的三大指令：include指令]</strong></p>
+<blockquote>
+<p>包含另外一个jsp的文件内容进来。</p>
+</blockquote>
+<blockquote>
+<p>&lt;%@ include file=”other02.jsp”%&gt;</p>
+</blockquote>
+<blockquote>
+<p>背后细节: 把另外一个页面的所有内容拿过来一起输出。 所有的标签元素都包含进来。</p>
+</blockquote>
+<p><strong>[JSP的三大指令：taglib指令]</strong></p>
+<blockquote>
+<p>&lt;%@ taglib prefix=””  uri=””%&gt;  </p>
+</blockquote>
+<blockquote>
+<p>uri: 标签库路径</p>
+</blockquote>
+<blockquote>
+<p>prefix : 标签库的别名  </p>
+</blockquote>
+<p>[JSP的动作标签]</p>
+<p> <img src="/2019/03/16/JSP+JSTL/1.png" alt></p>
+<pre><code>&lt;jsp:include page=&quot;&quot;&gt;&lt;/jsp:include&gt;
+&lt;jsp:param value=&quot;&quot; name=&quot;&quot;/&gt;
+&lt;jsp:forward page=&quot;&quot;&gt;&lt;/jsp:forward&gt;
+</code></pre><p>[jsp:include]</p>
+<blockquote>
+<p>&lt;jsp:include page=”other02.jsp”&gt;&lt;/jsp:include&gt;</p>
+</blockquote>
+<blockquote>
+<p>包含指定的页面， 这里是动态包含。 也就是不把包含的页面所有元素标签全部拿过来输出，而是把它的运行结果拿过来。 </p>
+</blockquote>
+<p>[jsp:forward]</p>
+<blockquote>
+<p>&lt;jsp:forward page=””&gt;&lt;/jsp:forward&gt;</p>
+</blockquote>
+<blockquote>
+<p>前往哪一个页面。  </p>
+</blockquote>
+<blockquote>
+<p>&lt;%<br>        //请求转发<br>        request.getRequestDispatcher(“other02.jsp”).forward(request, response);<br>    %&gt;    </p>
+</blockquote>
+<p>[jsp:param]</p>
+<blockquote>
+<p>意思是： 在包含某个页面的时候，或者在跳转某个页面的时候，加入这个参数。</p>
+</blockquote>
+<pre><code>&lt;jsp:forward page=&quot;other02.jsp&quot;&gt;
+    &lt;jsp:param value=&quot;beijing&quot; name=&quot;address&quot;/&gt;
+&lt;/jsp:forward&gt;
+
+//到另外一个页面收参数
+在other02.jsp中获取参数
+
+&lt;br&gt;收到的参数是：&lt;br&gt;
+
+&lt;%= request.getParameter(&quot;address&quot;)%&gt;
+</code></pre><p>[JSP9大内置对象，四大作用域：使用范围]</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+使用作用域来存储数据&lt;br&gt;
+
+    &lt;%
+        pageContext.setAttribute(&quot;name&quot;, &quot;page&quot;);
+        request.setAttribute(&quot;name&quot;, &quot;request&quot;);
+        session.setAttribute(&quot;name&quot;, &quot;session&quot;);
+        application.setAttribute(&quot;name&quot;, &quot;application&quot;);
+    %&gt;
+
+    取出四个作用域中的值&lt;br&gt;
+
+    &lt;%=pageContext.getAttribute(&quot;name&quot;)%&gt;
+    &lt;%=request.getAttribute(&quot;name&quot;)%&gt;
+    &lt;%=session.getAttribute(&quot;name&quot;)%&gt;
+    &lt;%=application.getAttribute(&quot;name&quot;)%&gt;
+
+&lt;%
+//请求转发
+   request.getRequestDispatcher(&quot;other04.jsp&quot;).forward(request,response);
+%&gt;
+
+&lt;%
+  //重定向。与上面二选一
+  response.sendRedirect(&quot;other04.jsp&quot;);
+%&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><blockquote>
+<p>所谓内置对象，就是我们可以直接在jsp页面中使用这些对象。 不用创建。</p>
+</blockquote>
+<ul>
+<li>pageContext</li>
+<li>request</li>
+<li>session</li>
+<li>application</li>
+</ul>
+<p>以上4个是作用域对象 , </p>
+<ul>
+<li>作用域 </li>
+</ul>
+<blockquote>
+<p>表示这些对象可以存值，他们的取值范围有限定。  setAttribute   和  getAttribute</p>
+</blockquote>
+<pre><code>使用作用域来存储数据&lt;br&gt;
+
+&lt;%
+    pageContext.setAttribute(&quot;name&quot;, &quot;page&quot;);
+    request.setAttribute(&quot;name&quot;, &quot;request&quot;);
+    session.setAttribute(&quot;name&quot;, &quot;session&quot;);
+    application.setAttribute(&quot;name&quot;, &quot;application&quot;);
+%&gt;
+
+取出四个作用域中的值&lt;br&gt;
+
+&lt;%=pageContext.getAttribute(&quot;name&quot;)%&gt;
+&lt;%=request.getAttribute(&quot;name&quot;)%&gt;
+&lt;%=session.getAttribute(&quot;name&quot;)%&gt;
+&lt;%=application.getAttribute(&quot;name&quot;)%&gt;
+</code></pre><p>作用域范围大小：</p>
+<pre><code>pageContext -- request --- session -- application 
+</code></pre><p>[四个作用域的区别]</p>
+<ul>
+<li>pageContext 【PageContext】</li>
+</ul>
+<blockquote>
+<p>作用域仅限于当前的页面。  </p>
+</blockquote>
+<blockquote>
+<p>还可以获取到其他八个内置对象。</p>
+</blockquote>
+<ul>
+<li>request 【HttpServletRequest】</li>
+</ul>
+<blockquote>
+<p>作用域仅限于一次请求， 只要服务器对该请求做出了响应。 这个域中存的值就没有了。</p>
+</blockquote>
+<ul>
+<li>session 【HttpSession】</li>
+</ul>
+<blockquote>
+<p>作用域限于一次会话（多次请求与响应） 当中。 </p>
+</blockquote>
+<ul>
+<li>application 【ServletContext】</li>
+</ul>
+<blockquote>
+<p>整个工程都可以访问， 服务器关闭后就不能访问了。 </p>
+</blockquote>
+<ul>
+<li><p>out         【JspWriter】</p>
+<ul>
+<li>response  【HttpServletResponse】</li>
+</ul>
+<p><img src="/2019/03/16/JSP+JSTL/2.png" alt></p>
+</li>
+</ul>
+<ul>
+<li>exception  【Throwable】<ul>
+<li>page     【Object】 —就是这个jsp翻译成的java类的实例对象<ul>
+<li>config 【ServletConfig】</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>##EL表达式</p>
+<blockquote>
+<p>是为了简化咱们的jsp代码，具体一点就是为了简化在jsp里面写的那些java代码。</p>
+</blockquote>
+<ul>
+<li>写法格式</li>
+</ul>
+<p>${表达式 }</p>
+<blockquote>
+<p>如果从作用域中取值，会先从小的作用域开始取，如果没有，就往下一个作用域取。  一直把四个作用域取完都没有， 就没有显示。</p>
+</blockquote>
+<p>###如何使用</p>
+<p>###1. 取出4个作用域中存放的值。</p>
+<pre><code>&lt;%
+    pageContext.setAttribute(&quot;name&quot;, &quot;page&quot;);
+    request.setAttribute(&quot;name&quot;, &quot;request&quot;);
+    session.setAttribute(&quot;name&quot;, &quot;session&quot;);
+    application.setAttribute(&quot;name&quot;, &quot;application&quot;);
+%&gt;
+
+按普通手段取值&lt;br&gt;
+
+&lt;%= pageContext.getAttribute(&quot;name&quot;)%&gt;
+&lt;%= request.getAttribute(&quot;name&quot;)%&gt;
+&lt;%= session.getAttribute(&quot;name&quot;)%&gt;
+&lt;%= application.getAttribute(&quot;name&quot;)%&gt;
+
+&lt;br&gt;使用EL表达式取出作用域中的值&lt;br&gt;
+
+${ pageScope.name }
+${ requestScope.name }
+${ sessionScope.name }
+${ applicationScope.name }
+</code></pre><ol start="2">
+<li><p>如果域中所存的是数组</p>
+<pre><code>&lt;%
+    String [] a = {&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;,&quot;dd&quot;};
+    pageContext.setAttribute(&quot;array&quot;, a);
+%&gt;
+
+使用EL表达式取出作用域中数组的值&lt;br&gt;
+
+${array[0] } , ${array[1] },${array[2] },${array[3] }
+</code></pre></li>
+</ol>
+<ol start="3">
+<li>如果域中锁存的是集合</li>
+</ol>
+<pre><code>使用EL表达式取出作用域中集合的值&lt;br&gt;
+
+${li[0] } , ${li[1] },${li[2] },${li[3] }
+
+&lt;br&gt;-------------Map数据----------------&lt;br&gt;
+&lt;%
+    Map map = new HashMap();
+    map.put(&quot;name&quot;, &quot;zhangsna&quot;);
+    map.put(&quot;age&quot;,18);
+    map.put(&quot;address&quot;,&quot;北京..&quot;);
+
+    map.put(&quot;address.aa&quot;,&quot;深圳..&quot;);
+
+
+    pageContext.setAttribute(&quot;map&quot;, map);
+%&gt;
+</code></pre><ol start="4">
+<li><p>取出Map集合的值</p>
+<pre><code>&lt;%
+    Map map = new HashMap();
+    map.put(&quot;name&quot;, &quot;zhangsna&quot;);
+    map.put(&quot;age&quot;,18);
+    map.put(&quot;address&quot;,&quot;北京..&quot;);
+
+    map.put(&quot;address.aa&quot;,&quot;深圳..&quot;);
+</code></pre></li>
+</ol>
+<pre><code>    pageContext.setAttribute(&quot;map&quot;, map);
+%&gt;
+使用EL表达式取出作用域中Map的值&lt;br&gt;
+
+${map.name } , ${map.age } , ${map.address }  , ${map[&quot;address.aa&quot;] }
+</code></pre><p>###取值细节：</p>
+<ol>
+<li><p>从域中取值。  得先存值。<br>&lt;%</p>
+<pre><code>//pageContext.setAttribute(&quot;name&quot;, &quot;zhangsan&quot;);
+session.setAttribute(&quot;name&quot;, &quot;lisi...&quot;);
+</code></pre><p>%&gt;</p>
+<p><br>直接指定说了，到这个作用域里面去找这个name<br><br>${ pageScope.name } </p>
+</li>
+</ol>
+<p>   <br>//先从page里面找，没有去request找，去session，去application <br><br>   ${ name }</p>
+<p>   <br>指定从session中取值<br><br>   ${ sessionScope.name }  </p>
+<ol start="2">
+<li>取值方式</li>
+</ol>
+<p>如果这份值是有下标的，那么直接使用[]</p>
+<pre><code>&lt;%
+    String [] array = {&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;}
+    session.setAttribute(&quot;array&quot;,array);
+%&gt;
+
+
+${ array[1] } --&gt; 这里array说的是attribute的name 
+</code></pre><p>如果没有下标， 直接使用 .的方式去取</p>
+<pre><code>&lt;%
+    User user = new User(&quot;zhangsan&quot;,18);
+
+    session.setAttribute(&quot;u&quot;, user);
+%&gt;
+
+${ u.name }  , ${ u.age } 
+</code></pre><blockquote>
+<p>一般使用EL表达式，用的比较多的，都是从一个对象中取出它的属性值，比如取出某一个学生的姓名。</p>
+</blockquote>
+<p>##EL表达式 的11个内置对象。 </p>
+<p>${ 对象名.成员 }</p>
+<ul>
+<li>pageContext </li>
+</ul>
+<p>作用域相关对象</p>
+<ul>
+<li>pageScope</li>
+<li>requestScope</li>
+<li>sessionScope</li>
+<li>applicationScope</li>
+</ul>
+<p>头信息相关对象</p>
+<ul>
+<li>header</li>
+<li>headerValues</li>
+</ul>
+<p>参数信息相关对象</p>
+<ul>
+<li>param</li>
+<li>paramValues</li>
+</ul>
+<ul>
+<li>cookie<br>全局初始化参数</li>
+<li>initParam</li>
+</ul>
+<p>##JSTL</p>
+<blockquote>
+<p>全称 ： JSP Standard Tag Library  jsp标准标签库</p>
+</blockquote>
+<blockquote>
+<p>简化jsp的代码编写。 替换 &lt;%%&gt; 写法。 一般与EL表达式配合</p>
+</blockquote>
+<p>###怎么使用</p>
+<ol>
+<li><p>导入jar文件到工程的WebContent/Web-Inf/lib  jstl.jar standard.jar</p>
+</li>
+<li><p>在jsp页面上，使用taglib 指令，来引入标签库</p>
+</li>
+<li><p>注意： 如果想支持 EL表达式，那么引入的标签库必须选择1.1的版本，1.0的版本不支持EL表达式。</p>
+</li>
+</ol>
+<pre><code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+</code></pre><p>###常用标签</p>
+<p>&lt;c:set&gt;&lt;/c:set&gt;<br>&lt;c:if test=””&gt;&lt;/c:if&gt;<br>&lt;c:forEach&gt;&lt;/c:forEach&gt;</p>
+<ul>
+<li>c:set</li>
+</ul>
+<pre><code>&lt;!-- 声明一个对象name， 对象的值 zhangsan , 存储到了page（默认） ， 指定是session --&gt;
+&lt;c:set var=&quot;name&quot; value=&quot;zhangsan&quot; scope=&quot;session&quot;&gt;&lt;/c:set&gt;
+
+${sessionScope.name }
+</code></pre><ul>
+<li>c:if</li>
+</ul>
+<blockquote>
+<p>判断test里面的表达式是否满足，如果满足，就执行c:if标签中的输出 ， c:if 是没有else的。 </p>
+</blockquote>
+<pre><code>&lt;c:set var=&quot;age&quot; value=&quot;18&quot; &gt;&lt;/c:set&gt;
+&lt;c:if test=&quot;${ age &gt; 26 }&quot;&gt;
+    年龄大于了26岁...
+&lt;/c:if&gt;
+
+&lt;c:if test=&quot;${ age &lt;= 26 }&quot;&gt;
+    年龄小于了26岁...
+&lt;/c:if&gt;
+
+
+------------------------------
+
+定义一个变量名 flag  去接收前面表达式的值，然后存在session域中
+
+&lt;c:if test=&quot;${ age &gt; 26 }&quot; var=&quot;flag&quot; scope=&quot;session&quot;&gt;
+    年龄大于了26岁...
+&lt;/c:if&gt;
+</code></pre><ul>
+<li>c:forEach</li>
+</ul>
+<pre><code>从1 开始遍历到10 ，得到的结果 ，赋值给 i ,并且会存储到page域中， step , 增幅为2， 
+&lt;c:forEach begin=&quot;1&quot; end=&quot;10&quot; var=&quot;i&quot; step=&quot;2&quot;&gt;
+    ${i }
+&lt;/c:forEach&gt;
+
+
+-----------------------------------------------
+
+&lt;!-- items : 表示遍历哪一个对象，注意，这里必须写EL表达式。 
+var: 遍历出来的每一个元素用user 去接收。 --&gt;
+&lt;c:forEach var=&quot;user&quot; items=&quot;${list }&quot;&gt;
+    ${user.name } ----${user.age }
+&lt;/c:forEach&gt;
+</code></pre><p> <img src="/2019/03/16/JSP+JSTL/4.gif" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/Cookie+Session/" rel="next" title="后台06：Cookie&Session">
+                <i class="fa fa-chevron-left"></i> 后台06：Cookie&Session
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/01/基础Demo1--菜单Menu/" rel="prev" title="基础Demo1-菜单Menu">
+                基础Demo1-菜单Menu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Server-Page"><span class="nav-number">1.</span> <span class="nav-text">Java Server Page</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
