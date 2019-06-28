@@ -1488,6 +1488,7 @@ public void TransactionTest() {
 <blockquote>
 <p>本项目目录右键—&gt;Build Path—&gt;Add libraries–&gt;JUnit5—&gt;单元测试方法名上加@Test</p>
 </blockquote>
+<p><br></p>
 <p>【事务的特性：ACID】</p>
 <ul>
 <li>原子性</li>
@@ -1530,7 +1531,8 @@ public void TransactionTest() {
 * 不可重复读 
 
 &gt; 一个事务读到了另外一个事务提交的数据 ，造成了前后两次查询结果不一致。
-</code></pre><p>【读未提交】演示</p>
+</code></pre><p><br></p>
+<p>【读未提交】演示</p>
 <ol>
 <li><p>设置A窗口的隔离级别为 读未提交<br><img src="/2019/03/17/事务+数据库连接池+DBUtils/img03.png" alt></p>
 </li>
@@ -1544,6 +1546,7 @@ public void TransactionTest() {
 <blockquote>
 <p>丢失更新</p>
 </blockquote>
+<p><br></p>
 <p>【读已提交】演示 </p>
 <ol>
 <li>设置A窗口的隔离级别为 读已提交</li>
@@ -1560,6 +1563,7 @@ public void TransactionTest() {
 <blockquote>
 <p>这个隔离级别能够屏蔽 脏读的现象， 但是引发了另一个问题  ，不可重复读。</p>
 </blockquote>
+<p><br></p>
 <p>【可串行化】</p>
 <blockquote>
 <p>如果有一个连接的隔离级别设置为了串行化 ，那么谁先打开了事务， 谁就有了先执行的权利， 谁后打开事务，谁就只能得着，等前面的那个事务，提交或者回滚后，才能执行。  但是这种隔离级别一般比较少用。 容易造成性能上的问题。 效率比较低。</p>
@@ -1639,7 +1643,266 @@ conn.rollback();
 <p>要求程序员自己控制。 </p>
 </blockquote>
 <p><img src="/2019/03/17/事务+数据库连接池+DBUtils/img10.png" alt="icon"></p>
+<hr>
 <p>【数据库连接池】—》数据库连接池==构造连接对象的集合，统一管理和循环使用连接对象，本质是集合！！！</p>
+<p> <img src="/2019/03/17/事务+数据库连接池+DBUtils/13.png" alt></p>
+<pre><code>import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp.BasicDataSourceFactory;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.junit.Test;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public class TestC3P0Demo {
+
+@Test
+public void testCPDBU() throws SQLException {
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    //增
+    queryRunner.update(&quot;insert into account values(null,?,?)&quot;,&quot;迪丽热巴&quot;,888);
+    //删
+    queryRunner.update(&quot;delete from account where id=?&quot;,7);
+    //改
+    queryRunner.update(&quot;update account set money=? where id=?&quot;,999,4);
+    //查一个：繁
+    User user=queryRunner.query(&quot;select * from account where id = ?&quot;,new ResultSetHandler&lt;User&gt;() {
+
+        @Override
+        public User handle(ResultSet arg0) throws SQLException {
+            //手动封装数据到Javabean返回
+            User user=new User();
+            while(arg0.next()) {
+
+                String name=arg0.getString(&quot;name&quot;);
+                int money=arg0.getInt(&quot;money&quot;);
+
+                user.setName(name);
+                user.setMoney(money);
+            }
+            return user;
+        }
+
+
+    },9);
+    System.out.println(user.toString());
+
+
+    //查一个
+    User user2=queryRunner.query(&quot;select * from account where id = ?&quot;,new BeanHandler&lt;User&gt;(User.class),14);
+    System.out.println(user2.toString());
+
+
+    //查多个
+    List&lt;User&gt; list=new ArrayList&lt;&gt;();
+    list=queryRunner.query(&quot;select * from account&quot;,new BeanListHandler&lt;User&gt;(User.class));
+    for(User users:list) {
+        System.out.println(users.toString());
+    }
+
+}
+
+
+
+//代码查询数据库
+@Test
+public void testC3P0(){
+    Connection conn = null;
+    PreparedStatement ps = null;
+    try {
+
+        //就new了一个对象。
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+        //2. 得到连接对象
+        conn = dataSource.getConnection();
+        String sql = &quot;insert into account values(null , ? , ?)&quot;;
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, &quot;wangwu2&quot;);
+        ps.setInt(2, 2600);
+
+        ps.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps, conn);
+    }
+}
+
+//代码连接和查询数据库
+@Test
+public void testCP() {
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    try {
+
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        System.out.println(dataSource.hashCode() );
+
+        //2. 设置连接数据的信息
+        dataSource.setDriverClass(&quot;com.mysql.cj.jdbc.Driver&quot;);
+
+        //忘记了---&gt; 去以前的代码 ---&gt; jdbc的文档
+        dataSource.setJdbcUrl(&quot;jdbc:mysql://localhost:3306/bank?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&quot;);
+        dataSource.setUser(&quot;root&quot;);
+        dataSource.setPassword(&quot;8875696127m&quot;);
+
+        //2. 得到连接对象
+        conn = dataSource.getConnection();
+        String sql = &quot;insert into account values(null , ? , ?)&quot;;
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, &quot;hhhhhhhh&quot;);
+        ps.setInt(2, 103200);
+
+        ps.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps, conn);
+    }
+}
+
+//文件配置DBCP
+@Test
+public void testUpdate() {
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    try {
+        BasicDataSourceFactory factory = new BasicDataSourceFactory();
+        Properties properties = new Properties();
+
+        //InputStream is = new FileInputStream(&quot;src//dbcpconfig.properties&quot;);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(&quot;dbcpconfig.properties&quot;);
+        properties.load(is);
+        DataSource dataSource = factory.createDataSource(properties);
+
+        //2. 得到连接对象
+        conn = dataSource.getConnection();
+        String sql = &quot;insert into account values(null , ? , ?)&quot;;
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, &quot;liangchaowei22&quot;);
+        ps.setInt(2, 200);
+
+        ps.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps, conn);
+    }
+
+}
+
+@Test
+public void testDBCP01(){
+
+
+    Connection conn = null;
+    PreparedStatement ps = null;
+    try {
+
+        //1. 构建数据源对象
+        BasicDataSource dataSource = new BasicDataSource();
+        //连的是什么类型的数据库， 访问的是哪个数据库 ， 用户名， 密码。。
+        //jdbc:mysql://localhost/bank 主协议：子协议 ://本地/数据库
+        dataSource.setDriverClassName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+        dataSource.setUrl(&quot;jdbc:mysql://localhost:3306/bank?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&quot;);
+        dataSource.setUsername(&quot;root&quot;);
+        dataSource.setPassword(&quot;8875696127m&quot;);
+
+
+        //2. 得到连接对象
+        conn = dataSource.getConnection();
+        String sql = &quot;insert into account values(null , ? , ?)&quot;;
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, &quot;admin33333&quot;);
+        ps.setInt(2, 1000);
+
+        ps.executeUpdate();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        JDBCUtil.release(ps, conn);
+    }
+
+    }
+    }
+</code></pre><p>c3p0-config.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;c3p0-config&gt;
+
+&lt;!-- default-config 默认的配置，  --&gt;
+  &lt;default-config&gt;
+&lt;property name=&quot;driverClass&quot;&gt;com.mysql.cj.jdbc.Driver&lt;/property&gt;
+&lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/bank?useSSL=false&amp;amp;serverTimezone=Hongkong&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true&lt;/property&gt;
+&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;
+&lt;property name=&quot;password&quot;&gt;8875696127m&lt;/property&gt;
+
+
+&lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;
+&lt;property name=&quot;maxIdleTime&quot;&gt;30&lt;/property&gt;
+&lt;property name=&quot;maxPoolSize&quot;&gt;100&lt;/property&gt;
+&lt;property name=&quot;minPoolSize&quot;&gt;10&lt;/property&gt;
+&lt;property name=&quot;maxStatements&quot;&gt;200&lt;/property&gt;
+  &lt;/default-config&gt;
+
+&lt;/c3p0-config&gt;
+</code></pre><p>User.java </p>
+<pre><code>public class User {
+
+private String name;
+private int money;
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+public int getMoney() {
+    return money;
+}
+public void setMoney(int money) {
+    this.money = money;
+}
+
+@Override
+public String toString() {
+    return &quot;User [name=&quot; + name + &quot;, money=&quot; + money + &quot;]&quot;;
+    }
+}
+</code></pre><blockquote>
+<p>Getter和Setter可以快捷键    </p>
+</blockquote>
+<blockquote>
+<p>以后做项目首选C3P0和DBUtils搭配，一个创建数据库连接池，一个获取连接对象直接进行CRUD</p>
+</blockquote>
+<blockquote>
+<p>lib的jar包：c3p0包，dbutils包，mysql.jdbc包</p>
+</blockquote>
+<blockquote>
+<p>src目录下的c3p0-config.xml文件，固定名称不可改，而且要根据版本号来改配置信息，这个Bug调试了一个下午,非常重要</p>
+</blockquote>
 <blockquote>
 <ol>
 <li>数据库的连接对象创建工作，比较消耗性能。 </li>
@@ -1649,8 +1912,61 @@ conn.rollback();
 <p>2.一开始现在内存中开辟一块空间（集合） ， 一开先往池子里面放置 多个连接对象。  后面需要连接的话，直接从池子里面去。不要去自己创建连接了。  使用完毕， 要记得归还连接。确保连接对象能循环利用。</p>
 </blockquote>
 <p><img src="/2019/03/17/事务+数据库连接池+DBUtils/img/img11.png" alt="icon"></p>
-<p>装饰者模式== A类构造器接收B类对象，回调B类象方来构造新的API—-》其实就是一个回调构造新的API<br>（跟普通回调不一样的== A类和B类的需要是同一父类）</p>
+<p>【装饰者模式】</p>
+<p>Waiter.java</p>
+<pre><code>//父接口
+public interface Waiter {
+
+    void service();
+}
+</code></pre><p>A类：</p>
+<pre><code>//实现父接口
+public class Waitress implements Waiter {
+
+@Override
+public void service() {
+    System.out.println(&quot;在服务...&quot;);
+    }
+
+}
+</code></pre><p>B类：回调A类对象方法+附加操作，装饰A类的象方操作</p>
+<pre><code>public class WaitressWrap implements Waiter {
+
+Waiter watier  = null;
+public WaitressWrap(Waiter watier){
+    this.watier = watier;
+}
+
+
+@Override
+public void service() {
+    System.out.println(&quot;微笑:::&quot;);
+    watier.service();
+    }
+}
+</code></pre><p>使用Demo</p>
+<pre><code>public class MainTest {
+
+    public static void main(String[] args) {
+        /*Waiter waiter = new Waitress();
+
+    waiter.service();*/
+
+    WaitressWrap waitressWrap = new WaitressWrap(new Waitress());
+
+    waitressWrap.service();
+
+    }
+}
+</code></pre><blockquote>
+<p> 装饰者模式== A类构造器接收B类对象，回调B类象方来构造新的API—-》其实就是一个回调构造新的API</p>
+</blockquote>
+<blockquote>
+<p>（跟普通回调不一样的== A类和B类的需要是同一父类）</p>
+</blockquote>
+<blockquote>
 <p>面向接口的好处就是： 可以从大局出发，搭建好框架，提前写好必须要实现的空抽象方法名，然后可以不用看实现类具体实现，直接使用多态创建对象，接口引用直接调用方法即可！！！很方便！！！</p>
+</blockquote>
 
           
         
