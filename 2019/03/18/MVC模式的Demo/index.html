@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.创建数据库    2.创建数据的JavaBeanimport java.util.Date;  public class Student {  private int sid; private String sname; private String gender; private String phone; private Date birthday; private String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后台09：MVC模式的Demo">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/MVC模式的Demo/index.html">
+<meta property="og:site_name" content="QiuFeisheng&#39;Blog">
+<meta property="og:description" content="1.创建数据库    2.创建数据的JavaBeanimport java.util.Date;  public class Student {  private int sid; private String sname; private String gender; private String phone; private Date birthday; private String">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/MVC模式的Demo/110.gif">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/MVC模式的Demo/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/MVC模式的Demo/2.png">
+<meta property="og:updated_time" content="2019-06-28T06:21:12.317Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后台09：MVC模式的Demo">
+<meta name="twitter:description" content="1.创建数据库    2.创建数据的JavaBeanimport java.util.Date;  public class Student {  private int sid; private String sname; private String gender; private String phone; private Date birthday; private String">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/18/MVC模式的Demo/110.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/MVC模式的Demo/">
+
+
+
+
+
+  <title>后台09：MVC模式的Demo | QiuFeisheng'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QiuFeisheng'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/MVC模式的Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuFeisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiuFeisheng'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后台09：MVC模式的Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T00:00:00+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>   <img src="/2019/03/18/MVC模式的Demo/110.gif" alt></p>
+<h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1.创建数据库"></a>1.创建数据库</h3><p> <img src="/2019/03/18/MVC模式的Demo/1.png" alt></p>
+<p> <img src="/2019/03/18/MVC模式的Demo/2.png" alt></p>
+<h3 id="2-创建数据的JavaBean"><a href="#2-创建数据的JavaBean" class="headerlink" title="2.创建数据的JavaBean"></a>2.创建数据的JavaBean</h3><pre><code>import java.util.Date;
+
+public class Student {
+
+private int sid;
+private String sname;
+private String gender;
+private String phone;
+private Date birthday;
+private String hobby;
+private String info;
+
+
+
+public Student() {
+    super();
+    // TODO Auto-generated constructor stub
+}
+
+public Student( String sname, String gender, String phone, String hobby, String info, Date birthday) {
+    super();
+    this.sname = sname;
+    this.gender = gender;
+    this.phone = phone;
+    this.hobby = hobby;
+    this.info = info;
+    this.birthday = birthday;
+}
+
+public int getSid() {
+    return sid;
+}
+public void setSid(int sid) {
+    this.sid = sid;
+}
+public String getSname() {
+    return sname;
+}
+public void setSname(String sname) {
+    this.sname = sname;
+}
+public String getGender() {
+    return gender;
+}
+public void setGender(String gender) {
+    this.gender = gender;
+}
+public String getPhone() {
+    return phone;
+}
+public void setPhone(String phone) {
+    this.phone = phone;
+}
+public Date getBirthday() {
+    return birthday;
+}
+public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+}
+public String getHobby() {
+    return hobby;
+}
+public void setHobby(String hobby) {
+    this.hobby = hobby;
+}
+public String getInfo() {
+    return info;
+}
+public void setInfo(String info) {
+    this.info = info;
+}
+
+}
+</code></pre><blockquote>
+<p>属性名要和数据库表的字段名一样，才可以解析</p>
+</blockquote>
+<h3 id="3-创建访问数据的接口Dao和具体实现类"><a href="#3-创建访问数据的接口Dao和具体实现类" class="headerlink" title="3.创建访问数据的接口Dao和具体实现类"></a>3.创建访问数据的接口Dao和具体实现类</h3><blockquote>
+<p>好处是接口是架构师可以提前规范设计，具体实现类交给组员分工实现</p>
+</blockquote>
+<blockquote>
+<p>导入JDBC驱动jar包，c3p0 jar包，DBUtils jar包</p>
+</blockquote>
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentDao {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+
+}
+
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public class StudentDaoImple implements StudentDao {
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException{
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    List&lt;Student&gt; list=queryRunner.query(&quot;select * from stu&quot;,new BeanListHandler&lt;Student&gt;(Student.class));
+
+    return list;
+    }
+}
+</code></pre><h3 id="4-创建Service"><a href="#4-创建Service" class="headerlink" title="4.创建Service"></a>4.创建Service</h3><blockquote>
+<p>Service是对Dao的拓展与调用，Dao是单一逻辑，Service是业务多逻辑</p>
+</blockquote>
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentService {
+
+    List&lt;Student&gt; findAll() throws SQLException ;
+}
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.daoimple.StudentDaoImple;
+import com.feisheng.service.StudentService;
+
+public class StudentServiceImple implements StudentService{
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException {
+
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.findAll();
+    }    
+}
+</code></pre><h3 id="5-首页面：index-jsp"><a href="#5-首页面：index-jsp" class="headerlink" title="5.首页面：index.jsp"></a>5.首页面：index.jsp</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h3&gt; &lt;a href=&quot;StudentListServlet&quot;&gt;点击进入学生列表页面&lt;/a&gt;&lt;/h3&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="6-Servlet访问拿到数据库数据，传入作用域，再跳转页面"><a href="#6-Servlet访问拿到数据库数据，传入作用域，再跳转页面" class="headerlink" title="6.Servlet访问拿到数据库数据，传入作用域，再跳转页面"></a>6.Servlet访问拿到数据库数据，传入作用域，再跳转页面</h3><pre><code>import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.Student;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+public class StudentListServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    try {
+        //1、访问数据库，获取学生数据
+        StudentService dao=new StudentServiceImple();
+        List&lt;Student&gt; list = dao.findAll();
+
+        //2、数据传入作用域
+        request.setAttribute(&quot;list&quot;, list);
+
+        //3、跳转页面
+        request.getRequestDispatcher(&quot;list.jsp&quot;).forward(request, response);
+
+
+
+
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
+}
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    doGet(request, response);
+}
+
+}
+
+
+
+
+
+&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;  
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;编号&lt;/td&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;操作&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;student&quot;&gt;
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;${student.sid}&lt;/td&gt;
+&lt;td&gt;${student.sname}&lt;/td&gt;
+&lt;td&gt;${student.gender}&lt;/td&gt;
+&lt;td&gt;${student.phone}&lt;/td&gt;
+&lt;td&gt;${student.birthday}&lt;/td&gt;
+&lt;td&gt;${student.hobby}&lt;/td&gt;
+&lt;td&gt;${student.info}&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;&quot;&gt;更新&lt;/a&gt;  &lt;a href=&quot;&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/c:forEach&gt;&gt;
+&lt;/table&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="7、写添加按钮跳转的add-jsp页面"><a href="#7、写添加按钮跳转的add-jsp页面" class="headerlink" title="7、写添加按钮跳转的add.jsp页面"></a>7、写添加按钮跳转的add.jsp页面</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+&lt;title&gt;添加学生页面&lt;/title&gt;
+
+&lt;/head&gt;
+
+
+&lt;body&gt;
+
+&lt;h3&gt;添加学生页面&lt;/h3&gt;
+
+&lt;form method=&quot;post&quot; action=&quot;AddServlet&quot;&gt;
+  &lt;table border=&quot;1&quot; width=&quot;600&quot;&gt;
+  &lt;tr&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;sname&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;男&quot;&gt;男
+    &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;女&quot;&gt;女
+&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;phone&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;birthday&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;游泳&quot;&gt;游泳
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;篮球&quot;&gt;篮球
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;足球&quot;&gt;足球
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;看书&quot;&gt;看书
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;写字&quot;&gt;写字
+
+&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;&lt;textarea name=&quot;info&quot; rows=&quot;3&quot; cols=&quot;20&quot;&gt;&lt;/textarea&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td colspan=&quot;2&quot;&gt; &lt;input type=&quot;submit&quot; value=&quot;添加&quot;&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/table&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="8、提交表单之后发送数据到了AddServlet-java文件"><a href="#8、提交表单之后发送数据到了AddServlet-java文件" class="headerlink" title="8、提交表单之后发送数据到了AddServlet.java文件"></a>8、提交表单之后发送数据到了AddServlet.java文件</h3><pre><code>import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.Student;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+/**
+     * 用于处理学生的添加请求
+         * @author xiaomi
+ *
+ */
+public class AddServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+
+    try {
+
+        //1. 获取客户端提交上来的数据
+        String sname = request.getParameter(&quot;sname&quot;); //sname:zhangsan
+        String gender = request.getParameter(&quot;gender&quot;);
+        String phone = request.getParameter(&quot;phone&quot;);
+        String birthday = request.getParameter(&quot;birthday&quot;); // 1989-10-18
+        String info = request.getParameter(&quot;info&quot;);
+        //String hobby = request.getParameter(&quot;hobby&quot;);//hobby : 游泳，写字， 足球。
+        String [] h  = request.getParameterValues(&quot;hobby&quot;);
+    //            [篮球，足球，写字] --- 篮球，足球，写字
+
+        String hobby = Arrays.toString(h);
+        hobby = hobby.substring(1, hobby.length()-1);
+
+        //2. 添加到数据库
+        //string -- date
+        Date date= new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(birthday);
+
+        Student student = new Student(sname, gender, phone, hobby, info, date);
+        StudentService service = new StudentServiceImple();
+        service.insert(student);
+
+        //3. 跳转到列表页
+        //再查一次数据库，然后再装到作用域中 ，然后再跳转。
+        //这里是直接跳转到页面上， 那么这个页面会重新翻译一次，上面的那个request的请求存放的数据是没有了。 
+        //request.getRequestDispatcher(&quot;list.jsp&quot;).forward(request, response);
+
+        //servlet除了能跳jsp之外。 还能跳servlet
+        request.getRequestDispatcher(&quot;StudentListServlet&quot;).forward(request, response);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+        }
+}
+</code></pre><h3 id="9-现在是要添加删除按钮的功能，为-lt-a添加onClick的脚本JS函数"><a href="#9-现在是要添加删除按钮的功能，为-lt-a添加onClick的脚本JS函数" class="headerlink" title="9.现在是要添加删除按钮的功能，为&lt;a添加onClick的脚本JS函数"></a>9.现在是要添加删除按钮的功能，为&lt;a添加onClick的脚本JS函数</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function doDelete(sid) {
+    /* 如果这里弹出的对话框，用户点击的是确定，就马上去请求Servlet。 
+    如何知道用户点击的是确定。
+    如何在js的方法中请求servlet。 */
+    var flag = confirm(&quot;是否确定删除?&quot;);
+    if(flag){
+        //表明点了确定。 访问servlet。 在当前标签页上打开 超链接，
+        //window.location.href=&quot;DeleteServlet?sid=&quot;+sid;
+
+        location.href=&quot;DeleteServlet?sid=&quot;+sid;
+    }
+}
+&lt;/script&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;编号&lt;/td&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;操作&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;student&quot;&gt;
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;${student.sid}&lt;/td&gt;
+&lt;td&gt;${student.sname}&lt;/td&gt;
+&lt;td&gt;${student.gender}&lt;/td&gt;
+&lt;td&gt;${student.phone}&lt;/td&gt;
+&lt;td&gt;${student.birthday}&lt;/td&gt;
+&lt;td&gt;${student.hobby}&lt;/td&gt;
+&lt;td&gt;${student.info}&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;&quot;&gt;更新&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;doDelete(${student.sid})&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/c:forEach&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="10-脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理"><a href="#10-脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理" class="headerlink" title="10.脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理"></a>10.脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理</h3><pre><code>import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+public class DeleteServlet extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    try {
+        //1. 接收id
+        int sid = Integer.parseInt(request.getParameter(&quot;sid&quot;));
+
+        //2. 执行删除
+        StudentService service = new StudentServiceImple();
+        service.delete(sid);
+
+        //3. 跳转到列表页。
+        request.getRequestDispatcher(&quot;StudentListServlet&quot;).forward(request, response);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+        }
+    }
+</code></pre><h3 id="11-因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao"><a href="#11-因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao" class="headerlink" title="11.因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao"></a>11.因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao</h3><pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentDao {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+
+void insert(Student student) throws SQLException ;
+
+void delete(int sid) throws SQLException ;
+}
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+public class StudentDaoImple implements StudentDao {
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException{
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    List&lt;Student&gt; list=queryRunner.query(&quot;select * from stu&quot;,new BeanListHandler&lt;Student&gt;(Student.class));
+
+    return list;
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;insert into stu values(null , ?,?,?,?,?,?)&quot; ,
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo()
+            );
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    runner.update(&quot;delete from stu where sid=?&quot;,sid);
+    }
+
+}
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentService {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+void insert(Student student)throws SQLException;
+
+void delete(int sid) throws SQLException ;
+}
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.daoimple.StudentDaoImple;
+import com.feisheng.service.StudentService;
+
+public class StudentServiceImple implements StudentService{
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    return dao.findAll();
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    dao.insert(student);
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+
+    StudentDao dao=new StudentDaoImple();
+    dao.delete(sid);
+        }
+}
+</code></pre><h3 id="12-更新功能：先给list-jsp添加update按钮的超链接"><a href="#12-更新功能：先给list-jsp添加update按钮的超链接" class="headerlink" title="12.更新功能：先给list.jsp添加update按钮的超链接"></a>12.更新功能：先给list.jsp添加update按钮的超链接</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function doDelete(sid) {
+    /* 如果这里弹出的对话框，用户点击的是确定，就马上去请求Servlet。 
+    如何知道用户点击的是确定。
+    如何在js的方法中请求servlet。 */
+    var flag = confirm(&quot;是否确定删除?&quot;);
+    if(flag){
+        //表明点了确定。 访问servlet。 在当前标签页上打开 超链接，
+        //window.location.href=&quot;DeleteServlet?sid=&quot;+sid;
+
+        location.href=&quot;DeleteServlet?sid=&quot;+sid;
+    }
+}
+&lt;/script&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;编号&lt;/td&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;操作&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;student&quot;&gt;
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;${student.sid}&lt;/td&gt;
+&lt;td&gt;${student.sname}&lt;/td&gt;
+&lt;td&gt;${student.gender}&lt;/td&gt;
+&lt;td&gt;${student.phone}&lt;/td&gt;
+&lt;td&gt;${student.birthday}&lt;/td&gt;
+&lt;td&gt;${student.hobby}&lt;/td&gt;
+&lt;td&gt;${student.info}&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;EditServlet?sid=${student.sid }&quot;&gt;更新&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;doDelete(${student.sid})&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/c:forEach&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="把此对象元素的数据库id值传给Servlet进行查询"><a href="#把此对象元素的数据库id值传给Servlet进行查询" class="headerlink" title="把此对象元素的数据库id值传给Servlet进行查询"></a>把此对象元素的数据库id值传给Servlet进行查询</h3><pre><code>import java.io.IOException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.Student;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+/**
+ * Servlet implementation class EditServlet
+ */
+public class EditServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+    try {
+        //1. 接收id
+        int sid = Integer.parseInt(request.getParameter(&quot;sid&quot;));
+
+        //2. 查询学生数据
+        StudentService service = new StudentServiceImple();
+        Student stu = service.findStudentById(sid);
+
+        //3. 显示数据
+        //存数据bean到作用域
+        request.setAttribute(&quot;stu&quot;, stu);
+        //跳转
+        request.getRequestDispatcher(&quot;edit.jsp&quot;).forward(request, response);
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+}
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+    }
+
+}
+</code></pre><p>搭配Dao接口才能查数据</p>
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentDao {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+
+void insert(Student student) throws SQLException ;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+}
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+public class StudentDaoImple implements StudentDao {
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException{
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    List&lt;Student&gt; list=queryRunner.query(&quot;select * from stu&quot;,new BeanListHandler&lt;Student&gt;(Student.class));
+
+    return list;
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;insert into stu values(null , ?,?,?,?,?,?)&quot; ,
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo()
+            );
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    runner.update(&quot;delete from stu where sid=?&quot;,sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    return runner.query(&quot;select * from stu where sid = ?&quot;, new BeanHandler&lt;Student&gt;(Student.class) ,sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;update stu set sname=? , gender=? , phone=? , birthday=? , hobby=? , info=? where sid = ?&quot;, 
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo(),
+            student.getSid());
+        }    
+}
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentService {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+void insert(Student student)throws SQLException;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+}
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.daoimple.StudentDaoImple;
+import com.feisheng.service.StudentService;
+
+public class StudentServiceImple implements StudentService{
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    return dao.findAll();
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    dao.insert(student);
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+
+    StudentDao dao=new StudentDaoImple();
+    dao.delete(sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.findStudentById(sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    StudentDao dao=new StudentDaoImple();
+    dao.update(student);
+        }
+}
+</code></pre><h3 id="再把数据库查到数据封装成bean对象，存在作用域，然后在edit-jsp显示"><a href="#再把数据库查到数据封装成bean对象，存在作用域，然后在edit-jsp显示" class="headerlink" title="再把数据库查到数据封装成bean对象，存在作用域，然后在edit.jsp显示"></a>再把数据库查到数据封装成bean对象，存在作用域，然后在edit.jsp显示</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+ &lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+ &lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/    loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+&lt;title&gt;更新学生页面&lt;/title&gt;
+
+&lt;/head&gt;
+
+
+&lt;body&gt;
+
+&lt;h3&gt;更新学生页面&lt;/h3&gt;
+
+&lt;form method=&quot;post&quot; action=&quot;UpdateServlet&quot;&gt;
+
+&lt;input type=&quot;hidden&quot; name=&quot;sid&quot; value=&quot;${stu.sid }&quot;&gt;
+
+  &lt;table border=&quot;1&quot; width=&quot;600&quot;&gt;
+  &lt;tr&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;sname&quot; value=&quot;${stu.sname }&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;男&quot; &lt;c:if test=&quot;${stu.gender == &apos;男&apos;}&quot;&gt;checked&lt;/c:if&gt;&gt;男
+    &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;女&quot; &lt;c:if test=&quot;${stu.gender == &apos;女&apos;}&quot;&gt;checked&lt;/c:if&gt;&gt;女
+&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;phone&quot;  value=&quot;${stu.phone }&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;birthday&quot; value=&quot;${stu.birthday }&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;
+    &lt;!-- 爱好： 篮球 ， 足球 ， 看书 
+    因为爱好有很多个，  里面存在包含的关系 --&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;游泳&quot; &lt;c:if test=&quot;${fn:contains(stu.hobby,&apos;游泳&apos;) }&quot;&gt;checked&lt;/c:if&gt;&gt;游泳
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;篮球&quot; &lt;c:if test=&quot;${fn:contains(stu.hobby,&apos;篮球&apos;) }&quot;&gt;checked&lt;/c:if&gt;&gt;篮球
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;足球&quot; &lt;c:if test=&quot;${fn:contains(stu.hobby,&apos;足球&apos;) }&quot;&gt;checked&lt;/c:if&gt;&gt;足球
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;看书&quot; &lt;c:if test=&quot;${fn:contains(stu.hobby,&apos;看书&apos;) }&quot;&gt;checked&lt;/c:if&gt;&gt;看书
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;写字&quot; &lt;c:if test=&quot;${fn:contains(stu.hobby,&apos;写字&apos;) }&quot;&gt;checked&lt;/c:if&gt;&gt;写字
+
+&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;&lt;textarea name=&quot;info&quot; rows=&quot;3&quot; cols=&quot;20&quot;&gt;${stu.info }&lt;/textarea&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+&lt;td colspan=&quot;2&quot;&gt; &lt;input type=&quot;submit&quot; value=&quot;更新&quot;&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/table&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍"><a href="#最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍" class="headerlink" title="最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍"></a>最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍</h3><pre><code>import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.Student;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+/**
+ * Servlet implementation class UpdateServlet
+ */
+public class UpdateServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+    try {
+        //1. 获取客户端提交上来的数据
+        int sid = Integer.parseInt(request.getParameter(&quot;sid&quot;));
+        String sname = request.getParameter(&quot;sname&quot;); //sname:zhangsan
+        String gender = request.getParameter(&quot;gender&quot;);
+        String phone = request.getParameter(&quot;phone&quot;);
+        String birthday = request.getParameter(&quot;birthday&quot;); // 1989-10-18
+        String info = request.getParameter(&quot;info&quot;);
+        //String hobby = request.getParameter(&quot;hobby&quot;);//hobby : 游泳，写字， 足球。
+        String[] h = request.getParameterValues(&quot;hobby&quot;);
+        //        [篮球，足球，写字] --- 篮球，足球，写字
+        String hobby = Arrays.toString(h);
+        hobby = hobby.substring(1, hobby.length() - 1);
+        //2. 添加到数据库
+        //string -- date
+        Date date = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(birthday);
+        Student student = new Student(sid ,sname, gender, phone, hobby, info, date);
+
+        //2. 更新数据库数据
+        StudentService service = new StudentServiceImple();
+        service.update(student);
+
+        //3. 跳转界面
+        request.getRequestDispatcher(&quot;StudentListServlet&quot;).forward(request, response);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+
+
+}
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+    }
+}
+</code></pre><h3 id="模糊查询：现在先改一下list-jsp的页面布局，增加查询按钮"><a href="#模糊查询：现在先改一下list-jsp的页面布局，增加查询按钮" class="headerlink" title="模糊查询：现在先改一下list.jsp的页面布局，增加查询按钮"></a>模糊查询：现在先改一下list.jsp的页面布局，增加查询按钮</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function doDelete(sid) {
+    /* 如果这里弹出的对话框，用户点击的是确定，就马上去请求Servlet。 
+    如何知道用户点击的是确定。
+    如何在js的方法中请求servlet。 */
+    var flag = confirm(&quot;是否确定删除?&quot;);
+    if(flag){
+        //表明点了确定。 访问servlet。 在当前标签页上打开 超链接，
+        //window.location.href=&quot;DeleteServlet?sid=&quot;+sid;
+
+        location.href=&quot;DeleteServlet?sid=&quot;+sid;
+    }
+}
+&lt;/script&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+&lt;tr&gt;
+&lt;td colspan=&quot;8&quot;&gt;
+
+按姓名查询：&lt;input type=&quot;text&quot; name=&quot;sname&quot;/&gt;
+
+按性别查询：&lt;select name=&quot;sgender&quot;&gt;
+      &lt;option value=&quot;--请选择--&quot;&gt;--请选择--
+      &lt;option value=&quot;男&quot;&gt;男
+      &lt;option value=&quot;女&quot;&gt;女
+      &lt;/select&gt;
+
+      &amp;nbsp;&amp;nbsp;&amp;nbsp;
+
+     &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
+
+     &lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;
+
+&lt;/td&gt;
+&lt;/tr&gt;
+
+
+
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;编号&lt;/td&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;操作&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;student&quot;&gt;
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;${student.sid}&lt;/td&gt;
+&lt;td&gt;${student.sname}&lt;/td&gt;
+&lt;td&gt;${student.gender}&lt;/td&gt;
+&lt;td&gt;${student.phone}&lt;/td&gt;
+&lt;td&gt;${student.birthday}&lt;/td&gt;
+&lt;td&gt;${student.hobby}&lt;/td&gt;
+&lt;td&gt;${student.info}&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;EditServlet?sid=${student.sid }&quot;&gt;更新&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;doDelete(${student.sid})&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/c:forEach&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="为查询按钮增加submit功能，那就需要一个-lt-form表单控件，post提交参数值到Servlet进行处理"><a href="#为查询按钮增加submit功能，那就需要一个-lt-form表单控件，post提交参数值到Servlet进行处理" class="headerlink" title="为查询按钮增加submit功能，那就需要一个&lt;form表单控件，post提交参数值到Servlet进行处理"></a>为查询按钮增加submit功能，那就需要一个&lt;form表单控件，post提交参数值到Servlet进行处理</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function doDelete(sid) {
+    /* 如果这里弹出的对话框，用户点击的是确定，就马上去请求Servlet。 
+    如何知道用户点击的是确定。
+    如何在js的方法中请求servlet。 */
+    var flag = confirm(&quot;是否确定删除?&quot;);
+    if(flag){
+        //表明点了确定。 访问servlet。 在当前标签页上打开 超链接，
+        //window.location.href=&quot;DeleteServlet?sid=&quot;+sid;
+
+        location.href=&quot;DeleteServlet?sid=&quot;+sid;
+    }
+}
+&lt;/script&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form action=&quot;SearchStudentServlet&quot; method=&quot;post&quot;&gt;
+&lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+&lt;tr&gt;
+&lt;td colspan=&quot;8&quot;&gt;
+
+按姓名查询：&lt;input type=&quot;text&quot; name=&quot;sname&quot;/&gt;
+
+按性别查询：&lt;select name=&quot;sgender&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;--请选择--
+      &lt;option value=&quot;男&quot;&gt;男
+      &lt;option value=&quot;女&quot;&gt;女
+      &lt;/select&gt;
+
+      &amp;nbsp;&amp;nbsp;&amp;nbsp;
+
+     &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
+
+     &lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;        
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;编号&lt;/td&gt;
+&lt;td&gt;姓名&lt;/td&gt;
+&lt;td&gt;性别&lt;/td&gt;
+&lt;td&gt;电话&lt;/td&gt;
+&lt;td&gt;生日&lt;/td&gt;
+&lt;td&gt;爱好&lt;/td&gt;
+&lt;td&gt;简介&lt;/td&gt;
+&lt;td&gt;操作&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;student&quot;&gt;
+&lt;tr align=&quot;center&quot;&gt;
+&lt;td&gt;${student.sid}&lt;/td&gt;
+&lt;td&gt;${student.sname}&lt;/td&gt;
+&lt;td&gt;${student.gender}&lt;/td&gt;
+&lt;td&gt;${student.phone}&lt;/td&gt;
+&lt;td&gt;${student.birthday}&lt;/td&gt;
+&lt;td&gt;${student.hobby}&lt;/td&gt;
+&lt;td&gt;${student.info}&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;EditServlet?sid=${student.sid }&quot;&gt;更新&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;doDelete(${student.sid})&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/c:forEach&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Servlet处理</p>
+<pre><code>import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.Student;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+/**
+ * Servlet implementation class SearchStudentServlet
+ */
+public class SearchStudentServlet extends HttpServlet {
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    request.setCharacterEncoding(&quot;UTF-8&quot;);
+    try {
+
+        //取到要查询的条件值
+        String sname=request.getParameter(&quot;sname&quot;);
+        String sgender=request.getParameter(&quot;sgender&quot;);
+
+        //Service的dao去查询
+        StudentService service=new StudentServiceImple();
+        List&lt;Student&gt; list = service.searchStudent(sname, sgender);
+
+        //跳转界面
+        request.setAttribute(&quot;list&quot;, list);
+        request.getRequestDispatcher(&quot;list.jsp&quot;).forward(request, response);
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+    }
+}
+</code></pre><p>Servlet搭配Dao</p>
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentDao {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+
+void insert(Student student) throws SQLException ;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+
+List&lt;Student&gt; searchStudent(String sname,String sgender) throws SQLException;
+}
+
+
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.utils.TextUtils;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+public class StudentDaoImple implements StudentDao {
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException{
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    List&lt;Student&gt; list=queryRunner.query(&quot;select * from stu&quot;,new BeanListHandler&lt;Student&gt;(Student.class));
+
+    return list;
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;insert into stu values(null , ?,?,?,?,?,?)&quot; ,
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo()
+            );
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    runner.update(&quot;delete from stu where sid=?&quot;,sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    return runner.query(&quot;select * from stu where sid = ?&quot;, new BeanHandler&lt;Student&gt;(Student.class) ,sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;update stu set sname=? , gender=? , phone=? , birthday=? , hobby=? , info=? where sid = ?&quot;, 
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo(),
+            student.getSid());
+}
+
+@Override
+public List&lt;Student&gt; searchStudent(String sname, String sgender) throws SQLException {
+    System.out.println(&quot;现在要执行模糊查询了，收到的name =&quot;+sname + &quot;==genser==&quot;+sgender);
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+
+    /*
+     * 这里要分析一下：
+     *     如果只有姓名 ，select * from stu where sname like ? ;
+     *     如果只有性别 ， select * from stu where gender = ?
+     * 
+     * 如果两个都有 select * from stu where sname like ? and gender=?
+     * 
+     * 如果两个都没有就查询所有。
+     * 
+     */
+    String sql = &quot;select * from stu where 1=1 &quot;;
+    List&lt;String&gt; list = new ArrayList&lt;String&gt; ();
+
+    //判断有没有姓名， 如果有，就组拼到sql语句里面，%是因为与like的固定搭配
+    if(!TextUtils.isEmpty(sname)){
+        sql = sql + &quot;  and sname like ?&quot;;
+        list.add(&quot;%&quot;+sname+&quot;%&quot;);
+    }
+
+    //判断有没有性别，有的话，就组拼到sql语句里面。
+    if(!TextUtils.isEmpty(sgender)){
+        sql = sql + &quot; and gender = ?&quot;;
+        list.add(sgender);
+    }
+
+
+    return runner.query(sql , new BeanListHandler&lt;Student&gt;(Student.class) ,list.toArray() );        
+    }
+
+}
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentService {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+void insert(Student student)throws SQLException;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+
+List&lt;Student&gt; searchStudent(String sname,String sgender) throws SQLException;
+}
+
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.daoimple.StudentDaoImple;
+import com.feisheng.service.StudentService;
+
+public class StudentServiceImple implements StudentService{
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    return dao.findAll();
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    dao.insert(student);
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+
+    StudentDao dao=new StudentDaoImple();
+    dao.delete(sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.findStudentById(sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    StudentDao dao=new StudentDaoImple();
+    dao.update(student);
+}
+
+@Override
+public List&lt;Student&gt; searchStudent(String sname, String sgender) throws SQLException {
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.searchStudent(sname, sgender);
+    }
+}
+</code></pre><h3 id="分页查询：首先在index-jsp提供超链接入口"><a href="#分页查询：首先在index-jsp提供超链接入口" class="headerlink" title="分页查询：首先在index.jsp提供超链接入口"></a>分页查询：首先在index.jsp提供超链接入口</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h3&gt; &lt;a href=&quot;StudentListServlet&quot;&gt;点击进入学生列表页面&lt;/a&gt;&lt;/h3&gt;
+
+&lt;h3&gt;&lt;a href=&quot;StudentListPageServlet?currentPage=1&quot;&gt;分页显示所有学生&lt;/a&gt;&lt;/h3&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示"><a href="#点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示" class="headerlink" title="点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示"></a>点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示</h3><pre><code>import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.feisheng.bean.PageBean;
+import com.feisheng.service.StudentService;
+import com.feisheng.serviceimple.StudentServiceImple;
+
+/**
+ * 这是用于分页显示学生列表的servlet
+ * @author xiaomi
+ *
+ */
+public class StudentListPageServlet extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    try {
+        //1. 获取需要显示的页码数
+        int currentPage =Integer.parseInt( request.getParameter(&quot;currentPage&quot;));
+
+        //2. 根据指定的页数，去获取该页的数据回来
+        //List&lt;Student&gt; --- list.jsp
+
+        StudentService service = new StudentServiceImple();
+        PageBean pageBean= service.findStudentByPage(currentPage);
+        request.setAttribute(&quot;pageBean&quot;, pageBean);
+        //3. 跳转界面。
+        request.getRequestDispatcher(&quot;list_page.jsp&quot;).forward(request, response);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+
+}
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+        }
+}
+</code></pre><p>搭配Dao来实现</p>
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.Student;
+
+public interface StudentDao {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+
+void insert(Student student) throws SQLException ;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+
+List&lt;Student&gt; searchStudent(String sname,String sgender) throws SQLException;
+
+List&lt;Student&gt; findStudentByPage(int currentPage) throws SQLException;
+
+
+/**
+ * 查询总的学生记录数
+ * @return
+ * @throws SQLException
+ */
+int findCount()throws SQLException ;
+
+}
+
+
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.utils.TextUtils;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+public class StudentDaoImple implements StudentDao {
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException{
+
+    //C3P0创建数据库连接池
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    //DBUtils从连接池获取连接对象，然后进行CRUD
+    QueryRunner queryRunner=new QueryRunner(dataSource);
+
+    List&lt;Student&gt; list=queryRunner.query(&quot;select * from stu&quot;,new BeanListHandler&lt;Student&gt;(Student.class));
+
+    return list;
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;insert into stu values(null , ?,?,?,?,?,?)&quot; ,
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo()
+            );
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    runner.update(&quot;delete from stu where sid=?&quot;,sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    return runner.query(&quot;select * from stu where sid = ?&quot;, new BeanHandler&lt;Student&gt;(Student.class) ,sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    runner.update(&quot;update stu set sname=? , gender=? , phone=? , birthday=? , hobby=? , info=? where sid = ?&quot;, 
+            student.getSname(),
+            student.getGender(),
+            student.getPhone(),
+            student.getBirthday(),
+            student.getHobby(),
+            student.getInfo(),
+            student.getSid());
+}
+
+@Override
+public List&lt;Student&gt; searchStudent(String sname, String sgender) throws SQLException {
+    System.out.println(&quot;现在要执行模糊查询了，收到的name =&quot;+sname + &quot;==genser==&quot;+sgender);
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+
+    /*
+     * 这里要分析一下：
+     *     如果只有姓名 ，select * from stu where sname like ? ;
+     *     如果只有性别 ， select * from stu where gender = ?
+     * 
+     * 如果两个都有 select * from stu where sname like ? and gender=?
+     * 
+     * 如果两个都没有就查询所有。
+     * 
+     */
+    String sql = &quot;select * from stu where 1=1 &quot;;
+    List&lt;String&gt; list = new ArrayList&lt;String&gt; ();
+
+    //判断有没有姓名， 如果有，就组拼到sql语句里面，%是因为与like的固定搭配
+    if(!TextUtils.isEmpty(sname)){
+        sql = sql + &quot;  and sname like ?&quot;;
+        list.add(&quot;%&quot;+sname+&quot;%&quot;);
+    }
+
+    //判断有没有性别，有的话，就组拼到sql语句里面。
+    if(!TextUtils.isEmpty(sgender)){
+        sql = sql + &quot; and gender = ?&quot;;
+        list.add(sgender);
+    }
+
+
+    return runner.query(sql , new BeanListHandler&lt;Student&gt;(Student.class) ,list.toArray() );
+
+}
+
+@Override
+public List&lt;Student&gt; findStudentByPage(int currentPage) throws SQLException {
+
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+
+    //5代表每页显示5条数据，跳过前面几页*5，就是当前页应该需要开始展示的数据
+    return runner.query(&quot;select * from stu limit ? offset ?&quot;, new BeanListHandler&lt;Student&gt;(Student.class),5,(currentPage-1)*5);
+
+}
+
+@Override
+public int findCount() throws SQLException {
+    QueryRunner runner = new QueryRunner(new ComboPooledDataSource());
+    //用于处理 平均值 、 总的个数。 
+    Long  result = (Long) runner.query(&quot;SELECT COUNT(*) FROM stu&quot; , new ScalarHandler() );
+    return result.intValue();
+    }
+
+}
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.PageBean;
+import com.feisheng.bean.Student;
+
+public interface StudentService {
+
+List&lt;Student&gt; findAll() throws SQLException ;
+void insert(Student student)throws SQLException;
+
+void delete(int sid) throws SQLException ;
+
+Student findStudentById(int sid)throws SQLException ;
+
+void update (Student student )throws SQLException ;
+
+List&lt;Student&gt; searchStudent(String sname,String sgender) throws SQLException;
+
+
+
+PageBean findStudentByPage(int currentPage) throws SQLException;
+
+}
+
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+import com.feisheng.bean.PageBean;
+import com.feisheng.bean.Student;
+import com.feisheng.dao.StudentDao;
+import com.feisheng.daoimple.StudentDaoImple;
+import com.feisheng.service.StudentService;
+
+public class StudentServiceImple implements StudentService{
+
+@Override
+public List&lt;Student&gt; findAll() throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    return dao.findAll();
+}
+
+@Override
+public void insert(Student student) throws SQLException {
+    StudentDao dao = new StudentDaoImple();
+    dao.insert(student);
+}
+
+@Override
+public void delete(int sid) throws SQLException {
+    // TODO Auto-generated method stub
+
+    StudentDao dao=new StudentDaoImple();
+    dao.delete(sid);
+}
+
+@Override
+public Student findStudentById(int sid) throws SQLException {
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.findStudentById(sid);
+}
+
+@Override
+public void update(Student student) throws SQLException {
+    // TODO Auto-generated method stub
+    StudentDao dao=new StudentDaoImple();
+    dao.update(student);
+}
+
+@Override
+public List&lt;Student&gt; searchStudent(String sname, String sgender) throws SQLException {
+
+    StudentDao dao=new StudentDaoImple();
+    return dao.searchStudent(sname, sgender);
+}
+
+@Override
+public PageBean findStudentByPage(int currentPage) throws SQLException {
+
+    //封装分页的该页数据
+    PageBean&lt;Student&gt; pageBean = new PageBean&lt;Student&gt;();
+
+    int pageSize = 5;
+    pageBean.setCurrentPage(currentPage); //设置当前页
+    pageBean.setPageSize(pageSize); //设置每页显示多少记录
+
+    StudentDao dao = new StudentDaoImple() ;
+    List&lt;Student&gt; list =dao .findStudentByPage(currentPage);
+    pageBean.setList(list); //设置这一页的学生数据
+
+    //总的记录数， 总的页数。
+    int count = dao.findCount();
+    pageBean.setTotalSize(count); //设置总的记录数
+    //200 ， 10 ==20   201 ， 10 = 21   201 % 10 == 0 ?201 / 10 :201 % 10 + 1
+    pageBean.setTotalPage(count % pageSize==0 ? count / pageSize : (count / pageSize) + 1); //总页数
+    return pageBean;
+            }    
+    }
+</code></pre><h3 id="开始可以写list-page-jsp了，显示"><a href="#开始可以写list-page-jsp了，显示" class="headerlink" title="开始可以写list_page.jsp了，显示"></a>开始可以写list_page.jsp了，显示</h3><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+pageEncoding=&quot;UTF-8&quot;%&gt;
+
+ &lt;%@ taglib prefix=&quot;c&quot;  uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+&lt;title&gt;学生列表页面&lt;/title&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function doDelete(sid) {
+    /* 如果这里弹出的对话框，用户点击的是确定，就马上去请求Servlet。 
+    如何知道用户点击的是确定。
+    如何在js的方法中请求servlet。 */
+    var flag = confirm(&quot;是否确定删除?&quot;);
+    if(flag){
+        //表明点了确定。 访问servlet。 在当前标签页上打开 超链接，
+        //window.location.href=&quot;DeleteServlet?sid=&quot;+sid;
+        location.href=&quot;DeleteServlet?sid=&quot;+sid;
+    }
+}
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;SearchStudentServlet&quot; method=&quot;post&quot;&gt;
+    &lt;table border=&quot;1&quot; width=&quot;700&quot;&gt;
+
+        &lt;tr &gt;
+            &lt;td colspan=&quot;8&quot;&gt;
+
+                按姓名查询:&lt;input type=&quot;text&quot; name=&quot;sname&quot;/&gt;
+                &amp;nbsp;
+                按性别查询:&lt;select name=&quot;sgender&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;--请选择--
+                            &lt;option value=&quot;男&quot;&gt;男
+                            &lt;option value=&quot;女&quot;&gt;女
+                          &lt;/select&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;a href=&quot;add.jsp&quot;&gt;添加&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+
+      &lt;tr align=&quot;center&quot;&gt;
+        &lt;td&gt;编号&lt;/td&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+        &lt;td&gt;电话&lt;/td&gt;
+        &lt;td&gt;生日&lt;/td&gt;
+        &lt;td&gt;爱好&lt;/td&gt;
+        &lt;td&gt;简介&lt;/td&gt;
+        &lt;td&gt;操作&lt;/td&gt;
+      &lt;/tr&gt;
+
+          &lt;c:forEach items=&quot;${pageBean.list }&quot; var=&quot;stu&quot;&gt;
+              &lt;tr align=&quot;center&quot;&gt;
+                &lt;td&gt;${stu.sid }&lt;/td&gt;
+                &lt;td&gt;${stu.sname }&lt;/td&gt;
+                &lt;td&gt;${stu.gender }&lt;/td&gt;
+                &lt;td&gt;${stu.phone }&lt;/td&gt;
+                &lt;td&gt;${stu.birthday }&lt;/td&gt;
+                &lt;td&gt;${stu.hobby }&lt;/td&gt;
+                &lt;td&gt;${stu.info }&lt;/td&gt;
+                &lt;td&gt;&lt;a href=&quot;EditServlet?sid=${stu.sid }&quot;&gt;更新&lt;/a&gt;   &lt;a href=&quot;#&quot; onclick=&quot;doDelete(${stu.sid})&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+          &lt;/c:forEach&gt;
+
+          &lt;tr&gt;
+              &lt;td colspan=&quot;8&quot;&gt;
+                  第 ${pageBean.currentPage } / ${pageBean.totalPage }
+                  &amp;nbsp;&amp;nbsp;
+                  每页显示${pageBean.pageSize }条  &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  总的记录数${pageBean.totalSize } &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;c:if test=&quot;${pageBean.currentPage !=1 }&quot;&gt;
+                      &lt;a href=&quot;StudentListPageServlet?currentPage=1&quot;&gt;首页&lt;/a&gt;
+                    | &lt;a href=&quot;StudentListPageServlet?currentPage=${pageBean.currentPage-1 }&quot;&gt;上一页&lt;/a&gt;
+                  &lt;/c:if&gt;
+
+                  &lt;c:forEach begin=&quot;1&quot; end=&quot;${pageBean.totalPage }&quot; var=&quot;i&quot;&gt;
+                      &lt;c:if test=&quot;${pageBean.currentPage == i }&quot;&gt;
+                          ${i }
+                      &lt;/c:if&gt;
+                      &lt;c:if test=&quot;${pageBean.currentPage != i }&quot;&gt;
+                          &lt;a href=&quot;StudentListPageServlet?currentPage=${i }&quot;&gt;${i }&lt;/a&gt;
+                      &lt;/c:if&gt;
+
+                  &lt;/c:forEach&gt;
+
+
+                  &lt;c:if test=&quot;${pageBean.currentPage !=pageBean.totalPage }&quot;&gt;
+                      &lt;a href=&quot;StudentListPageServlet?currentPage=${pageBean.currentPage+1 }&quot;&gt;下一页&lt;/a&gt; | 
+                      &lt;a href=&quot;StudentListPageServlet?currentPage=${pageBean.totalPage }&quot;&gt;尾页&lt;/a&gt;
+                  &lt;/c:if&gt;
+              &lt;/td&gt;
+          &lt;/tr&gt;
+      &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/17/事务+数据库连接池+DBUtils/" rel="next" title="后台08：事务+数据库连接池&DBUtils">
+                <i class="fa fa-chevron-left"></i> 后台08：事务+数据库连接池&DBUtils
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/01/基础Demo1--菜单Menu/" rel="prev" title="基础Demo1-菜单Menu">
+                基础Demo1-菜单Menu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">QiuFeisheng</p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据库"><span class="nav-number">1.</span> <span class="nav-text">1.创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建数据的JavaBean"><span class="nav-number">2.</span> <span class="nav-text">2.创建数据的JavaBean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建访问数据的接口Dao和具体实现类"><span class="nav-number">3.</span> <span class="nav-text">3.创建访问数据的接口Dao和具体实现类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建Service"><span class="nav-number">4.</span> <span class="nav-text">4.创建Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-首页面：index-jsp"><span class="nav-number">5.</span> <span class="nav-text">5.首页面：index.jsp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Servlet访问拿到数据库数据，传入作用域，再跳转页面"><span class="nav-number">6.</span> <span class="nav-text">6.Servlet访问拿到数据库数据，传入作用域，再跳转页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、写添加按钮跳转的add-jsp页面"><span class="nav-number">7.</span> <span class="nav-text">7、写添加按钮跳转的add.jsp页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、提交表单之后发送数据到了AddServlet-java文件"><span class="nav-number">8.</span> <span class="nav-text">8、提交表单之后发送数据到了AddServlet.java文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-现在是要添加删除按钮的功能，为-lt-a添加onClick的脚本JS函数"><span class="nav-number">9.</span> <span class="nav-text">9.现在是要添加删除按钮的功能，为&lt;a添加onClick的脚本JS函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理"><span class="nav-number">10.</span> <span class="nav-text">10.脚本函数最终是将数据库元素的id传给了Servlet，要新建一个Servlet来处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao"><span class="nav-number">11.</span> <span class="nav-text">11.因为是用Dao接口来处理数据库的，所以上面的Servlet需要搭配Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-更新功能：先给list-jsp添加update按钮的超链接"><span class="nav-number">12.</span> <span class="nav-text">12.更新功能：先给list.jsp添加update按钮的超链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把此对象元素的数据库id值传给Servlet进行查询"><span class="nav-number">13.</span> <span class="nav-text">把此对象元素的数据库id值传给Servlet进行查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再把数据库查到数据封装成bean对象，存在作用域，然后在edit-jsp显示"><span class="nav-number">14.</span> <span class="nav-text">再把数据库查到数据封装成bean对象，存在作用域，然后在edit.jsp显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍"><span class="nav-number">15.</span> <span class="nav-text">最后再到UpdateServlate重新读取更新数据库数据，再重新读取显示一遍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模糊查询：现在先改一下list-jsp的页面布局，增加查询按钮"><span class="nav-number">16.</span> <span class="nav-text">模糊查询：现在先改一下list.jsp的页面布局，增加查询按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为查询按钮增加submit功能，那就需要一个-lt-form表单控件，post提交参数值到Servlet进行处理"><span class="nav-number">17.</span> <span class="nav-text">为查询按钮增加submit功能，那就需要一个&lt;form表单控件，post提交参数值到Servlet进行处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页查询：首先在index-jsp提供超链接入口"><span class="nav-number">18.</span> <span class="nav-text">分页查询：首先在index.jsp提供超链接入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示"><span class="nav-number">19.</span> <span class="nav-text">点击之后先进入Servlet处理，主要是获取数据库的数据，然后存到作用域，再进行跳转显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始可以写list-page-jsp了，显示"><span class="nav-number">20.</span> <span class="nav-text">开始可以写list_page.jsp了，显示</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuFeisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
